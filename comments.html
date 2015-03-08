@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Luettelo</title>
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/search.css">
+    <link rel="shortcut icon" href="images/favicon.ico">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+</head>
+<body>
+    <main>
+        <header id="header">
+        </header>
+        <div class="content">
+            <div class="component main-component">
+                <div class="component-title">
+                    <a href="list.html">The best list in the world</a>
+                </div>
+                <span class="rating">9.2</span>
+                <br/>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officia nostrum repellendus in, doloribus deserunt veniam sapiente velit officiis vero. Repellendus officia veniam aliquid maxime quam possimus architecto voluptates similique veritatis. Omnis id impedit unde, laborum ipsum reiciendis! Tenetur nulla, quibusdam recusandae veniam excepturi culpa quidem necessitatibus harum quas, minima libero?</p>
+                <a class="component-category" href="index.html">Category</a>
+            </div>
+                <div class="component comment-component">
+                    <form>
+                        <div class="right-holder">
+                            <textarea class="comment-box"></textarea>
+                        </div>
+                        <div class="right-holder">
+                             <input type="submit" value="Submit"/>
+                        </div>
+                    </form>
+                </div>
+                <div class="component">
+                    <div class="user">PepitoPerez1</div>
+                    <div>
+                        <div class="comment-rating">
+                        <span id="upvote" class="arrow">▲</span>
+                        <span id="downvote" class="arrow">▼</span>
+                        </div>
+                        <div>
+                            <p class="comment" id="comment">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.</p>
+                            <form id="comment-edit"style="display:none">
+                                <div class="right-holder">
+                                    <textarea class="comment-edit-box" id="comment-field"></textarea>
+                                </div>
+                                <div class="right-holder">
+                                     <input type="submit" value="Submit"/>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <a href="javascript:deleteComment()" style="float:right" class="complete-icon" >
+                    <img src="images/delete.png" alt="Eliminar" id="completeIcon">
+                    </a>
+                    <a href="javascript:editComment()" style="float:right" class="complete-icon" >
+                        <img src="images/edit.png" alt="Editar" id="completeIcon">
+                    </a>
+                </div>
+
+                <div class="component">
+                    <div class="user">PepitoPerez2</div>
+                    <div>
+                        <div class="comment-rating">
+                        <span id="upvote" class="arrow">▲</span>
+                        <span id="downvote" class="arrow">▼</span>
+                        </div>
+                        <p class="comment">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi officiis aliquid minus, itaque at fuga id mollitia laudantium veniam omnis! Aperiam, ipsum aliquam libero. Adipisci accusamus ratione et numquam, sint, voluptate neque! Fugiat, voluptas, praesentium. Doloremque repellat aperiam porro nihil, nesciunt dolore ea mollitia neque. Sint placeat tempora, beatae enim voluptate nisi consequuntur.</p>
+                    </div>
+                    
+                </div>
+        </div>
+        <aside id="aside">
+        </aside>
+        <footer id="footer">
+        </footer>
+    </main>
+    <!-- JS -->
+    <!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script> -->
+    <script src="js/script.js" type="text/javascript" charset="utf-8"></script>
+</body>
+</html>

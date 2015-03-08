@@ -1,0 +1,439 @@
+body
+{
+	font-family: Helvetica, Arial;
+	font-size: 11pt;
+	background-image: url('../images/background.png');
+    /*background-attachment: fixed;
+	color: #EBEBEB;*/
+}
+
+main
+{
+	width: 1000px;
+	background-color: #AD3030;
+	margin: auto;
+}
+
+header
+{
+	padding: 50px 50px 70px 50px;
+    box-shadow:         0px 5px 7px 0px rgba(50, 50, 50, 0.6);
+    overflow: auto;
+    position: relative;
+    z-index: 10;
+    background-color: #B5C0CA;
+}
+
+.logo
+{
+	font-family: wisdom;
+	font-size: 30pt;
+	text-decoration: none;
+	color: #003031;
+	float: left;
+	width: 30%;
+}
+
+h1
+{
+	display: inline;
+}
+
+
+.search
+{
+	width: 60%;
+	float:right;
+    padding-top: 5px;
+}
+
+.categories
+{
+    padding-top:30px;
+    clear: both;
+}
+
+.category
+{
+    float:left;
+    text-decoration: none;
+    color:#0A0A0A;
+    padding-left : 1px;
+    padding-right: 1px;
+    padding-top : 8px;
+    padding-bottom: 6px;
+    margin-top : 18px;
+    margin-left : 4px;
+    margin-right: 4px;
+    margin-bottom: -10px;
+    width : 15%;
+    font-size: 15pt;
+    text-align: center;
+    border-radius: 5pt;
+    /*background: #A5C0CA;*/
+}
+
+.category:hover
+{
+    background-color: #E7E7EF;
+}
+
+.content
+{
+    width: 688px;
+    min-height: 800px;
+    float: left;
+    /*margin : auto;*/
+    text-align: justify;
+    padding : 10px 5px 0px 0px;
+    background-color: #E7E7EF;
+}
+
+.content a:hover
+{
+    text-decoration: underline;
+}
+
+.component
+{
+    width: 85%;
+    margin: auto;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    padding: 10px;
+    border-radius: 0px;
+    background-color : #CAD5DF;
+    overflow: auto;
+}
+
+/*
+.component:hover
+{
+	border-style:solid;
+    border-color: #d83c3c;
+    border-width: 2px;
+    padding: 8px;
+}
+*/
+
+.component a
+{
+    text-decoration: none;
+}
+
+.component-title
+{
+    font-size: 15pt;
+    margin: 8px 25px 0px 0px;
+    max-width: 450px;
+    float:left;
+    color : #c72b2b;
+}
+
+.component-title a
+{
+    color : #c72b2b;
+}
+
+.component-description
+{
+    margin-top: 0px;
+    float:right;
+    clear:right;
+    width :93%;
+}
+
+.component-category
+{
+    font-size: 9pt;
+    font-style: italic;
+    color: #384c9c;
+    /*clear:right;*/
+    float:right;
+    margin-right: 15px;
+    margin-top: 5px;
+}
+
+.component-comments
+{
+	color:darkred;
+    font-size: 10pt;
+    clear:left;
+    float:left;
+    margin-left: 15px;
+    margin-top: 5px;
+}
+
+.comment-box
+{
+    width:95%;
+    min-width:95%;
+    max-width:95%;
+
+    margin-left: 20px;
+
+    height:70px;
+    min-height:70px;
+    max-height:70px;
+}
+
+.comment-edit-box
+{
+    width:90%;
+    height:70px;
+}
+
+.right-holder
+{
+    text-align: right;
+    margin-right: 20px;
+}
+
+.component-rating
+{
+    font-family: Helvetica;
+    font-weight: bold;
+    font-size: 20pt;
+    float: right;
+    margin: 4px 20px 3px 0px;
+}
+
+.component-rating-index
+{
+    margin: 0px 20px 0px 0px;
+}
+
+.main-component
+{
+    margin-left : 30px;
+    width: 86.7%
+}
+
+.list-margin
+{
+    margin-left: 15px;
+}
+
+.suscribe-icon
+{
+    height: 25px;
+    width: 25px;
+    margin-top:30px;
+    float:left;
+    clear:left;
+}
+
+.complete-icon
+{
+    height: 25px;
+    width: 25px;
+    float:left;
+    /*clear:left;*/
+    margin: 0px 15px 0px 0px;
+    text-decoration: none;
+}
+
+
+form td
+{
+    height: 30px;
+    width: 80px;
+}
+
+aside
+{
+    width: 307px;
+    min-height : 500px;
+    float: right;
+    /*background-color: #FFF;*/
+    padding : 40px 0px 10px 0px;
+
+    /*background-color: #E7E7EF;*/
+    color: #EFC0C0;
+}
+
+aside a:hover
+{
+  
+}
+
+.trendingL
+{
+    padding-left: 5px;
+}
+
+.trendingL td
+{
+	padding : 5px;
+}
+
+.trendingL a:hover
+{
+    text-decoration: underline;
+}
+
+aside a
+{
+    text-decoration: none;
+    /*color : #B70000;*/
+    color: #E7EAED;
+}
+
+footer
+{
+	text-align: center;
+	padding: 10px;
+    background-color: #B5C0CA;
+	color: #003031;
+    clear:both;
+    box-shadow: 0px -1px 7px 0px rgba(50, 50, 50, 0.6);
+    position: relative;
+    z-index: 10;
+}
+
+footer span
+{
+    font-family: wisdom;
+}
+
+@font-face {
+    font-family: cylburn;
+    src: url(../fonts/Cylburn.woff);
+}
+
+@font-face {
+    font-family: wisdom;
+    src: url(../fonts/Wisdom_Script_AJ.woff);
+}
+
+
+.formulario {
+    text-align: center;
+        
+}
+
+.botonFormulario{
+  text-decoration: none;
+  border: 0;
+  outline: none;
+  border-radius: 0;
+  padding: 18px 43px;
+/*  margin: 15px 10px;*/
+  font-size: 1em;
+  background: #d83c3c;
+  color: #fff;
+  
+}
+
+
+.botonAside:hover{
+  background: #d12a2a;
+}
+
+.panelFormulario input {
+  border: 1px solid #d12a2a;
+  color: #fff;
+  background:#d83c3c;
+  padding: 5px 10px 5px 5px;
+  width: 85%;
+  margin: 5px;
+  font-size: 10pt;
+}
+
+.panelFormulario input:focus
+{
+    border: 1px solid #fff;
+    outline:none;
+}
+.formulario
+{
+  float:center;
+}
+
+.mensajeFormulario {
+    margin: 30px 0px 20px 0px;
+    color:#fff0f0;
+    font-size: 2em;
+}
+
+.botonAside
+{
+    border: 0;
+    outline: none;
+    border-radius: 0;
+    padding: 15px 0 15px 0px;
+    background: #d83c3c;
+    color: #fff;
+    font-size: 1em;
+    width: 90%;
+    margin: 15px 2px 15px 2px;
+}
+
+.rating {
+  unicode-bidi: bidi-override;
+  direction: rtl;
+  display:none;
+  float:left;
+  clear:left;
+  margin:10px 30px;
+  color : #c72b2b;
+  font-size:12pt;
+}
+.rating > span {
+  display: inline-block;
+  position: relative;
+  width: 1.1em;
+}
+.rating > span:hover:before,
+.rating > span:hover ~ span:before {
+   content: "\2605";
+   position: absolute;
+}
+
+
+.comment-rating
+{
+    width: 10px;
+    float:left;
+    margin:0px 30px 0px 5px;
+    font-size: 18pt;
+    clear:left;
+    
+}
+
+.arrow
+{
+    color:#535557;
+}
+
+.arrow:hover
+{
+    color:#c72b2b;
+}
+
+.comment
+{
+    margin: 5px 0px 0px 0px;
+    width: 90%;
+    float:left;
+}
+.user
+{
+    font-weight: bold;
+    clear:both;
+    float:left;
+    margin:auto;
+    margin-bottom:10px;
+    width: 100%;
+}
+
+.forgot{
+    float:right;
+    margin-right: 23px;
+    font-size: 10pt;
+    margin-bottom: 0px;
+}
+
+.edit-field{
+    width: 250px;
+}

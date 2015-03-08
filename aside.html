@@ -1,0 +1,110 @@
+<!--
+<div class="loginDiv">
+    <form action="">
+        Username<br/>
+        <input type="text" name="firstname">
+        <br/><br/>
+        Password<br/>
+        <input type="text" name="lastname">
+        <br/><br/>
+        <input type="submit" value="Submit">
+    </form>
+</div>
+-->
+<div class="formulario">
+    <div class="opcion">
+        <a id="btnShowLogin" href="javascript:showLogin();" class="botonFormulario">Log In</a>
+        <a id="btnShowSignUp" href="javascript:showSignUp();" class="botonFormulario" style="background:#bf3535">Sign Up</a>
+    </div>
+
+    <div class="panelFormulario" id="loginPanel">
+        <div class="mensajeFormulario">Welcome Back!</div>
+        <form action="javascript:LogIn();" method="post">
+            <div >
+                <input type="email"required autocomplete="off" placeholder="Email Adress" />
+            </div>
+            <div >
+                <input type="password"required autocomplete="off" placeholder="Password"/>
+            </div>
+            <p class="forgot"><a href="#">Forgot Password?</a></p>
+            <div  style="margin-top:10px">
+                <button id="btnLogIn" type="submit" class="botonAside" ><strong>LOG IN</strong></button>
+            </div>
+        </form>
+    </div>
+
+    <div class="panelFormulario" id="signupPanel" style="display:none">
+        <div class="mensajeFormulario">Sign Up for Free</div>
+        <form action="javascript:SignUp();" method="post">
+            <div >
+                <input type="text"required autocomplete="off" placeholder="Username" />
+            </div>
+            <div >
+                <input type="email"required autocomplete="off" placeholder="Email Adress" />
+            </div>
+            <div >
+                <input type="password"required autocomplete="off" placeholder="Password"/>
+            </div>
+            <div >
+                <input type="password"required autocomplete="off" placeholder="Retype Password"/>
+            </div>
+            <div style="margin-top:10px">
+                <button id="btnSignUp" type="submit" class="botonAside" ><strong>GET STARTED</strong></button>
+            </div>
+        </form>
+    </div>
+
+</div>
+        <hr/>
+        <form action="newlist.html" style="text-align: center">
+        <button id="btnNewList" type="submit" class="botonAside" ><strong>CREATE A NEW LIST</strong></button>
+        </form>
+        <hr/>
+        <div class="trendingL">
+            <form action="index.html" style="text-align: center">
+                <button id="btnTlists" type="submit" class="botonAside" ><strong>TRENDING LISTS</strong></button>
+                </form>
+            <table>
+                <tr>
+                    <td> 99 </td>
+                    <td> <a href="list.html"> 50 Films to See Before You Die </a> </td>
+                </tr>
+                <tr>
+                    <td> 98 </td>
+                    <td> <a href="list.html"> The 50 Greatest Cartoons </a> </td>
+                </tr>
+                <tr>
+                    <td> 95 </td>
+                    <td> <a href="list.html"> List of box office records set by Avatar </a> </td>
+                </tr>
+                <tr>
+                    <td> 94 </td>
+                    <td> <a href="list.html"> List of films considered the best </a> </td>
+                </tr>
+                <tr>
+                    <td> 85 </td>
+                    <td> <a href="list.html"> Best in Film: The Greatest Movies of Our Time </a> </td>
+                </tr>
+                <tr>
+                    <td> 77 </td>
+                    <td> <a href="list.html"> BFI list of the 50 films you should see by the age of 14 </a> </td>
+                </tr>
+                <tr>
+                    <td> 76 </td>
+                    <td> <a href="list.html"> BFI The Top 50 Greatest Films of All Time </a> </td>
+                </tr>
+                <tr>
+                    <td> 74 </td>
+                    <td> <a href="list.html"> BFI Top 100 British films </a> </td>
+                </tr>
+                <tr>
+                    <td> 73 </td>
+                    <td> <a href="list.html"> Dallas–Fort Worth Film Critics Association: Top 10 Films </a> </td>
+                </tr>
+                <tr>
+                    <td> 71 </td>
+                    <td> <a href="list.html"> Empire (film magazine) </a> </td>
+                </tr>
+                
+            </table>
+        </div>
