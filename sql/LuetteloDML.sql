@@ -1,0 +1,107 @@
+-------------
+--- USERS
+-------------
+
+--INSERT NEW USER IN THE DB
+INSERT INTO USERS (USERNAME, EMAIL, PASSWORD)
+VALUES (?user,?email,?sha_256);
+
+--REMOVE USER FROM DB
+DELETE FROM USERS
+WHERE USERNAME = ?user
+
+-------------
+--- LISTS
+-------------
+
+--CREATE LIST
+INSERT INTO LISTS (NAME, CATEGORY, DESCRIPTION, USER)
+VALUES (?name, ?cat, ?description, ?user);
+
+--EDIT LIST
+UPDATE LISTS
+SET NAME 		= ?name,
+	CATEGORY 	= ?cat,
+	DESCRIPTION = ?description
+WHERE ID = ?id
+
+--REMOVE LIST
+DELETE FROM LISTS
+WHERE ID = ?id
+
+-------------
+--- ITEMS
+-------------
+
+--ADD ITEM
+INSERT INTO ITEMS(NAME, URL, LIST)
+VALUES (?name, ?url, ?list)
+
+--EDIT ITEM
+UPDATE ITEMS
+SET NAME = ?name,
+	URL  = ?url
+WHERE ID = ?id
+
+--REMOVE ITEM
+DELETE FROM ITEMS
+WHERE ID = ?id
+
+-------------
+--- COMMENTS
+-------------
+
+--ADD COMMENT
+INSERT INTO COMMENTS(CONTENT, USER, LIST)
+VALUES (?content, ?user, ?list)
+
+--EDIT COMMENT
+UPDATE COMMENTS
+SET CONTENT = ?content
+WHERE ID = ?id
+
+--REMOVE COMMENT
+DELETE FROM COMMENTS
+WHERE ID = ?id
+
+-------------
+--- SUSCRIPTIONS
+-------------
+
+--SUSCRIBE TO A LIST
+INSERT INTO SUBSCRIPTIONS (USER,LIST)
+VALUES (?user,?email);
+
+--UNSUSCRIBE FROM A LIST
+DELETE FROM SUBSCRIPTIONS
+WHERE USER = ?user AND LIST = ?list;
+
+-------------
+--- RATINGS
+-------------
+
+--CHECK IN AN ITEM
+INSERT INTO RATINGS(USER,ITEM)
+VALUES (?user, ?item);
+
+--(RE)RATE AN ELEMENT
+REPLACE INTO RATINGS(VALUE,USER,ITEM)
+VALUES (?rating, ?user, ?item);
+
+--UNCHECK AN ELEMENT
+DELETE FROM RATINGS
+WHERE USER = ?user and ITEM = ?item
+
+-------------
+--- VOTES
+-------------
+
+--(RE)VOTE AN ELEMENT
+REPLACE INTO VOTES(VALUE,USER,COMMENT)
+VALUES (?value, ?user, ?comment);
+
+--UNVOTE AN ELEMENT
+DELETE FROM VOTES
+WHERE USER = ?user and COMMENT = ?comment
+
+
