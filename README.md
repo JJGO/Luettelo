@@ -7,4 +7,4 @@ Being the topic open for the user to decide, lists can be composed of any type o
 
 *Luettelo* **All Rights Reserved**
 ###### Jose Javier Gonzalez Ortiz
-###### Lucia Montero Sanchis
+######    Lucia Montero Sanchis
