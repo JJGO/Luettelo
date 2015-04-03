@@ -53,3 +53,9 @@ INSERT INTO RATINGS(VALUE, USER, ITEM) VALUES
 (5,     'Lucia',    10  ),
 (3,     'Lucia',    11  ),
 (3,     'Lucia',    12  );
+
+INSERT INTO COMMENTS(CONTENT,USER,LIST) VALUES
+('This list is tor','Dumbo',1),
+('This list is top*','Dumbo',1),
+('@Dumbo, you can edit your comment','Joseja',1),
+('I will add the remaining animes ASAP','Lucia',3);
