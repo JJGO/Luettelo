@@ -8,6 +8,7 @@
 package dao;
 
 import dominio.List;
+import dominio.User;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -95,29 +96,64 @@ public class ListDAO
         ps.close();
     }
 
-    // GET THE LISTS CREATED BY A USER {username}
-    // GET THE List A USER HAS SUBSCRIBED TO {username}
-    // GET LISTS OF A CATEGORY {username, category}
-    // SEARCH BY A KEYWORD {username, '%keyword%'}
-    // GET THE INFO OF A LIST {username,listId}
-
-    public Producto findByCreator(User user) throws SQLException
+    public ArrayList<List> findByCreator(User user) throws SQLException
     {
         // GET THE LISTS CREATED BY A USER {username}
         PreparedStatement ps = c.prepareStatement(QUERY_CREATED_LISTS);
         ps.setString(   1,  user.getUsername()      );
-        this.parseResultSetBrief(ps.executeQuery());
-        //this.parseResultSetDisplay(ps.executeQuery());
-        //this.parseResultSet(ps.executeQuery());
-
-        Producto p = null;
-        
-        
-
+        ArrayList<List> lists = this.parseResultSetBrief(ps.executeQuery());
         rs.close();
         ps.close();
-        return p;
+        return lists;
     }
+
+    public ArrayList<List> findBySubscriber(User user) throws SQLException
+    {
+        // GET THE List A USER HAS SUBSCRIBED TO {username}
+        PreparedStatement ps = c.prepareStatement(QUERY_SUBSCRIBED_LISTS);
+        ps.setString(   1,  user.getUsername()      );
+        ArrayList<List> lists = this.parseResultSetBrief(ps.executeQuery());
+        rs.close();
+        ps.close();
+        return lists;
+    }
+
+    public ArrayList<List> findByCategory(String category, User user) throws SQLException
+    {
+        // GET LISTS OF A CATEGORY {username, category}
+        PreparedStatement ps = c.prepareStatement(QUERY_LISTS_BY_CATEGORY);
+        ps.setString(   1,  user.getUsername()      );
+        ps.setString(   2,  category                );
+        ArrayList<List> lists = this.parseResultSetDisplay(ps.executeQuery());
+        rs.close();
+        ps.close();
+        return lists;
+    }
+    
+    public ArrayList<List> findByKeyword(String keyword, User user) throws SQLException
+    {
+        // SEARCH BY A KEYWORD {username, '%keyword%'}
+        PreparedStatement ps = c.prepareStatement(QUERY_LISTS_BY_KEYWORD);
+        ps.setString(   1,  user.getUsername()      );
+        ps.setString(   2,  "%" + keyword + "%"     );
+        ArrayList<List> lists = this.parseResultSetDisplay(ps.executeQuery());
+        rs.close();
+        ps.close();
+        return lists;
+    }
+
+    public List findById(List list, User user) throws SQLException
+    {
+        // GET THE INFO OF A LIST {username,listId}
+        PreparedStatement ps = c.prepareStatement(QUERY_LISTS_BY_KEYWORD);
+        ps.setString(   1,  user.getUsername()      );
+        ps.setInt(      2,  list.getId()            );
+        ArrayList<List> lists = this.parseResultSet(ps.executeQuery());
+        rs.close();
+        ps.close();
+        return lists.get(0);
+    }
+
 
     private ArrayList<List> parseResultSet(ResultSet rs)
     {
@@ -137,11 +173,42 @@ public class ListDAO
             Integer     comments    = rs.getInteger("numcom"        );
             boolean     subscribed  = rs.getBoolean("subscribed"    );
             
-            //List list = new List( id, name, average)
-            //List list = new List( id, name, category, username, average, comments, subscribed)
-            List list = new List( id, name, category, description, username, average, comments, subscribed)
+            List list = new List( id, name, category, description, username, average, comments, subscribed);
+            lists.add(list);
+        }
+        return lists;
+    }
 
+
+    private ArrayList<List> parseResultSetDisplay(ResultSet rs)
+    {
+        ArrayList<List> lists = new ArrayList<List>();
+        while (rs.next())
+        {
+            int         id          = rs.getInt(    "listId"        );
+            String      name        = rs.getString( "name"          );
+            String      category    = rs.getString( "category"      );
+            String      username    = rs.getString( "username"      );
+            Integer     average     = rs.getInteger("average"       );
+            Integer     comments    = rs.getInteger("numcom"        );
+            boolean     subscribed  = rs.getBoolean("subscribed"    );
             
+            List list = new List( id, name, category, username, average, comments, subscribed)
+            lists.add(list);
+        }
+        return lists;
+    }
+
+    private ArrayList<List> parseResultSetBrief(ResultSet rs)
+    {
+        ArrayList<List> lists = new ArrayList<List>();
+        while (rs.next())
+        {
+            int         id          = rs.getInt(    "listId"        );
+            String      name        = rs.getString( "name"          );
+            Integer     average     = rs.getInteger("average"       );
+            
+            List list = new List( id, name, average)
             lists.add(list);
         }
         return lists;
