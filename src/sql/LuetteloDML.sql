@@ -92,16 +92,16 @@ VALUES (?rating, ?user, ?item);
 DELETE FROM RATINGS
 WHERE USER = ?user and ITEM = ?item
 
--------------
---- VOTES
--------------
+-- -------------
+-- --- VOTES
+-- -------------
 
---(RE)VOTE AN ELEMENT
-REPLACE INTO VOTES(VALUE,USER,COMMENT)
-VALUES (?value, ?user, ?comment);
+-- --(RE)VOTE AN ELEMENT
+-- REPLACE INTO VOTES(VALUE,USER,COMMENT)
+-- VALUES (?value, ?user, ?comment);
 
---UNVOTE AN ELEMENT
-DELETE FROM VOTES
-WHERE USER = ?user and COMMENT = ?comment
+-- --UNVOTE AN ELEMENT
+-- DELETE FROM VOTES
+-- WHERE USER = ?user and COMMENT = ?comment
 
 
