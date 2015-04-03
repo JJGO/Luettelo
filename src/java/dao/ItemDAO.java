@@ -1,7 +1,7 @@
 /*
  * Class: dao.ItemDAO
  * Luettelo
- * 
+ *
  * 2015-04-03
  */
 
@@ -11,7 +11,7 @@ package dao;
  *
  * @author Lucia
  */
-public class ItemDAO 
+public class ItemDAO
 {
     private Connection con;
 
@@ -22,7 +22,7 @@ public class ItemDAO
         throws SQLException, ClassNotFoundException
     {
         Class.forName("com.mysql.jdbc.Driver");
-        con = DriverManager.getConnection("jdbc:mysql://localhost/pat", USER, PASSWD);
+        con = DriverManager.getConnection("jdbc:mysql://localhost/luettelo", USER, PASSWD);
     }
 
     public void addItem(Item i)

@@ -1,7 +1,7 @@
 /*
  * Class: dominio.Comment
  * Luettelo
- * 
+ *
  * 2015-04-03
  */
 
@@ -11,10 +11,10 @@ package dominio;
  *
  * @author Lucia
  */
-public class Comment 
+public class Comment
 {
     private int id;
-    private String user;
+    private String username;
     private String content;
 
     Comment(int id)
@@ -22,10 +22,10 @@ public class Comment
         this.id = id;
     }
 
-    Comment(int id, String user, String content)
+    Comment(int id, String username, String content)
     {
         this(id);
-        this.user = user;
+        this.username = username;
         this.content = content;
     }
 
@@ -37,12 +37,12 @@ public class Comment
         this.id = id;
     }
 
-    public String getUser() {
-        return user;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUser(String user) {
-        this.user = user;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getContent() {

@@ -1,7 +1,7 @@
 /*
  * Class: dao.CommentDAO
  * Luettelo
- * 
+ *
  * 2015-04-03
  */
 
@@ -16,7 +16,7 @@ import java.sql.SQLException;
  *
  * @author Lucia
  */
-public class CommentDAO 
+public class CommentDAO
 {
     private Connection con;
 
@@ -27,7 +27,7 @@ public class CommentDAO
         throws SQLException, ClassNotFoundException
     {
         Class.forName("com.mysql.jdbc.Driver");
-        con = DriverManager.getConnection("jdbc:mysql://localhost/pat", USER, PASSWD);
+        con = DriverManager.getConnection("jdbc:mysql://localhost/luettelo", USER, PASSWD);
     }
 
     public void addComment(Comment c)

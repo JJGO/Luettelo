@@ -1,7 +1,7 @@
 /*
  * Class: dominio.List
  * Luettelo
- * 
+ *
  * 2015-04-03
  */
 
@@ -11,13 +11,13 @@ package dominio;
  *
  * @author Lucia
  */
-public class List 
+public class List
 {
     private int id;
     private String name;
     private String category;
     private String description;
-    private String user;        //person who created the list
+    private String username;        //person who created the list
     private Integer average;    //avg rating of the list
     private Integer comments;   //number of comments in the list
     private boolean subscribed;
@@ -34,19 +34,33 @@ public class List
         this.average = average;
     }
 
-    public List(int id, String name, String category, String user, Integer average, Integer comments, boolean subscribed)
+    public List(int id, String name, String category, String username, Integer average, Integer comments, boolean subscribed)
     {
         this(id, name, average);
         this.category = category;
-        this.user = user;
+        this.username = username;
         this.comments = comments;
         this.subscribed = subscribed;
     }
 
-    public List(int id, String name, String category, String description, String user, Integer average, Integer comments, boolean subscribed)
+    public List(int id, String name, String category, String description, String username, Integer average, Integer comments, boolean subscribed)
     {
-        this(id, name, category, user, average, comments, subscribed);
+        this(id, name, category, username, average, comments, subscribed);
         this.description = description;
+    }
+
+    public List(String name, String category,String description, String username)
+    {
+        this.name           = name;
+        this.category       = category;
+        this.description    = description;
+        this.username       = username;
+    }
+
+    public List(int id, String name, String category, String description)
+    {
+        this(id);
+        this(id,name,category,description,null);
     }
 
     public int getId() {
@@ -81,12 +95,12 @@ public class List
         this.description = description;
     }
 
-    public String getUser() {
-        return user;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUser(String user) {
-        this.user = user;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public Integer getAverage() {
