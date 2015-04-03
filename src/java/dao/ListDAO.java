@@ -70,7 +70,6 @@ public class ListDAO
         ps.setString(   4,  user.getUsername()      );
         ps.executeQuery();
 
-        //rs.close();
         ps.close();
     }
 
@@ -84,7 +83,6 @@ public class ListDAO
         ps.setInt(      4,  list.getId()            );
         ps.executeQuery();
 
-        //rs.close();
         ps.close();
     }
 
@@ -95,7 +93,6 @@ public class ListDAO
         ps.setInt(      1,  list.getId()            );
         ps.executeQuery();
 
-        //rs.close();
         ps.close();
     }
 
@@ -105,7 +102,6 @@ public class ListDAO
         PreparedStatement ps = con.prepareStatement(QUERY_CREATED_LISTS);
         ps.setString(   1,  user.getUsername()      );
         ArrayList<List> lists = this.parseResultSetBrief(ps.executeQuery());
-        //rs.close();
         ps.close();
         return lists;
     }
@@ -116,7 +112,6 @@ public class ListDAO
         PreparedStatement ps = con.prepareStatement(QUERY_SUBSCRIBED_LISTS);
         ps.setString(   1,  user.getUsername()      );
         ArrayList<List> lists = this.parseResultSetBrief(ps.executeQuery());
-        //rs.close();
         ps.close();
         return lists;
     }
@@ -128,7 +123,6 @@ public class ListDAO
         ps.setString(   1,  user.getUsername()      );
         ps.setString(   2,  category                );
         ArrayList<List> lists = this.parseResultSetDisplay(ps.executeQuery());
-        //rs.close();
         ps.close();
         return lists;
     }
@@ -140,7 +134,6 @@ public class ListDAO
         ps.setString(   1,  user.getUsername()      );
         ps.setString(   2,  "%" + keyword + "%"     );
         ArrayList<List> lists = this.parseResultSetDisplay(ps.executeQuery());
-        //rs.close();
         ps.close();
         return lists;
     }
@@ -152,7 +145,6 @@ public class ListDAO
         ps.setString(   1,  user.getUsername()      );
         ps.setInt(      2,  list.getId()            );
         ArrayList<List> lists = this.parseResultSet(ps.executeQuery());
-        //rs.close();
         ps.close();
         return lists.get(0);
     }
@@ -163,18 +155,19 @@ public class ListDAO
         ArrayList<List> lists = new ArrayList<List>();
         while (rs.next())
         {
-            int         id          = rs.getInt(    "listId"        );
-            String      name        = rs.getString( "name"          );
-            String      category    = rs.getString( "category"      );
-            String      description = rs.getString( "description"   );
-            String      username    = rs.getString( "username"      );
-            Integer     average     = rs.getInt("average"       );
-            Integer     comments    = rs.getInt("numcom"        );
-            boolean     subscribed  = rs.getBoolean("subscribed"    );
+            int         id          =           rs.getInt(    "listId"        );
+            String      name        =           rs.getString( "name"          );
+            String      category    =           rs.getString( "category"      );
+            String      description =           rs.getString( "description"   );
+            String      username    =           rs.getString( "username"      );
+            Integer     average     = (Integer) rs.getObject( "average"       );
+            Integer     comments    = (Integer) rs.getObject( "numcom"        );
+            boolean     subscribed  =           rs.getBoolean("subscribed"    );
             
             List list = new List(id, name, category, description, username, average, comments, subscribed);
             lists.add(list);
         }
+        rs.close();
         return lists;
     }
 
@@ -184,17 +177,18 @@ public class ListDAO
         ArrayList<List> lists = new ArrayList<List>();
         while (rs.next())
         {
-            int         id          = rs.getInt(    "listId"        );
-            String      name        = rs.getString( "name"          );
-            String      category    = rs.getString( "category"      );
-            String      username    = rs.getString( "username"      );
-            Integer     average     = rs.getInt("average"       );
-            Integer     comments    = rs.getInt("numcom"        );
-            boolean     subscribed  = rs.getBoolean("subscribed"    );
+            int         id          =           rs.getInt(    "listId"        );
+            String      name        =           rs.getString( "name"          );
+            String      category    =           rs.getString( "category"      );
+            String      username    =           rs.getString( "username"      );
+            Integer     average     = (Integer) rs.getObject( "average"       );
+            Integer     comments    = (Integer) rs.getObject( "numcom"        );
+            boolean     subscribed  =           rs.getBoolean("subscribed"    );
             
             List list = new List(id, name, category, username, average, comments, subscribed);
             lists.add(list);
         }
+        rs.close();
         return lists;
     }
 
@@ -203,13 +197,14 @@ public class ListDAO
         ArrayList<List> lists = new ArrayList<List>();
         while (rs.next())
         {
-            int         id          = rs.getInt(    "listId"        );
-            String      name        = rs.getString( "name"          );
-            Integer     average     = rs.getInt("average"       );
+            int         id          =           rs.getInt(    "listId"        );
+            String      name        =           rs.getString( "name"          );
+            Integer     average     = (Integer) rs.getObject( "average"       );
             
             List list = new List( id, name, average);
             lists.add(list);
         }
+        rs.close();
         return lists;
     }
 

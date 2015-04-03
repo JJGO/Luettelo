@@ -46,40 +46,40 @@ public class CommentDAO
         con = DriverManager.getConnection("jdbc:mysql://localhost/luettelo", USER, PASSWD);
     }
 
-    public void addComment(Comment c) throws SQLException
+    public void addComment(Comment comment) throws SQLException
     {
         PreparedStatement ps = con.prepareStatement(QUERY_ADD_COMMENT);
-        ps.setString(1, c.getContent());
-        ps.setString(2, c.getUsername());
-        ps.setInt(3, c.getId());
+        ps.setString(1, comment.getContent());
+        ps.setString(2, comment.getUsername());
+        ps.setInt(3, comment.getId());
 
         ps.executeQuery();
         ps.close();
     }
 
-    public void editComment(Comment c) throws SQLException
+    public void editComment(Comment comment) throws SQLException
     {
         PreparedStatement ps = con.prepareStatement(QUERY_UPDATE_COMMENT);
-        ps.setString(1, c.getContent());
-        ps.setInt(2, c.getId());        
+        ps.setString(1, comment.getContent());
+        ps.setInt(2, comment.getId());
 
         ps.executeQuery();
         ps.close();
     }
 
-    public void removeComment(Comment c) throws SQLException
+    public void removeComment(Comment comment) throws SQLException
     {
         PreparedStatement ps = con.prepareStatement(QUERY_REMOVE_COMMENT);
-        ps.setInt(1, c.getId());
+        ps.setInt(1, comment.getId());
 
         ps.executeQuery();
         ps.close();
     }
 
-    public java.util.ArrayList<Comment> getComments(dominio.List l) throws SQLException
+    public java.util.ArrayList<Comment> getComments(dominio.List list) throws SQLException
     {
         PreparedStatement ps = con.prepareStatement(QUERY_ALL_COMMENTS);
-        ps.setInt(1, l.getId());
+        ps.setInt(1, list.getId());
 
         ResultSet rs = ps.executeQuery();
         java.util.ArrayList<Comment> commentList = new java.util.ArrayList<Comment>();

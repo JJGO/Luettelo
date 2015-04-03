@@ -46,53 +46,53 @@ public class ItemDAO
         con = DriverManager.getConnection("jdbc:mysql://localhost/luettelo", USER, PASSWD);
     }
 
-    public void addItem(Item i, dominio.List l) throws SQLException
+    public void addItem(Item item, dominio.List list) throws SQLException
     {
         PreparedStatement ps = con.prepareStatement(QUERY_ADD_ITEM);
-        ps.setString(1, i.getName());
-        ps.setString(2, i.getUrl());
-        ps.setInt(3, l.getId());
+        ps.setString(1, item.getName());
+        ps.setString(2, item.getUrl());
+        ps.setInt(3, list.getId());
 
         ps.executeQuery();
         ps.close();
     }
     
-    public void editItem(Item i) throws SQLException
+    public void editItem(Item item) throws SQLException
     {
         PreparedStatement ps = con.prepareStatement(QUERY_UPDATE_ITEM);
-        ps.setString(1, i.getName());
-        ps.setString(2, i.getUrl());
-        ps.setInt(3, i.getId());
+        ps.setString(1, item.getName());
+        ps.setString(2, item.getUrl());
+        ps.setInt(3, item.getId());
 
         ps.executeQuery();
         ps.close();
     }
     
-    public void removeItem(Item i) throws SQLException
+    public void removeItem(Item item) throws SQLException
     {
         PreparedStatement ps = con.prepareStatement(QUERY_REMOVE_ITEM);
-        ps.setInt(1, i.getId());
+        ps.setInt(1, item.getId());
 
         ps.executeQuery();
         ps.close();
     }
     
-    public java.util.ArrayList<Item> getItems(dominio.List l, dominio.User u) throws SQLException
+    public java.util.ArrayList<Item> getItems(dominio.List list, dominio.User user) throws SQLException
     {
         PreparedStatement ps = con.prepareStatement(QUERY_ALL_ITEMS);
-        ps.setString(1, u.getUsername());
-        ps.setInt(2, l.getId());
+        ps.setString(1, user.getUsername());
+        ps.setInt(2, list.getId());
 
         ResultSet rs = ps.executeQuery();
         java.util.ArrayList<Item> itemList = new java.util.ArrayList<Item>();
 
         while(rs.next())
         {
-            int itemId = rs.getInt("itemId");
-            String name = rs.getString("name");
-            String url = rs.getString("url");
+            int itemId      = rs.getInt("itemId");
+            String name     = rs.getString("name");
+            String url      = rs.getString("url");
             Integer average = rs.getInt("average"); //average rating
-            Integer value = rs.getInt("value");     //user rating
+            Integer value   = rs.getInt("value");     //user rating
 
             itemList.add(new Item(itemId, name, url, average, value));
         }

@@ -4,7 +4,7 @@
 
 --V-- CHECK IF A USER IS IN THE DB {username,password}
 SELECT username
-FROM LUETTELO.User
+FROM User
 WHERE username = ? AND
       password = ?;
 

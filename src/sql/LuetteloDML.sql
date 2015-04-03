@@ -4,11 +4,12 @@
 
 --INSERT NEW USER IN THE DB {username, email, password}
 INSERT INTO User (username, email, password)
-VALUES (LOWER(?),LOWER(?),?);
+VALUES (?,?,?);
 
---REMOVE USER FROM DB {username}
+--REMOVE USER FROM DB {username, password}
 DELETE FROM User
-WHERE username = ?
+WHERE username = ? AND
+      password = ?;
 
 -------------
 --- List
