@@ -3,12 +3,12 @@ INSERT INTO User (username, email, password) VALUES
 ('Lucia',   'lucia@luettelo.com',   'LU'),
 ('Dumbo',   'dumbo@luettelo.com',   'DB');
 
-INSERT INTO List (name, category, description, user) VALUES
+INSERT INTO List (name, category, description, username) VALUES
 ('Best Fantasy Books',   'Books',    'Best Recent Books',    'Joseja'    ),
 ('Best Sci-Fi',          'Movies',   'Best RecentSF Movies', 'Joseja'    ),
 ('Best Anime Series',    'Series',   'Best Anime Series',    'Lucia'     );
 
-INSERT INTO Item (name, url, list) VALUES
+INSERT INTO Item (name, url, listId) VALUES
 ('Name of The Wind',        'a',   1    ),
 ('A Storm Of Swords',       'a',   1    ),
 ('The Way Of The Kings',    'a',   1    ),
@@ -23,7 +23,7 @@ INSERT INTO Item (name, url, list) VALUES
 ('Sword Art Online',        'a',   3    );
 
 
-INSERT INTO Subscription (user, list) VALUES
+INSERT INTO Subscription (username, listId) VALUES
 ('Joseja',      1),
 ('Joseja',      2),
 ('Joseja',      3),
@@ -33,7 +33,7 @@ INSERT INTO Subscription (user, list) VALUES
 ('Dumbo',       2),
 ('Dumbo',       3);
 
-INSERT INTO Rating(value, user, item) VALUES
+INSERT INTO Rating(value, username, itemId) VALUES
 (5,     'Joseja',   1   ),
 (5,     'Joseja',   2   ),
 (5,     'Joseja',   3   ),
@@ -54,7 +54,7 @@ INSERT INTO Rating(value, user, item) VALUES
 (3,     'Lucia',    11  ),
 (3,     'Lucia',    12  );
 
-INSERT INTO Comment(content,user,list) VALUES
+INSERT INTO Comment(content,username,listId) VALUES
 ('This list is tor','Dumbo',1),
 ('This list is top*','Dumbo',1),
 ('@Dumbo, you can edit your comment','Joseja',1),

@@ -2,104 +2,104 @@
 --- User
 -------------
 
---INSERT NEW USER IN THE DB
+--INSERT NEW USER IN THE DB {username, email, password}
 INSERT INTO User (username, email, password)
-VALUES (?user,?email,?hash);
+VALUES (LOWER(?),LOWER(?),?);
 
---REMOVE USER FROM DB
+--REMOVE USER FROM DB {username}
 DELETE FROM User
-WHERE username = ?user
+WHERE username = ?
 
 -------------
 --- List
 -------------
 
---CREATE LIST
-INSERT INTO List (name, category, description, user)
-VALUES (?name, ?cat, ?description, ?user);
+--CREATE LIST {name, category, description, username}
+INSERT INTO List (name, category, description, username)
+VALUES (?, ?, ?, ?);
 
---EDIT LIST
+--EDIT LIST {name, category, description, listId}
 UPDATE List
-SET name 		= ?name,
-	category 	= ?cat,
-	description = ?description
-WHERE id = ?id
+SET name 		= ?,
+	category 	= ?,
+	description = ?
+WHERE listId = ?
 
---REMOVE LIST
+--REMOVE LIST {listId}
 DELETE FROM List
-WHERE id = ?id
+WHERE listId = ?
 
 -------------
 --- Item
 -------------
 
---ADD ITEM
-INSERT INTO Item(name, url, list)
-VALUES (?name, ?url, ?list)
+--ADD ITEM {name, url, listId}
+INSERT INTO Item(name, url, listId)
+VALUES (?, ?, ?)
 
---EDIT ITEM
+--EDIT ITEM {name, url, itemId}
 UPDATE Item
-SET name = ?name,
-	url  = ?url
-WHERE id = ?id
+SET name = ?,
+	url  = ?
+WHERE itemId = ?
 
---REMOVE ITEM
+--REMOVE ITEM {itemId}
 DELETE FROM Item
-WHERE id = ?id
+WHERE itemId = ?
 
 -------------
 --- Comment
 -------------
 
---ADD COMMENT
-INSERT INTO Comment(content, user, list)
-VALUES (?content, ?user, ?list)
+--ADD COMMENT {content, username, listId}
+INSERT INTO Comment(content, username, listId)
+VALUES (?, ?, ?)
 
---EDIT COMMENT
+--EDIT COMMENT {content, commentId}
 UPDATE Comment
-SET content = ?content
-WHERE id = ?id
+SET content = ?
+WHERE commentId = ?
 
---REMOVE COMMENT
+--REMOVE COMMENT {commentId}
 DELETE FROM Comment
-WHERE id = ?id
+WHERE commentId = ?
 
 -------------
 --- Subscription
 -------------
 
---SUBSCRIBE TO A LIST
-INSERT INTO Subscription(user,list)
-VALUES (?user,?email);
+--SUBSCRIBE TO A LIST {username, listId}
+INSERT INTO Subscription(username,listId)
+VALUES (?,?);
 
---UNSUBSCRIBE FROM A LIST
+--UNSUBSCRIBE FROM A LIST {username, listId}
 DELETE FROM Subscription
-WHERE user = ?user AND list = ?list;
+WHERE username = ? AND listId = ?;
 
 -------------
 --- Rating
 -------------
 
---CHECK IN AN ITEM
-INSERT INTO Rating(user,item)
-VALUES (?user, ?item);
+--CHECK IN AN ITEM {username, itemId}
+INSERT INTO Rating(username,itemId)
+VALUES (?, ?);
 
---(RE)RATE AN ELEMENT
-REPLACE INTO Rating(value,user,item)
-VALUES (?rating, ?user, ?item);
+--(RE)RATE AN ELEMENT {value, username, itemId}
+REPLACE INTO Rating(value,username,itemId)
+VALUES (?, ?, ?);
 
---UNCHECK AN ELEMENT
+--UNCHECK AN ELEMENT {username, itemId}
 DELETE FROM Rating
-WHERE user = ?user and item = ?item
+WHERE username = ? and itemId = ?
 
 -- -------------
 -- --- VOTES
 -- -------------
 
--- --(RE)VOTE AN ELEMENT
--- REPLACE INTO Vote(value,user,comment)
--- VALUES (?value, ?user, ?comment);
+-- --(RE)VOTE AN ELEMENT {value, username, commentId}
+-- REPLACE INTO Vote(value,username,commentId)
+-- VALUES (?, ?, ?);
 
--- --UNVOTE AN ELEMENT
+-- --UNVOTE AN ELEMENT {username, commentId}
 -- DELETE FROM Vote
--- WHERE user = ?user and comment = ?comment
+-- WHERE username = ? and commentId = ?
