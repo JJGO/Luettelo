@@ -2,13 +2,13 @@
 --- ASIDE
 -------------
 
---V-- CHECK IF AN USER IS IN THE DB {user,password}
+--V-- CHECK IF A USER IS IN THE DB {user,password}
 SELECT USERNAME
 FROM LUETTELO.USERS
 WHERE USERNAME = ?user AND
       PASSWORD = ?password;
 
---V-- GET THE LISTS CREATED BY AN USER {user}
+--V-- GET THE LISTS CREATED BY A USER {user}
 SELECT L.ID,
        L.NAME,
        LA.AVERAGE
