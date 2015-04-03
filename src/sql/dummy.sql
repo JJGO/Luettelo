@@ -1,14 +1,14 @@
-INSERT INTO USERS (USERNAME, EMAIL, PASSWORD) VALUES
+INSERT INTO User (username, email, password) VALUES
 ('Joseja',  'joseja@luettelo.com',  'JJ'),
 ('Lucia',   'lucia@luettelo.com',   'LU'),
 ('Dumbo',   'dumbo@luettelo.com',   'DB');
 
-INSERT INTO LISTS (NAME, CATEGORY, DESCRIPTION, USER) VALUES
+INSERT INTO List (name, category, description, user) VALUES
 ('Best Fantasy Books',   'Books',    'Best Recent Books',    'Joseja'    ),
 ('Best Sci-Fi',          'Movies',   'Best RecentSF Movies', 'Joseja'    ),
 ('Best Anime Series',    'Series',   'Best Anime Series',    'Lucia'     );
 
-INSERT INTO ITEMS (NAME, URL, LIST) VALUES
+INSERT INTO Item (name, url, list) VALUES
 ('Name of The Wind',        'a',   1    ),
 ('A Storm Of Swords',       'a',   1    ),
 ('The Way Of The Kings',    'a',   1    ),
@@ -23,7 +23,7 @@ INSERT INTO ITEMS (NAME, URL, LIST) VALUES
 ('Sword Art Online',        'a',   3    );
 
 
-INSERT INTO SUBSCRIPTIONS (USER, LIST) VALUES
+INSERT INTO Subscription (user, list) VALUES
 ('Joseja',      1),
 ('Joseja',      2),
 ('Joseja',      3),
@@ -33,7 +33,7 @@ INSERT INTO SUBSCRIPTIONS (USER, LIST) VALUES
 ('Dumbo',       2),
 ('Dumbo',       3);
 
-INSERT INTO RATINGS(VALUE, USER, ITEM) VALUES
+INSERT INTO Rating(value, user, item) VALUES
 (5,     'Joseja',   1   ),
 (5,     'Joseja',   2   ),
 (5,     'Joseja',   3   ),
@@ -54,7 +54,7 @@ INSERT INTO RATINGS(VALUE, USER, ITEM) VALUES
 (3,     'Lucia',    11  ),
 (3,     'Lucia',    12  );
 
-INSERT INTO COMMENTS(CONTENT,USER,LIST) VALUES
+INSERT INTO Comment(content,user,list) VALUES
 ('This list is tor','Dumbo',1),
 ('This list is top*','Dumbo',1),
 ('@Dumbo, you can edit your comment','Joseja',1),

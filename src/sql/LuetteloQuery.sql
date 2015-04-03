@@ -3,31 +3,31 @@
 -------------
 
 --V-- CHECK IF A USER IS IN THE DB {user,password}
-SELECT USERNAME
-FROM LUETTELO.USERS
-WHERE USERNAME = ?user AND
-      PASSWORD = ?password;
+SELECT username
+FROM LUETTELO.User
+WHERE username = ?user AND
+      password = ?password;
 
 --V-- GET THE LISTS CREATED BY A USER {user}
-SELECT L.ID,
-       L.NAME,
-       LA.AVERAGE
-FROM LISTS L
-     INNER JOIN LISTS_AVG LA
-        ON L.ID = LA.ID
-WHERE L.USER = ?user
---V-- GET THE LISTS A USER HAS SUBSCRIBED TO {user}
-SELECT L.ID,
-       L.NAME,
-       LA.AVERAGE
-FROM LISTS L
-     INNER JOIN LISTS_AVG LA
-        ON L.ID = LA.ID
-     INNER JOIN (   SELECT LIST, USER
-                    FROM SUBSCRIPTIONS
-                    WHERE USER = ?user
+SELECT L.id,
+       L.name,
+       LA.average
+FROM List L
+     INNER JOIN Lists_avg LA
+        ON L.id = LA.id
+WHERE L.user = ?user
+--V-- GET THE List A USER HAS SUBSCRIBED TO {user}
+SELECT L.id,
+       L.name,
+       LA.average
+FROM List L
+     INNER JOIN Lists_avg LA
+        ON L.id = LA.id
+     INNER JOIN (   SELECT list, user
+                    FROM Subscription
+                    WHERE user = ?user
                 ) S
-             ON L.ID = S.LIST
+             ON L.id = S.list
 
 -------------
 --- INDEX
@@ -36,58 +36,58 @@ FROM LISTS L
 
 
 --V-- GET THE 50 FIRST ITEMS OF A CATEGORY {category,user}
-SELECT L.ID,
-       L.NAME,
-       L.CATEGORY,
-       L.USER,
-       LA.AVERAGE,
-       COALESCE(C.NUMCOM,0) AS NUMCOM,
-       NOT ISNULL(S.USER) AS SUBSCRIBED
-FROM LISTS L
-     INNER JOIN LISTS_AVG LA
-        ON L.ID = LA.ID
-     LEFT OUTER JOIN (  SELECT  LIST,
-                                COUNT(*) AS NUMCOM
-                        FROM COMMENTS
-                        GROUP BY LIST
+SELECT L.id,
+       L.name,
+       L.category,
+       L.user,
+       LA.average,
+       COALESCE(C.numcom,0) AS numcom,
+       NOT ISNULL(S.user) AS subscribed
+FROM List L
+     INNER JOIN Lists_avg LA
+        ON L.id = LA.id
+     LEFT OUTER JOIN (  SELECT  list,
+                                COUNT(*) AS numcom
+                        FROM Comment
+                        GROUP BY list
                     
                 ) C
-        ON L.ID = C.LIST
-     LEFT OUTER JOIN (  SELECT LIST, USER
-                        FROM SUBSCRIPTIONS
-                        WHERE USER = ?user
+        ON L.id = C.list
+     LEFT OUTER JOIN (  SELECT list, user
+                        FROM Subscription
+                        WHERE user = ?user
                 ) S
-        ON L.ID = S.LIST
+        ON L.id = S.list
 
-WHERE L.CATEGORY LIKE ?cat
-ORDER BY LA.AVERAGE DESC;
+WHERE L.category LIKE ?cat
+ORDER BY LA.average DESC;
 
 --V-- SEARCH BY A KEYWORD
-SELECT L.ID,
-       L.NAME,
-       L.CATEGORY,
-       L.USER,
-       LA.AVERAGE,
-       COALESCE(C.NUMCOM,0) AS NUMCOM,
-       NOT ISNULL(S.USER) AS SUBSCRIBED
-FROM LISTS L
-     INNER JOIN LISTS_AVG LA
-        ON L.ID = LA.ID
-     LEFT OUTER JOIN (  SELECT  LIST,
-                                COUNT(*) AS NUMCOM
-                        FROM COMMENTS
-                        GROUP BY LIST
+SELECT L.id,
+       L.name,
+       L.category,
+       L.user,
+       LA.average,
+       COALESCE(C.numcom,0) AS numcom,
+       NOT ISNULL(S.user) AS subscribed
+FROM List L
+     INNER JOIN Lists_avg LA
+        ON L.id = LA.id
+     LEFT OUTER JOIN (  SELECT  list,
+                                COUNT(*) AS numcom
+                        FROM Comment
+                        GROUP BY list
                     
                 ) C
-        ON L.ID = C.LIST
-     LEFT OUTER JOIN (  SELECT LIST, USER
-                        FROM SUBSCRIPTIONS
-                        WHERE USER = ?user
+        ON L.id = C.list
+     LEFT OUTER JOIN (  SELECT list, user
+                        FROM Subscription
+                        WHERE user = ?user
                 ) S
-        ON L.ID = S.LIST
+        ON L.id = S.list
 
-WHERE L.NAME LIKE '%?key%'
-ORDER BY LA.AVERAGE DESC;
+WHERE L.name LIKE '%?key%'
+ORDER BY LA.average DESC;
 
 
 
@@ -97,57 +97,54 @@ ORDER BY LA.AVERAGE DESC;
 
 --V-- GET THE INFO OF A LIST {user,list}
 
-SELECT  L.ID,
-        L.NAME,
-        L.CATEGORY,
-        L.DESCRIPTION,
-        L.USER,
-        LA.AVERAGE,
-        COALESCE(C.NUMCOM,0) AS NUMCOM,
-        NOT ISNULL(S.USER) AS SUBSCRIBED
-FROM LISTS L
-     INNER JOIN LISTS_AVG LA
-        ON L.ID = LA.ID
-     LEFT OUTER JOIN (  SELECT  LIST,
-                                COUNT(*) AS NUMCOM
-                        FROM COMMENTS
+SELECT  L.id,
+        L.name,
+        L.category,
+        L.description,
+        L.user,
+        LA.average,
+        COALESCE(C.numcom,0) AS numcom,
+        NOT ISNULL(S.user) AS subscribed
+FROM List L
+     INNER JOIN Lists_avg LA
+        ON L.id = LA.id
+     LEFT OUTER JOIN (  SELECT  list,
+                                COUNT(*) AS numcom
+                        FROM Comment
                     
                 ) C
-        ON L.ID = C.LIST
-     LEFT OUTER JOIN (  SELECT LIST, USER
-                        FROM SUBSCRIPTIONS
-                        WHERE USER = ?user
+        ON L.id = C.list
+     LEFT OUTER JOIN (  SELECT list, user
+                        FROM Subscription
+                        WHERE user = ?user
                 ) S
-        ON L.ID = S.LIST
-WHERE L.ID = ?list
-ORDER BY AVERAGE DESC;
+        ON L.id = S.list
+WHERE L.id = ?list
+ORDER BY average DESC;
 
 --V-- GET THE ITEMS OF A LIST AS WELL AS THEIR RATINGS (AUTH) {user, list}
-SELECT I.ID,
-       I.NAME,
-       I.URL,
-       IA.AVERAGE,
-       RU.VALUE AS RATING
-FROM ITEMS I
-     INNER JOIN ITEMS_AVG IA
-        ON I.ID = IA.ID
-     LEFT OUTER JOIN (  SELECT VALUE, ITEM
-                        FROM RATINGS
-                        WHERE USER = ?user
+SELECT I.id,
+       I.name,
+       I.url,
+       IA.average,
+       RU.value AS rating
+FROM Item I
+     INNER JOIN Items_avg IA
+        ON I.id = IA.id
+     LEFT OUTER JOIN (  SELECT value, item
+                        FROM Rating
+                        WHERE user = ?user
                      ) RU
-        ON I.ID = RU.ITEM
-WHERE I.LIST = ?list
-ORDER BY AVERAGE DESC;
+        ON I.id = RU.item
+WHERE I.list = ?list
+ORDER BY average DESC;
 --LIMIT 50;
 
 
 --V-- GET THE COMMENTS OF A LIST {list}
 
-SELECT  ID,
-        USER
-        CONTENT
-FROM COMMENTS
-WHERE LIST = ?list
-
-
-
+SELECT  id,
+        user
+        content
+FROM Comment
+WHERE list = ?list

@@ -1,107 +1,105 @@
 -------------
---- USERS
+--- User
 -------------
 
 --INSERT NEW USER IN THE DB
-INSERT INTO USERS (USERNAME, EMAIL, PASSWORD)
+INSERT INTO User (username, email, password)
 VALUES (?user,?email,?hash);
 
 --REMOVE USER FROM DB
-DELETE FROM USERS
-WHERE USERNAME = ?user
+DELETE FROM User
+WHERE username = ?user
 
 -------------
---- LISTS
+--- List
 -------------
 
 --CREATE LIST
-INSERT INTO LISTS (NAME, CATEGORY, DESCRIPTION, USER)
+INSERT INTO List (name, category, description, user)
 VALUES (?name, ?cat, ?description, ?user);
 
 --EDIT LIST
-UPDATE LISTS
-SET NAME 		= ?name,
-	CATEGORY 	= ?cat,
-	DESCRIPTION = ?description
-WHERE ID = ?id
+UPDATE List
+SET name 		= ?name,
+	category 	= ?cat,
+	description = ?description
+WHERE id = ?id
 
 --REMOVE LIST
-DELETE FROM LISTS
-WHERE ID = ?id
+DELETE FROM List
+WHERE id = ?id
 
 -------------
---- ITEMS
+--- Item
 -------------
 
 --ADD ITEM
-INSERT INTO ITEMS(NAME, URL, LIST)
+INSERT INTO Item(name, url, list)
 VALUES (?name, ?url, ?list)
 
 --EDIT ITEM
-UPDATE ITEMS
-SET NAME = ?name,
-	URL  = ?url
-WHERE ID = ?id
+UPDATE Item
+SET name = ?name,
+	url  = ?url
+WHERE id = ?id
 
 --REMOVE ITEM
-DELETE FROM ITEMS
-WHERE ID = ?id
+DELETE FROM Item
+WHERE id = ?id
 
 -------------
---- COMMENTS
+--- Comment
 -------------
 
 --ADD COMMENT
-INSERT INTO COMMENTS(CONTENT, USER, LIST)
+INSERT INTO Comment(content, user, list)
 VALUES (?content, ?user, ?list)
 
 --EDIT COMMENT
-UPDATE COMMENTS
-SET CONTENT = ?content
-WHERE ID = ?id
+UPDATE Comment
+SET content = ?content
+WHERE id = ?id
 
 --REMOVE COMMENT
-DELETE FROM COMMENTS
-WHERE ID = ?id
+DELETE FROM Comment
+WHERE id = ?id
 
 -------------
---- SUSCRIPTIONS
+--- Subscription
 -------------
 
---SUSCRIBE TO A LIST
-INSERT INTO SUBSCRIPTIONS (USER,LIST)
+--SUBSCRIBE TO A LIST
+INSERT INTO Subscription(user,list)
 VALUES (?user,?email);
 
---UNSUSCRIBE FROM A LIST
-DELETE FROM SUBSCRIPTIONS
-WHERE USER = ?user AND LIST = ?list;
+--UNSUBSCRIBE FROM A LIST
+DELETE FROM Subscription
+WHERE user = ?user AND list = ?list;
 
 -------------
---- RATINGS
+--- Rating
 -------------
 
 --CHECK IN AN ITEM
-INSERT INTO RATINGS(USER,ITEM)
+INSERT INTO Rating(user,item)
 VALUES (?user, ?item);
 
 --(RE)RATE AN ELEMENT
-REPLACE INTO RATINGS(VALUE,USER,ITEM)
+REPLACE INTO Rating(value,user,item)
 VALUES (?rating, ?user, ?item);
 
 --UNCHECK AN ELEMENT
-DELETE FROM RATINGS
-WHERE USER = ?user and ITEM = ?item
+DELETE FROM Rating
+WHERE user = ?user and item = ?item
 
 -- -------------
 -- --- VOTES
 -- -------------
 
 -- --(RE)VOTE AN ELEMENT
--- REPLACE INTO VOTES(VALUE,USER,COMMENT)
+-- REPLACE INTO Vote(value,user,comment)
 -- VALUES (?value, ?user, ?comment);
 
 -- --UNVOTE AN ELEMENT
--- DELETE FROM VOTES
--- WHERE USER = ?user and COMMENT = ?comment
-
-
+-- DELETE FROM Vote
+-- WHERE user = ?user and comment = ?comment
