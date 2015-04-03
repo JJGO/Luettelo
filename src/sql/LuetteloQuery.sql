@@ -36,7 +36,7 @@ FROM List L
 
 
 
---V-- GET THE 50 FIRST ITEMS OF A CATEGORY {username, category}
+--V-- GET LISTS OF A CATEGORY {username, category}
 SELECT L.listId,
        L.name,
        L.category,
@@ -51,7 +51,6 @@ FROM List L
                                 COUNT(*) AS numcom
                         FROM Comment
                         GROUP BY listId
-                    
                 ) C
         ON L.listId = C.listId
      LEFT OUTER JOIN (  SELECT listId, username
@@ -59,7 +58,6 @@ FROM List L
                         WHERE username = ?
                 ) S
         ON L.listId = S.listId
-
 WHERE category LIKE ?
 ORDER BY LA.average DESC;
 
@@ -78,7 +76,6 @@ FROM List L
                                 COUNT(*) AS numcom
                         FROM Comment
                         GROUP BY listId
-                    
                 ) C
         ON L.listId = C.listId
      LEFT OUTER JOIN (  SELECT listId, username
@@ -86,7 +83,6 @@ FROM List L
                         WHERE username = ?
                 ) S
         ON L.listId = S.listId
-
 WHERE name LIKE '%?%'
 ORDER BY LA.average DESC;
 
@@ -112,7 +108,6 @@ FROM List L
      LEFT OUTER JOIN (  SELECT  listId,
                                 COUNT(*) AS numcom
                         FROM Comment
-                    
                 ) C
         ON L.listId = C.listId
      LEFT OUTER JOIN (  SELECT listId, username
@@ -123,7 +118,7 @@ FROM List L
 WHERE L.listId = ?
 ORDER BY LA.average DESC;
 
----- GET THE ITEMS OF A LIST AS WELL AS THEIR RATINGS (AUTH) {username, listId}
+--V-- GET THE ITEMS OF A LIST AS WELL AS THEIR RATINGS (AUTH) {username, listId}
 SELECT I.itemId,
        I.name,
        I.url,
@@ -142,7 +137,7 @@ ORDER BY IA.average DESC;
 --LIMIT 50;
 
 
----- GET THE COMMENTS OF A LIST {listId}
+--V-- GET THE COMMENTS OF A LIST {listId}
 
 SELECT  commentId,
         username,

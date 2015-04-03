@@ -49,18 +49,17 @@ public class List
         this.description = description;
     }
 
-    public List(String name, String category,String description, String username)
+    public List(String name, String category,String description)
     {
         this.name           = name;
         this.category       = category;
         this.description    = description;
-        this.username       = username;
     }
 
     public List(int id, String name, String category, String description)
     {
         this(id);
-        this(id,name,category,description,null);
+        this(id,name,category,description);
     }
 
     public int getId() {
