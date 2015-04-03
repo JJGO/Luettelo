@@ -19,12 +19,12 @@ public class Item
     private Integer average;
     private Integer rating;
 
-    Item(int id)
+    public Item(int id)
     {
         this.id = id;
     }
 
-    Item(int id, String name, String url, Integer average, Integer rating)
+    public Item(int id, String name, String url, Integer average, Integer rating)
     {
         this(id);
         this.name = name;

@@ -17,12 +17,12 @@ public class Comment
     private String username;
     private String content;
 
-    Comment(int id)
+    public Comment(int id)
     {
         this.id = id;
     }
 
-    Comment(int id, String username, String content)
+    public Comment(int id, String username, String content)
     {
         this(id);
         this.username = username;
