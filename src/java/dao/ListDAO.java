@@ -11,7 +11,10 @@ import dominio.List;
 import dominio.User;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 /**
  *
@@ -60,49 +63,49 @@ public class ListDAO
     public void addList(List list, User user) throws SQLException
     {
         //CREATE LIST {name, category, description, username}
-        PreparedStatement ps = c.prepareStatement(QUERY_ADD_LIST);
+        PreparedStatement ps = con.prepareStatement(QUERY_ADD_LIST);
         ps.setString(   1,  list.getName()          );
         ps.setString(   2,  list.getCategory()      );
         ps.setString(   3,  list.getDescription()   );
         ps.setString(   4,  user.getUsername()      );
         ps.executeQuery();
 
-        rs.close();
+        //rs.close();
         ps.close();
     }
 
     public void editList(List list) throws SQLException
     {
         //EDIT LIST {name, category, description, listId}
-        PreparedStatement ps = c.prepareStatement(QUERY_UPDATE_LIST);
+        PreparedStatement ps = con.prepareStatement(QUERY_UPDATE_LIST);
         ps.setString(   1,  list.getName()          );
         ps.setString(   2,  list.getCategory()      );
         ps.setString(   3,  list.getDescription()   );
         ps.setInt(      4,  list.getId()            );
         ps.executeQuery();
 
-        rs.close();
+        //rs.close();
         ps.close();
     }
 
     public void removeList(List list) throws SQLException
     {
         //REMOVE LIST {listId}
-        PreparedStatement ps = c.prepareStatement(QUERY_REMOVE_LIST);
+        PreparedStatement ps = con.prepareStatement(QUERY_REMOVE_LIST);
         ps.setInt(      1,  list.getId()            );
         ps.executeQuery();
 
-        rs.close();
+        //rs.close();
         ps.close();
     }
 
     public ArrayList<List> findByCreator(User user) throws SQLException
     {
         // GET THE LISTS CREATED BY A USER {username}
-        PreparedStatement ps = c.prepareStatement(QUERY_CREATED_LISTS);
+        PreparedStatement ps = con.prepareStatement(QUERY_CREATED_LISTS);
         ps.setString(   1,  user.getUsername()      );
         ArrayList<List> lists = this.parseResultSetBrief(ps.executeQuery());
-        rs.close();
+        //rs.close();
         ps.close();
         return lists;
     }
@@ -110,10 +113,10 @@ public class ListDAO
     public ArrayList<List> findBySubscriber(User user) throws SQLException
     {
         // GET THE List A USER HAS SUBSCRIBED TO {username}
-        PreparedStatement ps = c.prepareStatement(QUERY_SUBSCRIBED_LISTS);
+        PreparedStatement ps = con.prepareStatement(QUERY_SUBSCRIBED_LISTS);
         ps.setString(   1,  user.getUsername()      );
         ArrayList<List> lists = this.parseResultSetBrief(ps.executeQuery());
-        rs.close();
+        //rs.close();
         ps.close();
         return lists;
     }
@@ -121,11 +124,11 @@ public class ListDAO
     public ArrayList<List> findByCategory(String category, User user) throws SQLException
     {
         // GET LISTS OF A CATEGORY {username, category}
-        PreparedStatement ps = c.prepareStatement(QUERY_LISTS_BY_CATEGORY);
+        PreparedStatement ps = con.prepareStatement(QUERY_LISTS_BY_CATEGORY);
         ps.setString(   1,  user.getUsername()      );
         ps.setString(   2,  category                );
         ArrayList<List> lists = this.parseResultSetDisplay(ps.executeQuery());
-        rs.close();
+        //rs.close();
         ps.close();
         return lists;
     }
@@ -133,11 +136,11 @@ public class ListDAO
     public ArrayList<List> findByKeyword(String keyword, User user) throws SQLException
     {
         // SEARCH BY A KEYWORD {username, '%keyword%'}
-        PreparedStatement ps = c.prepareStatement(QUERY_LISTS_BY_KEYWORD);
+        PreparedStatement ps = con.prepareStatement(QUERY_LISTS_BY_KEYWORD);
         ps.setString(   1,  user.getUsername()      );
         ps.setString(   2,  "%" + keyword + "%"     );
         ArrayList<List> lists = this.parseResultSetDisplay(ps.executeQuery());
-        rs.close();
+        //rs.close();
         ps.close();
         return lists;
     }
@@ -145,42 +148,38 @@ public class ListDAO
     public List findById(List list, User user) throws SQLException
     {
         // GET THE INFO OF A LIST {username,listId}
-        PreparedStatement ps = c.prepareStatement(QUERY_LISTS_BY_KEYWORD);
+        PreparedStatement ps = con.prepareStatement(QUERY_LISTS_BY_KEYWORD);
         ps.setString(   1,  user.getUsername()      );
         ps.setInt(      2,  list.getId()            );
         ArrayList<List> lists = this.parseResultSet(ps.executeQuery());
-        rs.close();
+        //rs.close();
         ps.close();
         return lists.get(0);
     }
 
 
-    private ArrayList<List> parseResultSet(ResultSet rs)
+    private ArrayList<List> parseResultSet(ResultSet rs) throws SQLException
     {
         ArrayList<List> lists = new ArrayList<List>();
         while (rs.next())
         {
-            int id          = rs.getInt("listId");
-            String nombre   = rs.getString("nombre");
-            double precio   = rs.getDouble("precio");
-
             int         id          = rs.getInt(    "listId"        );
             String      name        = rs.getString( "name"          );
             String      category    = rs.getString( "category"      );
             String      description = rs.getString( "description"   );
             String      username    = rs.getString( "username"      );
-            Integer     average     = rs.getInteger("average"       );
-            Integer     comments    = rs.getInteger("numcom"        );
+            Integer     average     = rs.getInt("average"       );
+            Integer     comments    = rs.getInt("numcom"        );
             boolean     subscribed  = rs.getBoolean("subscribed"    );
             
-            List list = new List( id, name, category, description, username, average, comments, subscribed);
+            List list = new List(id, name, category, description, username, average, comments, subscribed);
             lists.add(list);
         }
         return lists;
     }
 
 
-    private ArrayList<List> parseResultSetDisplay(ResultSet rs)
+    private ArrayList<List> parseResultSetDisplay(ResultSet rs) throws SQLException
     {
         ArrayList<List> lists = new ArrayList<List>();
         while (rs.next())
@@ -189,26 +188,26 @@ public class ListDAO
             String      name        = rs.getString( "name"          );
             String      category    = rs.getString( "category"      );
             String      username    = rs.getString( "username"      );
-            Integer     average     = rs.getInteger("average"       );
-            Integer     comments    = rs.getInteger("numcom"        );
+            Integer     average     = rs.getInt("average"       );
+            Integer     comments    = rs.getInt("numcom"        );
             boolean     subscribed  = rs.getBoolean("subscribed"    );
             
-            List list = new List( id, name, category, username, average, comments, subscribed)
+            List list = new List(id, name, category, username, average, comments, subscribed);
             lists.add(list);
         }
         return lists;
     }
 
-    private ArrayList<List> parseResultSetBrief(ResultSet rs)
+    private ArrayList<List> parseResultSetBrief(ResultSet rs) throws SQLException
     {
         ArrayList<List> lists = new ArrayList<List>();
         while (rs.next())
         {
             int         id          = rs.getInt(    "listId"        );
             String      name        = rs.getString( "name"          );
-            Integer     average     = rs.getInteger("average"       );
+            Integer     average     = rs.getInt("average"       );
             
-            List list = new List( id, name, average)
+            List list = new List( id, name, average);
             lists.add(list);
         }
         return lists;

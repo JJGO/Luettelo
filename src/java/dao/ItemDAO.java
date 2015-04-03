@@ -77,14 +77,14 @@ public class ItemDAO
         ps.close();
     }
     
-    public java.util.Collection getItems(dominio.List l, dominio.User u) throws SQLException
+    public java.util.ArrayList<Item> getItems(dominio.List l, dominio.User u) throws SQLException
     {
         PreparedStatement ps = con.prepareStatement(QUERY_ALL_ITEMS);
         ps.setString(1, u.getUsername());
         ps.setInt(2, l.getId());
 
         ResultSet rs = ps.executeQuery();
-        java.util.Collection<Item> itemList = new java.util.ArrayList<Item>();
+        java.util.ArrayList<Item> itemList = new java.util.ArrayList<Item>();
 
         while(rs.next())
         {

@@ -49,7 +49,7 @@ public class List
         this.description = description;
     }
 
-    public List(String name, String category,String description)
+    public List(String name, String category, String description)
     {
         this.name           = name;
         this.category       = category;
@@ -58,8 +58,8 @@ public class List
 
     public List(int id, String name, String category, String description)
     {
-        this(id);
-        this(id,name,category,description);
+        this(name, category, description);
+        this.id = id;
     }
 
     public int getId() {

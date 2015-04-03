@@ -76,13 +76,13 @@ public class CommentDAO
         ps.close();
     }
 
-    public java.util.Collection getComments(dominio.List l) throws SQLException
+    public java.util.ArrayList<Comment> getComments(dominio.List l) throws SQLException
     {
         PreparedStatement ps = con.prepareStatement(QUERY_ALL_COMMENTS);
         ps.setInt(1, l.getId());
 
         ResultSet rs = ps.executeQuery();
-        java.util.Collection<Comment> commentList = new java.util.ArrayList<Comment>();
+        java.util.ArrayList<Comment> commentList = new java.util.ArrayList<Comment>();
 
         while(rs.next())
         {
