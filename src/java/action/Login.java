@@ -11,9 +11,10 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author JJ
  */
-public class Login extends Action
+public class Login implements Action
 {
     // TODO - Put coherently the exceptions to error.jsp
+    @Override
     public void execute(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException
     {
 

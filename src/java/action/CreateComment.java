@@ -10,6 +10,7 @@ package action;
 import dao.CommentDAO;
 import dominio.Comment;
 import helper.DAOHelper;
+import helper.DisplayHelper;
 import java.io.IOException;
 import java.sql.SQLException;
 import javax.servlet.ServletException;
@@ -20,7 +21,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Lucia
  */
-public class CreateComment extends Action
+public class CreateComment implements Action
 {
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response)

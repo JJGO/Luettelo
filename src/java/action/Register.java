@@ -12,9 +12,10 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author JJ
  */
-public class Register extends Action
+public class Register implements Action
 {
     // TODO - Put coherently the exceptions to error.jsp
+    @Override
     public void execute(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException
     {
 
