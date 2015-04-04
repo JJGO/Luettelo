@@ -56,14 +56,14 @@ WHERE itemId = ?
 INSERT INTO Comment(content, username, listId)
 VALUES (?, ?, ?)
 
---EDIT COMMENT {content, commentId}
+--EDIT COMMENT {content, commentId, username}
 UPDATE Comment
 SET content = ?
-WHERE commentId = ?
+WHERE commentId = ? AND username = ?
 
---REMOVE COMMENT {commentId}
+--REMOVE COMMENT {commentId, username}
 DELETE FROM Comment
-WHERE commentId = ?
+WHERE commentId = ? AND username = ?
 
 -------------
 --- Subscription
@@ -91,7 +91,7 @@ VALUES (?, ?, ?);
 
 --UNCHECK AN ELEMENT {username, itemId}
 DELETE FROM Rating
-WHERE username = ? and itemId = ?
+WHERE username = ? AND itemId = ?
 
 -- -------------
 -- --- VOTES

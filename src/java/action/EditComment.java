@@ -23,7 +23,7 @@ import javax.servlet.http.HttpServletResponse;
  * @author Lucia
  */
 
-//EditComment{id, content}
+//EditComment{id, content, username}
 
 public class EditComment implements Action
 {
@@ -33,12 +33,13 @@ public class EditComment implements Action
     {
         String content = request.getParameter("content");
         int commentId = Integer.valueOf(request.getParameter("commentId"));
+        User user = (User) request.getSession().getAttribute("user");
 
         try
         {
             CommentDAO dao = DAOHelper.getCommentDAO(request);
             Comment comment = new Comment(content, commentId);
-            dao.editComment(comment);
+            dao.editComment(comment, user);
 
             DisplayHelper.setComments(request);
             DisplayHelper.setList(request);

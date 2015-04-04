@@ -23,7 +23,7 @@ import javax.servlet.http.HttpServletResponse;
  * @author Lucia
  */
 
-//RemoveComment{id}
+//RemoveComment{id, username}
 
 public class RemoveComment implements Action
 {
@@ -32,12 +32,13 @@ public class RemoveComment implements Action
             throws ServletException, IOException
     {
         int commentId = Integer.valueOf(request.getParameter("commentId"));
+        User user = (User) request.getSession().getAttribute("user");
 
         try
         {
             CommentDAO dao = DAOHelper.getCommentDAO(request);
             Comment comment = new Comment(commentId);
-            dao.removeComment(comment);
+            dao.removeComment(comment, user);
 
             DisplayHelper.setComments(request);
             DisplayHelper.setList(request);

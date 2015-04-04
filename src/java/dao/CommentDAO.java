@@ -24,10 +24,10 @@ public class CommentDAO extends DAO
     private static String QUERY_ADD_COMMENT = ("INSERT INTO Comment(content, username, listId) VALUES (?, ?, ?)");
 
     //EDIT COMMENT {content, commentId}
-    private static String QUERY_UPDATE_COMMENT = ("UPDATE Comment SET content = ? WHERE commentId = ?");
+    private static String QUERY_UPDATE_COMMENT = ("UPDATE Comment SET content = ? WHERE commentId = ? AND username = ?");
 
     //REMOVE COMMENT {commentId}
-    private static String QUERY_REMOVE_COMMENT = ("DELETE FROM Comment WHERE commentId = ?");
+    private static String QUERY_REMOVE_COMMENT = ("DELETE FROM Comment WHERE commentId = ? AND username = ?");
 
 //QUERY
     //GET THE COMMENTS OF A LIST {listId}
@@ -50,20 +50,22 @@ public class CommentDAO extends DAO
         ps.close();
     }
 
-    public void editComment(Comment comment) throws SQLException
+    public void editComment(Comment comment, dominio.User user) throws SQLException
     {
         PreparedStatement ps = con.prepareStatement(QUERY_UPDATE_COMMENT);
         ps.setString(1, comment.getContent());
         ps.setInt(2, comment.getId());
+        ps.setString(3, user.getUsername());
 
         ps.executeQuery();
         ps.close();
     }
 
-    public void removeComment(Comment comment) throws SQLException
+    public void removeComment(Comment comment, dominio.User user) throws SQLException
     {
         PreparedStatement ps = con.prepareStatement(QUERY_REMOVE_COMMENT);
         ps.setInt(1, comment.getId());
+        ps.setString(2, user.getUsername());
 
         ps.executeQuery();
         ps.close();
