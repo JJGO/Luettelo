@@ -39,19 +39,18 @@ public class UserDAO
 
     public void addUser(User user) throws SQLException
     {
-        //INSERT NEW USER IN THE DB {username, email, password}
+        // INSERT NEW USER IN THE DB {username, email, password}
         PreparedStatement ps = con.prepareStatement(QUERY_ADD_USER);
         ps.setString(   1,  user.getUsername()   );
         ps.setString(   2,  user.getEmail()      );
         ps.setString(   3,  user.getPassword()   );
-        ps.executeQuery();
-
+        ps.execute();
         ps.close();
     }
 
     public boolean removeUser(User user) throws SQLException
     {
-        //REMOVE USER FROM DB {username}
+        // REMOVE USER FROM DB {username}
         PreparedStatement ps = con.prepareStatement(QUERY_REMOVE_USER);
         ps.setString(   1,  user.getUsername()   );
         ps.setString(   2,  user.getPassword()   );
