@@ -29,7 +29,9 @@ public class List
     
     public List(int id, String name, String category, String username, Integer average, Integer comments, boolean subscribed)
     {
-        this(id, name, average);
+        this.id = id;
+        this.name = name;
+        this.average = average;
         this.category = category;
         this.username = username;
         this.comments = comments;

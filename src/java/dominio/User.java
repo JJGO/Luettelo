@@ -17,13 +17,13 @@ public class User
     private String email;
     private String password;
 
-    User(String username, String password)
+    public User(String username, String password)
     {
         this.username = username;
         this.password = password;
     }
 
-    User(String username, String email, String password)
+    public User(String username, String email, String password)
     {
         this(username, password);
         this.email = email;

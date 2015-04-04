@@ -1,5 +1,5 @@
 /*
- * Class: action.CreateComment
+ * Class: action.AddComment
  * Luettelo
  *
  * 2015-04-04
@@ -13,6 +13,7 @@ import helper.DAOHelper;
 import helper.DisplayHelper;
 import java.io.IOException;
 import java.sql.SQLException;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -21,7 +22,10 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Lucia
  */
-public class CreateComment implements Action
+
+//AddComment{listId, content, username} //TO DO: Check username is needed here
+
+public class AddComment implements Action
 {
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response)

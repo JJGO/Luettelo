@@ -1,10 +1,17 @@
 package action;
 
+import dao.UserDAO;
+import dominio.User;
+import helper.DAOHelper;
+import helper.DisplayHelper;
 import java.io.IOException;
+import java.sql.SQLException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import util.BCrypt;
 // import java.security.NoSuchAlgorithmException;
 
 
@@ -12,6 +19,9 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author JJ
  */
+
+//Register{username, email, password}
+
 public class Register implements Action
 {
     // TODO - Put coherently the exceptions to error.jsp
@@ -28,7 +38,7 @@ public class Register implements Action
             String hash = BCrypt.hashpw(password, BCrypt.gensalt(12));
             User user = new User(username, email, hash);
 
-            UserDAO dao = DAOHelper.getUserDAO()
+            UserDAO dao = DAOHelper.getUserDAO(request);
             dao.addUser(user);
 
             HttpSession session = request.getSession();

@@ -1,8 +1,12 @@
 package helper;
 
-import javax.servlet.ServletContext;
+import dao.CommentDAO;
+import dao.ItemDAO;
+import dao.ListDAO;
+import dominio.List;
+import dominio.User;
+import java.sql.SQLException;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 
 /**
@@ -11,33 +15,33 @@ import javax.servlet.http.HttpSession;
  */
 public class DisplayHelper
 {
-    public static void setDefaultLists(HttpServletRequest request) throws SQLException
+    public static void setDefaultLists(HttpServletRequest request) throws SQLException, ClassNotFoundException
     {
-        ListDAO dao = DAOHelper.getListDAO();
-        User user = request.getSession().getAttribute("user");
+        ListDAO dao = (ListDAO) DAOHelper.getListDAO(request);
+        User user = (User) request.getSession().getAttribute("user");
         request.setAttribute("defaultLists",dao.findByCategory("%",user));
     }
 
     public static void setList(HttpServletRequest request) throws SQLException
     {
-        ListDAO dao = DAOHelper.getListDAO();
-        User user = request.getSession().getAttribute("user");
-        List list = new List(request.getParameter("listId"));
+        ListDAO dao = DAOHelper.getListDAO(request);
+        User user = (User) request.getSession().getAttribute("user");
+        List list = new List(Integer.valueOf(request.getParameter("listId")));
         request.setAttribute("displayList",dao.findById());
     }
 
-    public static void setItems(HttpServletRequest request) throws SQLException
+    public static void setItems(HttpServletRequest request) throws SQLException, ClassNotFoundException
     {
-        ItemDAO dao = DAOHelper.getItemDAO();
-        User user = request.getSession().getAttribute("user");
-        List list = new List(request.getParameter("listId"));
+        ItemDAO dao = DAOHelper.getItemDAO(request);
+        User user = (User) request.getSession().getAttribute("user");
+        List list = new List(Integer.valueOf(request.getParameter("listId")));
         request.setAttribute("displayItems",dao.getItems(list,user));
     }
 
-    public static void setComments(HttpServletRequest request) throws SQLException
+    public static void setComments(HttpServletRequest request) throws SQLException, ClassNotFoundException
     {
-        CommentDAO dao = DAOHelper.getCommentDAO();
-        List list = new List(request.getParameter("listId"));
+        CommentDAO dao = DAOHelper.getCommentDAO(request);
+        List list = new List(Integer.valueOf(request.getParameter("listId")));
         request.setAttribute("displayComments",dao.getComments(list));
     }
 }

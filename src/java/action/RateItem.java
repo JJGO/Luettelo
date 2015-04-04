@@ -1,0 +1,1 @@
+//RateItem{id, value} //TO DO: Check this is right! (AJAX)

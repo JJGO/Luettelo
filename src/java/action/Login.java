@@ -1,16 +1,25 @@
 package action;
 
+import dao.UserDAO;
+import dominio.User;
+import helper.DAOHelper;
+import helper.DisplayHelper;
 import java.io.IOException;
+import java.sql.SQLException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 
 /**
  *
  * @author JJ
  */
+
+//Login{username, password}
+
 public class Login implements Action
 {
     // TODO - Put coherently the exceptions to error.jsp
@@ -25,7 +34,7 @@ public class Login implements Action
         {
             User user = new User(username, password);
 
-            UserDAO dao = DAOHelper.getUserDAO();
+            UserDAO dao = DAOHelper.getUserDAO(request);
             if( dao.findUser(user) )
             {
                 HttpSession session = request.getSession();

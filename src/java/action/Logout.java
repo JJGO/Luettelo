@@ -1,5 +1,6 @@
 package action;
 
+import helper.DisplayHelper;
 import java.io.IOException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -11,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author JJ
  */
-public class Logout extends Action
+public class Logout implements Action
 {
     // TODO - Put coherently the exceptions to error.jsp
     @Override
