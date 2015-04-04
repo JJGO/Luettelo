@@ -39,36 +39,42 @@ public class CommentDAO extends DAO
         super();
     }
 
-    public void addComment(Comment comment, dominio.List list, dominio.User user) throws SQLException
+    public boolean addComment(Comment comment, dominio.List list, dominio.User user) throws SQLException
     {
+        //ADD COMMENT {content, username, listId}
         PreparedStatement ps = con.prepareStatement(QUERY_ADD_COMMENT);
-        ps.setString(1, comment.getContent());
-        ps.setString(2, user.getUsername());
-        ps.setInt(3, list.getId());
+        ps.setString(   1, comment.getContent() );
+        ps.setString(   2, user.getUsername()   );
+        ps.setInt(      3, list.getId()         );
 
-        ps.executeQuery();
+        int rows = ps.executeUpdate();
         ps.close();
+        return (rows != 0);
     }
 
-    public void editComment(Comment comment, dominio.User user) throws SQLException
+    public boolean editComment(Comment comment, dominio.User user) throws SQLException
     {
+        //EDIT COMMENT {content, commentId}
         PreparedStatement ps = con.prepareStatement(QUERY_UPDATE_COMMENT);
-        ps.setString(1, comment.getContent());
-        ps.setInt(2, comment.getId());
-        ps.setString(3, user.getUsername());
+        ps.setString(   1, comment.getContent() );
+        ps.setInt(      2, comment.getId()      );
+        ps.setString(   3, user.getUsername()   );
 
-        ps.executeQuery();
+        int rows = ps.executeUpdate();
         ps.close();
+        return (rows != 0);
     }
 
-    public void removeComment(Comment comment, dominio.User user) throws SQLException
+    public boolean removeComment(Comment comment, dominio.User user) throws SQLException
     {
+        //REMOVE COMMENT {commentId}
         PreparedStatement ps = con.prepareStatement(QUERY_REMOVE_COMMENT);
-        ps.setInt(1, comment.getId());
-        ps.setString(2, user.getUsername());
+        ps.setInt(      1, comment.getId()      );
+        ps.setString(   2, user.getUsername()   );
 
-        ps.executeQuery();
+        int rows = ps.executeUpdate();
         ps.close();
+        return (rows != 0);
     }
 
     public java.util.ArrayList<Comment> getComments(dominio.List list) throws SQLException

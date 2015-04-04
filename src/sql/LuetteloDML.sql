@@ -7,6 +7,7 @@ INSERT INTO User (username, email, password)
 VALUES (?,?,?);
 
 --REMOVE USER FROM DB {username, password}
+--The password is checked before
 DELETE FROM User
 WHERE username = ? AND
       password = ?;
@@ -19,34 +20,48 @@ WHERE username = ? AND
 INSERT INTO List (name, category, description, username)
 VALUES (?, ?, ?, ?);
 
---EDIT LIST {name, category, description, listId}
+--EDIT LIST {name, category, description, listId, username}
+--Only the creator can edit
 UPDATE List
 SET name 		= ?,
 	category 	= ?,
 	description = ?
-WHERE listId = ?
+WHERE listId = ? AND username = ?
 
---REMOVE LIST {listId}
+--REMOVE LIST {listId, username}
+--Only the creator can delete
 DELETE FROM List
-WHERE listId = ?
+WHERE listId = ? AND username = ?
 
 -------------
 --- Item
 -------------
 
---ADD ITEM {name, url, listId}
+--ADD ITEM {name, url, listId, listId, username}
+--Only the creator can add
 INSERT INTO Item(name, url, listId)
-VALUES (?, ?, ?)
+SELECT ?, ?, ?
+FROM List
+WHERE listId = ? and username = ?
 
---EDIT ITEM {name, url, itemId}
+
+--EDIT ITEM {name, url, itemId, username}
+--Only the creator can edit
 UPDATE Item
 SET name = ?,
 	url  = ?
-WHERE itemId = ?
+WHERE 	itemId = ? AND
+	  	listId IN (	SELECT listId
+					FROM List
+					WHERE username = ?)
 
---REMOVE ITEM {itemId}
+--REMOVE ITEM {itemId, username}
+--Only the creator can delete
 DELETE FROM Item
-WHERE itemId = ?
+WHERE 	itemId = ? AND
+	  	listId IN (	SELECT listId
+					FROM List
+					WHERE username = ?)
 
 -------------
 --- Comment
@@ -81,13 +96,20 @@ WHERE username = ? AND listId = ?;
 --- Rating
 -------------
 
---CHECK IN AN ITEM {username, itemId}
+--CHECK IN AN ITEM {username, itemId, username, itemId}
+--Only a subscriber can check
 INSERT INTO Rating(username,itemId)
-VALUES (?, ?);
+SELECT ?, ?
+FROM Item I
+	 INNER JOIN Subscription S
+	 	ON I.listId = S.listId
+WHERE S.username = ? and I.itemId = ?
 
 --(RE)RATE AN ELEMENT {value, username, itemId}
-REPLACE INTO Rating(value,username,itemId)
-VALUES (?, ?, ?);
+-- Only a checked item can be rated
+UPDATE Rating
+SET value = ?
+WHERE username = ? AND itemId = ?
 
 --UNCHECK AN ELEMENT {username, itemId}
 DELETE FROM Rating

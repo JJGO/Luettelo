@@ -25,11 +25,11 @@ public class ListDAO extends DAO
     //CREATE LIST {name, category, description, username}
     private static String QUERY_ADD_LIST = "INSERT INTO List (name, category, description, username) VALUES (?, ?, ?, ?)";
     
-    //EDIT LIST {name, category, description, listId}
-    private static String QUERY_UPDATE_LIST = "SET name = ?, category = ?, description = ? WHERE listId = ?";
-    
-    //REMOVE LIST {listId}
-    private static String QUERY_REMOVE_LIST = "DELETE FROM List WHERE listId = ?";
+    //EDIT LIST {name, category, description, listId, username}
+    private static String QUERY_EDIT_LIST = "UPDATE List SET name = ?, category = ?, description = ? WHERE listId = ? AND username = ?";
+
+    //REMOVE LIST {listId, username}
+    private static String QUERY_REMOVE_LIST = "DELETE FROM List WHERE listId = ? AND username = ?";
 
 // QUERY
     // GET THE INFO OF A LIST {username,listId}
@@ -56,7 +56,7 @@ public class ListDAO extends DAO
         super();
     }
 
-    public void addList(List list, User user) throws SQLException
+    public boolean addList(List list, User user) throws SQLException
     {
         //CREATE LIST {name, category, description, username}
         PreparedStatement ps = con.prepareStatement(QUERY_ADD_LIST);
@@ -64,32 +64,37 @@ public class ListDAO extends DAO
         ps.setString(   2,  list.getCategory()      );
         ps.setString(   3,  list.getDescription()   );
         ps.setString(   4,  user.getUsername()      );
-        ps.executeQuery();
-
+        
+        int rows = ps.executeUpdate();
         ps.close();
+        return (rows != 0);
     }
 
-    public void editList(List list) throws SQLException
+    public boolean editList(List list, User user) throws SQLException
     {
-        //EDIT LIST {name, category, description, listId}
-        PreparedStatement ps = con.prepareStatement(QUERY_UPDATE_LIST);
+        //EDIT LIST {name, category, description, listId, username}
+        PreparedStatement ps = con.prepareStatement(QUERY_EDIT_LIST);
         ps.setString(   1,  list.getName()          );
         ps.setString(   2,  list.getCategory()      );
         ps.setString(   3,  list.getDescription()   );
         ps.setInt(      4,  list.getId()            );
-        ps.executeQuery();
-
+        ps.setString(   5,  user.getUsername()      );
+        
+        int rows = ps.executeUpdate();
         ps.close();
+        return (rows != 0);
     }
 
-    public void removeList(List list) throws SQLException
+    public boolean removeList(List list, User user) throws SQLException
     {
-        //REMOVE LIST {listId}
+        //REMOVE LIST {listId, username}
         PreparedStatement ps = con.prepareStatement(QUERY_REMOVE_LIST);
         ps.setInt(      1,  list.getId()            );
-        ps.executeQuery();
-
+        ps.setString(   2,  user.getUsername()      );
+        
+        int rows = ps.executeUpdate();
         ps.close();
+        return (rows != 0);
     }
 
     public ArrayList<List> findByCreator(User creator, User user) throws SQLException

@@ -61,9 +61,9 @@ CREATE TABLE IF NOT EXISTS Subscription
 
     CONSTRAINT Subscription_pkey
         PRIMARY KEY(username,listId),
-    CONSTRAINT Subscription_username_pkey
+    CONSTRAINT Subscription_username_fkey
         FOREIGN KEY(username) REFERENCES User(username) ON DELETE CASCADE,
-    CONSTRAINT Subscription_listId_pkey
+    CONSTRAINT Subscription_listId_fkey
         FOREIGN KEY(listId) REFERENCES List(listId) ON DELETE CASCADE
 );
 

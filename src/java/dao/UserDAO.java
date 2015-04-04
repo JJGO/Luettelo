@@ -35,15 +35,16 @@ public class UserDAO extends DAO
         super();
     }
 
-    public void addUser(User user) throws SQLException
+    public boolean addUser(User user) throws SQLException
     {
         // INSERT NEW USER IN THE DB {username, email, password}
         PreparedStatement ps = con.prepareStatement(QUERY_ADD_USER);
         ps.setString(   1,  user.getUsername()   );
         ps.setString(   2,  user.getEmail()      );
         ps.setString(   3,  user.getPassword()   );
-        ps.execute();
+        int rows = ps.executeUpdate();
         ps.close();
+        return (rows != 0);
     }
 
     public boolean removeUser(User user) throws SQLException
