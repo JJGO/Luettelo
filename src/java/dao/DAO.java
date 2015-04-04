@@ -7,13 +7,17 @@
 
 package dao;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+
 /**
  *
  * @author JJ
  */
 public class DAO
 {
-    private Connection con;
+    protected Connection con;
 
     static String USER = "root";
     static String PASSWD = "root";

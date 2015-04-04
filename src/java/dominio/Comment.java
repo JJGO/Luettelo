@@ -14,19 +14,30 @@ package dominio;
 public class Comment
 {
     private int id;
-    private String username;
     private String content;
+    private String username;
 
     public Comment(int id)
     {
         this.id = id;
     }
 
-    public Comment(int id, String username, String content)
+    public Comment(String content, String username)
     {
-        this(id);
-        this.username = username;
         this.content = content;
+        this.username = username;
+    }
+
+    public Comment(String content, int id)
+    {
+        this.content = content;
+        this.id = id;
+    }
+
+    public Comment(int id, String content, String username)
+    {
+        this(content, username);
+        this.id = id;
     }
 
     public int getId() {

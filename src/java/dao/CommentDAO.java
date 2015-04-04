@@ -8,8 +8,6 @@
 package dao;
 
 import dominio.Comment;
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -18,7 +16,7 @@ import java.sql.SQLException;
  *
  * @author Lucia
  */
-public class CommentDAO
+public class CommentDAO extends DAO
 {
 
 //DML
@@ -41,12 +39,12 @@ public class CommentDAO
         super();
     }
 
-    public void addComment(Comment comment) throws SQLException
+    public void addComment(Comment comment, dominio.List list) throws SQLException
     {
         PreparedStatement ps = con.prepareStatement(QUERY_ADD_COMMENT);
         ps.setString(1, comment.getContent());
         ps.setString(2, comment.getUsername());
-        ps.setInt(3, comment.getId());
+        ps.setInt(3, list.getId());
 
         ps.executeQuery();
         ps.close();

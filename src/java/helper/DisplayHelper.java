@@ -32,4 +32,19 @@ public class DisplayHelper
             request.setAttribute("subscribedLists",dao.findBySubscriber(user));
         }
     }
+
+    public static void setItems(HttpServletRequest request)
+    {
+        ItemDAO dao = DAOHelper.getItemDAO();
+        List list = request.getAttribute("list"); //???
+        User user = request.getSession().getAttribute("user");
+        request.setAttribute("displayItems",dao.getItems(list,user));
+    }
+
+    public static void setComments(HttpServletRequest request)
+    {
+        CommentDAO dao = DAOHelper.getCommentDAO();
+        List list = request.getAttribute("list"); //???
+        request.setAttribute("displayComments",dao.getComments(list));
+    }
 }

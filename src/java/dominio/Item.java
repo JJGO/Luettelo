@@ -24,6 +24,18 @@ public class Item
         this.id = id;
     }
 
+    public Item(String name, String url)
+    {
+        this.name = name;
+        this.url = url;
+    }
+
+    public Item(String name, String url, int id)
+    {
+        this(name, url);
+        this.id = id;
+    }
+
     public Item(int id, String name, String url, Integer average, Integer rating)
     {
         this(id);

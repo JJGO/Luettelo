@@ -1,10 +1,16 @@
 package action;
 
+import dao.UserDAO;
+import dominio.User;
+import helper.DAOHelper;
+import helper.DisplayHelper;
 import java.io.IOException;
+import java.sql.SQLException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 
 /**
@@ -24,7 +30,7 @@ public class DeleteAccount extends Action
         {
             User user = new User(username, password);
 
-            UserDAO dao = DAOHelper.getUserDAO()
+            UserDAO dao = DAOHelper.getUserDAO();
             if( dao.removeUser(user) )
             {
                 HttpSession session = request.getSession();

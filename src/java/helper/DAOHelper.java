@@ -1,8 +1,12 @@
 package helper;
 
+import dao.CommentDAO;
+import dao.ItemDAO;
+import dao.ListDAO;
+import dao.UserDAO;
+import java.sql.SQLException;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 
 /**
@@ -19,7 +23,7 @@ public class DAOHelper
         if(dao == null)
         {
             dao = new UserDAO();
-            aplicacion.setAttribute("UserDAO",dao);
+            application.setAttribute("UserDAO",dao);
         }
         return dao;
     }
@@ -31,7 +35,7 @@ public class DAOHelper
         if(dao == null)
         {
             dao = new ListDAO();
-            aplicacion.setAttribute("ListDAO",dao);
+            application.setAttribute("ListDAO",dao);
         }
         return dao;
     }
@@ -43,7 +47,7 @@ public class DAOHelper
         if(dao == null)
         {
             dao = new ItemDAO();
-            aplicacion.setAttribute("ItemDAO",dao);
+            application.setAttribute("ItemDAO",dao);
         }
         return dao;
     }
@@ -55,7 +59,7 @@ public class DAOHelper
         if(dao == null)
         {
             dao = new CommentDAO();
-            aplicacion.setAttribute("CommentDAO",dao);
+            application.setAttribute("CommentDAO",dao);
         }
         return dao;
     }

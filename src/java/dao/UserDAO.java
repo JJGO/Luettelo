@@ -8,8 +8,6 @@
 package dao;
 
 import dominio.User;
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -18,7 +16,7 @@ import java.sql.SQLException;
  *
  * @author JJ
  */
-public class UserDAO
+public class UserDAO extends DAO
 {
 
     //INSERT NEW USER IN THE DB {username, email, password}
