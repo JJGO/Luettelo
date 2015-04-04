@@ -43,6 +43,8 @@ public class AddList implements Action
             List list   = new List(name, category, description);
             if(dao.addList(list, user))
             {
+                //shouldnt this go to 'items.jsp'?
+                //if it really goes to 'lists.jsp' 'DisplayHelper.set' should set the lists instead
                 DisplayHelper.setItems(request);
                 DisplayHelper.setList(request);
 

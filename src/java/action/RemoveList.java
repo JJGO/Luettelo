@@ -44,7 +44,7 @@ public class RemoveList implements Action
                 DisplayHelper.setItems(request);
                 DisplayHelper.setList(request);
 
-                RequestDispatcher rd = request.getRequestDispatcher("/index.jsp");
+                RequestDispatcher rd = request.getRequestDispatcher("/lists.jsp");
                 rd.forward(request,response);
             }
             else

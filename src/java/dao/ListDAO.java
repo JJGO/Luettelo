@@ -173,7 +173,7 @@ public class ListDAO extends DAO
     public List findById(List list, User user) throws SQLException
     {
         // GET THE INFO OF A LIST {username,listId}
-        PreparedStatement ps = con.prepareStatement(QUERY_LISTS_INFO);
+        PreparedStatement ps = con.prepareStatement(QUERY_LIST_INFO);
         ps.setString(   1,  user.getUsername()      );
         ps.setInt(      2,  list.getId()            );
         ArrayList<List> lists = this.parseResultSet(ps.executeQuery());

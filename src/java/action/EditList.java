@@ -44,6 +44,8 @@ public class EditList implements Action
             List list   = new List(listId, name, category, description);
             if( dao.editList(list, user) )
             {
+                //shouldnt this go to 'items.jsp'?
+                //if it really goes to 'lists.jsp' 'DisplayHelper.set' should set the lists instead
                 DisplayHelper.setItems(request);
                 DisplayHelper.setList(request);
 
