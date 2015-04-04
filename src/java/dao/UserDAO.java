@@ -20,10 +20,10 @@ public class UserDAO extends DAO
 {
 
     //INSERT NEW USER IN THE DB {username, email, password}
-    private static String QUERY_ADD_USER = "INSERT INTO User (username, email, password) VALUES (?,?,?)";
+    private static String ADD_USER = "INSERT INTO User (username, email, password) VALUES (?,?,?)";
 
     //REMOVE USER FROM DB {username, password}
-    private static String QUERY_REMOVE_USER = "DELETE FROM User WHERE username = ? AND password = ?";
+    private static String REMOVE_USER = "DELETE FROM User WHERE username = ? AND password = ?";
 
     // CHECK IF A USER IS IN THE DB {username,password}
     private static String QUERY_FIND_USER = "SELECT username FROM User WHERE username = ? AND password = ?";
@@ -38,7 +38,7 @@ public class UserDAO extends DAO
     public boolean addUser(User user) throws SQLException
     {
         // INSERT NEW USER IN THE DB {username, email, password}
-        PreparedStatement ps = con.prepareStatement(QUERY_ADD_USER);
+        PreparedStatement ps = con.prepareStatement(ADD_USER);
         ps.setString(   1,  user.getUsername()   );
         ps.setString(   2,  user.getEmail()      );
         ps.setString(   3,  user.getPassword()   );
@@ -50,7 +50,7 @@ public class UserDAO extends DAO
     public boolean removeUser(User user) throws SQLException
     {
         // REMOVE USER FROM DB {username}
-        PreparedStatement ps = con.prepareStatement(QUERY_REMOVE_USER);
+        PreparedStatement ps = con.prepareStatement(REMOVE_USER);
         ps.setString(   1,  user.getUsername()   );
         ps.setString(   2,  user.getPassword()   );
         int rows = ps.executeUpdate();

@@ -21,13 +21,13 @@ public class CommentDAO extends DAO
 
 //DML
     //ADD COMMENT {content, username, listId}
-    private static String QUERY_ADD_COMMENT = ("INSERT INTO Comment(content, username, listId) VALUES (?, ?, ?)");
+    private static String ADD_COMMENT = ("INSERT INTO Comment(content, username, listId) VALUES (?, ?, ?)");
 
     //EDIT COMMENT {content, commentId}
-    private static String QUERY_UPDATE_COMMENT = ("UPDATE Comment SET content = ? WHERE commentId = ? AND username = ?");
+    private static String UPDATE_COMMENT = ("UPDATE Comment SET content = ? WHERE commentId = ? AND username = ?");
 
     //REMOVE COMMENT {commentId}
-    private static String QUERY_REMOVE_COMMENT = ("DELETE FROM Comment WHERE commentId = ? AND username = ?");
+    private static String REMOVE_COMMENT = ("DELETE FROM Comment WHERE commentId = ? AND username = ?");
 
 //QUERY
     //GET THE COMMENTS OF A LIST {listId}
@@ -42,7 +42,7 @@ public class CommentDAO extends DAO
     public boolean addComment(Comment comment, dominio.List list, dominio.User user) throws SQLException
     {
         //ADD COMMENT {content, username, listId}
-        PreparedStatement ps = con.prepareStatement(QUERY_ADD_COMMENT);
+        PreparedStatement ps = con.prepareStatement(ADD_COMMENT);
         ps.setString(   1, comment.getContent() );
         ps.setString(   2, user.getUsername()   );
         ps.setInt(      3, list.getId()         );
@@ -55,7 +55,7 @@ public class CommentDAO extends DAO
     public boolean editComment(Comment comment, dominio.User user) throws SQLException
     {
         //EDIT COMMENT {content, commentId}
-        PreparedStatement ps = con.prepareStatement(QUERY_UPDATE_COMMENT);
+        PreparedStatement ps = con.prepareStatement(UPDATE_COMMENT);
         ps.setString(   1, comment.getContent() );
         ps.setInt(      2, comment.getId()      );
         ps.setString(   3, user.getUsername()   );
@@ -68,7 +68,7 @@ public class CommentDAO extends DAO
     public boolean removeComment(Comment comment, dominio.User user) throws SQLException
     {
         //REMOVE COMMENT {commentId}
-        PreparedStatement ps = con.prepareStatement(QUERY_REMOVE_COMMENT);
+        PreparedStatement ps = con.prepareStatement(REMOVE_COMMENT);
         ps.setInt(      1, comment.getId()      );
         ps.setString(   2, user.getUsername()   );
 

@@ -1,7 +1,7 @@
 /*
  * Class: dominio.Item
  * Luettelo
- * 
+ *
  * 2015-04-03
  */
 
@@ -11,7 +11,7 @@ package dominio;
  *
  * @author Lucia
  */
-public class Item 
+public class Item
 {
     private int id;
     private String name;
@@ -22,6 +22,12 @@ public class Item
     public Item(int id)
     {
         this.id = id;
+    }
+
+    public Item(int id, Integer rating)
+    {
+        this(id);
+        this.setRating(rating);
     }
 
     public Item(String name, String url)
@@ -42,7 +48,7 @@ public class Item
         this.name = name;
         this.url = url;
         this.average = average;
-        this.rating = rating;
+        this.setRating(rating);
     }
 
     public int getId() {
@@ -82,7 +88,14 @@ public class Item
     }
 
     public void setRating(Integer rating) {
-        this.rating = rating;
+        if(rating >= 1 && rating <= 5)
+        {
+            this.rating = rating;
+        }
+        else
+        {
+            this.rating = 0;
+        }
     }
     
     @Override
