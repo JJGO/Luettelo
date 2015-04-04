@@ -32,20 +32,26 @@ public class EditItem implements Action
             throws ServletException, IOException
     {
         String name = request.getParameter("name");
-        String url = request.getParameter("url");
-        int itemId = Integer.valueOf(request.getParameter("itemId"));
+        String url  = request.getParameter("url");
+        int itemId  = Integer.parseInt(request.getParameter("itemId"));
+        User user   = (User) request.getSession().getAttribute("user");
 
         try
         {
             ItemDAO dao = DAOHelper.getItemDAO(request);
             Item item = new Item(name, url, itemId);
-            dao.editItem(item);
+            if( dao.editItem(item, user) )
+            {
+                DisplayHelper.setList(request);
+                DisplayHelper.setItems(request);
 
-            DisplayHelper.setItems(request);
-            DisplayHelper.setList(request);
-
-            RequestDispatcher rd = request.getRequestDispatcher("/items.jsp");
-            rd.forward(request,response);
+                RequestDispatcher rd = request.getRequestDispatcher("/items.jsp");
+                rd.forward(request,response);
+            }
+            else
+            {
+                response.sendRedirect("index.jsp");
+            }
         }
         catch(SQLException e)
         {

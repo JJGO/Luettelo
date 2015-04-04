@@ -24,7 +24,7 @@ import javax.servlet.http.HttpServletResponse;
  * @author Lucia
  */
 
-//AddComment{listId, content, username}
+//AddComment{listId, content}
 
 public class AddComment implements Action
 {
@@ -32,22 +32,28 @@ public class AddComment implements Action
     public void execute(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException
     {
-        String content = request.getParameter("content");
-        int listId = Integer.valueOf(request.getParameter("listId"));
-        User user = (User) request.getSession().getAttribute("user");
+        String  content = request.getParameter("content");
+        int listId      = Integer.parseInt(request.getParameter("listId"));
+        User user       = (User) request.getSession().getAttribute("user");
 
         try
         {
-            CommentDAO dao = DAOHelper.getCommentDAO(request);
-            Comment comment = new Comment(content);
-            dominio.List list = new dominio.List(listId);
-            dao.addComment(comment, list, user);
+            CommentDAO dao      = DAOHelper.getCommentDAO(request);
+            Comment comment     = new Comment(content);
+            dominio.List list   = new dominio.List(listId);
+            
+            if( dao.addComment(comment, list, user) )
+            {
+                DisplayHelper.setList(request);
+                DisplayHelper.setComments(request);
 
-            DisplayHelper.setComments(request);
-            DisplayHelper.setList(request);
-
-            RequestDispatcher rd = request.getRequestDispatcher("/comments.jsp");
-            rd.forward(request,response);
+                RequestDispatcher rd = request.getRequestDispatcher("/comments.jsp");
+                rd.forward(request,response);
+            }
+            else
+            {
+                response.sendRedirect("index.jsp");
+            }
         }
         catch(SQLException e)
         {

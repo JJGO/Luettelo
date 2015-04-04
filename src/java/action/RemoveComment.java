@@ -38,14 +38,18 @@ public class RemoveComment implements Action
         {
             CommentDAO dao = DAOHelper.getCommentDAO(request);
             Comment comment = new Comment(commentId);
-            dao.removeComment(comment, user);
+            if( dao.removeComment(comment, user) )
+            {
+                DisplayHelper.setComments(request);
+                DisplayHelper.setList(request);
 
-            DisplayHelper.setComments(request);
-            DisplayHelper.setList(request);
-
-            RequestDispatcher rd = request.getRequestDispatcher("/comments.jsp");
-            rd.forward(request,response);
-
+                RequestDispatcher rd = request.getRequestDispatcher("/comments.jsp");
+                rd.forward(request,response);
+            }
+            else
+            {
+                response.sendRedirect("index.jsp");
+            }
         }
         catch(SQLException e)
         {

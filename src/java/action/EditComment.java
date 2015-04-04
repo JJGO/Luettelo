@@ -23,7 +23,7 @@ import javax.servlet.http.HttpServletResponse;
  * @author Lucia
  */
 
-//EditComment{id, content, username}
+//EditComment{id, content}
 
 public class EditComment implements Action
 {
@@ -31,22 +31,26 @@ public class EditComment implements Action
     public void execute(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException
     {
-        String content = request.getParameter("content");
-        int commentId = Integer.valueOf(request.getParameter("commentId"));
-        User user = (User) request.getSession().getAttribute("user");
+        String content  = request.getParameter("content");
+        int commentId   = Integer.parseInt(request.getParameter("commentId"));
+        User user       = (User) request.getSession().getAttribute("user");
 
         try
         {
             CommentDAO dao = DAOHelper.getCommentDAO(request);
             Comment comment = new Comment(content, commentId);
-            dao.editComment(comment, user);
+            if( dao.editComment(comment, user) )
+            {
+                DisplayHelper.setList(request);
+                DisplayHelper.setComments(request);
 
-            DisplayHelper.setComments(request);
-            DisplayHelper.setList(request);
-
-            RequestDispatcher rd = request.getRequestDispatcher("/comments.jsp");
-            rd.forward(request,response);
-
+                RequestDispatcher rd = request.getRequestDispatcher("/comments.jsp");
+                rd.forward(request,response);
+            }
+            else
+            {
+                response.sendRedirect("index.jsp");
+            }
         }
         catch(SQLException e)
         {

@@ -32,18 +32,24 @@ public class RemoveItem implements Action
             throws ServletException, IOException
     {
         int itemId = Integer.valueOf(request.getParameter("itemId"));
+        User user  = (User) request.getSession().getAttribute("user");
 
         try
         {
             ItemDAO dao = DAOHelper.getItemDAO(request);
             Item item = new Item(itemId);
-            dao.removeItem(item);
+            if( dao.removeItem(item, user) )
+            {
+                DisplayHelper.setItems(request);
+                DisplayHelper.setList(request);
 
-            DisplayHelper.setItems(request);
-            DisplayHelper.setList(request);
-
-            RequestDispatcher rd = request.getRequestDispatcher("/items.jsp");
-            rd.forward(request,response);
+                RequestDispatcher rd = request.getRequestDispatcher("/items.jsp");
+                rd.forward(request,response);
+            }
+            else
+            {
+                response.sendRedirect("index.jsp");
+            }
         }
         catch(SQLException e)
         {

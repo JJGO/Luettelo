@@ -32,21 +32,27 @@ public class AddItem implements Action
             throws ServletException, IOException
     {
         String name = request.getParameter("name");
-        String url = request.getParameter("url");
-        int listId = Integer.valueOf(request.getParameter("listId"));
+        String url  = request.getParameter("url");
+        int listId  = Integer.parseInt(request.getParameter("listId"));
+        User user   = (User) request.getSession().getAttribute("user");
 
         try
         {
-            ItemDAO dao = DAOHelper.getItemDAO(request);
-            Item item = new Item(name, url);
+            ItemDAO dao       = DAOHelper.getItemDAO(request);
+            Item item         = new Item(name, url);
             dominio.List list = new dominio.List(listId);
-            dao.addItem(item, list);
+            if( dao.addItem(item, list, user) )
+            {
+                DisplayHelper.setList(request);
+                DisplayHelper.setItems(request);
 
-            DisplayHelper.setItems(request);
-            DisplayHelper.setList(request);
-
-            RequestDispatcher rd = request.getRequestDispatcher("/items.jsp");
-            rd.forward(request,response);
+                RequestDispatcher rd = request.getRequestDispatcher("/items.jsp");
+                rd.forward(request,response);
+            }
+            else
+            {
+                response.sendRedirect("index.jsp");
+            }
         }
         catch(SQLException e)
         {

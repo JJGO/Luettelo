@@ -24,7 +24,7 @@ import javax.servlet.http.HttpServletResponse;
  * @author Lucia
  */
 
-//AddList{name, category, description, username}
+//AddList{name, category, description}
 
 public class AddList implements Action
 {
@@ -32,22 +32,27 @@ public class AddList implements Action
     public void execute(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException
     {
-        String name = request.getParameter("name");
-        String category = request.getParameter("category");
-        String description = request.getParameter("description");
-        User user = (User) request.getSession().getAttribute("user"); //to know who created the list
-
+        String name         = request.getParameter("name");
+        String category     = request.getParameter("category");
+        String description  = request.getParameter("description");
+        User user           = (User) request.getSession().getAttribute("user");
+                              //to know who created the list
         try
         {
             ListDAO dao = DAOHelper.getListDAO(request);
-            List list = new List(name, category, description);
-            dao.addList(list, user);
+            List list   = new List(name, category, description);
+            if( dao.addList(list, user) )
+            {
+                DisplayHelper.setItems(request);
+                DisplayHelper.setList(request);
 
-            DisplayHelper.setItems(request);
-            DisplayHelper.setList(request);
-
-            RequestDispatcher rd = request.getRequestDispatcher("/items.jsp");
-            rd.forward(request,response);
+                RequestDispatcher rd = request.getRequestDispatcher("/lists.jsp");
+                rd.forward(request,response);
+            }
+            else
+            {
+                response.sendRedirect("index.jsp");
+            }
         }
         catch(SQLException e)
         {

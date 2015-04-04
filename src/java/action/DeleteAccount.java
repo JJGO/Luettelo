@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
  * @author JJ
  */
 
-//DeleteAccount{username, password}
+//DeleteAccount{password}
 
 public class DeleteAccount implements Action
 {
@@ -26,12 +26,11 @@ public class DeleteAccount implements Action
     public void execute(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException
     {
 
-        String username     = request.getParameter("username");
         String password     = request.getParameter("password");
-
+        User user           = (User) request.getSession().getAttribute("user");
         try
         {
-            User user = new User(username, password);
+            User user = new User(user.getUsername(), password);
 
             UserDAO dao = DAOHelper.getUserDAO(request);
             if( dao.removeUser(user) )
@@ -43,8 +42,6 @@ public class DeleteAccount implements Action
                 request.setAttribute("loginError","La contraseña introducida es incorrecta");
             }
 
-            DisplayHelper.setDefaultLists(request);
-            DisplayHelper.setAsideLists(request);
             RequestDispatcher rd = request.getRequestDispatcher("/index.jsp");
             rd.forward(request, response);
         }
