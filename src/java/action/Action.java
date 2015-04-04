@@ -9,10 +9,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author JJ
  */
-public abstract class Action
+public interface Action
 {
-    public void execute(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException
-    {
-        
-    }
+    public void execute(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException;
 }
