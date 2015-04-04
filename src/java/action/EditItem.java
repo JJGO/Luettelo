@@ -9,6 +9,7 @@ package action;
 
 import dao.ItemDAO;
 import dominio.Item;
+import dominio.User;
 import helper.DAOHelper;
 import helper.DisplayHelper;
 import java.io.IOException;

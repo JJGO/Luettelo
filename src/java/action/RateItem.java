@@ -7,13 +7,24 @@
 
 package action;
 
+import dao.ItemDAO;
+import dominio.Item;
+import dominio.User;
+import helper.DAOHelper;
+import helper.DisplayHelper;
+import java.io.IOException;
+import java.sql.SQLException;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author
+ * @author Lucia
  */
 
-//RateItem{id, value} //TO DO: Check this is right! (AJAX)
+//RateItem{value, username, itemId}
 
 public class RateItem implements Action
 {

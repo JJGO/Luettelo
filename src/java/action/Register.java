@@ -14,7 +14,6 @@ import javax.servlet.http.HttpSession;
 import util.BCrypt;
 // import java.security.NoSuchAlgorithmException;
 
-
 /**
  *
  * @author JJ
