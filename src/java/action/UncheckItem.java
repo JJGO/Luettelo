@@ -25,6 +25,25 @@ public class UncheckItem implements Action
     public void execute(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException
     {
-        
+        int itemId = Integer.parseInt(request.getParameter("itemId"));
+        User user  = (User) request.getSession().getAttribute("user");
+
+        try
+        {
+            ItemDAO dao = DAOHelper.getItemDAO(request);
+            Item item = new Item(itemId);
+            boolean error = !dao.uncheckItem(item, user);
+            
+   			PrintWriter out = response.getWriter();
+   			out.prinln("{ error : "+error+"}");
+        }
+        catch(SQLException e)
+        {
+            response.sendRedirect("error.jsp");
+        }
+        catch(ClassNotFoundException e)
+        {
+            response.sendRedirect("error.jsp");
+        }
     }
 }

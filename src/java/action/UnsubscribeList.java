@@ -25,6 +25,26 @@ public class UnsubscribeList implements Action
     public void execute(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException
     {
-        
+        int listId = Integer.valueOf(request.getParameter("listId"));
+        User user  = (User) request.getSession().getAttribute("user");
+
+        try
+        {
+            ListDAO dao = DAOHelper.getListDAO(request);
+            List list = new List(listId);
+            boolean error = !dao.unsubscribeList(list, user);
+            
+   			PrintWriter out = response.getWriter();
+   			out.prinln("{ error : "+error+"}");
+        }
+        catch(SQLException e)
+        {
+            response.sendRedirect("error.jsp");
+        }
+        catch(ClassNotFoundException e)
+        {
+            response.sendRedirect("error.jsp");
+        }
+
     }
 }

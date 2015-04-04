@@ -33,14 +33,10 @@ public class CheckItem implements Action
         {
             ItemDAO dao = DAOHelper.getItemDAO(request);
             Item item = new Item(itemId);
-            if( dao.checkItem(item, user) )
-            {
-            	//// TODO >>> JSON
-            }
-            else
-            {
-            	//// TODO >>> JSON
-            }
+            boolean error = !dao.checkItem(item, user);
+            
+            PrintWriter out = response.getWriter();
+   			out.prinln("{ error : "+error+"}");
         }
         catch(SQLException e)
         {

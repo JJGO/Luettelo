@@ -38,13 +38,10 @@ public class SubscribeList implements Action
         {
             ListDAO dao = DAOHelper.getListDAO(request);
             List list = new List(listId);
-            dao.subscribeList(list, user);
-
-            //DisplayHelper.setItems(request);
-            //DisplayHelper.setList(request);
-
-            RequestDispatcher rd = request.getRequestDispatcher("/subscription.jsp"); //??? (so that AJAX request shows the icons for checking items...)
-            rd.forward(request,response);
+            boolean error = !dao.subscribeList(list, user)
+            
+            PrintWriter out = response.getWriter();
+            out.prinln("{ error : "+error+"}");
         }
         catch(SQLException e)
         {

@@ -40,14 +40,10 @@ public class RateItem implements Action
         {
             ItemDAO dao = DAOHelper.getItemDAO(request);
             Item item = new Item(itemId,rating);
-            if( dao.rateItem(item, user) )
-            {
-            	//// TODO >>> JSON
-            }
-            else
-            {
-            	//// TODO >>> JSON
-            }
+            boolean error = !dao.rateItem(item, user);
+            
+            PrintWriter out = response.getWriter();
+   			out.prinln("{ error : "+error+"}");
         }
         catch(SQLException e)
         {
