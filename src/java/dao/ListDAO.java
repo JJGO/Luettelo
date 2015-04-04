@@ -20,12 +20,8 @@ import java.util.ArrayList;
  *
  * @author JJ
  */
-public class ListDAO
+public class ListDAO extends DAO
 {
-    private Connection con;
-
-    static String USER = "root";
-    static String PASSWD = "root";
 
 // DML
     //CREATE LIST {name, category, description, username}
@@ -52,12 +48,11 @@ public class ListDAO
     
     // GET THE INFO OF A LIST {username,listId}
     private static String QUERY_LIST_INFO = "SELECT  L.listId, L.name, L.category, L.description, L.username, LA.average, COALESCE(C.numcom,0) AS numcom, NOT ISNULL(S.username) AS subscribed FROM List L INNER JOIN List_avg LA ON L.listId = LA.listId LEFT OUTER JOIN (  SELECT  listId, COUNT(*) AS numcom FROM Comment ) C ON L.listId = C.listId LEFT OUTER JOIN (  SELECT listId, username FROM Subscription WHERE username = ? ) S ON L.listId = S.listId WHERE L.listId = ? ORDER BY LA.average DESC";
-    
+
     public ListDAO()
         throws SQLException, ClassNotFoundException
     {
-        Class.forName("com.mysql.jdbc.Driver");
-        con = DriverManager.getConnection("jdbc:mysql://localhost/luettelo", USER, PASSWD);
+        super();
     }
 
     public void addList(List list, User user) throws SQLException
@@ -206,11 +201,5 @@ public class ListDAO
         }
         rs.close();
         return lists;
-    }
-
-    public void close()
-        throws SQLException, ClassNotFoundException
-    {
-        con.close();
     }
 }

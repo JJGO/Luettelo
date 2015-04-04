@@ -20,10 +20,6 @@ import java.sql.SQLException;
  */
 public class CommentDAO
 {
-    private Connection con;
-
-    static String USER = "root";
-    static String PASSWD = "root";
 
 //DML
     //ADD COMMENT {content, username, listId}
@@ -42,8 +38,7 @@ public class CommentDAO
     public CommentDAO()
         throws SQLException, ClassNotFoundException
     {
-        Class.forName("com.mysql.jdbc.Driver");
-        con = DriverManager.getConnection("jdbc:mysql://localhost/luettelo", USER, PASSWD);
+        super();
     }
 
     public void addComment(Comment comment) throws SQLException
@@ -97,11 +92,5 @@ public class CommentDAO
         rs.close();
 
         return commentList;
-    }
-
-    public void close()
-        throws SQLException, ClassNotFoundException
-    {
-        con.close();
     }
 }

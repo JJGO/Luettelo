@@ -20,10 +20,6 @@ import java.sql.SQLException;
  */
 public class UserDAO
 {
-    private Connection con;
-
-    static String USER = "root";
-    static String PASSWD = "root";
 
     //INSERT NEW USER IN THE DB {username, email, password}
     private static String QUERY_ADD_USER = "INSERT INTO User (username, email, password) VALUES (?,?,?)";
@@ -38,8 +34,7 @@ public class UserDAO
     public UserDAO()
         throws SQLException, ClassNotFoundException
     {
-        Class.forName("com.mysql.jdbc.Driver");
-        con = DriverManager.getConnection("jdbc:mysql://localhost/luettelo", USER, PASSWD);
+        super();
     }
 
     public void addUser(User user) throws SQLException
@@ -62,16 +57,7 @@ public class UserDAO
         ps.setString(   2,  user.getPassword()   );
         int rows = ps.executeUpdate();
         ps.close();
-        if(rows == 0)
-        {
-            return false;
-        }
-        else
-        {
-            return true;
-        }
-        
-        
+        return (rows != 0);
     }
 
     public boolean findUser(User user) throws SQLException
@@ -81,17 +67,12 @@ public class UserDAO
         ps.setString(   1,  user.getUsername()   );
         ps.setString(   2,  user.getPassword()   );
         ResultSet rs = ps.executeQuery();
-        if (rs.next())
-            return true;
-        else
-            return false;
+        boolean exists = rs.next();
+        ps.close();
+        rs.close();
+        return exists;
     }
 
-    public void close()
-        throws SQLException, ClassNotFoundException
-    {
-        con.close();
-    }
 }
 
 

@@ -18,12 +18,8 @@ import java.sql.SQLException;
  *
  * @author Lucia
  */
-public class ItemDAO
+public class ItemDAO extends DAO
 {
-    private Connection con;
-
-    static String USER = "root";
-    static String PASSWD = "root";
 
 //DML
     //ADD ITEM {name, url, listId}
@@ -42,8 +38,7 @@ public class ItemDAO
     public ItemDAO()
         throws SQLException, ClassNotFoundException
     {
-        Class.forName("com.mysql.jdbc.Driver");
-        con = DriverManager.getConnection("jdbc:mysql://localhost/luettelo", USER, PASSWD);
+        super();
     }
 
     public void addItem(Item item, dominio.List list) throws SQLException
@@ -101,11 +96,5 @@ public class ItemDAO
         rs.close();
 
         return itemList;
-    }
-
-    public void close()
-        throws SQLException, ClassNotFoundException
-    {
-        con.close();
     }
 }
