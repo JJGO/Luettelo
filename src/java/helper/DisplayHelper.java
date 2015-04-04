@@ -15,36 +15,29 @@ public class DisplayHelper
     {
         ListDAO dao = DAOHelper.getListDAO();
         User user = request.getSession().getAttribute("user");
-        request.setAttribute("displayLists",dao.findByCategory("%",user));
+        request.setAttribute("defaultLists",dao.findByCategory("%",user));
     }
 
-    public static void setAsideLists(HttpServletRequest request) throws SQLException
+    public static void setList(HttpServletRequest request) throws SQLException
     {
         ListDAO dao = DAOHelper.getListDAO();
         User user = request.getSession().getAttribute("user");
-        if(user == null)
-        {
-            request.setAttribute("topLists",dao.findByCategory("%",user));
-        }
-        else
-        {
-            request.setAttribute("createdLists",dao.findByCreator(user));
-            request.setAttribute("subscribedLists",dao.findBySubscriber(user));
-        }
+        List list = new List(request.getParameter("listId"));
+        request.setAttribute("displayList",dao.findById());
     }
 
-    public static void setItems(HttpServletRequest request)
+    public static void setItems(HttpServletRequest request) throws SQLException
     {
         ItemDAO dao = DAOHelper.getItemDAO();
-        List list = request.getAttribute("list"); //???
         User user = request.getSession().getAttribute("user");
+        List list = new List(request.getParameter("listId"));
         request.setAttribute("displayItems",dao.getItems(list,user));
     }
 
-    public static void setComments(HttpServletRequest request)
+    public static void setComments(HttpServletRequest request) throws SQLException
     {
         CommentDAO dao = DAOHelper.getCommentDAO();
-        List list = request.getAttribute("list"); //???
+        List list = new List(request.getParameter("listId"));
         request.setAttribute("displayComments",dao.getComments(list));
     }
 }

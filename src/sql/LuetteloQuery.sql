@@ -8,33 +8,9 @@ FROM User
 WHERE username = ? AND
       password = ?;
 
---V-- GET THE LISTS CREATED BY A USER {username}
-SELECT L.listId,
-       L.name,
-       LA.average
-FROM List L
-     INNER JOIN List_avg LA
-        ON L.listId = LA.listId
-WHERE username = ?;
-
---V-- GET THE List A USER HAS SUBSCRIBED TO {username}
-SELECT L.listId,
-       L.name,
-       LA.average
-FROM List L
-     INNER JOIN List_avg LA
-        ON L.listId = LA.listId
-     INNER JOIN (   SELECT listId, username
-                    FROM Subscription
-                    WHERE username = ?
-                ) S
-             ON L.listId = S.listId;
-
 -------------
 --- INDEX
 -------------
-
-
 
 --V-- GET LISTS OF A CATEGORY {username, category}
 SELECT L.listId,
@@ -58,7 +34,7 @@ FROM List L
                         WHERE username = ?
                 ) S
         ON L.listId = S.listId
-WHERE category LIKE ?
+WHERE L.category LIKE ?
 ORDER BY LA.average DESC;
 
 --V-- SEARCH BY A KEYWORD {username, keyword}
@@ -83,9 +59,59 @@ FROM List L
                         WHERE username = ?
                 ) S
         ON L.listId = S.listId
-WHERE name LIKE '%?%'
+WHERE L.name LIKE '%?%'
 ORDER BY LA.average DESC;
 
+
+--V-- GET THE LISTS CREATED BY A USER {username, username(creator)}
+SELECT L.listId,
+       L.name,
+       L.category,
+       L.username,
+       LA.average,
+       COALESCE(C.numcom,0) AS numcom,
+       NOT ISNULL(S.username) AS subscribed
+FROM List L
+     INNER JOIN List_avg LA
+        ON L.listId = LA.listId
+     LEFT OUTER JOIN (  SELECT  listId,
+                                COUNT(*) AS numcom
+                        FROM Comment
+                        GROUP BY listId
+                ) C
+        ON L.listId = C.listId
+     LEFT OUTER JOIN (  SELECT listId, username
+                        FROM Subscription
+                        WHERE username = ?
+                ) S
+        ON L.listId = S.listId
+WHERE L.username = ?
+ORDER BY LA.average DESC;
+
+--V-- GET THE LISTS A USER HAS SUBSCRIBED TO {username}
+SELECT L.listId,
+       L.name,
+       L.category,
+       L.username,
+       LA.average,
+       COALESCE(C.numcom,0) AS numcom,
+       NOT ISNULL(S.username) AS subscribed
+FROM List L
+     INNER JOIN List_avg LA
+        ON L.listId = LA.listId
+     LEFT OUTER JOIN (  SELECT  listId,
+                                COUNT(*) AS numcom
+                        FROM Comment
+                        GROUP BY listId
+                ) C
+        ON L.listId = C.listId
+     LEFT OUTER JOIN (  SELECT listId, username
+                        FROM Subscription
+                        WHERE username = ?
+                ) S
+        ON L.listId = S.listId
+WHERE S.username IS NOT NULL
+ORDER BY LA.average DESC;
 
 
 -------------

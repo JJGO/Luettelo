@@ -25,7 +25,7 @@ public class EditComment implements Action
 {
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException 
+            throws ServletException, IOException
     {
         String content = request.getParameter("content");
         String commentId_st = request.getParameter("commentId");
@@ -37,15 +37,10 @@ public class EditComment implements Action
             Comment comment = new Comment(content, commentId);
             dao.editComment(comment);
 
-            DisplayHelper.setComments(request); //???
+            DisplayHelper.setComments(request);
 
-          //to do:
-            //in case its an AJAX request:
-            //  response.sendRedirect("something"); 
-            //
-            //in case its not:
-            //  RequestDispatcher rd = request.getRequestDispatcher("something");
-            //  rd.forward(request,response);
+            RequestDispatcher rd = request.getRequestDispatcher("/comments.jsp");
+            rd.forward(request,response);
 
         }
         catch(SQLException e)

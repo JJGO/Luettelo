@@ -25,12 +25,11 @@ public class AddItem implements Action
 {
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException 
+            throws ServletException, IOException
     {
         String name = request.getParameter("name");
         String url = request.getParameter("url");
-        String listId_st = request.getParameter("listId");
-        int listId = Integer.valueOf(listId_st);
+        int listId = Integer.valueOf(request.getParameter("listId"));
 
         try
         {
@@ -39,15 +38,10 @@ public class AddItem implements Action
             dominio.List list = new dominio.List(listId);
             dao.addItem(item, list);
 
-            DisplayHelper.setItems(request); //???
+            DisplayHelper.setItems(request);
 
-          //to do:
-            //in case its an AJAX request:
-            //  response.sendRedirect("something"); 
-            //
-            //in case its not:
-            //  RequestDispatcher rd = request.getRequestDispatcher("something");
-            //  rd.forward(request,response);
+            RequestDispatcher rd = request.getRequestDispatcher("/items.jsp");
+            rd.forward(request,response);
 
         }
         catch(SQLException e)

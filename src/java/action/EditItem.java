@@ -25,7 +25,7 @@ public class EditItem implements Action
 {
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException 
+            throws ServletException, IOException
     {
         String name = request.getParameter("name");
         String url = request.getParameter("url");
@@ -38,16 +38,10 @@ public class EditItem implements Action
             Item item = new Item(name, url, itemId);
             dao.editItem(item);
 
-            DisplayHelper.setItems(request); //???
+            DisplayHelper.setItems(request);
 
-          //to do:
-            //in case its an AJAX request:
-            //  response.sendRedirect("something"); 
-            //
-            //in case its not:
-            //  RequestDispatcher rd = request.getRequestDispatcher("something");
-            //  rd.forward(request,response);
-
+            RequestDispatcher rd = request.getRequestDispatcher("/items.jsp");
+            rd.forward(request,response);
         }
         catch(SQLException e)
         {

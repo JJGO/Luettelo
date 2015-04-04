@@ -25,7 +25,7 @@ public class RemoveItem implements Action
 {
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException 
+            throws ServletException, IOException
     {
         String itemId_st = request.getParameter("itemId");
         int itemId = Integer.valueOf(itemId_st);
@@ -36,15 +36,10 @@ public class RemoveItem implements Action
             Item item = new Item(itemId);
             dao.removeItem(item);
 
-            DisplayHelper.setItems(request); //???
+            DisplayHelper.setItems(request);
 
-          //to do:
-            //in case its an AJAX request:
-            //  response.sendRedirect("something"); 
-            //
-            //in case its not:
-            //  RequestDispatcher rd = request.getRequestDispatcher("something");
-            //  rd.forward(request,response);
+            RequestDispatcher rd = request.getRequestDispatcher("/items.jsp");
+            rd.forward(request,response);
 
         }
         catch(SQLException e)

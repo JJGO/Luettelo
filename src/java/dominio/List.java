@@ -27,13 +27,6 @@ public class List
         this.id = id;
     }
     
-    public List(int id, String name, Integer average)
-    {
-        this(id);
-        this.name = name;
-        this.average = average;
-    }
-
     public List(int id, String name, String category, String username, Integer average, Integer comments, boolean subscribed)
     {
         this(id, name, average);

@@ -32,20 +32,23 @@ public class ListDAO extends DAO
     private static String QUERY_REMOVE_LIST = "DELETE FROM List WHERE listId = ?";
 
 // QUERY
-    // GET THE LISTS CREATED BY A USER {username}
-    private static String QUERY_CREATED_LISTS = "SELECT L.listId, L.name, LA.average FROM List L INNER JOIN List_avg LA ON L.listId = LA.listId WHERE username = ?";
-    
-    // GET THE List A USER HAS SUBSCRIBED TO {username}
-    private static String QUERY_SUBSCRIBED_LISTS = "SELECT L.listId, L.name, LA.average FROM List L INNER JOIN List_avg LA ON L.listId = LA.listId INNER JOIN (   SELECT listId, username FROM Subscription WHERE username = ? ) S ON L.listId = S.listId";
-    
-    // GET LISTS OF A CATEGORY {username, category}
-    private static String QUERY_LISTS_BY_CATEGORY = "SELECT L.listId, L.name, L.category, L.username, LA.average, COALESCE(C.numcom,0) AS numcom, NOT ISNULL(S.username) AS subscribed FROM List L INNER JOIN List_avg LA ON L.listId = LA.listId LEFT OUTER JOIN (  SELECT  listId, COUNT(*) AS numcom FROM Comment GROUP BY listId ) C ON L.listId = C.listId LEFT OUTER JOIN (  SELECT listId, username FROM Subscription WHERE username = ? ) S ON L.listId = S.listId WHERE category LIKE ? ORDER BY LA.average DESC";
-    
-    // SEARCH BY A KEYWORD {username, '%keyword%'}
-    private static String QUERY_LISTS_BY_KEYWORD = "SELECT L.listId, L.name, L.category, L.username, LA.average, COALESCE(C.numcom,0) AS numcom, NOT ISNULL(S.username) AS subscribed FROM List L INNER JOIN List_avg LA ON L.listId = LA.listId LEFT OUTER JOIN (  SELECT  listId, COUNT(*) AS numcom FROM Comment GROUP BY listId ) C ON L.listId = C.listId LEFT OUTER JOIN (  SELECT listId, username FROM Subscription WHERE username = ? ) S ON L.listId = S.listId WHERE name LIKE ORDER BY LA.average DESC";
-    
     // GET THE INFO OF A LIST {username,listId}
     private static String QUERY_LIST_INFO = "SELECT  L.listId, L.name, L.category, L.description, L.username, LA.average, COALESCE(C.numcom,0) AS numcom, NOT ISNULL(S.username) AS subscribed FROM List L INNER JOIN List_avg LA ON L.listId = LA.listId LEFT OUTER JOIN (  SELECT  listId, COUNT(*) AS numcom FROM Comment ) C ON L.listId = C.listId LEFT OUTER JOIN (  SELECT listId, username FROM Subscription WHERE username = ? ) S ON L.listId = S.listId WHERE L.listId = ? ORDER BY LA.average DESC";
+
+    private static String QUERY_LISTS = "SELECT L.listId, L.name, L.category, L.username, LA.average, COALESCE(C.numcom,0) AS numcom, NOT ISNULL(S.username) AS subscribed FROM List L INNER JOIN List_avg LA ON L.listId = LA.listId LEFT OUTER JOIN (  SELECT  listId, COUNT(*) AS numcom FROM Comment GROUP BY listId ) C ON L.listId = C.listId LEFT OUTER JOIN (  SELECT listId, username FROM Subscription WHERE username = ? ) S ON L.listId = S.listId";
+
+    // GET THE LISTS CREATED BY A USER {username, username(creator)}
+    private static String QUERY_LISTS_BY_CREATOR     = QUERY_LISTS + " WHERE L.username = ? ORDER BY LA.average DESC";
+    
+    // GET THE List A USER HAS SUBSCRIBED TO {username}
+    private static String QUERY_LISTS_BY_SUBSCRIBED  = QUERY_LISTS + " WHERE S.username IS NOT NULL ORDER BY LA.average DESC";
+    
+    // GET LISTS OF A CATEGORY {username, category}
+    private static String QUERY_LISTS_BY_CATEGORY    = QUERY_LISTS + " WHERE L.category LIKE ? ORDER BY LA.average DESC";
+    
+    // SEARCH BY A KEYWORD {username, '%keyword%'}
+    private static String QUERY_LISTS_BY_KEYWORD     = QUERY_LISTS + " WHERE L.name LIKE '%?%' ORDER BY LA.average DESC";
+
 
     public ListDAO()
         throws SQLException, ClassNotFoundException
@@ -89,22 +92,23 @@ public class ListDAO extends DAO
         ps.close();
     }
 
-    public ArrayList<List> findByCreator(User user) throws SQLException
+    public ArrayList<List> findByCreator(User creator, User user) throws SQLException
     {
-        // GET THE LISTS CREATED BY A USER {username}
-        PreparedStatement ps = con.prepareStatement(QUERY_CREATED_LISTS);
+        // GET THE LISTS CREATED BY A USER {username, username(creator)}
+        PreparedStatement ps = con.prepareStatement(QUERY_LISTS_BY_CREATOR);
         ps.setString(   1,  user.getUsername()      );
-        ArrayList<List> lists = this.parseResultSetBrief(ps.executeQuery());
+        ps.setString(   2,  creator.getUsername()   );
+        ArrayList<List> lists = this.parseResultSetDisplay(ps.executeQuery());
         ps.close();
         return lists;
     }
 
-    public ArrayList<List> findBySubscriber(User user) throws SQLException
+    public ArrayList<List> findBySubscribed(User user) throws SQLException
     {
         // GET THE List A USER HAS SUBSCRIBED TO {username}
-        PreparedStatement ps = con.prepareStatement(QUERY_SUBSCRIBED_LISTS);
+        PreparedStatement ps = con.prepareStatement(QUERY_LISTS_BY_SUBSCRIBED);
         ps.setString(   1,  user.getUsername()      );
-        ArrayList<List> lists = this.parseResultSetBrief(ps.executeQuery());
+        ArrayList<List> lists = this.parseResultSetDisplay(ps.executeQuery());
         ps.close();
         return lists;
     }
@@ -134,7 +138,7 @@ public class ListDAO extends DAO
     public List findById(List list, User user) throws SQLException
     {
         // GET THE INFO OF A LIST {username,listId}
-        PreparedStatement ps = con.prepareStatement(QUERY_LISTS_BY_KEYWORD);
+        PreparedStatement ps = con.prepareStatement(QUERY_LISTS_INFO);
         ps.setString(   1,  user.getUsername()      );
         ps.setInt(      2,  list.getId()            );
         ArrayList<List> lists = this.parseResultSet(ps.executeQuery());
@@ -179,22 +183,6 @@ public class ListDAO extends DAO
             boolean     subscribed  =           rs.getBoolean("subscribed"    );
             
             List list = new List(id, name, category, username, average, comments, subscribed);
-            lists.add(list);
-        }
-        rs.close();
-        return lists;
-    }
-
-    private ArrayList<List> parseResultSetBrief(ResultSet rs) throws SQLException
-    {
-        ArrayList<List> lists = new ArrayList<List>();
-        while (rs.next())
-        {
-            int         id          =           rs.getInt(    "listId"        );
-            String      name        =           rs.getString( "name"          );
-            Integer     average     = (Integer) rs.getObject( "average"       );
-            
-            List list = new List( id, name, average);
             lists.add(list);
         }
         rs.close();

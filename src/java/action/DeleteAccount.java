@@ -34,8 +34,7 @@ public class DeleteAccount implements Action
             UserDAO dao = DAOHelper.getUserDAO();
             if( dao.removeUser(user) )
             {
-                HttpSession session = request.getSession();
-                session.setAttribute("user",null);
+                request.getSession().setAttribute("user",null);
             }
             else
             {

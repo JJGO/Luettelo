@@ -25,7 +25,7 @@ public class RemoveComment implements Action
 {
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException 
+            throws ServletException, IOException
     {
         String commentId_st = request.getParameter("commentId");
         int commentId = Integer.valueOf(commentId_st);
@@ -36,15 +36,10 @@ public class RemoveComment implements Action
             Comment comment = new Comment(commentId);
             dao.removeComment(comment);
 
-            DisplayHelper.setComments(request); //???
+            DisplayHelper.setComments(request);
 
-          //to do:
-            //in case its an AJAX request:
-            //  response.sendRedirect("something"); 
-            //
-            //in case its not:
-            //  RequestDispatcher rd = request.getRequestDispatcher("something");
-            //  rd.forward(request,response);
+            RequestDispatcher rd = request.getRequestDispatcher("/comments.jsp");
+            rd.forward(request,response);
 
         }
         catch(SQLException e)
