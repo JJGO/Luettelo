@@ -38,11 +38,11 @@ public class AddComment implements Action
 
         try
         {
-            CommentDAO dao      = DAOHelper.getCommentDAO(request);
-            Comment comment     = new Comment(content);
-            dominio.List list   = new dominio.List(listId);
+            CommentDAO dao    = DAOHelper.getCommentDAO(request);
+            Comment comment   = new Comment(content);
+            dominio.List list = new dominio.List(listId);
             
-            if( dao.addComment(comment, list, user) )
+            if(dao.addComment(comment, list, user))
             {
                 DisplayHelper.setList(request);
                 DisplayHelper.setComments(request);

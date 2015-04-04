@@ -39,7 +39,7 @@ public class RemoveComment implements Action
         {
             CommentDAO dao = DAOHelper.getCommentDAO(request);
             Comment comment = new Comment(commentId);
-            if( dao.removeComment(comment, user) )
+            if(dao.removeComment(comment, user))
             {
                 DisplayHelper.setComments(request);
                 DisplayHelper.setList(request);

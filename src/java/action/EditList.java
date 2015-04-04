@@ -7,7 +7,14 @@
 
 package action;
 
+import dao.ListDAO;
+import dominio.List;
+import dominio.User;
+import helper.DAOHelper;
+import helper.DisplayHelper;
 import java.io.IOException;
+import java.sql.SQLException;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -25,11 +32,11 @@ public class EditList implements Action
     public void execute(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException
     {
-    	int listId 			= request.getParameter("listId");
-        String name         = request.getParameter("name");
-        String category     = request.getParameter("category");
-        String description  = request.getParameter("description");
-        User user           = (User) request.getSession().getAttribute("user");
+    	int listId 	   = Integer.parseInt(request.getParameter("listId"));
+        String name        = request.getParameter("name");
+        String category    = request.getParameter("category");
+        String description = request.getParameter("description");
+        User user          = (User) request.getSession().getAttribute("user");
                               //to know who created the list
         try
         {

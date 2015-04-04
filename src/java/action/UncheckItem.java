@@ -7,7 +7,13 @@
 
 package action;
 
+import dao.ItemDAO;
+import dominio.Item;
+import dominio.User;
+import helper.DAOHelper;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.sql.SQLException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -34,8 +40,8 @@ public class UncheckItem implements Action
             Item item = new Item(itemId);
             boolean error = !dao.uncheckItem(item, user);
             
-   			PrintWriter out = response.getWriter();
-   			out.prinln("{ error : "+error+"}");
+            PrintWriter out = response.getWriter();
+            out.println("{ error : "+error+"}");
         }
         catch(SQLException e)
         {

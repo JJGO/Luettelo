@@ -41,7 +41,7 @@ public class EditItem implements Action
         {
             ItemDAO dao = DAOHelper.getItemDAO(request);
             Item item = new Item(name, url, itemId);
-            if( dao.editItem(item, user) )
+            if(dao.editItem(item, user))
             {
                 DisplayHelper.setList(request);
                 DisplayHelper.setItems(request);

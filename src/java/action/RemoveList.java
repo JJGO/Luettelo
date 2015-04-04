@@ -7,7 +7,14 @@
 
 package action;
 
+import dao.ListDAO;
+import dominio.List;
+import dominio.User;
+import helper.DAOHelper;
+import helper.DisplayHelper;
 import java.io.IOException;
+import java.sql.SQLException;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -30,9 +37,9 @@ public class RemoveList implements Action
 
         try
         {
-            ItemDAO dao = DAOHelper.getItemDAO(request);
+            ListDAO dao = DAOHelper.getListDAO(request);
             List list = new List(listId);
-            if( dao.removeList(list, user) )
+            if(dao.removeList(list, user))
             {
                 DisplayHelper.setItems(request);
                 DisplayHelper.setList(request);

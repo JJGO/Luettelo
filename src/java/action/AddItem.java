@@ -42,7 +42,7 @@ public class AddItem implements Action
             ItemDAO dao       = DAOHelper.getItemDAO(request);
             Item item         = new Item(name, url);
             dominio.List list = new dominio.List(listId);
-            if( dao.addItem(item, list, user) )
+            if(dao.addItem(item, list, user))
             {
                 DisplayHelper.setList(request);
                 DisplayHelper.setItems(request);

@@ -13,6 +13,7 @@ import dominio.User;
 import helper.DAOHelper;
 import helper.DisplayHelper;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.SQLException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -32,9 +33,9 @@ public class RateItem implements Action
     public void execute(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException
     {
-        int itemId 		= Integer.parseInt(request.getParameter("itemId"));
-        Integer rating 	= Integer.valueOf(request.getParameter("rating"));
-        User user       = (User) request.getSession().getAttribute("user");
+        int itemId     = Integer.parseInt(request.getParameter("itemId"));
+        Integer rating = Integer.valueOf(request.getParameter("rating"));
+        User user      = (User) request.getSession().getAttribute("user");
 
         try
         {
@@ -43,7 +44,7 @@ public class RateItem implements Action
             boolean error = !dao.rateItem(item, user);
             
             PrintWriter out = response.getWriter();
-   			out.prinln("{ error : "+error+"}");
+            out.println("{ error : "+error+"}");
         }
         catch(SQLException e)
         {

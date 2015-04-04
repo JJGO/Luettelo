@@ -3,7 +3,6 @@ package action;
 import dao.UserDAO;
 import dominio.User;
 import helper.DAOHelper;
-import helper.DisplayHelper;
 import java.io.IOException;
 import java.sql.SQLException;
 import javax.servlet.RequestDispatcher;
@@ -30,10 +29,10 @@ public class DeleteAccount implements Action
         User user           = (User) request.getSession().getAttribute("user");
         try
         {
-            User user = new User(user.getUsername(), password);
+            User user_delete = new User(user.getUsername(), password);
 
             UserDAO dao = DAOHelper.getUserDAO(request);
-            if( dao.removeUser(user) )
+            if(dao.removeUser(user_delete))
             {
                 request.getSession().setAttribute("user",null);
             }

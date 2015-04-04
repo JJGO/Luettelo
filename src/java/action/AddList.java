@@ -32,16 +32,16 @@ public class AddList implements Action
     public void execute(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException
     {
-        String name         = request.getParameter("name");
-        String category     = request.getParameter("category");
-        String description  = request.getParameter("description");
-        User user           = (User) request.getSession().getAttribute("user");
-                              //to know who created the list
+        String name        = request.getParameter("name");
+        String category    = request.getParameter("category");
+        String description = request.getParameter("description");
+        User user          = (User) request.getSession().getAttribute("user");
+                             //to know who created the list
         try
         {
             ListDAO dao = DAOHelper.getListDAO(request);
             List list   = new List(name, category, description);
-            if( dao.addList(list, user) )
+            if(dao.addList(list, user))
             {
                 DisplayHelper.setItems(request);
                 DisplayHelper.setList(request);

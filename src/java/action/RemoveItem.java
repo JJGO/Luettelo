@@ -39,7 +39,7 @@ public class RemoveItem implements Action
         {
             ItemDAO dao = DAOHelper.getItemDAO(request);
             Item item = new Item(itemId);
-            if( dao.removeItem(item, user) )
+            if(dao.removeItem(item, user))
             {
                 DisplayHelper.setItems(request);
                 DisplayHelper.setList(request);

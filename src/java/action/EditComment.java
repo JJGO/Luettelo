@@ -40,7 +40,7 @@ public class EditComment implements Action
         {
             CommentDAO dao = DAOHelper.getCommentDAO(request);
             Comment comment = new Comment(content, commentId);
-            if( dao.editComment(comment, user) )
+            if(dao.editComment(comment, user))
             {
                 DisplayHelper.setList(request);
                 DisplayHelper.setComments(request);

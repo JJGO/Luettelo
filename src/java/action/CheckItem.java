@@ -7,7 +7,13 @@
 
 package action;
 
+import dao.ItemDAO;
+import dominio.Item;
+import dominio.User;
+import helper.DAOHelper;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.sql.SQLException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -36,7 +42,7 @@ public class CheckItem implements Action
             boolean error = !dao.checkItem(item, user);
             
             PrintWriter out = response.getWriter();
-   			out.prinln("{ error : "+error+"}");
+            out.println("{ error : "+error+"}");
         }
         catch(SQLException e)
         {

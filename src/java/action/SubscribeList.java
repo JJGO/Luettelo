@@ -12,8 +12,8 @@ import dominio.List;
 import dominio.User;
 import helper.DAOHelper;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.SQLException;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -38,10 +38,10 @@ public class SubscribeList implements Action
         {
             ListDAO dao = DAOHelper.getListDAO(request);
             List list = new List(listId);
-            boolean error = !dao.subscribeList(list, user)
+            boolean error = !dao.subscribeList(list, user);
             
             PrintWriter out = response.getWriter();
-            out.prinln("{ error : "+error+"}");
+            out.println("{ error : "+error+"}");
         }
         catch(SQLException e)
         {
