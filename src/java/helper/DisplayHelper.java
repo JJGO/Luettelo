@@ -22,12 +22,12 @@ public class DisplayHelper
         request.setAttribute("defaultLists",dao.findByCategory("%",user));
     }
 
-    public static void setList(HttpServletRequest request) throws SQLException
+    public static void setList(HttpServletRequest request) throws SQLException, ClassNotFoundException
     {
         ListDAO dao = DAOHelper.getListDAO(request);
-        User user = (User) request.getSession().getAttribute("user");
+        User user = (User) request.getSession().getAttribute("user"); //Needed to get the user ratings of the items in the list!
         List list = new List(Integer.valueOf(request.getParameter("listId")));
-        request.setAttribute("displayList",dao.findById());
+        request.setAttribute("displayList",dao.findById(list, user));
     }
 
     public static void setItems(HttpServletRequest request) throws SQLException, ClassNotFoundException

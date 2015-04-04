@@ -40,6 +40,7 @@ public class RemoveItem implements Action
             dao.removeItem(item);
 
             DisplayHelper.setItems(request);
+            DisplayHelper.setList(request);
 
             RequestDispatcher rd = request.getRequestDispatcher("/items.jsp");
             rd.forward(request,response);

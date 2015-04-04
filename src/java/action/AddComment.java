@@ -44,6 +44,7 @@ public class AddComment implements Action
             dao.addComment(comment, list, user);
 
             DisplayHelper.setComments(request);
+            DisplayHelper.setList(request);
 
             RequestDispatcher rd = request.getRequestDispatcher("/comments.jsp");
             rd.forward(request,response);

@@ -41,6 +41,7 @@ public class EditComment implements Action
             dao.editComment(comment);
 
             DisplayHelper.setComments(request);
+            DisplayHelper.setList(request);
 
             RequestDispatcher rd = request.getRequestDispatcher("/comments.jsp");
             rd.forward(request,response);

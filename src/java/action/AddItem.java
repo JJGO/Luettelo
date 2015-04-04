@@ -43,10 +43,10 @@ public class AddItem implements Action
             dao.addItem(item, list);
 
             DisplayHelper.setItems(request);
+            DisplayHelper.setList(request);
 
             RequestDispatcher rd = request.getRequestDispatcher("/items.jsp");
             rd.forward(request,response);
-
         }
         catch(SQLException e)
         {

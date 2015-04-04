@@ -42,6 +42,7 @@ public class EditItem implements Action
             dao.editItem(item);
 
             DisplayHelper.setItems(request);
+            DisplayHelper.setList(request);
 
             RequestDispatcher rd = request.getRequestDispatcher("/items.jsp");
             rd.forward(request,response);
