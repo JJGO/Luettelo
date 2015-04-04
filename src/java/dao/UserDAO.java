@@ -7,6 +7,13 @@
 
 package dao;
 
+import dominio.User;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 /**
  *
  * @author JJ
@@ -35,7 +42,7 @@ public class UserDAO
         con = DriverManager.getConnection("jdbc:mysql://localhost/luettelo", USER, PASSWD);
     }
 
-    public void addUser(User u) throws SQLException
+    public void addUser(User user) throws SQLException
     {
         //INSERT NEW USER IN THE DB {username, email, password}
         PreparedStatement ps = con.prepareStatement(QUERY_ADD_USER);
@@ -47,7 +54,7 @@ public class UserDAO
         ps.close();
     }
 
-    public boolean removeUser(User u) throws SQLException
+    public boolean removeUser(User user) throws SQLException
     {
         //REMOVE USER FROM DB {username}
         PreparedStatement ps = con.prepareStatement(QUERY_REMOVE_USER);
@@ -67,7 +74,7 @@ public class UserDAO
         
     }
 
-    public boolean findUser(User u) throws SQLException
+    public boolean findUser(User user) throws SQLException
     {
         // CHECK IF A USER IS IN THE DB {username,password}
         PreparedStatement ps = con.prepareStatement(QUERY_FIND_USER);
