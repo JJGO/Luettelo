@@ -32,8 +32,7 @@ public class EditComment implements Action
             throws ServletException, IOException
     {
         String content = request.getParameter("content");
-        String commentId_st = request.getParameter("commentId");
-        int commentId = Integer.valueOf(commentId_st);
+        int commentId = Integer.valueOf(request.getParameter("commentId"));
 
         try
         {

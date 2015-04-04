@@ -31,8 +31,7 @@ public class RemoveComment implements Action
     public void execute(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException
     {
-        String commentId_st = request.getParameter("commentId");
-        int commentId = Integer.valueOf(commentId_st);
+        int commentId = Integer.valueOf(request.getParameter("commentId"));
 
         try
         {

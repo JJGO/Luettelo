@@ -33,8 +33,7 @@ public class EditItem implements Action
     {
         String name = request.getParameter("name");
         String url = request.getParameter("url");
-        String itemId_st = request.getParameter("itemId");
-        int itemId = Integer.valueOf(itemId_st);
+        int itemId = Integer.valueOf(request.getParameter("itemId"));
 
         try
         {

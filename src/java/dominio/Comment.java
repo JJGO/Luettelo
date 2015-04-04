@@ -22,6 +22,11 @@ public class Comment
         this.id = id;
     }
 
+    public Comment(String content)
+    {
+        this.content = content;
+    }
+
     public Comment(String content, String username)
     {
         this.content = content;

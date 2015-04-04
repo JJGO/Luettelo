@@ -9,6 +9,7 @@ package action;
 
 import dao.CommentDAO;
 import dominio.Comment;
+import dominio.User;
 import helper.DAOHelper;
 import helper.DisplayHelper;
 import java.io.IOException;
@@ -23,7 +24,7 @@ import javax.servlet.http.HttpServletResponse;
  * @author Lucia
  */
 
-//AddComment{listId, content, username} //TO DO: Check username is needed here
+//AddComment{listId, content, username}
 
 public class AddComment implements Action
 {
@@ -32,16 +33,15 @@ public class AddComment implements Action
             throws ServletException, IOException
     {
         String content = request.getParameter("content");
-        String username = request.getParameter("username");
-        String listId_st = request.getParameter("listId");
-        int listId = Integer.valueOf(listId_st);
+        int listId = Integer.valueOf(request.getParameter("listId"));
+        User user = (User) request.getSession().getAttribute("user");
 
         try
         {
             CommentDAO dao = DAOHelper.getCommentDAO(request);
-            Comment comment = new Comment(content, username);
+            Comment comment = new Comment(content);
             dominio.List list = new dominio.List(listId);
-            dao.addComment(comment, list);
+            dao.addComment(comment, list, user);
 
             DisplayHelper.setComments(request);
 

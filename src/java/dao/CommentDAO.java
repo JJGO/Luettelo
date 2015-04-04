@@ -39,11 +39,11 @@ public class CommentDAO extends DAO
         super();
     }
 
-    public void addComment(Comment comment, dominio.List list) throws SQLException
+    public void addComment(Comment comment, dominio.List list, dominio.User user) throws SQLException
     {
         PreparedStatement ps = con.prepareStatement(QUERY_ADD_COMMENT);
         ps.setString(1, comment.getContent());
-        ps.setString(2, comment.getUsername());
+        ps.setString(2, user.getUsername());
         ps.setInt(3, list.getId());
 
         ps.executeQuery();

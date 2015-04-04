@@ -31,8 +31,7 @@ public class RemoveItem implements Action
     public void execute(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException
     {
-        String itemId_st = request.getParameter("itemId");
-        int itemId = Integer.valueOf(itemId_st);
+        int itemId = Integer.valueOf(request.getParameter("itemId"));
 
         try
         {
@@ -44,7 +43,6 @@ public class RemoveItem implements Action
 
             RequestDispatcher rd = request.getRequestDispatcher("/items.jsp");
             rd.forward(request,response);
-
         }
         catch(SQLException e)
         {
