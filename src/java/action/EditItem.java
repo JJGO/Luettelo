@@ -9,6 +9,7 @@ package action;
 
 import dao.ItemDAO;
 import dominio.Item;
+import dominio.User;
 import helper.DAOHelper;
 import helper.DisplayHelper;
 import java.io.IOException;
@@ -34,12 +35,13 @@ public class EditItem implements Action
         String name = request.getParameter("name");
         String url = request.getParameter("url");
         int itemId = Integer.valueOf(request.getParameter("itemId"));
-
+        User user = (User) request.getSession().getAttribute("user");
+        
         try
         {
             ItemDAO dao = DAOHelper.getItemDAO(request);
             Item item = new Item(name, url, itemId);
-            dao.editItem(item);
+            dao.editItem(item, user);
 
             DisplayHelper.setItems(request);
             DisplayHelper.setList(request);

@@ -9,6 +9,7 @@ package action;
 
 import dao.ItemDAO;
 import dominio.Item;
+import dominio.User;
 import helper.DAOHelper;
 import helper.DisplayHelper;
 import java.io.IOException;
@@ -34,13 +35,14 @@ public class AddItem implements Action
         String name = request.getParameter("name");
         String url = request.getParameter("url");
         int listId = Integer.valueOf(request.getParameter("listId"));
-
+        User user = (User) request.getSession().getAttribute("user");
+        
         try
         {
             ItemDAO dao = DAOHelper.getItemDAO(request);
             Item item = new Item(name, url);
             dominio.List list = new dominio.List(listId);
-            dao.addItem(item, list);
+            dao.addItem(item, list, user);
 
             DisplayHelper.setItems(request);
             DisplayHelper.setList(request);

@@ -9,6 +9,7 @@ package action;
 
 import dao.ItemDAO;
 import dominio.Item;
+import dominio.User;
 import helper.DAOHelper;
 import helper.DisplayHelper;
 import java.io.IOException;
@@ -32,12 +33,13 @@ public class RemoveItem implements Action
             throws ServletException, IOException
     {
         int itemId = Integer.valueOf(request.getParameter("itemId"));
-
+        User user = (User) request.getSession().getAttribute("user");
+        
         try
         {
             ItemDAO dao = DAOHelper.getItemDAO(request);
             Item item = new Item(itemId);
-            dao.removeItem(item);
+            dao.removeItem(item, user);
 
             DisplayHelper.setItems(request);
             DisplayHelper.setList(request);

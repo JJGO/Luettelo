@@ -9,6 +9,7 @@ package action;
 
 import dao.CommentDAO;
 import dominio.Comment;
+import dominio.User;
 import helper.DAOHelper;
 import helper.DisplayHelper;
 import java.io.IOException;
