@@ -12,6 +12,9 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author JJ
  */
+
+//Logout{}
+
 public class Logout implements Action
 {
     // TODO - Put coherently the exceptions to error.jsp

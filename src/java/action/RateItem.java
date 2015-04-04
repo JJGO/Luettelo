@@ -24,7 +24,7 @@ import javax.servlet.http.HttpServletResponse;
  * @author Lucia
  */
 
-//RateItem{value, username, itemId}
+//RateItem{itemId, rating}  (AJAX)
 
 public class RateItem implements Action
 {

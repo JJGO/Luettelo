@@ -24,7 +24,7 @@ import javax.servlet.http.HttpServletResponse;
  * @author Lucia
  */
 
-//RemoveComment{id, username}
+//RemoveComment{commentId, username}
 
 public class RemoveComment implements Action
 {
@@ -32,7 +32,7 @@ public class RemoveComment implements Action
     public void execute(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException
     {
-        int commentId = Integer.valueOf(request.getParameter("commentId"));
+        int commentId = Integer.parseInt(request.getParameter("commentId"));
         User user = (User) request.getSession().getAttribute("user");
 
         try

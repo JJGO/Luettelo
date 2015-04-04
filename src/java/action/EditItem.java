@@ -24,7 +24,7 @@ import javax.servlet.http.HttpServletResponse;
  * @author Lucia
  */
 
-//EditItem{id, name, url}
+//EditItem{itemId, name, url}
 
 public class EditItem implements Action
 {

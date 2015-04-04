@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
  * @author JJ
  */
 
-//EditList{id, name, category, description}
+//EditList{listId, name, category, description}
 
 public class EditList implements Action
 {

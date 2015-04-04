@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
  * @author
  */
 
-//RemoveList{id}
+//RemoveList{listId}
 
 public class RemoveList implements Action
 {
@@ -25,6 +25,33 @@ public class RemoveList implements Action
     public void execute(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException
     {
-        
+        int listId = Integer.parseInt(request.getParameter("listId"));
+        User user  = (User) request.getSession().getAttribute("user");
+
+        try
+        {
+            ItemDAO dao = DAOHelper.getItemDAO(request);
+            List list = new List(listId);
+            if( dao.removeList(list, user) )
+            {
+                DisplayHelper.setItems(request);
+                DisplayHelper.setList(request);
+
+                RequestDispatcher rd = request.getRequestDispatcher("/index.jsp");
+                rd.forward(request,response);
+            }
+            else
+            {
+                response.sendRedirect("index.jsp");
+            }
+        }
+        catch(SQLException e)
+        {
+            response.sendRedirect("error.jsp");
+        }
+        catch(ClassNotFoundException e)
+        {
+            response.sendRedirect("error.jsp");
+        }
     }
 }

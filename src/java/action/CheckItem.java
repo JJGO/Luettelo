@@ -18,7 +18,7 @@ import javax.servlet.http.HttpServletResponse;
  * @author
  */
 
-//CheckItem{id} (AJAX)
+//CheckItem{itemId} (AJAX)
 
 public class CheckItem implements Action
 {

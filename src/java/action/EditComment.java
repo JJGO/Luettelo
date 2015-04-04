@@ -24,7 +24,7 @@ import javax.servlet.http.HttpServletResponse;
  * @author Lucia
  */
 
-//EditComment{id, content}
+//EditComment{commentId, content}
 
 public class EditComment implements Action
 {

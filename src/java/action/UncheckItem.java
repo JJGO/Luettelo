@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
  * @author
  */
 
-//UncheckItem{id} //TO DO: Check this is right! (AJAX)
+//UncheckItem{itemId} (AJAX)
 
 public class UncheckItem implements Action
 {

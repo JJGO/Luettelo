@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
  * @author
  */
 
-//UnsubscribeList{id} (AJAX)
+//UnsubscribeList{listId} (AJAX)
 
 public class UnsubscribeList implements Action
 {
@@ -25,7 +25,7 @@ public class UnsubscribeList implements Action
     public void execute(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException
     {
-        int listId = Integer.valueOf(request.getParameter("listId"));
+        int listId = Integer.parseInt(request.getParameter("listId"));
         User user  = (User) request.getSession().getAttribute("user");
 
         try

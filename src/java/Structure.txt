@@ -1,0 +1,46 @@
+                                                                                        TODO
+ShowController.java                                                                        *
+    Lists.show{type,value}                                          lists.jsp              *
+        ?type=
+                ""
+                "category"
+                "user"
+                "keyword"
+                "subscribed"
+        -> changes the {displayLists} request parameter
+
+    Items.show          {listId}                                    items.jsp              *
+    Comments.show       {listId}                                    comments.jsp           *
+
+Authentication.java                                                                        *
+    DeleteAccount.auth  {password}                                  index.jsp
+    Login.auth          {username, password}                        index.jsp
+    Logout.auth         {}                                          index.jsp
+    Register.auth       {username, email, password}                 index.jsp
+
+
+
+UserActions.java (Checkea que exista user en session, si no  ->     index.jsp              *
+
+    AddList.do          {name, category, description}               items.jsp
+    EditList.do         {listId, name, category, description}       items.jsp
+    RemoveList.do       {listId}                                    index.jsp
+    SubscribeList.do    {username, listId}          (AJAX)          items.jsp
+    UnsubscribeList.do  {listId}                    (AJAX)          items.jsp
+
+    AddItem.do          {name, url, listId}                         items.jsp
+    EditItem.do         {itemId, name, url}                         items.jsp
+    RemoveItem.do       {itemId}                                    items.jsp
+    CheckItem.do        {itemId}                    (AJAX)          items.jsp
+    UncheckItem.do      {itemId}                    (AJAX)          items.jsp
+    RateItem.do         itemId, rating}             (AJAX)          items.jsp
+
+    AddComment.do       {listId, content}                           comments.jsp
+    EditComment.do      {commentId, content}                        comments.jsp
+    RemoveComment.do    {commentId, username}                       comments.jsp
+
+
+URLRewrite                                                                                 *
+lists.jsp                                                                                  *
+items.jsp                                                                                  *
+comments.jsp                                                                               *

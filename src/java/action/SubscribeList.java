@@ -31,7 +31,7 @@ public class SubscribeList implements Action
     public void execute(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException
     {
-        int listId = Integer.valueOf(request.getParameter("listId"));
+        int listId = Integer.parseInt(request.getParameter("listId"));
         User user  = (User) request.getSession().getAttribute("user");
 
         try

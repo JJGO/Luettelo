@@ -24,7 +24,7 @@ import javax.servlet.http.HttpServletResponse;
  * @author Lucia
  */
 
-//RemoveItem{id}
+//RemoveItem{itemId}
 
 public class RemoveItem implements Action
 {
@@ -32,7 +32,7 @@ public class RemoveItem implements Action
     public void execute(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException
     {
-        int itemId = Integer.valueOf(request.getParameter("itemId"));
+        int itemId = Integer.parseInt(request.getParameter("itemId"));
         User user  = (User) request.getSession().getAttribute("user");
 
         try
