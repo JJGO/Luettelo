@@ -1,11 +1,11 @@
 /*
- * Class: action.AddList
+ * Class: action.do.list.EditList
  * Luettelo
  *
  * 2015-04-04
  */
 
-package action;
+package list;
 
 import dao.ListDAO;
 import dominio.List;
@@ -21,27 +21,28 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author Lucia
+ * @author JJ
  */
 
-//AddList{name, category, description}
+//EditList{listId, name, category, description}
 
-public class AddList implements Action
+public class EditList implements Action
 {
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException
     {
+    	int listId 	   = Integer.parseInt(request.getParameter("listId"));
         String name        = request.getParameter("name");
         String category    = request.getParameter("category");
         String description = request.getParameter("description");
         User user          = (User) request.getSession().getAttribute("user");
-                             //to know who created the list
+                              //to know who created the list
         try
         {
             ListDAO dao = DAOHelper.getListDAO(request);
-            List list   = new List(name, category, description);
-            if(dao.addList(list, user))
+            List list   = new List(listId, name, category, description);
+            if( dao.editList(list, user) )
             {
                 //shouldnt this go to 'items.jsp'?
                 //if it really goes to 'lists.jsp' 'DisplayHelper.set' should set the lists instead

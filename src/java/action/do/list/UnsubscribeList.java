@@ -1,20 +1,19 @@
 /*
- * Class: action.RemoveList
+ * Class: action.do.list.UnsubscribeList
  * Luettelo
  *
  * 2015-04-04
  */
 
-package action;
+package list;
 
 import dao.ListDAO;
 import dominio.List;
 import dominio.User;
 import helper.DAOHelper;
-import helper.DisplayHelper;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.SQLException;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -24,9 +23,9 @@ import javax.servlet.http.HttpServletResponse;
  * @author
  */
 
-//RemoveList{listId}
+//UnsubscribeList{listId} (AJAX)
 
-public class RemoveList implements Action
+public class UnsubscribeList implements Action
 {
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response)
@@ -39,18 +38,10 @@ public class RemoveList implements Action
         {
             ListDAO dao = DAOHelper.getListDAO(request);
             List list = new List(listId);
-            if(dao.removeList(list, user))
-            {
-                DisplayHelper.setItems(request);
-                DisplayHelper.setList(request);
-
-                RequestDispatcher rd = request.getRequestDispatcher("/lists.jsp");
-                rd.forward(request,response);
-            }
-            else
-            {
-                response.sendRedirect("index.jsp");
-            }
+            boolean error = !dao.unsubscribeList(list, user);
+            
+            PrintWriter out = response.getWriter();
+            out.println("{ error : "+error+"}");
         }
         catch(SQLException e)
         {

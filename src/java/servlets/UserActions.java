@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author 
+ * @author
  */
 public class UserActions extends HttpServlet {
 
@@ -32,30 +32,33 @@ public class UserActions extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-
-
-        //PrintWriter out = response.getWriter();
-        //out.close();
         
-        //try
-        //{
-        //    Action action = ActionFactory.getAction(request.getServletPath());
-        //    action.execute(request, response);
-        //} 
-        //catch (ClassNotFoundException ex)
-        //{
-        //    response.sendRedirect("error.jsp");
-        //} 
-        //catch (InstantiationException ex)
-        //{
-        //    response.sendRedirect("error.jsp");
-        //} 
-        //catch (IllegalAccessException ex)
-        //{
-        //    response.sendRedirect("error.jsp");
-        //}
-        
-
+        try
+        {
+            String servletPath = request.getServletPath();
+            String actionPath = "action.do";
+            if(servletPath.endsWith("Comment")) {
+                actionPath += ".comment";
+            } else if(servletPath.endsWith("Item")) {
+                actionPath += ".item";
+            } else if(servletPath.endsWith("List")) {
+                actionPath += ".list";
+            }
+            Action action = ActionFactory.getAction(servletPath,actionPath);
+            action.execute(request, response);
+        }
+        catch (ClassNotFoundException ex)
+        {
+           response.sendRedirect("error.jsp");
+        }
+        catch (InstantiationException ex)
+        {
+           response.sendRedirect("error.jsp");
+        }
+        catch (IllegalAccessException ex)
+        {
+           response.sendRedirect("error.jsp");
+        }
 
     }
 

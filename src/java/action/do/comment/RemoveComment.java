@@ -1,11 +1,11 @@
 /*
- * Class: action.RemoveComment
+ * Class: action.do.comment.RemoveComment
  * Luettelo
  *
  * 2015-04-04
  */
 
-package action;
+package comment;
 
 import dao.CommentDAO;
 import dominio.Comment;

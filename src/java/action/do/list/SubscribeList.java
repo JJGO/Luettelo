@@ -1,14 +1,14 @@
 /*
- * Class: action.UncheckItem
+ * Class: action.do.list.SubscribeList
  * Luettelo
  *
  * 2015-04-04
  */
 
-package action;
+package list;
 
-import dao.ItemDAO;
-import dominio.Item;
+import dao.ListDAO;
+import dominio.List;
 import dominio.User;
 import helper.DAOHelper;
 import java.io.IOException;
@@ -20,25 +20,25 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author
+ * @author Lucia
  */
 
-//UncheckItem{itemId} (AJAX)
+//SubscribeList{username, listId} (AJAX)
 
-public class UncheckItem implements Action
+public class SubscribeList implements Action
 {
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException
     {
-        int itemId = Integer.parseInt(request.getParameter("itemId"));
+        int listId = Integer.parseInt(request.getParameter("listId"));
         User user  = (User) request.getSession().getAttribute("user");
 
         try
         {
-            ItemDAO dao = DAOHelper.getItemDAO(request);
-            Item item = new Item(itemId);
-            boolean error = !dao.uncheckItem(item, user);
+            ListDAO dao = DAOHelper.getListDAO(request);
+            List list = new List(listId);
+            boolean error = !dao.subscribeList(list, user);
             
             PrintWriter out = response.getWriter();
             out.println("{ error : "+error+"}");

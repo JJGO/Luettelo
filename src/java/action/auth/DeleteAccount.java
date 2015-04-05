@@ -1,16 +1,21 @@
-package action;
+/*
+ * Class: action.auth.DeleteAccount
+ * Luettelo
+ *
+ * 2015-04-04
+ */
+
+package auth;
 
 import dao.UserDAO;
 import dominio.User;
 import helper.DAOHelper;
-import helper.DisplayHelper;
 import java.io.IOException;
 import java.sql.SQLException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 
 /**
@@ -18,35 +23,31 @@ import javax.servlet.http.HttpSession;
  * @author JJ
  */
 
-//Login{username, password}
+//DeleteAccount{password}
 
-public class Login implements Action
+public class DeleteAccount implements Action
 {
     // TODO - Put coherently the exceptions to error.jsp
     @Override
     public void execute(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException
     {
 
-        String username     = request.getParameter("username");
         String password     = request.getParameter("password");
-
+        User user           = (User) request.getSession().getAttribute("user");
         try
         {
-            User user = new User(username, password);
+            User user_delete = new User(user.getUsername(), password);
 
             UserDAO dao = DAOHelper.getUserDAO(request);
-            if( dao.findUser(user) )
+            if(dao.removeUser(user_delete))
             {
-                HttpSession session = request.getSession();
-                session.setAttribute("user",user);
+                request.getSession().setAttribute("user",null);
             }
             else
             {
-                request.setAttribute("loginError","El usuario/contraseña son incorrectos");
+                request.setAttribute("loginError","La contraseña introducida es incorrecta");
             }
 
-            DisplayHelper.setDefaultLists(request);
-            DisplayHelper.setAsideLists(request);
             RequestDispatcher rd = request.getRequestDispatcher("/index.jsp");
             rd.forward(request, response);
         }

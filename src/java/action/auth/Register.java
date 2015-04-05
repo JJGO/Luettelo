@@ -1,4 +1,11 @@
-package action;
+/*
+ * Class: action.auth.Register
+ * Luettelo
+ *
+ * 2015-04-04
+ */
+
+package auth;
 
 import dao.UserDAO;
 import dominio.User;

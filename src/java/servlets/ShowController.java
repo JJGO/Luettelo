@@ -7,6 +7,7 @@
 
 package servlets;
 
+import action.Action;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -16,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author 
+ * @author
  */
 public class ShowController extends HttpServlet {
 
@@ -33,26 +34,24 @@ public class ShowController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         
-        //PrintWriter out = response.getWriter();
-        //out.close();
         
-        //try
-        //{
-        //    Action action = ActionFactory.getAction(request.getServletPath());
-        //    action.execute(request, response);
-        //} 
-        //catch (ClassNotFoundException ex)
-        //{
-        //    response.sendRedirect("error.jsp");
-        //} 
-        //catch (InstantiationException ex)
-        //{
-        //    response.sendRedirect("error.jsp");
-        //} 
-        //catch (IllegalAccessException ex)
-        //{
-        //    response.sendRedirect("error.jsp");
-        //}
+        try
+        {
+           Action action = ActionFactory.getAction(request.getServletPath(),"action.show");
+           action.execute(request, response);
+        }
+        catch (ClassNotFoundException ex)
+        {
+           response.sendRedirect("error.jsp");
+        }
+        catch (InstantiationException ex)
+        {
+           response.sendRedirect("error.jsp");
+        }
+        catch (IllegalAccessException ex)
+        {
+           response.sendRedirect("error.jsp");
+        }
 
     }
 

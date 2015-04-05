@@ -1,11 +1,11 @@
 /*
- * Class: action.EditList
+ * Class: action.do.list.RemoveList
  * Luettelo
  *
  * 2015-04-04
  */
 
-package action;
+package list;
 
 import dao.ListDAO;
 import dominio.List;
@@ -21,31 +21,26 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author JJ
+ * @author
  */
 
-//EditList{listId, name, category, description}
+//RemoveList{listId}
 
-public class EditList implements Action
+public class RemoveList implements Action
 {
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException
     {
-    	int listId 	   = Integer.parseInt(request.getParameter("listId"));
-        String name        = request.getParameter("name");
-        String category    = request.getParameter("category");
-        String description = request.getParameter("description");
-        User user          = (User) request.getSession().getAttribute("user");
-                              //to know who created the list
+        int listId = Integer.parseInt(request.getParameter("listId"));
+        User user  = (User) request.getSession().getAttribute("user");
+
         try
         {
             ListDAO dao = DAOHelper.getListDAO(request);
-            List list   = new List(listId, name, category, description);
-            if( dao.editList(list, user) )
+            List list = new List(listId);
+            if(dao.removeList(list, user))
             {
-                //shouldnt this go to 'items.jsp'?
-                //if it really goes to 'lists.jsp' 'DisplayHelper.set' should set the lists instead
                 DisplayHelper.setItems(request);
                 DisplayHelper.setList(request);
 

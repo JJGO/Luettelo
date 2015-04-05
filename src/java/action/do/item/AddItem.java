@@ -1,11 +1,11 @@
 /*
- * Class: action.AddItem
+ * Class: action.do.item.AddItem
  * Luettelo
  *
  * 2015-04-04
  */
 
-package action;
+package item;
 
 import dao.ItemDAO;
 import dominio.Item;

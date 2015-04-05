@@ -1,14 +1,14 @@
 /*
- * Class: action.EditComment
+ * Class: action.do.item.EditItem
  * Luettelo
  *
  * 2015-04-04
  */
 
-package action;
+package item;
 
-import dao.CommentDAO;
-import dominio.Comment;
+import dao.ItemDAO;
+import dominio.Item;
 import dominio.User;
 import helper.DAOHelper;
 import helper.DisplayHelper;
@@ -24,28 +24,29 @@ import javax.servlet.http.HttpServletResponse;
  * @author Lucia
  */
 
-//EditComment{commentId, content}
+//EditItem{itemId, name, url}
 
-public class EditComment implements Action
+public class EditItem implements Action
 {
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException
     {
-        String content  = request.getParameter("content");
-        int commentId   = Integer.parseInt(request.getParameter("commentId"));
-        User user       = (User) request.getSession().getAttribute("user");
+        String name = request.getParameter("name");
+        String url  = request.getParameter("url");
+        int itemId  = Integer.parseInt(request.getParameter("itemId"));
+        User user   = (User) request.getSession().getAttribute("user");
 
         try
         {
-            CommentDAO dao = DAOHelper.getCommentDAO(request);
-            Comment comment = new Comment(content, commentId);
-            if(dao.editComment(comment, user))
+            ItemDAO dao = DAOHelper.getItemDAO(request);
+            Item item = new Item(name, url, itemId);
+            if(dao.editItem(item, user))
             {
                 DisplayHelper.setList(request);
-                DisplayHelper.setComments(request);
+                DisplayHelper.setItems(request);
 
-                RequestDispatcher rd = request.getRequestDispatcher("/comments.jsp");
+                RequestDispatcher rd = request.getRequestDispatcher("/items.jsp");
                 rd.forward(request,response);
             }
             else

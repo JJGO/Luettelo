@@ -1,4 +1,11 @@
-package action;
+/*
+ * Class: action.auth.Logout
+ * Luettelo
+ *
+ * 2015-04-04
+ */
+
+package auth;
 
 import helper.DisplayHelper;
 import java.io.IOException;

@@ -1,11 +1,11 @@
 /*
- * Class: action.AddComment
+ * Class: action.do.comment.EditComment
  * Luettelo
  *
  * 2015-04-04
  */
 
-package action;
+package comment;
 
 import dao.CommentDAO;
 import dominio.Comment;
@@ -24,25 +24,23 @@ import javax.servlet.http.HttpServletResponse;
  * @author Lucia
  */
 
-//AddComment{listId, content}
+//EditComment{commentId, content}
 
-public class AddComment implements Action
+public class EditComment implements Action
 {
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException
     {
-        String  content = request.getParameter("content");
-        int listId      = Integer.parseInt(request.getParameter("listId"));
+        String content  = request.getParameter("content");
+        int commentId   = Integer.parseInt(request.getParameter("commentId"));
         User user       = (User) request.getSession().getAttribute("user");
 
         try
         {
-            CommentDAO dao    = DAOHelper.getCommentDAO(request);
-            Comment comment   = new Comment(content);
-            dominio.List list = new dominio.List(listId);
-            
-            if(dao.addComment(comment, list, user))
+            CommentDAO dao = DAOHelper.getCommentDAO(request);
+            Comment comment = new Comment(content, commentId);
+            if(dao.editComment(comment, user))
             {
                 DisplayHelper.setList(request);
                 DisplayHelper.setComments(request);
