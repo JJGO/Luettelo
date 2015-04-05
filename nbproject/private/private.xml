@@ -3,10 +3,20 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file://vmware-host/Shared%20Folders/32%20ITL%202o%20Semestre/02%20Programación%20de%20Aplicaciones%20Telemáticas/2%20Practica/Luettelo/src/java/action/auth/Register.java</file>
-            <file>file://vmware-host/Shared%20Folders/32%20ITL%202o%20Semestre/02%20Programación%20de%20Aplicaciones%20Telemáticas/2%20Practica/Luettelo/src/java/action/auth/Login.java</file>
-            <file>file://vmware-host/Shared%20Folders/32%20ITL%202o%20Semestre/02%20Programación%20de%20Aplicaciones%20Telemáticas/2%20Practica/Luettelo/src/java/servlets/UserActions.java</file>
-            <file>file://vmware-host/Shared%20Folders/32%20ITL%202o%20Semestre/02%20Programación%20de%20Aplicaciones%20Telemáticas/2%20Practica/Luettelo/web/lists.jsp</file>
+            <file>file:/C:/Users/Jose%20Javier/Luettelo/nbproject/build-impl.xml</file>
+            <file>file:/C:/Users/Jose%20Javier/Luettelo/src/java/action/list/AddList.java</file>
+            <file>file:/C:/Users/Jose%20Javier/Luettelo/src/java/dominio/List.java</file>
+            <file>file:/C:/Users/Jose%20Javier/Luettelo/src/java/dominio/Item.java</file>
+            <file>file:/C:/Users/Jose%20Javier/Luettelo/src/java/action/auth/Login.java</file>
+            <file>file:/C:/Users/Jose%20Javier/Luettelo/web/META-INF/context.xml</file>
+            <file>file:/C:/Users/Jose%20Javier/Luettelo/src/java/servlets/ShowController.java</file>
+            <file>file:/C:/Users/Jose%20Javier/Luettelo/src/java/dao/ListDAO.java</file>
+            <file>file:/C:/Users/Jose%20Javier/Luettelo/web/WEB-INF/urlrewrite.xml</file>
+            <file>file:/C:/Users/Jose%20Javier/Luettelo/src/java/action/list/EditList.java</file>
+            <file>file:/C:/Users/Jose%20Javier/Luettelo/src/java/action/auth/Register.java</file>
+            <file>file:/C:/Users/Jose%20Javier/Luettelo/web/lists.jsp</file>
+            <file>file:/C:/Users/Jose%20Javier/Luettelo/web/WEB-INF/web.xml</file>
+            <file>file:/C:/Users/Jose%20Javier/Luettelo/src/java/helper/DisplayHelper.java</file>
         </group>
     </open-files>
 </project-private>

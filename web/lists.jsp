@@ -3,7 +3,9 @@
     Created on : 04-abr-2015, 19:24:36
     Author     : Lucia
 --%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page import="java.util.ArrayList"%>
+<%@page import="dominio.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -21,7 +23,7 @@
             <header id="header">
             </header>
             <div class="content">
-                <c:forEach items="${displayList}" var="list">
+                <c:forEach var="list" items="${defaultLists}">
                     <div class="component">
                         <!-- TO DO: Change all href's -->
                         <div class="component-title">
@@ -31,7 +33,7 @@
                         </div>
                         <span class="component-rating component-rating-index">${list.average}</span>
                         <br/>
-                        <a class="component-comments" href="comments.html">Comments (${list.numcom})</a>
+                        <a class="component-comments" href="comments.html">Comments (${list.comments})</a>
                         <a class="component-category" href="lists.html">${list.category}</a>
                     </div>
                 </c:forEach>

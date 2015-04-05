@@ -134,4 +134,10 @@ public class List
             return false;
         }
     }
+    
+    @Override
+    public String toString()
+    {
+        return id+" "+name+" "+category+" "+username+" "+average+" "+comments+" "+subscribed;
+    }
 }

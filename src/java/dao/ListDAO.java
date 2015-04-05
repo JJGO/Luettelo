@@ -23,37 +23,37 @@ public class ListDAO extends DAO
 
 // DML
     //CREATE LIST {name, category, description, username}
-    private static String ADD_LIST = "INSERT INTO List (name, category, description, username) VALUES (?, ?, ?, ?)";
+    private static final String ADD_LIST = "INSERT INTO List (name, category, description, username) VALUES (?, ?, ?, ?)";
     
     //EDIT LIST {name, category, description, listId, username}
-    private static String EDIT_LIST = "UPDATE List SET name = ?, category = ?, description = ? WHERE listId = ? AND username = ?";
+    private static final String EDIT_LIST = "UPDATE List SET name = ?, category = ?, description = ? WHERE listId = ? AND username = ?";
 
     //REMOVE LIST {listId, username}
-    private static String REMOVE_LIST = "DELETE FROM List WHERE listId = ? AND username = ?";
+    private static final String REMOVE_LIST = "DELETE FROM List WHERE listId = ? AND username = ?";
 
     //SUBSCRIBE TO A LIST {username, listId}
-    private static String SUBSCRIBE_LIST = "INSERT INTO Subscription(username,listId) VALUES (?,?)";
+    private static final String SUBSCRIBE_LIST = "INSERT INTO Subscription(username,listId) VALUES (?,?)";
 
     //UNSUBSCRIBE FROM A LIST {username, listId}
-    private static String UNSUBSCRIBE_LIST = "DELETE FROM Subscription WHERE username = ? AND listId = ?";
+    private static final String UNSUBSCRIBE_LIST = "DELETE FROM Subscription WHERE username = ? AND listId = ?";
 
 // QUERY
     // GET THE INFO OF A LIST {username,listId}
-    private static String QUERY_LIST_INFO = "SELECT  L.listId, L.name, L.category, L.description, L.username, LA.average, COALESCE(C.numcom,0) AS numcom, NOT ISNULL(S.username) AS subscribed FROM List L INNER JOIN List_avg LA ON L.listId = LA.listId LEFT OUTER JOIN (  SELECT  listId, COUNT(*) AS numcom FROM Comment ) C ON L.listId = C.listId LEFT OUTER JOIN (  SELECT listId, username FROM Subscription WHERE username = ? ) S ON L.listId = S.listId WHERE L.listId = ? ORDER BY LA.average DESC";
+    private static final String QUERY_LIST_INFO = "SELECT  L.listId, L.name, L.category, L.description, L.username, LA.average, COALESCE(C.numcom,0) AS numcom, NOT ISNULL(S.username) AS subscribed FROM List L INNER JOIN List_avg LA ON L.listId = LA.listId LEFT OUTER JOIN (  SELECT  listId, COUNT(*) AS numcom FROM Comment ) C ON L.listId = C.listId LEFT OUTER JOIN (  SELECT listId, username FROM Subscription WHERE username = ? ) S ON L.listId = S.listId WHERE L.listId = ? ORDER BY LA.average DESC";
 
-    private static String QUERY_LISTS = "SELECT L.listId, L.name, L.category, L.username, LA.average, COALESCE(C.numcom,0) AS numcom, NOT ISNULL(S.username) AS subscribed FROM List L INNER JOIN List_avg LA ON L.listId = LA.listId LEFT OUTER JOIN (  SELECT  listId, COUNT(*) AS numcom FROM Comment GROUP BY listId ) C ON L.listId = C.listId LEFT OUTER JOIN (  SELECT listId, username FROM Subscription WHERE username = ? ) S ON L.listId = S.listId";
+    private static final String QUERY_LISTS = "SELECT L.listId, L.name, L.category, L.username, LA.average, COALESCE(C.numcom,0) AS numcom, NOT ISNULL(S.username) AS subscribed FROM List L INNER JOIN List_avg LA ON L.listId = LA.listId LEFT OUTER JOIN (  SELECT  listId, COUNT(*) AS numcom FROM Comment GROUP BY listId ) C ON L.listId = C.listId LEFT OUTER JOIN (  SELECT listId, username FROM Subscription WHERE username = ? ) S ON L.listId = S.listId";
 
     // GET THE LISTS CREATED BY A USER {username, username(creator)}
-    private static String QUERY_LISTS_BY_CREATOR     = QUERY_LISTS + " WHERE L.username = ? ORDER BY LA.average DESC";
+    private static final String QUERY_LISTS_BY_CREATOR     = QUERY_LISTS + " WHERE L.username = ? ORDER BY LA.average DESC";
     
     // GET THE List A USER HAS SUBSCRIBED TO {username}
-    private static String QUERY_LISTS_BY_SUBSCRIBED  = QUERY_LISTS + " WHERE S.username IS NOT NULL ORDER BY LA.average DESC";
+    private static final String QUERY_LISTS_BY_SUBSCRIBED  = QUERY_LISTS + " WHERE S.username IS NOT NULL ORDER BY LA.average DESC";
     
     // GET LISTS OF A CATEGORY {username, category}
-    private static String QUERY_LISTS_BY_CATEGORY    = QUERY_LISTS + " WHERE L.category LIKE ? ORDER BY LA.average DESC";
+    private static final String QUERY_LISTS_BY_CATEGORY    = QUERY_LISTS + " WHERE L.category LIKE ? ORDER BY LA.average DESC";
     
     // SEARCH BY A KEYWORD {username, '%keyword%'}
-    private static String QUERY_LISTS_BY_KEYWORD     = QUERY_LISTS + " WHERE L.name LIKE '%?%' ORDER BY LA.average DESC";
+    private static final String QUERY_LISTS_BY_KEYWORD     = QUERY_LISTS + " WHERE L.name LIKE '%?%' ORDER BY LA.average DESC";
 
 
     public ListDAO()
@@ -232,8 +232,8 @@ public class ListDAO extends DAO
             String      category    =           rs.getString( "category"      );
             String      description =           rs.getString( "description"   );
             String      username    =           rs.getString( "username"      );
-            Integer     average     = (Integer) rs.getObject( "average"       );
-            Integer     comments    = (Integer) rs.getObject( "numcom"        );
+            Integer     average     =           rs.getObject("average") != null ? rs.getInt("average") : null;
+            Integer     comments    =           rs.getObject("numcom") != null ? rs.getInt("numcom") : null;
             boolean     subscribed  =           rs.getBoolean("subscribed"    );
             
             List list = new List(id, name, category, description, username, average, comments, subscribed);
@@ -253,8 +253,8 @@ public class ListDAO extends DAO
             String      name        =           rs.getString( "name"          );
             String      category    =           rs.getString( "category"      );
             String      username    =           rs.getString( "username"      );
-            Integer     average     = (Integer) rs.getObject( "average"       );
-            Integer     comments    = (Integer) rs.getObject( "numcom"        );
+            Integer     average     =           rs.getObject("average") != null ? rs.getInt("average") : null;
+            Integer     comments    =           rs.getObject("numcom") != null ? rs.getInt("numcom") : null;
             boolean     subscribed  =           rs.getBoolean("subscribed"    );
             
             List list = new List(id, name, category, username, average, comments, subscribed);
