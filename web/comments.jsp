@@ -28,9 +28,11 @@
                     <div class="component-title">
                         <a href="list.html">${displayList.name}</a>
                     </div>
-                    <span class="rating">${displayList.average}</span>
+                    <span>${displayList.username}</span>
+                    <span class="component-rating component-rating-index">${displayList.average}</span>
                     <br/>
                     <p>${displayList.description}</p>
+                    <span class="component-comments">Comments (${displayList.comments})</span>
                     <a class="component-category" href="index.html">${displayList.category}</a>
                 </div>
                     <div class="component comment-component">
@@ -64,12 +66,14 @@
                                 </div>
                             </div>
                             <c:if test="${comment.username==sessionScope.user.username}">
-                                <a href="javascript:deleteComment()" style="float:right" class="complete-icon" > 
-                                <img src="images/delete.png" alt="Eliminar" id="completeIcon">
-                                </a>
-                                <a href="javascript:editComment()" style="float:right" class="complete-icon" >
-                                <img src="images/edit.png" alt="Editar" id="completeIcon">
-                                </a>
+                                <div style="float:right">
+                                    <a href="javascript:editComment()" class="complete-icon" >
+                                    <img src="images/edit.png" alt="Editar" id="completeIcon">
+                                    </a>
+                                    <a href="javascript:deleteComment()" class="complete-icon" > 
+                                    <img src="images/delete.png" alt="Eliminar" id="completeIcon">
+                                    </a>
+                                </div>
                             </c:if>
                         </div>
                     </c:forEach>

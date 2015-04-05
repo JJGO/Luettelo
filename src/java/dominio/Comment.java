@@ -17,31 +17,30 @@ public class Comment
     private String content;
     private String username;
 
+    //Used by RemoveComment.java
     public Comment(int id)
     {
         this.id = id;
     }
 
+    //Used by AddComment.java
     public Comment(String content)
     {
         this.content = content;
     }
 
-    public Comment(String content, String username)
-    {
-        this.content = content;
-        this.username = username;
-    }
-
+    //Used by EditComment.java
     public Comment(String content, int id)
     {
         this.content = content;
         this.id = id;
     }
 
-    public Comment(int id, String content, String username)
+    //Used by CommentDAO.java
+    public Comment(int id, String username, String content)
     {
-        this(content, username);
+        this.content = content;
+        this.username = username;
         this.id = id;
     }
 

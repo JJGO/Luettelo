@@ -17,7 +17,7 @@ public class List
     private String name;
     private String category;
     private String description;
-    private String username;        //person who created the list
+    private String username;    //person who created the list
     private Integer average;    //avg rating of the list
     private Integer comments;   //number of comments in the list
     private boolean subscribed;
