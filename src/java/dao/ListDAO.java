@@ -66,10 +66,14 @@ public class ListDAO extends DAO
     {
         //CREATE LIST {name, category, description, username}
         PreparedStatement ps = con.prepareStatement(ADD_LIST);
+        String username = null;
+        if (user != null){
+            username = user.getUsername();
+        }
         ps.setString(   1,  list.getName()          );
         ps.setString(   2,  list.getCategory()      );
         ps.setString(   3,  list.getDescription()   );
-        ps.setString(   4,  user.getUsername()      );
+        ps.setString(   4,  username      );
         
         int rows = ps.executeUpdate();
         ps.close();
@@ -80,11 +84,15 @@ public class ListDAO extends DAO
     {
         //EDIT LIST {name, category, description, listId, username}
         PreparedStatement ps = con.prepareStatement(EDIT_LIST);
+        String username = null;
+        if (user != null){
+            username = user.getUsername();
+        }
         ps.setString(   1,  list.getName()          );
         ps.setString(   2,  list.getCategory()      );
         ps.setString(   3,  list.getDescription()   );
         ps.setInt(      4,  list.getId()            );
-        ps.setString(   5,  user.getUsername()      );
+        ps.setString(   5,  username      );
         
         int rows = ps.executeUpdate();
         ps.close();
@@ -95,8 +103,12 @@ public class ListDAO extends DAO
     {
         //REMOVE LIST {listId, username}
         PreparedStatement ps = con.prepareStatement(REMOVE_LIST);
+        String username = null;
+        if (user != null){
+            username = user.getUsername();
+        }
         ps.setInt(      1,  list.getId()            );
-        ps.setString(   2,  user.getUsername()      );
+        ps.setString(   2,  username      );
         
         int rows = ps.executeUpdate();
         ps.close();
@@ -107,7 +119,11 @@ public class ListDAO extends DAO
     {
         //SUBSCRIBE TO A LIST {username, listId}
         PreparedStatement ps = con.prepareStatement(SUBSCRIBE_LIST);
-        ps.setString(   1,  user.getUsername()      );
+        String username = null;
+        if (user != null){
+            username = user.getUsername();
+        }
+        ps.setString(   1,  username      );
         ps.setInt(      2,  list.getId()            );
         
         int rows = ps.executeUpdate();
@@ -119,7 +135,11 @@ public class ListDAO extends DAO
     {
         //UNSUBSCRIBE FROM A LIST {username, listId}
         PreparedStatement ps = con.prepareStatement(UNSUBSCRIBE_LIST);
-        ps.setString(   1,  user.getUsername()      );
+        String username = null;
+        if (user != null){
+            username = user.getUsername();
+        }
+        ps.setString(   1,  username      );
         ps.setInt(      2,  list.getId()            );
         
         int rows = ps.executeUpdate();
@@ -131,7 +151,11 @@ public class ListDAO extends DAO
     {
         // GET THE LISTS CREATED BY A USER {username, username(creator)}
         PreparedStatement ps = con.prepareStatement(QUERY_LISTS_BY_CREATOR);
-        ps.setString(   1,  user.getUsername()      );
+        String username = null;
+        if (user != null){
+            username = user.getUsername();
+        }
+        ps.setString(   1,  username      );
         ps.setString(   2,  creator.getUsername()   );
         ArrayList<List> lists = this.parseResultSetDisplay(ps.executeQuery());
         ps.close();
@@ -142,7 +166,11 @@ public class ListDAO extends DAO
     {
         // GET THE List A USER HAS SUBSCRIBED TO {username}
         PreparedStatement ps = con.prepareStatement(QUERY_LISTS_BY_SUBSCRIBED);
-        ps.setString(   1,  user.getUsername()      );
+        String username = null;
+        if (user != null){
+            username = user.getUsername();
+        }
+        ps.setString(   1,  username      );
         ArrayList<List> lists = this.parseResultSetDisplay(ps.executeQuery());
         ps.close();
         return lists;
@@ -152,7 +180,11 @@ public class ListDAO extends DAO
     {
         // GET LISTS OF A CATEGORY {username, category}
         PreparedStatement ps = con.prepareStatement(QUERY_LISTS_BY_CATEGORY);
-        ps.setString(   1,  user.getUsername()      );
+        String username = null;
+        if (user != null){
+            username = user.getUsername();
+        }
+        ps.setString(   1,  username      );
         ps.setString(   2,  category                );
         ArrayList<List> lists = this.parseResultSetDisplay(ps.executeQuery());
         ps.close();
@@ -163,7 +195,11 @@ public class ListDAO extends DAO
     {
         // SEARCH BY A KEYWORD {username, '%keyword%'}
         PreparedStatement ps = con.prepareStatement(QUERY_LISTS_BY_KEYWORD);
-        ps.setString(   1,  user.getUsername()      );
+        String username = null;
+        if (user != null){
+            username = user.getUsername();
+        }
+        ps.setString(   1,  username      );
         ps.setString(   2,  "%" + keyword + "%"     );
         ArrayList<List> lists = this.parseResultSetDisplay(ps.executeQuery());
         ps.close();
@@ -174,7 +210,11 @@ public class ListDAO extends DAO
     {
         // GET THE INFO OF A LIST {username,listId}
         PreparedStatement ps = con.prepareStatement(QUERY_LIST_INFO);
-        ps.setString(   1,  user.getUsername()      );
+        String username = null;
+        if (user != null){
+            username = user.getUsername();
+        }
+        ps.setString(   1,  username      );
         ps.setInt(      2,  list.getId()            );
         ArrayList<List> lists = this.parseResultSet(ps.executeQuery());
         ps.close();
