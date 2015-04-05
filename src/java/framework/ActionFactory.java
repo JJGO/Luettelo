@@ -12,7 +12,7 @@ public class ActionFactory
     {
         int pos = url.indexOf('.');
         String actionClassName = url.substring(1,pos); //1 to delete the /
-        Class actionClass = Class.forName("acciones."+actionClassName);
+        Class actionClass = Class.forName("action."+actionClassName);
         Action action = (Action) actionClass.newInstance();
         return action;
     }
