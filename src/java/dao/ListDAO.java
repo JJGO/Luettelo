@@ -44,7 +44,7 @@ public class ListDAO extends DAO
     private static final String QUERY_LISTS = "SELECT L.listId, L.name, L.category, L.username, LA.average, COALESCE(C.numcom,0) AS numcom, NOT ISNULL(S.username) AS subscribed FROM List L INNER JOIN List_avg LA ON L.listId = LA.listId LEFT OUTER JOIN (  SELECT  listId, COUNT(*) AS numcom FROM Comment GROUP BY listId ) C ON L.listId = C.listId LEFT OUTER JOIN (  SELECT listId, username FROM Subscription WHERE username = ? ) S ON L.listId = S.listId";
 
     // GET THE LISTS CREATED BY A USER {username, username(creator)}
-    private static final String QUERY_LISTS_BY_CREATOR     = QUERY_LISTS + " WHERE L.username = ? ORDER BY LA.average DESC";
+    private static final String QUERY_LISTS_BY_USER     = QUERY_LISTS + " WHERE L.username = ? ORDER BY LA.average DESC";
     
     // GET THE List A USER HAS SUBSCRIBED TO {username}
     private static final String QUERY_LISTS_BY_SUBSCRIBED  = QUERY_LISTS + " WHERE S.username IS NOT NULL ORDER BY LA.average DESC";
@@ -147,10 +147,10 @@ public class ListDAO extends DAO
         return (rows != 0);
     }
 
-    public ArrayList<List> findByCreator(User creator, User user) throws SQLException
+    public ArrayList<List> findByUser(User creator, User user) throws SQLException
     {
         // GET THE LISTS CREATED BY A USER {username, username(creator)}
-        PreparedStatement ps = con.prepareStatement(QUERY_LISTS_BY_CREATOR);
+        PreparedStatement ps = con.prepareStatement(QUERY_LISTS_BY_USER);
         String username = null;
         if (user != null){
             username = user.getUsername();

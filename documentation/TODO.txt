@@ -2,6 +2,8 @@
 
 Hacer el URLRewrite teorico :(
 
+Boton de cancel edit
+
 ### Lucia
 
 Cambiar list.jsp
@@ -13,3 +15,12 @@ Para que hagan @include de header.jsp
 							footer.jsp
 
 Quitar jQuery de script.js
+
+
+### Further releases
+
+Paginar resultados
+
+Meter dummy content
+
+Pasar todo lo que no es show a AJAX / JSON
