@@ -5,8 +5,9 @@
  * 2015-04-04
  */
 
-package comment;
+package action.comment;
 
+import action.Action;
 import dao.CommentDAO;
 import dominio.Comment;
 import dominio.User;

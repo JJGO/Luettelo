@@ -1,12 +1,13 @@
 /*
- * Class: action.do.item.RemoveItem
+ * Class: action.do.item.EditItem
  * Luettelo
  *
  * 2015-04-04
  */
 
-package item;
+package action.item;
 
+import action.Action;
 import dao.ItemDAO;
 import dominio.Item;
 import dominio.User;
@@ -24,25 +25,27 @@ import javax.servlet.http.HttpServletResponse;
  * @author Lucia
  */
 
-//RemoveItem{itemId}
+//EditItem{itemId, name, url}
 
-public class RemoveItem implements Action
+public class EditItem implements Action
 {
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException
     {
-        int itemId = Integer.parseInt(request.getParameter("itemId"));
-        User user  = (User) request.getSession().getAttribute("user");
+        String name = request.getParameter("name");
+        String url  = request.getParameter("url");
+        int itemId  = Integer.parseInt(request.getParameter("itemId"));
+        User user   = (User) request.getSession().getAttribute("user");
 
         try
         {
             ItemDAO dao = DAOHelper.getItemDAO(request);
-            Item item = new Item(itemId);
-            if(dao.removeItem(item, user))
+            Item item = new Item(name, url, itemId);
+            if(dao.editItem(item, user))
             {
-                DisplayHelper.setItems(request);
                 DisplayHelper.setList(request);
+                DisplayHelper.setItems(request);
 
                 RequestDispatcher rd = request.getRequestDispatcher("/items.jsp");
                 rd.forward(request,response);

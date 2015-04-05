@@ -7,8 +7,9 @@
 
 package servlets;
 
+import action.Action;
+import framework.ActionFactory;
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -36,7 +37,7 @@ public class UserActions extends HttpServlet {
         try
         {
             String servletPath = request.getServletPath();
-            String actionPath = "action.do";
+            String actionPath = "action";
             if(servletPath.endsWith("Comment")) {
                 actionPath += ".comment";
             } else if(servletPath.endsWith("Item")) {

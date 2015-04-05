@@ -1,14 +1,15 @@
 /*
- * Class: action.do.list.EditList
+ * Class: action.do.item.RemoveItem
  * Luettelo
  *
  * 2015-04-04
  */
 
-package list;
+package action.item;
 
-import dao.ListDAO;
-import dominio.List;
+import action.Action;
+import dao.ItemDAO;
+import dominio.Item;
 import dominio.User;
 import helper.DAOHelper;
 import helper.DisplayHelper;
@@ -21,35 +22,30 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author JJ
+ * @author Lucia
  */
 
-//EditList{listId, name, category, description}
+//RemoveItem{itemId}
 
-public class EditList implements Action
+public class RemoveItem implements Action
 {
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException
     {
-    	int listId 	   = Integer.parseInt(request.getParameter("listId"));
-        String name        = request.getParameter("name");
-        String category    = request.getParameter("category");
-        String description = request.getParameter("description");
-        User user          = (User) request.getSession().getAttribute("user");
-                              //to know who created the list
+        int itemId = Integer.parseInt(request.getParameter("itemId"));
+        User user  = (User) request.getSession().getAttribute("user");
+
         try
         {
-            ListDAO dao = DAOHelper.getListDAO(request);
-            List list   = new List(listId, name, category, description);
-            if( dao.editList(list, user) )
+            ItemDAO dao = DAOHelper.getItemDAO(request);
+            Item item = new Item(itemId);
+            if(dao.removeItem(item, user))
             {
-                //shouldnt this go to 'items.jsp'?
-                //if it really goes to 'lists.jsp' 'DisplayHelper.set' should set the lists instead
                 DisplayHelper.setItems(request);
                 DisplayHelper.setList(request);
 
-                RequestDispatcher rd = request.getRequestDispatcher("/lists.jsp");
+                RequestDispatcher rd = request.getRequestDispatcher("/items.jsp");
                 rd.forward(request,response);
             }
             else

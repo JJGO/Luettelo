@@ -1,12 +1,13 @@
 /*
- * Class: action.do.comment.RemoveComment
+ * Class: action.do.comment.EditComment
  * Luettelo
  *
  * 2015-04-04
  */
 
-package comment;
+package action.comment;
 
+import action.Action;
 import dao.CommentDAO;
 import dominio.Comment;
 import dominio.User;
@@ -24,25 +25,26 @@ import javax.servlet.http.HttpServletResponse;
  * @author Lucia
  */
 
-//RemoveComment{commentId, username}
+//EditComment{commentId, content}
 
-public class RemoveComment implements Action
+public class EditComment implements Action
 {
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException
     {
-        int commentId = Integer.parseInt(request.getParameter("commentId"));
-        User user = (User) request.getSession().getAttribute("user");
+        String content  = request.getParameter("content");
+        int commentId   = Integer.parseInt(request.getParameter("commentId"));
+        User user       = (User) request.getSession().getAttribute("user");
 
         try
         {
             CommentDAO dao = DAOHelper.getCommentDAO(request);
-            Comment comment = new Comment(commentId);
-            if(dao.removeComment(comment, user))
+            Comment comment = new Comment(content, commentId);
+            if(dao.editComment(comment, user))
             {
-                DisplayHelper.setComments(request);
                 DisplayHelper.setList(request);
+                DisplayHelper.setComments(request);
 
                 RequestDispatcher rd = request.getRequestDispatcher("/comments.jsp");
                 rd.forward(request,response);

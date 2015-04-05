@@ -5,8 +5,9 @@
  * 2015-04-04
  */
 
-package auth;
+package action.auth;
 
+import action.Action;
 import dao.UserDAO;
 import dominio.User;
 import helper.DAOHelper;

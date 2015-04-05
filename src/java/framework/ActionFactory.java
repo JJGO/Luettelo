@@ -19,6 +19,6 @@ public class ActionFactory
 
     public static Action getAction(String url) throws ClassNotFoundException, InstantiationException, IllegalAccessException
     {
-        Action.getAction(url,"action");
+        return ActionFactory.getAction(url,"action");
     }
 }

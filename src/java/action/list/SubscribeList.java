@@ -5,8 +5,9 @@
  * 2015-04-04
  */
 
-package list;
+package action.list;
 
+import action.Action;
 import dao.ListDAO;
 import dominio.List;
 import dominio.User;

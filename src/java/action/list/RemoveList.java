@@ -1,14 +1,15 @@
 /*
- * Class: action.do.item.EditItem
+ * Class: action.do.list.RemoveList
  * Luettelo
  *
  * 2015-04-04
  */
 
-package item;
+package action.list;
 
-import dao.ItemDAO;
-import dominio.Item;
+import action.Action;
+import dao.ListDAO;
+import dominio.List;
 import dominio.User;
 import helper.DAOHelper;
 import helper.DisplayHelper;
@@ -21,32 +22,30 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author Lucia
+ * @author
  */
 
-//EditItem{itemId, name, url}
+//RemoveList{listId}
 
-public class EditItem implements Action
+public class RemoveList implements Action
 {
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException
     {
-        String name = request.getParameter("name");
-        String url  = request.getParameter("url");
-        int itemId  = Integer.parseInt(request.getParameter("itemId"));
-        User user   = (User) request.getSession().getAttribute("user");
+        int listId = Integer.parseInt(request.getParameter("listId"));
+        User user  = (User) request.getSession().getAttribute("user");
 
         try
         {
-            ItemDAO dao = DAOHelper.getItemDAO(request);
-            Item item = new Item(name, url, itemId);
-            if(dao.editItem(item, user))
+            ListDAO dao = DAOHelper.getListDAO(request);
+            List list = new List(listId);
+            if(dao.removeList(list, user))
             {
-                DisplayHelper.setList(request);
                 DisplayHelper.setItems(request);
+                DisplayHelper.setList(request);
 
-                RequestDispatcher rd = request.getRequestDispatcher("/items.jsp");
+                RequestDispatcher rd = request.getRequestDispatcher("/lists.jsp");
                 rd.forward(request,response);
             }
             else

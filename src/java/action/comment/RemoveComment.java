@@ -1,14 +1,15 @@
 /*
- * Class: action.do.list.RemoveList
+ * Class: action.do.comment.RemoveComment
  * Luettelo
  *
  * 2015-04-04
  */
 
-package list;
+package action.comment;
 
-import dao.ListDAO;
-import dominio.List;
+import action.Action;
+import dao.CommentDAO;
+import dominio.Comment;
 import dominio.User;
 import helper.DAOHelper;
 import helper.DisplayHelper;
@@ -21,30 +22,30 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author
+ * @author Lucia
  */
 
-//RemoveList{listId}
+//RemoveComment{commentId, username}
 
-public class RemoveList implements Action
+public class RemoveComment implements Action
 {
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException
     {
-        int listId = Integer.parseInt(request.getParameter("listId"));
-        User user  = (User) request.getSession().getAttribute("user");
+        int commentId = Integer.parseInt(request.getParameter("commentId"));
+        User user = (User) request.getSession().getAttribute("user");
 
         try
         {
-            ListDAO dao = DAOHelper.getListDAO(request);
-            List list = new List(listId);
-            if(dao.removeList(list, user))
+            CommentDAO dao = DAOHelper.getCommentDAO(request);
+            Comment comment = new Comment(commentId);
+            if(dao.removeComment(comment, user))
             {
-                DisplayHelper.setItems(request);
+                DisplayHelper.setComments(request);
                 DisplayHelper.setList(request);
 
-                RequestDispatcher rd = request.getRequestDispatcher("/lists.jsp");
+                RequestDispatcher rd = request.getRequestDispatcher("/comments.jsp");
                 rd.forward(request,response);
             }
             else

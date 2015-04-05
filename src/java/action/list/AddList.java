@@ -1,14 +1,15 @@
 /*
- * Class: action.do.comment.EditComment
+ * Class: action.do.list.AddList
  * Luettelo
  *
  * 2015-04-04
  */
 
-package comment;
+package action.list;
 
-import dao.CommentDAO;
-import dominio.Comment;
+import action.Action;
+import dao.ListDAO;
+import dominio.List;
 import dominio.User;
 import helper.DAOHelper;
 import helper.DisplayHelper;
@@ -24,28 +25,31 @@ import javax.servlet.http.HttpServletResponse;
  * @author Lucia
  */
 
-//EditComment{commentId, content}
+//AddList{name, category, description}
 
-public class EditComment implements Action
+public class AddList implements Action
 {
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException
     {
-        String content  = request.getParameter("content");
-        int commentId   = Integer.parseInt(request.getParameter("commentId"));
-        User user       = (User) request.getSession().getAttribute("user");
-
+        String name        = request.getParameter("name");
+        String category    = request.getParameter("category");
+        String description = request.getParameter("description");
+        User user          = (User) request.getSession().getAttribute("user");
+                             //to know who created the list
         try
         {
-            CommentDAO dao = DAOHelper.getCommentDAO(request);
-            Comment comment = new Comment(content, commentId);
-            if(dao.editComment(comment, user))
+            ListDAO dao = DAOHelper.getListDAO(request);
+            List list   = new List(name, category, description);
+            if(dao.addList(list, user))
             {
+                //shouldnt this go to 'items.jsp'?
+                //if it really goes to 'lists.jsp' 'DisplayHelper.set' should set the lists instead
+                DisplayHelper.setItems(request);
                 DisplayHelper.setList(request);
-                DisplayHelper.setComments(request);
 
-                RequestDispatcher rd = request.getRequestDispatcher("/comments.jsp");
+                RequestDispatcher rd = request.getRequestDispatcher("/lists.jsp");
                 rd.forward(request,response);
             }
             else

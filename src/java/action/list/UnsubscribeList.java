@@ -1,47 +1,45 @@
 /*
- * Class: action.do.item.RateItem
+ * Class: action.do.list.UnsubscribeList
  * Luettelo
  *
  * 2015-04-04
  */
 
-package item;
+package action.list;
 
-import dao.ItemDAO;
-import dominio.Item;
+import action.Action;
+import dao.ListDAO;
+import dominio.List;
 import dominio.User;
 import helper.DAOHelper;
-import helper.DisplayHelper;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author Lucia
+ * @author
  */
 
-//RateItem{itemId, rating}  (AJAX)
+//UnsubscribeList{listId} (AJAX)
 
-public class RateItem implements Action
+public class UnsubscribeList implements Action
 {
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException
     {
-        int itemId     = Integer.parseInt(request.getParameter("itemId"));
-        Integer rating = Integer.valueOf(request.getParameter("rating"));
-        User user      = (User) request.getSession().getAttribute("user");
+        int listId = Integer.parseInt(request.getParameter("listId"));
+        User user  = (User) request.getSession().getAttribute("user");
 
         try
         {
-            ItemDAO dao = DAOHelper.getItemDAO(request);
-            Item item = new Item(itemId,rating);
-            boolean error = !dao.rateItem(item, user);
+            ListDAO dao = DAOHelper.getListDAO(request);
+            List list = new List(listId);
+            boolean error = !dao.unsubscribeList(list, user);
             
             PrintWriter out = response.getWriter();
             out.println("{ error : "+error+"}");
