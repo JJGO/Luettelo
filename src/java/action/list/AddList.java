@@ -49,7 +49,7 @@ public class AddList implements Action
                 DisplayHelper.setItems(request);
                 DisplayHelper.setList(request);
 
-                RequestDispatcher rd = request.getRequestDispatcher("/lists.jsp");
+                RequestDispatcher rd = request.getRequestDispatcher("/items.jsp");
                 rd.forward(request,response);
             }
             else

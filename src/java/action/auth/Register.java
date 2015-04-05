@@ -52,7 +52,6 @@ public class Register implements Action
             session.setAttribute("user",user);
 
             DisplayHelper.setDefaultLists(request);
-            DisplayHelper.setAsideLists(request);
             RequestDispatcher rd = request.getRequestDispatcher("/index.jsp");
             rd.forward(request, response);
         }

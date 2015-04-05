@@ -9,7 +9,12 @@ package servlets;
 
 import action.Action;
 import framework.ActionFactory;
+import helper.DisplayHelper;
 import java.io.IOException;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -37,18 +42,25 @@ public class ShowController extends HttpServlet {
         
         try
         {
-           Action action = ActionFactory.getAction(request.getServletPath(),"action.show");
-           action.execute(request, response);
+           //Action action = ActionFactory.getAction(request.getServletPath(),"action.show");
+           //action.execute(request, response);
+            DisplayHelper.setDefaultLists(request);
+            RequestDispatcher rd = request.getRequestDispatcher("/lists.jsp");
+            rd.forward(request, response);
         }
         catch (ClassNotFoundException ex)
         {
            response.sendRedirect("error.jsp");
         }
-        catch (InstantiationException ex)
-        {
-           response.sendRedirect("error.jsp");
-        }
-        catch (IllegalAccessException ex)
+        //catch (InstantiationException ex)
+        //{
+        //   response.sendRedirect("error.jsp");
+        //}
+        //catch (IllegalAccessException ex)
+        //{
+        //   response.sendRedirect("error.jsp");
+        //}
+        catch (SQLException ex)
         {
            response.sendRedirect("error.jsp");
         }

@@ -54,7 +54,6 @@ public class Login implements Action
             }
 
             DisplayHelper.setDefaultLists(request);
-            DisplayHelper.setAsideLists(request);
             RequestDispatcher rd = request.getRequestDispatcher("/index.jsp");
             rd.forward(request, response);
         }
