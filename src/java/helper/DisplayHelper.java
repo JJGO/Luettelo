@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class DisplayHelper
 {
+
     public static void setDefaultLists(HttpServletRequest request) throws SQLException, ClassNotFoundException
     {
         ListDAO dao = (ListDAO) DAOHelper.getListDAO(request);

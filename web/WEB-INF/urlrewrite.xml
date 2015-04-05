@@ -32,41 +32,34 @@
     </outbound-rule>-->
 
         <rule>
-            <from>/listar-productos</from>
-            <to>/Listar.do</to>
+            <from>/index</from>
+            <to>/Lists.show</to>
         </rule>
         <rule>
-            <from>/borrar-producto/([0-9]+)</from>
-            <to>/Borrar.do?id=$1</to>
+            <from>/category/([a-z]+)</from>
+            <to>Lists.show?type=category&value=$1</to>
         </rule>
         <rule>
-            <from>/comprar-producto/([0-9]+)</from>
-            <to>/Comprar.do?id=$1</to>
+            <from>/user/([a-z]+)</from>
+            <to>Lists.show?type=user&value=$1</to>
         </rule>
         <rule>
-            <from>/vaciar-carrito</from>
-            <to>/Vaciar.do</to>
+            <from>/search/([a-z]+)</from>
+            <to>Lists.show?type=search&value=$1</to>
         </rule>
         <rule>
-            <from>/finalizar-compra</from>
-            <to>/Finalizar.do</to>
+            <from>/subscribed</from>
+            <to>Lists.show?type=subscribed</to>
         </rule>
+
         <rule>
-            <from>/aplicar-descuento/([0-9]+)</from>
-            <to>/Descuento.do?cod=$1</to>
+            <from>/items/([0-9]+)/([a-z]+)</from>
+            <to>Items.show?listId=$1</to>
         </rule>
+
         <rule>
-            <from>/pagar-compra</from>
-            <to>/Pagar.do</to>
-        </rule>
-        <rule>
-            <from>/cambiar-color/([a-z]+)</from>
-            <to>/Color.do?co=$1</to>
-        </rule>
-        
-        <rule>
-            <from>/validar-usuario</from>
-            <to>/Autenticacion</to>
+            <from>/comments/([0-9]+)/([a-z]+)</from>
+            <to>Comments.show?type=search&value=$1</to>
         </rule>
 
     <!--
