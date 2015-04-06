@@ -11,10 +11,8 @@ import action.Action;
 import dao.UserDAO;
 import dominio.User;
 import helper.DAOHelper;
-import helper.DisplayHelper;
 import java.io.IOException;
 import java.sql.SQLException;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -51,8 +49,5 @@ public class DeleteAccount implements Action
         {
             request.setAttribute("loginError","La contraseña introducida es incorrecta");
         }
-        DisplayHelper.setDefaultLists(request);
-        RequestDispatcher rd = request.getRequestDispatcher("/luettelo.jsp");
-        rd.forward(request, response);
     }
 }

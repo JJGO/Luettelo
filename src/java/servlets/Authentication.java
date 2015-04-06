@@ -9,8 +9,9 @@ package servlets;
 
 import action.Action;
 import framework.ActionFactory;
+import helper.DisplayHelper;
 import java.io.IOException;
-import java.sql.SQLException;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -39,26 +40,37 @@ public class Authentication extends HttpServlet {
         {  
            Action action = ActionFactory.getAction(request.getServletPath(),"action.auth");
            action.execute(request, response);
+           DisplayHelper.setDefaultLists(request);
+           request.setAttribute("content","lists");
         }
-        catch (ClassNotFoundException ex)
+//        catch (ClassNotFoundException ex)
+//        {
+//           response.sendRedirect("error.jsp");
+//           ex.printStackTrace();
+//        }
+//        catch (InstantiationException ex)
+//        {
+//           response.sendRedirect("error.jsp");
+//           ex.printStackTrace();
+//        }
+//        catch (IllegalAccessException ex)
+//        {
+//           response.sendRedirect("error.jsp");
+//           ex.printStackTrace();
+//        }
+//        catch (SQLException ex)
+//        {
+//           response.sendRedirect("error.jsp");
+//           ex.printStackTrace();
+//        }
+        catch(Exception ex)
         {
-           response.sendRedirect("error.jsp");
-           ex.printStackTrace();
-        }
-        catch (InstantiationException ex)
+            request.setAttribute("content","error");
+            ex.printStackTrace();
+        }finally
         {
-           response.sendRedirect("error.jsp");
-           ex.printStackTrace();
-        }
-        catch (IllegalAccessException ex)
-        {
-           response.sendRedirect("error.jsp");
-           ex.printStackTrace();
-        }
-        catch (SQLException ex)
-        {
-           response.sendRedirect("error.jsp");
-           ex.printStackTrace();
+            RequestDispatcher rd = request.getRequestDispatcher("/luettelo.jsp");
+            rd.forward(request, response);
         }
     }
 

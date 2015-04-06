@@ -13,6 +13,7 @@ import framework.ActionFactory;
 import helper.DisplayHelper;
 import java.io.IOException;
 import java.sql.SQLException;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -55,25 +56,31 @@ public class UserActions extends HttpServlet {
                 Action action = ActionFactory.getAction(servletPath,actionPath);
                 action.execute(request, response);
             }
-            catch (ClassNotFoundException ex)
+//            catch (ClassNotFoundException ex)
+//            {
+//               response.sendRedirect("error.jsp");
+//               ex.printStackTrace();
+//            }
+//            catch (InstantiationException ex)
+//            {
+//               response.sendRedirect("error.jsp");
+//               ex.printStackTrace();
+//            }
+//            catch (IllegalAccessException ex)
+//            {
+//               response.sendRedirect("error.jsp");
+//               ex.printStackTrace();
+//            }
+//            catch (SQLException ex)
+//            {
+//               response.sendRedirect("error.jsp");
+//               ex.printStackTrace();
+//            }
+            catch (Exception ex)
             {
-               response.sendRedirect("error.jsp");
                ex.printStackTrace();
-            }
-            catch (InstantiationException ex)
-            {
-               response.sendRedirect("error.jsp");
-               ex.printStackTrace();
-            }
-            catch (IllegalAccessException ex)
-            {
-               response.sendRedirect("error.jsp");
-               ex.printStackTrace();
-            }
-            catch (SQLException ex)
-            {
-               response.sendRedirect("error.jsp");
-               ex.printStackTrace();
+               RequestDispatcher rd = request.getRequestDispatcher("/error.jsp");
+               rd.forward(request,response);
             }
         }
         else

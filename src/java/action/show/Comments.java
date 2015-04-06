@@ -8,6 +8,7 @@
 package action.show;
 
 import action.Action;
+import dominio.List;
 import helper.DisplayHelper;
 import java.io.IOException;
 import java.sql.SQLException;
@@ -33,8 +34,7 @@ public class Comments implements Action
         DisplayHelper.setComments(request);
 
         request.setAttribute("content","comments");
-        request.setAttribute("title",request.getAttribute("displayList").getName()+" : Comments");
-        RequestDispatcher rd = request.getRequestDispatcher("/comments.jsp");
-        rd.forward(request,response);
+        List list = (List) request.getAttribute("displayList");
+        request.setAttribute("title",list.getName()+" : Comments");
     }
 }

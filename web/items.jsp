@@ -6,6 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <c:import url="/displayList.jsp" charEncoding="UTF-8" />
 <c:if test="${displayList.username==sessionScope.user.username}">
@@ -15,7 +16,7 @@
         </div>
         <br/>
         <br/>
-        <form onsubmit="addItem(${displayList.id})" >
+        <div >
             <table>
                 <tr>
                     <td>Name</td>
@@ -27,30 +28,30 @@
                 </tr>
             </table>
             <br/>
-                <input type="submit" value="Submit">
-        </form>
+                <input type="submit" value="Submit" onclick="addItem(${displayList.id})" >
+        </div>
     </div>
 </c:if>
 <c:forEach var="item" items="${displayItems}">
     <div class="component">
-        <c:if test="${subscription==1}">
-            <c:if test="${empty item.rating}">
-                <a href="javascript:checkItem(${item.id})"  class="check-icon" onmouseover="hoverCheck()" onmouseout="unhoverCheck()">
-                    <img src="images/check.png" alt="Check" id="checkIcon">
-                </a>
-            </c:if>
 
-            <c:if test="${not empty item.rating}">
-                <a href="javascript:uncheckItem(${item.id})"  class="check-icon" onmouseover="hoverUncheck()" onmouseout="unhoverUncheck()">
-                    <img src="images/checked.png" alt="Uncheck" id="checkIcon">
-                </a>
-            </c:if>
+        <c:if test="${empty item.rating}">
+            <a href="javascript:checkItem(${item.id})"  class="check-icon" onmouseover="hoverCheck(${item.id})" onmouseout="unhoverCheck(${item.id})">
+                <img src="images/check.png" alt="Check" id="checkIcon-${item.id}">
+            </a>
         </c:if>
+
+        <c:if test="${not empty item.rating}">
+            <a href="javascript:uncheckItem(${item.id})"  class="check-icon" onmouseover="hoverUncheck(${item.id})" onmouseout="unhoverUncheck(${item.id})">
+                <img src="images/checked.png" alt="Uncheck" id="checkIcon-${item.id}">
+            </a>
+        </c:if>
+
         <div class="component-title" id="item-title-${item.id}" >
             <a id="item-url-${item.id}" href="${item.url}">${item.name}</a>
         </div>
         <c:if test="${displayList.username==sessionScope.user.username}">
-        <form onsubmit="javascript:commitEditItem(${item.id})" class="component-title" style="display:none" id="item-edit-${item.id}">
+        <div class="component-title" style="display:none" id="item-edit-${item.id}">
             <table>
                 <tr>
                     <td>Name</td>
@@ -62,8 +63,8 @@
                 </tr>
             </table>
             <br/>
-                <input type="submit" value="Submit">
-        </form>
+                <input type="submit" value="Submit" onclick="javascript:commitEditItem(${item.id})">
+        </div>
             <a href="javascript:deleteItem(${item.id})" style="float:right" class="check-icon" >
                 <img src="images/delete.png" alt="Eliminar" id="deleteIcon">
             </a>
@@ -73,14 +74,16 @@
         </c:if>
         <span class="component-rating">${item.average}</span>
         <br/>
-        <div class="rating" id="rating">
-            <c:forEach var="i" begin="1" end="${item.rating}">
-                <span onclick="javascript:rateItem(${item.id},${i})">&#x2605;</span>
-            </c:forEach>
-            <c:forEach var="i" begin="${item.rating+1}" end="5">
-                <span onclick="javascript:rateItem(${item.id},${i})">&#x2606;</span>
-            </c:forEach>
-            <span>☆</span><span>☆</span><span>☆</span><span>☆</span>
-        </div>
+        <c:if test="${not empty item.rating}">
+            <c:out value="${item.rating}">NULL</c:out>
+            <div class="rating" id="rating">
+                <c:forEach var="i" begin="${item.rating+1}" end="5">
+                    <span onclick="javascript:rateItem(${item.id},${5-i})">&#x2606;</span>
+                </c:forEach>
+                <c:forEach var="i" begin="1" end="${item.rating}">
+                    <span onclick="javascript:rateItem(${item.id},${5-i})">&#x2605;</span>
+                </c:forEach>
+            </div>
+        </c:if>
     </div>
 </c:forEach>

@@ -45,42 +45,37 @@ public class ShowController extends HttpServlet {
            DisplayHelper.setDefaultLists(request);
            Action action = ActionFactory.getAction(request.getServletPath(),"action.show");
            action.execute(request, response);
-            
-            //Original
-                //DisplayHelper.setDefaultLists(request);
-                //RequestDispatcher rd = request.getRequestDispatcher("/lists.jsp");
-                //rd.forward(request, response);
-            
-            //To check comments.jspp
-                //request.setAttribute("listId", 1);
-                //request.getSession().setAttribute("user",new dominio.User("Dumbo","DB"));
-                //DisplayHelper.setDefaultLists(request);
-                //DisplayHelper.setList(request);
-                //DisplayHelper.setComments(request);
-                //RequestDispatcher rd = request.getRequestDispatcher("/comments.jsp");
-                //rd.forward(request, response);
         }
-        catch (ClassNotFoundException ex)
+//        catch (ClassNotFoundException ex)
+//        {
+//           request.setAttribute("content","error");
+//           ex.printStackTrace();
+//        }
+//        catch (InstantiationException ex)
+//        {
+//           request.setAttribute("content","error");
+//           ex.printStackTrace();
+//        }
+//        catch (IllegalAccessException ex)
+//        {
+//           request.setAttribute("content","error");
+//           ex.printStackTrace();
+//        }
+//        catch (SQLException ex)
+//        {
+//           request.setAttribute("content","error");
+//           ex.printStackTrace();
+//        }
+        catch (Exception ex)
         {
-           response.sendRedirect("error.jsp");
+           request.setAttribute("content","error");
            ex.printStackTrace();
         }
-        catch (InstantiationException ex)
+        finally
         {
-           response.sendRedirect("error.jsp");
-           ex.printStackTrace();
+            RequestDispatcher rd = request.getRequestDispatcher("/luettelo.jsp");
+            rd.forward(request,response);
         }
-        catch (IllegalAccessException ex)
-        {
-           response.sendRedirect("error.jsp");
-           ex.printStackTrace();
-        }
-        catch (SQLException ex)
-        {
-           response.sendRedirect("error.jsp");
-           ex.printStackTrace();
-        }
-
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

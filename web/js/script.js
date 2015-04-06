@@ -1,3 +1,5 @@
+var listId = document.getElementById("list-Id").text;
+
 function showLogin()
 {
 	document.getElementById("loginPanel").style.display = "block";
@@ -75,11 +77,13 @@ function updateContent(responseText)
     document.getElementById("content").innerHTML = responseText;
 }
 
+
+
 function addComment()
 {
-    var url = 'AddComment.do?content=';
-    url += document.getElementById("comment-field");
-    peticionAJAX(url,updateContent);
+    var url = 'AddComment.do?listId='+listId;
+    url += '&content='+document.getElementById("comment-field");
+    AJAX(url,updateContent);
 }
 
 function editComment(commentId)
@@ -92,51 +96,55 @@ function editComment(commentId)
 
 function commitEditComment(commentId)
 {
-    var url = 'EditComment.do?commentId='+commentId;
+    var url = 'EditComment.do?listId='+listId;
+	url += '&commentId='+commentId;
     url += '&content='+document.getElementById("comment-field-"+commentId).value;
-    peticionAJAX(url,updateContent);
+    AJAX(url,updateContent);
 }
 
 function removeComment(commentId)
 {
 	if(confirm("Do you really want to delete the comment?"))
 	{
-		var url = 'RemoveComment.do?commentId='+commentId;
-		peticionAJAX(url,updateContent);
+		var url = 'RemoveComment.do?listId='+listId;
+		url += '&commentId='+commentId;
+		AJAX(url,updateContent);
 	}
 }
 
-function addItem(listId)
+function addItem()
 {
-    var url = 'AddItem.do?';
+    var url = 'AddItem.do?listId='+listId;
     url += "name="+document.getElementById("item-name");
     url += "&url="+document.getElementById("item-url");
     url += "&listId="+listId;
-    peticionAJAX(url,updateContent);
+    AJAX(url,updateContent);
 }
 
 function editItem(itemId)
 {
-	document.getElementById("item-title-"itemId).style.display = "none";
-	document.getElementById("item-edit-"itemId).style.display = "block";
-	document.getElementById("name-field-"itemId).value = document.getElementById("item-url-"itemId).text;
-	document.getElementById("url-field-"itemId).value = document.getElementById("item-url-"itemId).href;
+	document.getElementById("item-title-"+itemId).style.display = "none";
+	document.getElementById("item-edit-"+itemId).style.display = "block";
+	document.getElementById("name-field-"+itemId).value = document.getElementById("item-url-"+itemId).text;
+	document.getElementById("url-field-"+itemId).value = document.getElementById("item-url-"+itemId).href;
 }
 
 function commitEditItem(itemId)
 {
-    var url = 'EditItem.do?itemId='+itemId;
-    url += "&name="+document.getElementById("name-field-"itemId).value;
-    url += "&url="+document.getElementById("url-field-"itemId).value;
-    peticionAJAX(url,updateContent);
+    var url = 'EditItem.do?listId='+listId;
+	url += '&itemId='+itemId;
+    url += "&name="+document.getElementById("name-field-"+itemId).value;
+    url += "&url="+document.getElementById("url-field-"+itemId).value;
+    AJAX(url,updateContent);
 }
 
 function removeItem(itemId)
 {
 	if(confirm("Do you really want to delete the item?"))
 	{
-		var url = 'RemoveItem.do?itemId='+itemId;
-		peticionAJAX(url,updateContent);
+		var url = 'RemoveItem.do?listId='+listId;
+		url += '&itemId='+itemId;
+		AJAX(url,updateContent);
 	}
 }
 
@@ -154,53 +162,56 @@ function editList()
 	document.getElementById("ldescription-field").value = document.getElementById("list-description").innerHTML;
 }
 
-function commitEditList(listId)
+function commitEditList()
 {
 	var url = 'EditList.do?listId='+listId;
 	url += "&name="+ document.getElementById("ltitle-field").value
 	url += "&category="+ document.getElementById("lcategory-field").value
 	url += "&description="+ document.getElementById("ldescription-field").value
-	peticionAJAX(url,updateContent);
+	AJAX(url,updateContent);
 }
 
-function removeList(listId)
+function removeList()
 {
-	if(confirm("Do you really want to delete this list?. This will delete all the items in it (This action cannot be undone)");)
+	if(confirm("Do you really want to delete this list?. This will delete all the items in it (This action cannot be undone)"))
 	{
 		var url = 'RemoveList.do?listId='+listId;
 		document.location.replace(url);
 	}
 }
 
-function subscribeList(listId)
+function subscribeList()
 {
 	var url = 'SubscribeList.do?listId='+listId;
-	peticionAJAX(url,updateContent);
+	AJAX(url,updateContent);
 }
 
-function unsubscribeList(listId)
+function unsubscribeList()
 {
 	var url = 'UnsubscribeList.do?listId='+listId;
-	peticionAJAX(url,updateContent);
+	AJAX(url,updateContent);
 }
 
 function checkItem(itemId)
 {
-	var url = 'CheckItem.do?itemId='+itemId;
-	peticionAJAX(url,updateContent);
+	var url = 'CheckItem.do?listId='+listId;
+	url += '&itemId='+itemId;
+	AJAX(url,updateContent);
 }
 
 function uncheckItem(itemId)
 {
-	var url = 'UncheckItem.do?itemId='+itemId;
-	peticionAJAX(url,updateContent);
+	var url = 'UncheckItem.do?listId='+listId;
+	url += '&itemId='+itemId;
+	AJAX(url,updateContent);
 }
 
 function uncheckItem(itemId,rating)
 {
-	var url = 'RateItem.do?itemId='+itemId;
+	var url = 'RateItem.do?listId='+listId;
+	url += '&itemId='+itemId;
 	url += "&rating="+rating;
-	peticionAJAX(url,updateContent);
+	AJAX(url,updateContent);
 }
 
 function hoverSubscribe()
@@ -224,22 +235,22 @@ function unhoverUnsubscribe()
 }
 
 
-function hoverCheck()
+function hoverCheckitemId(itemId)
 {
-	document.getElementById("checkIcon").src="images/checked.png";
+	document.getElementById("checkIcon-"+itemId).src="images/checked.png";
 }
 
-function unhoverCheck()
+function unhoverCheck(itemId)
 {
-	document.getElementById("checkIcon").src="images/check.png";
+	document.getElementById("checkIcon-"+itemId).src="images/check.png";
 }
 
-function hoverUncheck()
+function hoverUncheck(itemId)
 {
-	document.getElementById("checkIcon").src="images/unchecked.png";
+	document.getElementById("checkIcon-"+itemId).src="images/unchecked.png";
 }
 
-function unhoverUncheck()
+function unhoverUncheck(itemId)
 {
-	document.getElementById("checkIcon").src="images/checked.png";
+	document.getElementById("checkIcon-"+itemId).src="images/checked.png";
 }

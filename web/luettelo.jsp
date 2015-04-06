@@ -33,8 +33,6 @@
                 <c:import url="/footer.jsp" charEncoding="UTF-8" />
             </footer>
         </main>
-        <!-- JS -->
-        <!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script> -->
         <script src="js/script.js" type="text/javascript" charset="utf-8"></script>
     </body>
 </html>

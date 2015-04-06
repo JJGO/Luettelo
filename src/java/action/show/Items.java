@@ -8,6 +8,7 @@
 package action.show;
 
 import action.Action;
+import dominio.List;
 import helper.DisplayHelper;
 import java.io.IOException;
 import java.sql.SQLException;
@@ -33,8 +34,7 @@ public class Items implements Action
         DisplayHelper.setItems(request);
 
         request.setAttribute("content","items");
-        request.setAttribute("title",request.getAttribute("displayList").getName());
-        RequestDispatcher rd = request.getRequestDispatcher("/luettelo.jsp");
-        rd.forward(request,response);
+        List list = (List) request.getAttribute("displayList");
+        request.setAttribute("title",list.getName());
     }
 }

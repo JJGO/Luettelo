@@ -377,7 +377,6 @@ footer span
 .rating {
   unicode-bidi: bidi-override;
   direction: rtl;
-  display:none;
   float:left;
   clear:left;
   margin:10px 30px;

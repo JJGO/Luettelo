@@ -32,14 +32,14 @@
             <div>
                 <p class="comment" id="comment-${comment.id}">${comment.content}</p>
                 <c:if test="${comment.username==sessionScope.user.username}">
-                    <form id="comment-edit-${comment.id}"style="display:none" onsubmit="javascript:commitEditComment(${comment.id})">
+                    <div id="comment-edit-${comment.id}"style="display:none">
                         <div class="right-holder">
                             <textarea class="comment-edit-box" id="comment-field-${comment.id}"></textarea>
                         </div>
                         <div class="right-holder">
-                             <input type="submit" value="Submit"/>
+                             <input type="submit" value="Submit"  onclick="javascript:commitEditComment(${comment.id})"/>
                         </div>
-                    </form>
+                    </div>
                 </c:if>
             </div>
         </div>

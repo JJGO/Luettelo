@@ -8,30 +8,7 @@
 <%@page import="dominio.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Luettelo</title>
-        <!-- CSS -->
-        <link rel="stylesheet" href="css/style.css">
-        <link rel="stylesheet" href="css/search.css">
-        <link rel="shortcut icon" href="images/favicon.ico">
-    </head>
-    <body onLoad="javascript:showLogin();">
-        <main>
-            <header id="header">
-                <%@include file="header.jsp" %>
-            </header>
-            <div class="content">
-                Oops! An error has ocurred. We are sorry for th unconvenience
-            </div>
-            <aside id="aside">
-                <%@include file="aside.jsp" %>
-            </aside>
-            <footer id="footer">
-                <%@include file="footer.jsp" %>
-            </footer>
-        </main>
-        <script src="js/script.js" type="text/javascript" charset="utf-8"></script>
-    </body>
-</html>
+<div class="content">
+    <span class="error"> WHOOPSIE! </span>
+    It's looking like you may have taken a wrong turn. Don't worry... it happens to the best of us.
+</div>

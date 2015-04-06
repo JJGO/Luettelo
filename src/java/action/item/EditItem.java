@@ -12,9 +12,10 @@ import dao.ItemDAO;
 import dominio.Item;
 import dominio.User;
 import helper.DAOHelper;
+import helper.DisplayHelper;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.SQLException;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -52,4 +53,5 @@ public class EditItem implements Action
         {
             response.sendRedirect("index");
         }
+    }
 }

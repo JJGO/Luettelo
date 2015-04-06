@@ -63,8 +63,5 @@ public class Lists implements Action
         }
 
         request.setAttribute("content","lists");
-        
-        RequestDispatcher rd = request.getRequestDispatcher("/lists.jsp");
-        rd.forward(request,response);
     }
 }
