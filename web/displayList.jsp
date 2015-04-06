@@ -1,5 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page import="dominio.List"%>
 <!DOCTYPE html>
 <div class="component main-component">
     <span class="component-title">
@@ -52,6 +53,6 @@
     <br/>
     <a class="component-comments" id="list-comments" href="Comments.show?listId=${displayList.id}">Comments (${displayList.comments})</a>
     <a class="component-category" id="list-category" href="Lists.show?type=category&value=${displayList.category}">${displayList.category}</a>
-    <p style="display:none" id="list-id">${displayList.id}</p>
+    <p style="display:none" id="listId">${displayList.id}</p>
 </div>
 

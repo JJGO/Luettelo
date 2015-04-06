@@ -4,9 +4,12 @@
     Author     : Lucia
 --%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+<%@page import="java.util.ArrayList"%>
+<%@page import="dominio.Item"%>
+<%@page import="dominio.User"%>
+<%@page import="dominio.List"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <c:import url="/displayList.jsp" charEncoding="UTF-8" />
 <c:if test="${displayList.username==sessionScope.user.username}">
@@ -34,19 +37,19 @@
 </c:if>
 <c:forEach var="item" items="${displayItems}">
     <div class="component">
+        <c:if test="${displayList.subscribed}">
+            <c:if test="${empty item.rating}">
+                <a href="javascript:checkItem(${item.id})"  class="check-icon" onmouseover="hoverCheck(${item.id})" onmouseout="unhoverCheck(${item.id})">
+                    <img src="images/check.png" alt="Check" id="checkIcon-${item.id}">
+                </a>
+            </c:if>
 
-        <c:if test="${empty item.rating}">
-            <a href="javascript:checkItem(${item.id})"  class="check-icon" onmouseover="hoverCheck(${item.id})" onmouseout="unhoverCheck(${item.id})">
-                <img src="images/check.png" alt="Check" id="checkIcon-${item.id}">
-            </a>
+            <c:if test="${not empty item.rating}">
+                <a href="javascript:uncheckItem(${item.id})"  class="check-icon" onmouseover="hoverUncheck(${item.id})" onmouseout="unhoverUncheck(${item.id})">
+                    <img src="images/checked.png" alt="Uncheck" id="checkIcon-${item.id}">
+                </a>
+            </c:if>
         </c:if>
-
-        <c:if test="${not empty item.rating}">
-            <a href="javascript:uncheckItem(${item.id})"  class="check-icon" onmouseover="hoverUncheck(${item.id})" onmouseout="unhoverUncheck(${item.id})">
-                <img src="images/checked.png" alt="Uncheck" id="checkIcon-${item.id}">
-            </a>
-        </c:if>
-
         <div class="component-title" id="item-title-${item.id}" >
             <a id="item-url-${item.id}" href="${item.url}">${item.name}</a>
         </div>
@@ -65,7 +68,7 @@
             <br/>
                 <input type="submit" value="Submit" onclick="javascript:commitEditItem(${item.id})">
         </div>
-            <a href="javascript:deleteItem(${item.id})" style="float:right" class="check-icon" >
+            <a href="javascript:removeItem(${item.id})" style="float:right" class="check-icon" >
                 <img src="images/delete.png" alt="Eliminar" id="deleteIcon">
             </a>
             <a href="javascript:editItem(${item.id})" style="float:right" class="check-icon" >
@@ -75,7 +78,6 @@
         <span class="component-rating">${item.average}</span>
         <br/>
         <c:if test="${not empty item.rating}">
-            <c:out value="${item.rating}">NULL</c:out>
             <div class="rating" id="rating">
                 <c:forEach var="i" begin="${item.rating+1}" end="5">
                     <span onclick="javascript:rateItem(${item.id},${5-i})">&#x2606;</span>

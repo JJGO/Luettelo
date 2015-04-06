@@ -39,7 +39,7 @@ public class ListDAO extends DAO
 
 // QUERY
     // GET THE INFO OF A LIST {username,listId}
-    private static final String QUERY_LIST_INFO = "SELECT  L.listId, L.name, L.category, L.description, L.username, LA.average, COALESCE(C.numcom,0) AS numcom, NOT ISNULL(S.username) AS subscribed FROM List L INNER JOIN List_avg LA ON L.listId = LA.listId LEFT OUTER JOIN (  SELECT  listId, COUNT(*) AS numcom FROM Comment ) C ON L.listId = C.listId LEFT OUTER JOIN (  SELECT listId, username FROM Subscription WHERE username = ? ) S ON L.listId = S.listId WHERE L.listId = ? ORDER BY LA.average DESC";
+    private static final String QUERY_LIST_INFO = "SELECT  L.listId, L.name, L.category, L.description, L.username, LA.average, COALESCE(C.numcom,0) AS numcom, NOT ISNULL(S.username) AS subscribed FROM List L INNER JOIN List_avg LA ON L.listId = LA.listId LEFT OUTER JOIN (  SELECT  listId, COUNT(*) AS numcom FROM Comment GROUP BY listId) C ON L.listId = C.listId LEFT OUTER JOIN (  SELECT listId, username FROM Subscription WHERE username = ? ) S ON L.listId = S.listId WHERE L.listId = ? ORDER BY LA.average DESC";
 
     private static final String QUERY_LISTS = "SELECT L.listId, L.name, L.category, L.username, LA.average, COALESCE(C.numcom,0) AS numcom, NOT ISNULL(S.username) AS subscribed FROM List L INNER JOIN List_avg LA ON L.listId = LA.listId LEFT OUTER JOIN (  SELECT  listId, COUNT(*) AS numcom FROM Comment GROUP BY listId ) C ON L.listId = C.listId LEFT OUTER JOIN (  SELECT listId, username FROM Subscription WHERE username = ? ) S ON L.listId = S.listId";
 
@@ -255,6 +255,7 @@ public class ListDAO extends DAO
             
             List list = new List(id, name, category, description, username, average, comments, subscribed);
             lists.add(list);
+            //System.out.println(list);
         }
         rs.close();
         return lists;
@@ -276,6 +277,7 @@ public class ListDAO extends DAO
             
             List list = new List(id, name, category, username, average, comments, subscribed);
             lists.add(list);
+            //System.out.println(list);
         }
         rs.close();
         return lists;

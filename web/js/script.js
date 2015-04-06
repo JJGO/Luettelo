@@ -1,4 +1,4 @@
-var listId = document.getElementById("list-Id").text;
+var listId = document.getElementById("list-id").innerHTML;
 
 function showLogin()
 {

@@ -102,8 +102,9 @@ public class CommentDAO extends DAO
             int commentId = rs.getInt("commentId");
             String username = rs.getString("username");
             String content = rs.getString("content");
-
-            commentList.add(new Comment(commentId, username, content));
+            Comment comment = new Comment(commentId, username, content);
+            commentList.add(comment);
+            //System.out.println(comment);
         }
 
         ps.close();

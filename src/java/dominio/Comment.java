@@ -14,8 +14,8 @@ package dominio;
 public class Comment
 {
     private int id;
-    private String content;
     private String username;
+    private String content;
 
     //Used by RemoveComment.java
     public Comment(int id)
@@ -80,6 +80,12 @@ public class Comment
         {
             return false;
         }
+    }
+
+    @Override
+    public String toString()
+    {
+        return id+" "+username+" "+content;
     }
 
 }

@@ -132,6 +132,7 @@ FROM List L
      LEFT OUTER JOIN (  SELECT  listId,
                                 COUNT(*) AS numcom
                         FROM Comment
+                        GROUP BY listId
                 ) C
         ON L.listId = C.listId
      LEFT OUTER JOIN (  SELECT listId, username
@@ -149,7 +150,7 @@ SELECT I.itemId,
        IA.average,
        RU.value AS rating
 FROM Item I
-     INNER JOIN Item_avg IA
+     LEFT OUTER JOIN Item_avg IA
         ON I.itemId = IA.itemId
      LEFT OUTER JOIN (  SELECT itemId, value
                         FROM Rating

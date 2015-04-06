@@ -49,11 +49,10 @@ public class DisplayHelper
         request.setAttribute("displayComments",dao.getComments(list));
     }
 
-    public static void setDefaultLists(HttpServletRequest request) throws SQLException, ClassNotFoundException
+    public static void setFrontpageLists(HttpServletRequest request) throws SQLException, ClassNotFoundException
     {
         ListDAO dao = (ListDAO) DAOHelper.getListDAO(request);
         User user = (User) request.getSession().getAttribute("user");
-        request.setAttribute("trendingLists",dao.findByRating(15,user));
         request.setAttribute("displayLists",dao.findByRating(50,user));
     }
 }

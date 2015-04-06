@@ -42,7 +42,7 @@ public class ShowController extends HttpServlet {
         
         try
         {
-           DisplayHelper.setDefaultLists(request);
+           DisplayHelper.setTrendingLists(request);
            Action action = ActionFactory.getAction(request.getServletPath(),"action.show");
            action.execute(request, response);
         }

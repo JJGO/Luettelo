@@ -5,6 +5,9 @@
 --%>
 
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page import="java.util.ArrayList"%>
+<%@page import="dominio.Comment"%>
+<%@page import="dominio.User"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <c:import url="/displayList.jsp" charEncoding="UTF-8" />

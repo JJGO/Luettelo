@@ -10,9 +10,7 @@ package servlets;
 import action.Action;
 import dominio.User;
 import framework.ActionFactory;
-import helper.DisplayHelper;
 import java.io.IOException;
-import java.sql.SQLException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -43,7 +41,6 @@ public class UserActions extends HttpServlet {
         {
             try
             {
-                DisplayHelper.setDefaultLists(request);
                 String servletPath = request.getServletPath();
                 String actionPath = "action";
                 if(servletPath.contains("Comment")) {

@@ -88,8 +88,10 @@ public class Item
     }
 
     public void setRating(Integer rating) {
-        if(rating >= 1 && rating <= 5)
-        {
+        if(rating == null) {
+            this.rating = rating;
+        }
+        else if(rating >= 1 && rating <= 5) {
             this.rating = rating;
         }
         else

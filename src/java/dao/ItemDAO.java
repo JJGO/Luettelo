@@ -41,7 +41,7 @@ public class ItemDAO extends DAO
 
 //QUERY
     //GET THE ITEMS OF A LIST AS WELL AS THEIR RATINGS (AUTH) {username, listId}
-    private static String QUERY_ALL_ITEMS = "SELECT I.itemId, I.name, I.url, IA.average, RU.value AS rating FROM Item I INNER JOIN Item_avg IA ON I.itemId = IA.itemId LEFT OUTER JOIN ( SELECT itemId, value FROM Rating WHERE username = ?) RU ON I.itemId = RU.itemId WHERE I.listId = ? ORDER BY IA.average DESC;";
+    private static String QUERY_ALL_ITEMS = "SELECT I.itemId, I.name, I.url, IA.average, RU.value AS rating FROM Item I LEFT OUTER JOIN Item_avg IA ON I.itemId = IA.itemId LEFT OUTER JOIN ( SELECT itemId, value FROM Rating WHERE username = ?) RU ON I.itemId = RU.itemId WHERE I.listId = ? ORDER BY IA.average DESC;";
 
     public ItemDAO()
         throws SQLException, ClassNotFoundException
@@ -171,11 +171,12 @@ public class ItemDAO extends DAO
             int itemId      = rs.getInt("itemId");
             String name     = rs.getString("name");
             String url      = rs.getString("url");
-            Integer average = rs.getInt("average"); //average rating
-            Integer value   = rs.getInt("rating");     //user rating
+            Integer average = rs.getObject("average") != null ? rs.getInt("average") : null;
+            Integer value   = rs.getObject("rating") != null ? rs.getInt("rating") : null;
 
             Item item = new Item(itemId, name, url, average, value);
             itemList.add(item);
+            //System.out.println(item);
         }
 
         ps.close();
