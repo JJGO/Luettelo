@@ -144,7 +144,7 @@ public class ItemDAO extends DAO
         if (user != null){
             username = user.getUsername();
         }
-        ps.setInt(      3, item.getRating()     );
+        ps.setInt(      1, item.getRating()     );
         ps.setString(   2, username   );
         ps.setInt(      3, item.getId()         );
 
