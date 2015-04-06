@@ -37,9 +37,18 @@ public class UncheckItem implements Action
 
         ItemDAO dao = DAOHelper.getItemDAO(request);
         Item item = new Item(itemId);
-        boolean error = !dao.uncheckItem(item, user);
-        
-        PrintWriter out = response.getWriter();
-        out.println("{ error : "+error+"}");
+
+        if(dao.uncheckItem(item, user))
+        {
+            DisplayHelper.setList(request);
+            DisplayHelper.setItems(request);
+            
+            RequestDispatcher rd = request.getRequestDispatcher("/items.jsp");
+            rd.forward(request,response);
+        }
+        else
+        {
+            response.sendRedirect("index");
+        }
     }
 }

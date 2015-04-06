@@ -29,10 +29,12 @@ public class Items implements Action
     public void execute(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException, ClassNotFoundException
     {
-        DisplayHelper.setList(request);
+    	DisplayHelper.setList(request);
         DisplayHelper.setItems(request);
 
-        RequestDispatcher rd = request.getRequestDispatcher("/items.jsp");
+        request.setAttribute("content","items");
+        request.setAttribute("title",request.getAttribute("displayList").getName());
+        RequestDispatcher rd = request.getRequestDispatcher("/luettelo.jsp");
         rd.forward(request,response);
     }
 }

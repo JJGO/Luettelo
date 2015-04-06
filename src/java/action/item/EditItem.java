@@ -40,9 +40,16 @@ public class EditItem implements Action
         ItemDAO dao = DAOHelper.getItemDAO(request);
         Item item = new Item(name, url, itemId);
         
-        boolean error = !dao.editItem(item, user);
-        
-        PrintWriter out = response.getWriter();
-        out.println("{ error : "+error+"}");
-    }
+        if(dao.editItem(item, user))
+        {
+            DisplayHelper.setList(request);
+            DisplayHelper.setItems(request);
+            
+            RequestDispatcher rd = request.getRequestDispatcher("/items.jsp");
+            rd.forward(request,response);
+        }
+        else
+        {
+            response.sendRedirect("index");
+        }
 }

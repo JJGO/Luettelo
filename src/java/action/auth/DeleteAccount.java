@@ -52,7 +52,6 @@ public class DeleteAccount implements Action
             request.setAttribute("loginError","La contraseña introducida es incorrecta");
         }
         DisplayHelper.setDefaultLists(request);
-        request.setAttribute("content","lists");
         RequestDispatcher rd = request.getRequestDispatcher("/luettelo.jsp");
         rd.forward(request, response);
     }

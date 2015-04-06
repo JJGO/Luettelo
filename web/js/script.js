@@ -1,24 +1,3 @@
-var suscribed = false;
-var suscribeIcon = "images/suscribe.png";
-var suscribeIconHover = "images/suscribed.png";
-
-function showLogin()
-{
-	document.getElementById("loginPanel").style.display = "block";
-	document.getElementById("signupPanel").style.display = "none";
-	document.getElementById("btnShowLogin").style.background ="#d83c3c";
-	document.getElementById("btnShowSignUp").style.background ="#bf3535";
-}
-
-
-function showSignUp()
-{
-	document.getElementById("loginPanel").style.display = "none";
-	document.getElementById("signupPanel").style.display = "block";
-	document.getElementById("btnShowLogin").style.background = "#bf3535";
-	document.getElementById("btnShowSignUp").style.background = "#d83c3c";
-}
-
 function validate()
 {
 	var username = document.getElementById("username").value;
@@ -51,6 +30,89 @@ function validate()
 	}
 	return false;
 }
+
+function AJAX(url,fun)
+{
+    var xmlHttpReq = new XMLHttpRequest();
+    xmlHttpReq.onreadystatechange=function()
+                {
+                    if (xmlHttpReq.readyState == 4)
+                    {
+                    	if(xmlHttpReq.status==200)
+                    	{
+                        	fun(xmlHttpReq.responseText);
+                    	}
+                    	else
+                    	{
+                    		document.location.replace(document.location.path);
+                    	}
+                    }
+                }
+
+    xmlHttpReq.open('GET', url, true);
+    xmlHttpReq.send();
+}
+
+function updateContent(responseText)
+{
+    document.getElementById("content").innerHTML = responseText;
+}
+
+function addComment()
+{
+    var url = 'AddComment.do?content=';
+    url += document.getElementById("comment-field");
+    peticionAJAX(url,updateContent);
+}
+
+function editComment(id)
+{
+	var comment = document.getElementById("comment-"+id);
+	comment.style.display = "none";
+	document.getElementById("comment-edit-"+id).style.display = "block";
+	document.getElementById("comment-field-"+id).value = comment.innerHTML;
+}
+
+function commitEditComment(id)
+{
+    var url = 'EditComment.do?commentId='+id;
+    url += '&content='+document.getElementById("comment-field-"+id);
+    peticionAJAX(url,updateContent);
+}
+
+function removeComment(id)
+{
+	if(confirm("Do you really want to delete the comment?"))
+	{
+		var url = 'DeleteComment.do?commentId='+id;
+		peticionAJAX(url,updateContent);
+	}
+}
+
+
+
+// ///////////////////////////////
+var suscribed = false;
+var suscribeIcon = "images/suscribe.png";
+var suscribeIconHover = "images/suscribed.png";
+
+function showLogin()
+{
+	document.getElementById("loginPanel").style.display = "block";
+	document.getElementById("signupPanel").style.display = "none";
+	document.getElementById("btnShowLogin").style.background ="#d83c3c";
+	document.getElementById("btnShowSignUp").style.background ="#bf3535";
+}
+
+
+function showSignUp()
+{
+	document.getElementById("loginPanel").style.display = "none";
+	document.getElementById("signupPanel").style.display = "block";
+	document.getElementById("btnShowLogin").style.background = "#bf3535";
+	document.getElementById("btnShowSignUp").style.background = "#d83c3c";
+}
+
 
 
 function suscribe()
@@ -86,11 +148,6 @@ function deleteItem()
 	confirm("Do you really want to delete the item?");
 }
 
-function deleteComment()
-{
-	confirm("Do you really want to delete the comment?");
-}
-
 function editList()
 {
     document.getElementById("list-title").style.display = "none";
@@ -112,15 +169,6 @@ function editItem()
 	var element = document.getElementById("element");
 	document.getElementById("name-field").value = document.getElementById("element").text;
 	document.getElementById("url-field").value = element.href;
-}
-
-
-function editComment()
-{
-	var comment = document.getElementById("comment");
-	comment.style.display = "none";
-	document.getElementById("comment-edit").style.display = "block";
-	document.getElementById("comment-field").value = comment.innerHTML;
 }
 
 function hoverSuscribe()

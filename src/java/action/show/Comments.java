@@ -32,6 +32,8 @@ public class Comments implements Action
         DisplayHelper.setList(request);
         DisplayHelper.setComments(request);
 
+        request.setAttribute("content","comments");
+        request.setAttribute("title",request.getAttribute("displayList").getName()+" : Comments");
         RequestDispatcher rd = request.getRequestDispatcher("/comments.jsp");
         rd.forward(request,response);
     }

@@ -37,9 +37,18 @@ public class UnsubscribeList implements Action
 
         ListDAO dao = DAOHelper.getListDAO(request);
         List list = new List(listId);
-        boolean error = !dao.unsubscribeList(list, user);
-        
-        PrintWriter out = response.getWriter();
-        out.println("{ error : "+error+"}");
+
+        if(dao.unsubscribeList(list, user))
+        {
+            DisplayHelper.setList(request);
+            DisplayHelper.setItems(request);
+            
+            RequestDispatcher rd = request.getRequestDispatcher("/items.jsp");
+            rd.forward(request,response);
+        }
+        else
+        {
+            response.sendRedirect("index");
+        }
     }
 }

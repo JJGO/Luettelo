@@ -65,7 +65,7 @@ public class Register implements Action
             if(dao.findUser(user) != null)
             {
                 request.setAttribute("loginError","Username already exists");
-            } 
+            }
             //else if(user.getEmail().equals(storedUser.getEmail()))
             //{
             //    request.setAttribute("loginError","Email already registered");
@@ -77,7 +77,7 @@ public class Register implements Action
                 session.setAttribute("user",user);
             }
             DisplayHelper.setDefaultLists(request);
-            RequestDispatcher rd = request.getRequestDispatcher("/lists.jsp");
+            RequestDispatcher rd = request.getRequestDispatcher("/luettelo.jsp");
             rd.forward(request, response);
         }
         

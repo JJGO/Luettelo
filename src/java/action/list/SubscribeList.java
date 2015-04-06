@@ -37,9 +37,17 @@ public class SubscribeList implements Action
 
         ListDAO dao = DAOHelper.getListDAO(request);
         List list = new List(listId);
-        boolean error = !dao.subscribeList(list, user);
-        
-        PrintWriter out = response.getWriter();
-        out.println("{ error : "+error+"}");
+        if(dao.subscribeList(list, user))
+        {
+            DisplayHelper.setList(request);
+            DisplayHelper.setItems(request);
+            
+            RequestDispatcher rd = request.getRequestDispatcher("/items.jsp");
+            rd.forward(request,response);
+        }
+        else
+        {
+            response.sendRedirect("index");
+        }
     }
 }

@@ -52,7 +52,6 @@ public class Login implements Action
         }
 
         DisplayHelper.setDefaultLists(request);
-        request.setAttribute("content","lists");
         RequestDispatcher rd = request.getRequestDispatcher("/luettelo.jsp");
         rd.forward(request, response);
     }

@@ -39,9 +39,17 @@ public class CheckItem implements Action
         ItemDAO dao = DAOHelper.getItemDAO(request);
         Item item = new Item(itemId);
         
-        boolean error = !dao.checkItem(item, user);
-        
-        PrintWriter out = response.getWriter();
-        out.println("{ error : "+error+"}");
+        if(dao.checkItem(item, user))
+        {
+            DisplayHelper.setList(request);
+            DisplayHelper.setItems(request);
+            
+            RequestDispatcher rd = request.getRequestDispatcher("/items.jsp");
+            rd.forward(request,response);
+        }
+        else
+        {
+            response.sendRedirect("index");
+        }
     }
 }

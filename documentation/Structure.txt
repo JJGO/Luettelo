@@ -25,7 +25,7 @@ UserActions.java (Checkea que exista user en session, si no  ->     index.jsp   
     AddList.do          {name, category, description}               items.jsp
     EditList.do         {listId, name, category, description}       items.jsp
     RemoveList.do       {listId}                                    index.jsp
-    SubscribeList.do    {username, listId}          (AJAX)          items.jsp
+    SubscribeList.do    {listId}                    (AJAX)          items.jsp
     UnsubscribeList.do  {listId}                    (AJAX)          items.jsp
 
     AddItem.do          {name, url, listId}         (AJAX)          items.jsp
@@ -37,7 +37,7 @@ UserActions.java (Checkea que exista user en session, si no  ->     index.jsp   
 
     AddComment.do       {listId, content}           (AJAX)          comments.jsp
     EditComment.do      {commentId, content}        (AJAX)          comments.jsp
-    RemoveComment.do    {commentId, username}       (AJAX)          comments.jsp
+    RemoveComment.do    {commentId}                (AJAX)          comments.jsp
 
 
 URLRewrite                                                                                 *

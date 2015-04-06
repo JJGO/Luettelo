@@ -19,16 +19,20 @@
     <span class="component-comments">Comments</span>
     <a class="component-category" href="Lists.show?type=category&value=${list.category}">${displayList.category}</a>
 </div>
-<div class="component comment-component">
-    <form onsubmit="javascript:addComment()">
-        <div class="right-holder">
-            <textarea class="comment-box"></textarea>
-        </div>
-        <div class="right-holder">
-             <input type="submit" value="Submit"/>
-        </div>
-    </form>
-</div>
+
+<c:if test="${not empty sessionScope.user}">
+    <div class="component comment-component">
+        <form onsubmit="javascript:addComment()">
+            <div class="right-holder">
+                <textarea class="comment-box" id="comment-field"></textarea>
+            </div>
+            <div class="right-holder">
+                 <input type="submit" value="Submit"/>
+            </div>
+        </form>
+    </div>
+</c:if>
+
 <c:forEach var="comment" items="${displayComments}">
     <div class="component">
         <div class="user"><a href="Lists.show?type=user&value=${comment.username}">${comment.username}</a></div>
@@ -38,10 +42,10 @@
             <span id="downvote" class="arrow">▼</span>
             </div> -->
             <div>
-                <p class="comment" id="comment_${comment.id}">${comment.content}</p>
-                <form id="comment-edit"style="display:none">
+                <p class="comment" id="comment-${comment.id}">${comment.content}</p>
+                <form id="comment-edit-${comment.id}"style="display:none" onsubmit="javascript:commitEditComment(${comment.id})">
                     <div class="right-holder">
-                        <textarea class="comment-edit-box" id="comment-field"></textarea>
+                        <textarea class="comment-edit-box" id="comment-field-${comment.id}"></textarea>
                     </div>
                     <div class="right-holder">
                          <input type="submit" value="Submit"/>
@@ -54,7 +58,7 @@
                 <a href="javascript:editComment(${comment.id})" class="complete-icon" >
                 <img src="images/edit.png" alt="Editar" id="completeIcon">
                 </a>
-                <a href="javascript:deleteComment(${comment.id})" class="complete-icon" >
+                <a href="javascript:removeComment(${comment.id})" class="complete-icon" >
                 <img src="images/delete.png" alt="Eliminar" id="completeIcon">
                 </a>
             </div>

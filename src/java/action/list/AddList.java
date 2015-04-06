@@ -37,23 +37,30 @@ public class AddList implements Action
         String name        = request.getParameter("name");
         String category    = request.getParameter("category");
         String description = request.getParameter("description");
-        User user          = (User) request.getSession().getAttribute("user");
-                             //to know who created the list
-        ListDAO dao = DAOHelper.getListDAO(request);
-        List list   = new List(name, category, description);
-        if(dao.addList(list, user))
+        if(name != null && category != null && description != null)
         {
-            ArrayList<List> col = dao.findByKeyword(list.getName(),user);
-            list = col.get(0);
-            request.setAttribute("listId",list.getId());
-            DisplayHelper.setItems(request);
-            DisplayHelper.setList(request);
-            RequestDispatcher rd = request.getRequestDispatcher("/items.jsp");
+            User user          = (User) request.getSession().getAttribute("user");
+                                 //to know who created the list
+            ListDAO dao = DAOHelper.getListDAO(request);
+            List list   = new List(name, category, description);
+            if(dao.addList(list, user))
+            {
+                //TODO findLast in ListDAO
+                ArrayList<List> col = dao.findByKeyword(list.getName(),user);
+                list = col.get(0);
+                request.setAttribute("listId",list.getId());
+                response.sendRedirect("Items.show?listid="+list.getId());
+            }
+            else
+            {
+                response.sendRedirect("error.jsp");
+            }
+        }else
+        {
+            request.setAttribute("content","newlist");
+            request.setAttribute("title","New List");
+            RequestDispatcher rd = request.getRequestDispatcher("/luettelo.jsp");
             rd.forward(request,response);
-        }
-        else
-        {
-            response.sendRedirect("error.jsp");
         }
     }
 }

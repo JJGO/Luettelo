@@ -11,7 +11,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Comentarios</title>
+        <title>${title}</title>
         <!-- CSS -->
         <link rel="stylesheet" href="css/style.css">
         <link rel="stylesheet" href="css/search.css">
@@ -23,7 +23,7 @@
             <header id="header">
                 <c:import url="/header.jsp" charEncoding="UTF-8" />
             </header>
-            <div class="content">
+            <div id="content" class="content">
                 <c:import url="/${content}.jsp" charEncoding="UTF-8" />
             </div>
             <aside id="aside">
