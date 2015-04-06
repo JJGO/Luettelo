@@ -11,6 +11,7 @@ import action.Action;
 import dao.UserDAO;
 import dominio.User;
 import helper.DAOHelper;
+import helper.DisplayHelper;
 import java.io.IOException;
 import java.sql.SQLException;
 import javax.servlet.RequestDispatcher;
@@ -18,6 +19,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import util.BCrypt;
 
 
 /**
@@ -35,20 +37,21 @@ public class Login implements Action
     {
         String username     = request.getParameter("username");
         String password     = request.getParameter("password");
-        String hash = BCrypt.hashpw(password, BCrypt.gensalt(12));
 
-        User user = new User(username, hash);
+        User user = new User(username);
         UserDAO dao = DAOHelper.getUserDAO(request);
-        if( dao.findUser(user) )
+        String hash = dao.findUser(user).getPassword();
+        if( BCrypt.checkpw(password,hash))
         {
             HttpSession session = request.getSession();
             session.setAttribute("user",user);
         }
         else
         {
-            request.setAttribute("loginError","El usuario/contraseña son incorrectos");
+            request.setAttribute("loginError","Incorrect username or passwords");
         }
 
+        DisplayHelper.setDefaultLists(request);
         request.setAttribute("content","lists");
         RequestDispatcher rd = request.getRequestDispatcher("/luettelo.jsp");
         rd.forward(request, response);

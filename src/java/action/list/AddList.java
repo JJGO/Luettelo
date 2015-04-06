@@ -15,6 +15,7 @@ import helper.DAOHelper;
 import helper.DisplayHelper;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -42,9 +43,11 @@ public class AddList implements Action
         List list   = new List(name, category, description);
         if(dao.addList(list, user))
         {
+            ArrayList<List> col = dao.findByKeyword(list.getName(),user);
+            list = col.get(0);
+            request.setAttribute("listId",list.getId());
             DisplayHelper.setItems(request);
             DisplayHelper.setList(request);
-
             RequestDispatcher rd = request.getRequestDispatcher("/items.jsp");
             rd.forward(request,response);
         }

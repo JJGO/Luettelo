@@ -31,8 +31,7 @@ public class Logout implements Action
     {
 
         request.getSession().setAttribute("user",null);
-        RequestDispatcher rd = request.getRequestDispatcher("/index.jsp");
-        rd.forward(request, response);
+        response.sendRedirect("Lists.show");
 
     }
 }

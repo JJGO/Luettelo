@@ -20,7 +20,7 @@ public class DisplayHelper
     {
         ListDAO dao = (ListDAO) DAOHelper.getListDAO(request);
         User user = (User) request.getSession().getAttribute("user");
-        request.setAttribute("trendingLists",dao.findByRating(15));
+        request.setAttribute("trendingLists",dao.findByRating(15,user));
     }
 
     public static void setList(HttpServletRequest request) throws SQLException, ClassNotFoundException
@@ -53,7 +53,7 @@ public class DisplayHelper
     {
         ListDAO dao = (ListDAO) DAOHelper.getListDAO(request);
         User user = (User) request.getSession().getAttribute("user");
-        request.setAttribute("trendingLists",dao.findByRating(15));
-        request.setAttribute("displayLists",dao.findByRating(50));
+        request.setAttribute("trendingLists",dao.findByRating(15,user));
+        request.setAttribute("displayLists",dao.findByRating(50,user));
     }
 }

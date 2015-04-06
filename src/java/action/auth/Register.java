@@ -11,6 +11,7 @@ import action.Action;
 import dao.UserDAO;
 import dominio.User;
 import helper.DAOHelper;
+import helper.DisplayHelper;
 import java.io.IOException;
 import java.sql.SQLException;
 import javax.servlet.RequestDispatcher;
@@ -58,17 +59,26 @@ public class Register implements Action
         }
         else
         {
-        String hash = BCrypt.hashpw(password, BCrypt.gensalt(12));
-        User user = new User(username, email, hash);
-
-        UserDAO dao = DAOHelper.getUserDAO(request);
-        dao.addUser(user);
-
-        HttpSession session = request.getSession();
-        session.setAttribute("user",user);
-
-        RequestDispatcher rd = request.getRequestDispatcher("/lists.jsp");
-        rd.forward(request, response);
+            UserDAO dao = DAOHelper.getUserDAO(request);
+            String hash = BCrypt.hashpw(password, BCrypt.gensalt(12));
+            User user = new User(username, email, hash);
+            if(dao.findUser(user) != null)
+            {
+                request.setAttribute("loginError","Username already exists");
+            } 
+            //else if(user.getEmail().equals(storedUser.getEmail()))
+            //{
+            //    request.setAttribute("loginError","Email already registered");
+            //}
+            else
+            {
+                dao.addUser(user);
+                HttpSession session = request.getSession();
+                session.setAttribute("user",user);
+            }
+            DisplayHelper.setDefaultLists(request);
+            RequestDispatcher rd = request.getRequestDispatcher("/lists.jsp");
+            rd.forward(request, response);
         }
         
     }

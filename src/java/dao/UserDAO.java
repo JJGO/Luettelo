@@ -26,7 +26,7 @@ public class UserDAO extends DAO
     private static String REMOVE_USER = "DELETE FROM User WHERE username = ? AND password = ?";
 
     // CHECK IF A USER IS IN THE DB {username,password}
-    private static String QUERY_FIND_USER = "SELECT username FROM User WHERE username = ? AND password = ?";
+    private static String QUERY_FIND_USER = "SELECT username, password FROM User WHERE username = ?";
 
 
     public UserDAO()
@@ -58,17 +58,20 @@ public class UserDAO extends DAO
         return (rows != 0);
     }
 
-    public boolean findUser(User user) throws SQLException
+    public User findUser(User user) throws SQLException
     {
-        // CHECK IF A USER IS IN THE DB {username,password}
+        // CHECK IF A USER IS IN THE DB {username}
         PreparedStatement ps = con.prepareStatement(QUERY_FIND_USER);
         ps.setString(   1,  user.getUsername()   );
-        ps.setString(   2,  user.getPassword()   );
         ResultSet rs = ps.executeQuery();
-        boolean exists = rs.next();
+        User storedUser = null;
+        if(rs.next())
+        {
+            storedUser = new User(rs.getString("username"),rs.getString("password"));
+        }
         ps.close();
         rs.close();
-        return exists;
+        return storedUser;
     }
 
 }

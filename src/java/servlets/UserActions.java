@@ -57,30 +57,28 @@ public class UserActions extends HttpServlet {
             }
             catch (ClassNotFoundException ex)
             {
-               response.sendRedirect("ClassNotFoundException.jsp");
+               response.sendRedirect("error.jsp");
                ex.printStackTrace();
             }
             catch (InstantiationException ex)
             {
-               response.sendRedirect("InstantiationException.jsp");
+               response.sendRedirect("error.jsp");
                ex.printStackTrace();
             }
             catch (IllegalAccessException ex)
             {
-               response.sendRedirect("IllegalAccessException.jsp");
+               response.sendRedirect("error.jsp");
                ex.printStackTrace();
             }
             catch (SQLException ex)
             {
-               response.sendRedirect("SQLException.jsp");
+               response.sendRedirect("error.jsp");
                ex.printStackTrace();
             }
         }
         else
         {
-            user = new User("Joseja");
-            request.getSession().setAttribute("user",user);
-            //response.sendRedirect("index");
+            response.sendRedirect("Lists.show");
         }
         
     }
