@@ -11,7 +11,6 @@ import action.Action;
 import dao.UserDAO;
 import dominio.User;
 import helper.DAOHelper;
-import helper.DisplayHelper;
 import java.io.IOException;
 import java.sql.SQLException;
 import javax.servlet.RequestDispatcher;
@@ -43,23 +42,23 @@ public class Register implements Action
 
         if(!username.matches("^[a-z0-9_-]{3,15}$"))
         {
-            response.sendRedirect("index"); //el usuario se ha saltado la verificacion de cliente
+            response.sendRedirect("Lists.show"); //el usuario se ha saltado la verificacion de cliente
         }
         else if(!email.matches("^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$"))
         {
-            response.sendRedirect("index"); //el usuario se ha saltado la verificacion de cliente
+            response.sendRedirect("Lists.show"); //el usuario se ha saltado la verificacion de cliente
         }
         else if(!password.matches("^.{8,}$"))
         {
-            response.sendRedirect("index"); //el usuario se ha saltado la verificacion de cliente
+            response.sendRedirect("Lists.show"); //el usuario se ha saltado la verificacion de cliente
         }
         else if(password.equals(rpassword))
         {
-            response.sendRedirect("index"); //el usuario se ha saltado la verificacion de cliente
+            response.sendRedirect("Lists.show"); //el usuario se ha saltado la verificacion de cliente
         }
         else
         {
-            String hash = BCrypt.hashpw(password, BCrypt.gensalt(12));
+        String hash = BCrypt.hashpw(password, BCrypt.gensalt(12));
         User user = new User(username, email, hash);
 
         UserDAO dao = DAOHelper.getUserDAO(request);
@@ -68,8 +67,7 @@ public class Register implements Action
         HttpSession session = request.getSession();
         session.setAttribute("user",user);
 
-        DisplayHelper.setDefaultLists(request);
-        RequestDispatcher rd = request.getRequestDispatcher("/index.jsp");
+        RequestDispatcher rd = request.getRequestDispatcher("/lists.jsp");
         rd.forward(request, response);
         }
         

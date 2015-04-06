@@ -39,17 +39,10 @@ public class EditComment implements Action
 
         CommentDAO dao = DAOHelper.getCommentDAO(request);
         Comment comment = new Comment(content, commentId);
-        if(dao.editComment(comment, user))
-        {
-            DisplayHelper.setList(request);
-            DisplayHelper.setComments(request);
-
-            RequestDispatcher rd = request.getRequestDispatcher("/comments.jsp");
-            rd.forward(request,response);
-        }
-        else
-        {
-            response.sendRedirect("index.jsp");
-        }
+        
+        boolean error = !dao.editComment(comment, user);
+        
+        PrintWriter out = response.getWriter();
+        out.println("{ error : "+error+"}");
     }
 }

@@ -34,7 +34,7 @@
                                 ${list.name}
                             </a>
                             <!-- <a class="user-inline" href="user/${displayList.username}">${displayList.username}</a> -->
-                            <a class="user-inline" href="Lists.show?type=user&value=${displayList.username}">${displayList.username}</a>
+                            <a class="user-inline" href="Lists.show?type=user&value=${list.username}">${list.username}</a>
                         </div>
 
                         <span class="component-rating component-rating-index">${list.average}</span>

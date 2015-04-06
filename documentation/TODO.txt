@@ -8,13 +8,6 @@ Boton de cancel edit
 
 ### Lucia
 
-Cambiar list.jsp
-		items.jsp -(crearlo antes, el JSTL iterará sobre displayItems y usara una vez displayList)
-		comments.jsp
-
-Para que hagan @include de header.jsp
-							aside.jsp -(las trending list iteran en JSTL sobre defaultLists)
-							footer.jsp
 
 
 displayLists == null -> Su búsqueda no ha obtenido resultados

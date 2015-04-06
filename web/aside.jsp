@@ -4,6 +4,7 @@
     Author     : JJ
 --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"  %>
 <%@page import="java.util.ArrayList"%>
 <%@page import="dominio.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -60,10 +61,11 @@
 </c:if>
 
 <c:if test="${not empty sessionScope.user}">
-
+     <div class="mensajeFormulario" style="text-transform: capitalize">Hi  ${sessionScope.user.username}</div>
+     <a href="Logout.auth"> Logout </a>
         <!-- <form action="user/${sessionScope.user.username}" style="text-align: center"> -->
         <form action="Lists.show?type=user&value=${sessionScope.user.username}" style="text-align: center">
-        <button id="btnCreated" type="submit" class="botonAside" ><strong>${sessionScope.user.username}'s LISTS</strong></button>
+        <button id="btnCreated" type="submit" class="botonAside" ><strong>${fn:toUpperCase(sessionScope.user.username)}'S LISTS</strong></button>
         </form>
 
         <!-- <form action="subscribed" style="text-align: center"> -->
@@ -71,18 +73,18 @@
         <button id="btnSubscribed" type="submit" class="botonAside" ><strong>SUBSCRIBED LISTS</strong></button>
         </form>
         <hr/>
-        <form action="newList.html" style="text-align: center">
+        <form action="newList.jsp" style="text-align: center">
         <button id="btnNewList" type="submit" class="botonAside" ><strong>CREATE A NEW LIST</strong></button>
         </form>
         <hr/>
 </c:if>
 
 <div class="trendingL">
-    <form action="index" style="text-align: center">
+    <form action="Lists.show" style="text-align: center">
         <button id="btnTlists" type="submit" class="botonAside" ><strong>TRENDING LISTS</strong></button>
         </form>
     <table>
-        <c:forEach var="list" items="${defaultLists}">
+        <c:forEach var="list" items="${trendingLists}">
             <tr>
                 <td> ${list.average} </td>
                 <!-- Pasar a URL Rewrite -->

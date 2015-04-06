@@ -38,6 +38,7 @@ public class CheckItem implements Action
 
         ItemDAO dao = DAOHelper.getItemDAO(request);
         Item item = new Item(itemId);
+        
         boolean error = !dao.checkItem(item, user);
         
         PrintWriter out = response.getWriter();

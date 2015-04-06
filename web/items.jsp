@@ -120,7 +120,7 @@
                                     <img src="images/edit.png" alt="Editar" id="editIcon">
                                 </a>
                             </c:if>
-                            <span class="component-rating">92</span>
+                            <span class="component-rating">${item.rating}</span>
                             <!--  -->
                             <c:if test="${subscription}">
                             <!--  -->

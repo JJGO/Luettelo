@@ -8,7 +8,6 @@
 package action.auth;
 
 import action.Action;
-import helper.DisplayHelper;
 import java.io.IOException;
 import java.sql.SQLException;
 import javax.servlet.RequestDispatcher;
@@ -32,7 +31,6 @@ public class Logout implements Action
     {
 
         request.getSession().setAttribute("user",null);
-        DisplayHelper.setDefaultLists(request);
         RequestDispatcher rd = request.getRequestDispatcher("/index.jsp");
         rd.forward(request, response);
 

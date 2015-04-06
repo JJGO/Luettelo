@@ -41,19 +41,10 @@ public class EditList implements Action
                               //to know who created the list
         ListDAO dao = DAOHelper.getListDAO(request);
         List list   = new List(listId, name, category, description);
-        if( dao.editList(list, user) )
-        {
-            //shouldnt this go to 'items.jsp'?
-            //if it really goes to 'lists.jsp' 'DisplayHelper.set' should set the lists instead
-            DisplayHelper.setItems(request);
-            DisplayHelper.setList(request);
-
-            RequestDispatcher rd = request.getRequestDispatcher("/lists.jsp");
-            rd.forward(request,response);
-        }
-        else
-        {
-            response.sendRedirect("index.jsp");
-        }
+        
+        boolean error = !dao.editList(list, user);
+        
+        PrintWriter out = response.getWriter();
+        out.println("{ error : "+error+"}");
     }
 }
