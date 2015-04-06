@@ -1,35 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE urlrewrite PUBLIC "-//tuckey.org//DTD UrlRewrite 4.0//EN"
-        "http://www.tuckey.org/res/dtds/urlrewrite4.0.dtd">
+<!DOCTYPE urlrewrite PUBLIC "-//tuckey.org//DTD UrlRewrite 3.2//EN"
+        "http://tuckey.org/res/dtds/urlrewrite3.2.dtd">
 
+<!--
+
+    Configuration file for UrlRewriteFilter
+    http://tuckey.org/urlrewrite/
+
+-->
 <urlrewrite>
 
-<!--<rule>
+    <rule>
         <note>
             The rule means that requests to /test/status/ will be redirected to /rewrite-status
             the url will be rewritten.
         </note>
         <from>/test/status/</from>
         <to type="redirect">%{context-path}/rewrite-status</to>
-    </rule>-->
-
-<!--<rule>
-        <from>/buscar-personas/([A-Z]+)/([0-9]+)</from>
-        <to>/Buscar.do?nombre=$1&amp;edad=$2</to>
-    </rule>-->
-    
-<!--<outbound-rule>
-        <note>
-            The outbound-rule specifies that when response.encodeURL is called (if you are using JSTL c:url)
-            the url /rewrite-status will be rewritten to /test/status/.
-
-            The above rule and this outbound-rule means that end users should never see the
-            url /rewrite-status only /test/status/ both in thier location bar and in hyperlinks
-            in your pages.
-        </note>
-        <from>/rewrite-status</from>
-        <to>/test/status/</to>
-    </outbound-rule>-->
+    </rule>
 
         <rule>
             <from>/index</from>
@@ -61,6 +49,19 @@
             <from>/comments/([0-9]+)/([a-z]+)</from>
             <to>Comments.show?type=search&value=$1</to>
         </rule>
+    
+    <outbound-rule>
+        <note>
+            The outbound-rule specifies that when response.encodeURL is called (if you are using JSTL c:url)
+            the url /rewrite-status will be rewritten to /test/status/.
+
+            The above rule and this outbound-rule means that end users should never see the
+            url /rewrite-status only /test/status/ both in thier location bar and in hyperlinks
+            in your pages.
+        </note>
+        <from>/rewrite-status</from>
+        <to>/test/status/</to>
+    </outbound-rule>
 
     <!--
     INSTALLATION

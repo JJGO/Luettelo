@@ -172,9 +172,10 @@ public class ItemDAO extends DAO
             String name     = rs.getString("name");
             String url      = rs.getString("url");
             Integer average = rs.getInt("average"); //average rating
-            Integer value   = rs.getInt("value");     //user rating
+            Integer value   = rs.getInt("rating");     //user rating
 
-            itemList.add(new Item(itemId, name, url, average, value));
+            Item item = new Item(itemId, name, url, average, value);
+            itemList.add(item);
         }
 
         ps.close();

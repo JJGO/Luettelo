@@ -248,7 +248,7 @@ public class ListDAO extends DAO
             String      username    =           rs.getString( "username"      );
             Integer     average     =           rs.getObject("average") != null ? rs.getInt("average") : null;
             Integer     comments    =           rs.getObject("numcom") != null ? rs.getInt("numcom") : null;
-            boolean     subscribed  =           rs.getBoolean("subscribed"    );
+            boolean     subscribed  =           rs.getInt("subscribed") == 1;
             
             List list = new List(id, name, category, description, username, average, comments, subscribed);
             lists.add(list);
@@ -269,7 +269,7 @@ public class ListDAO extends DAO
             String      username    =           rs.getString( "username"      );
             Integer     average     =           rs.getObject("average") != null ? rs.getInt("average") : null;
             Integer     comments    =           rs.getObject("numcom") != null ? rs.getInt("numcom") : null;
-            boolean     subscribed  =           rs.getBoolean("subscribed"    );
+            boolean     subscribed  =           rs.getInt("subscribed") == 1;
             
             List list = new List(id, name, category, username, average, comments, subscribed);
             lists.add(list);

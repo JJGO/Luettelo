@@ -23,8 +23,8 @@
                 <%@include file="header.jsp" %>
             </header>
             <div class="content">
-                <c:forEach var="list" items="${defaultLists}">
-                    <div class="component">
+                <c:forEach var="list" items="${displayLists}">
+                    <div class="component ${list.subscribed ? 'subscribed' : ''}"}>
                         <!-- TO DO: Change all href's -->
                         <div class="component-title">
                             <a href="list.html">

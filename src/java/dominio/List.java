@@ -116,7 +116,7 @@ public class List
         this.comments = comments;
     }
 
-    public boolean isSubscribed() {
+    public boolean getSubscribed() {
         return subscribed;
     }
 
