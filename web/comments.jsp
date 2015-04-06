@@ -26,18 +26,18 @@
             <div class="content">
                 <div class="component main-component">
                     <span class="component-title">
-                        <a href="list.html">${displayList.name}</a>
-                        <a class="user-inline" href="lists.jsp">${displayList.username}</a>
+                        <a href="Items.show?listId=${list.id}">${displayList.name}</a>
+                        <a class="user-inline" href="Lists.show?type=user&value=${displayList.username}">${displayList.username}</a>
                     </span>
                     <span class="component-rating component-rating-index">${displayList.average}</span>
                     <br/><br/>
                     <p>${displayList.description}</p>
                     <!--<span class="component-comments">Comments (${displayList.comments})</span>-->
                     <span class="component-comments">Comments</span>
-                    <a class="component-category" href="index.html">${displayList.category}</a>
+                    <a class="component-category" href="Lists.show?type=category&value=${list.category}">${displayList.category}</a>
                 </div>
                     <div class="component comment-component">
-                        <form>
+                        <form onsubmit="javascript:addComment()">
                             <div class="right-holder">
                                 <textarea class="comment-box"></textarea>
                             </div>
@@ -48,14 +48,14 @@
                     </div>
                     <c:forEach var="comment" items="${displayComments}">
                         <div class="component">
-                            <div class="user"><a href="lists.jsp">${comment.username}</a></div>
+                            <div class="user"><a href="Lists.show?type=user&value=${comment.username}">${comment.username}</a></div>
                             <div>
                                 <!-- <div class="comment-rating">
                                 <span id="upvote" class="arrow">▲</span>
                                 <span id="downvote" class="arrow">▼</span>
                                 </div> -->
                                 <div>
-                                    <p class="comment" id="comment">${comment.content}</p>
+                                    <p class="comment" id="comment_${comment.id}">${comment.content}</p>
                                     <form id="comment-edit"style="display:none">
                                         <div class="right-holder">
                                             <textarea class="comment-edit-box" id="comment-field"></textarea>
@@ -68,10 +68,10 @@
                             </div>
                             <c:if test="${comment.username==sessionScope.user.username}">
                                 <div style="float:right">
-                                    <a href="javascript:editComment()" class="complete-icon" >
+                                    <a href="javascript:editComment(${comment.id})" class="complete-icon" >
                                     <img src="images/edit.png" alt="Editar" id="completeIcon">
                                     </a>
-                                    <a href="javascript:deleteComment()" class="complete-icon" >
+                                    <a href="javascript:deleteComment(${comment.id})" class="complete-icon" >
                                     <img src="images/delete.png" alt="Eliminar" id="completeIcon">
                                     </a>
                                 </div>

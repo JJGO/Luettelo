@@ -1,4 +1,4 @@
-                                                                                        TODO
+                                                                                        TODO    WORKING
 ShowController.java                                                                        *
     Lists.show{type,value}                                          lists.jsp              *
         ?type=
@@ -28,16 +28,16 @@ UserActions.java (Checkea que exista user en session, si no  ->     index.jsp   
     SubscribeList.do    {username, listId}          (AJAX)          items.jsp
     UnsubscribeList.do  {listId}                    (AJAX)          items.jsp
 
-    AddItem.do          {name, url, listId}                         items.jsp
-    EditItem.do         {itemId, name, url}                         items.jsp
-    RemoveItem.do       {itemId}                                    items.jsp
+    AddItem.do          {name, url, listId}         (AJAX)          items.jsp
+    EditItem.do         {itemId, name, url}         (AJAX)          items.jsp
+    RemoveItem.do       {itemId}                    (AJAX)          items.jsp
     CheckItem.do        {itemId}                    (AJAX)          items.jsp
     UncheckItem.do      {itemId}                    (AJAX)          items.jsp
     RateItem.do         itemId, rating}             (AJAX)          items.jsp
 
-    AddComment.do       {listId, content}                           comments.jsp
-    EditComment.do      {commentId, content}                        comments.jsp
-    RemoveComment.do    {commentId, username}                       comments.jsp
+    AddComment.do       {listId, content}           (AJAX)          comments.jsp
+    EditComment.do      {commentId, content}        (AJAX)          comments.jsp
+    RemoveComment.do    {commentId, username}       (AJAX)          comments.jsp
 
 
 URLRewrite                                                                                 *

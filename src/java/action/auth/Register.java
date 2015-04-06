@@ -45,7 +45,7 @@ public class Register implements Action
         {
             response.sendRedirect("index"); //el usuario se ha saltado la verificacion de cliente
         }
-        else if(!email.matches("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\\\.[A-Z]{2,6}$"))
+        else if(!email.matches("^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$"))
         {
             response.sendRedirect("index"); //el usuario se ha saltado la verificacion de cliente
         }

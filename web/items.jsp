@@ -1,4 +1,4 @@
-<%-- 
+<%--
     Document   : items
     Created on : 06-abr-2015, 2:52:36
     Author     : Lucia
@@ -19,6 +19,7 @@
     <body>
         <main>
             <header id="header">
+                <%@include file="header.jsp" %>
             </header>
             <div class="content">
                 <div class="component main-component">
@@ -132,8 +133,10 @@
                     </c:forEach>
             </div>
             <aside id="aside">
+                <%@include file="aside.jsp" %>
             </aside>
             <footer id="footer">
+                <%@include file="footer.jsp" %>
             </footer>
         </main>
         <!-- JS -->

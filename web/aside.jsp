@@ -61,11 +61,13 @@
 
 <c:if test="${not empty sessionScope.user}">
 
-        <form action="user/${sessionScope.user.username}" style="text-align: center">
+        <!-- <form action="user/${sessionScope.user.username}" style="text-align: center"> -->
+        <form action="Lists.show?type=user&value=${sessionScope.user.username}" style="text-align: center">
         <button id="btnCreated" type="submit" class="botonAside" ><strong>${sessionScope.user.username}'s LISTS</strong></button>
         </form>
 
-        <form action="subscribed" style="text-align: center">
+        <!-- <form action="subscribed" style="text-align: center"> -->
+        <form action="Lists.show?type=subscribed" style="text-align: center">
         <button id="btnSubscribed" type="submit" class="botonAside" ><strong>SUBSCRIBED LISTS</strong></button>
         </form>
         <hr/>
@@ -83,6 +85,8 @@
         <c:forEach var="list" items="${defaultLists}">
             <tr>
                 <td> ${list.average} </td>
+                <!-- Pasar a URL Rewrite -->
+                <!-- <td> <a href="items/${list.id}/${list.url}"> ${list.name} </a> </td> -->
                 <td> <a href="items/${list.id}/${list.url}"> ${list.name} </a> </td>
             </tr>
         </c:forEach>

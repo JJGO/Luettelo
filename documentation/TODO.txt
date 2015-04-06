@@ -17,6 +17,8 @@ Para que hagan @include de header.jsp
 							footer.jsp
 
 
+displayLists == null -> Su búsqueda no ha obtenido resultados
+
 ### Further releases
 
 Paginar resultados

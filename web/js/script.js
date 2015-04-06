@@ -25,12 +25,17 @@ function validate()
 	var email = document.getElementById("email").value;
 	var password = document.getElementById("password").value;
 	var rpassword = document.getElementById("rpassword").value;
-	error = "";
+
+	document.getElementById("errorUsername").innerHTML = "";
+	document.getElementById("errorEmail").innerHTML = "";
+	document.getElementById("errorPassword").innerHTML = "";
+	document.getElementById("errorRpassword").innerHTML = "";
+
 	if(!username.match(/^[a-z0-9_-]{3,15}$/))
 	{
 		document.getElementById("errorUsername").innerHTML = "Invalid username";
 	}
-	else if(!email.match(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$/))
+	else if(!email.match(/^^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/))
 	{
 		document.getElementById("errorEmail").innerHTML = "The email address is invalid";
 	}

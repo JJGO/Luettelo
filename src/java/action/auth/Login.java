@@ -40,7 +40,6 @@ public class Login implements Action
         User user = new User(username, password);
         UserDAO dao = DAOHelper.getUserDAO(request);
         if( dao.findUser(user) )
-
         {
             HttpSession session = request.getSession();
             session.setAttribute("user",user);
