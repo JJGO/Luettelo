@@ -11,12 +11,14 @@ import action.Action;
 import dao.UserDAO;
 import dominio.User;
 import helper.DAOHelper;
+import helper.DisplayHelper;
 import java.io.IOException;
 import java.sql.SQLException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import util.BCrypt;
 
 
 /**
@@ -33,23 +35,23 @@ public class DeleteAccount implements Action
     public void execute(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException, SQLException, ClassNotFoundException
     {
 
+        String username     = request.getParameter("username");
         String password     = request.getParameter("password");
-        User user           = (User) request.getSession().getAttribute("user");
 
-        String hash = BCrypt.hashpw(password, BCrypt.gensalt(12));
-        User user_delete = new User(user.getUsername(), hash);
-
-
+        User user = new User(username);
         UserDAO dao = DAOHelper.getUserDAO(request);
-        if(dao.removeUser(user_delete))
+        User storedUser = dao.findUser(user);
+        String hash = storedUser.getPassword();
+        if( BCrypt.checkpw(password,hash))
         {
+            dao.removeUser(storedUser);
             request.getSession().setAttribute("user",null);
         }
         else
         {
             request.setAttribute("loginError","La contraseña introducida es incorrecta");
         }
-
+        DisplayHelper.setDefaultLists(request);
         RequestDispatcher rd = request.getRequestDispatcher("/lists.jsp");
         rd.forward(request, response);
     }

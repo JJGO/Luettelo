@@ -9,7 +9,6 @@ package servlets;
 
 import action.Action;
 import framework.ActionFactory;
-import helper.DisplayHelper;
 import java.io.IOException;
 import java.sql.SQLException;
 import javax.servlet.ServletException;
@@ -37,29 +36,28 @@ public class Authentication extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         
         try
-        {
-           DisplayHelper.setDefaultLists(request);
+        {  
            Action action = ActionFactory.getAction(request.getServletPath(),"action.auth");
            action.execute(request, response);
         }
         catch (ClassNotFoundException ex)
         {
-           response.sendRedirect("ClassNotFoundException.jsp");
+           response.sendRedirect("error.jsp");
            ex.printStackTrace();
         }
         catch (InstantiationException ex)
         {
-           response.sendRedirect("InstantiationException.jsp");
+           response.sendRedirect("error.jsp");
            ex.printStackTrace();
         }
         catch (IllegalAccessException ex)
         {
-           response.sendRedirect("IllegalAccessException.jsp");
+           response.sendRedirect("error.jsp");
            ex.printStackTrace();
         }
         catch (SQLException ex)
         {
-           response.sendRedirect("SQLException.jsp");
+           response.sendRedirect("error.jsp");
            ex.printStackTrace();
         }
     }

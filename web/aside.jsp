@@ -73,7 +73,7 @@
         <button id="btnSubscribed" type="submit" class="botonAside" ><strong>SUBSCRIBED LISTS</strong></button>
         </form>
         <hr/>
-        <form action="newList.jsp" style="text-align: center">
+        <form action="newlist.jsp" style="text-align: center">
         <button id="btnNewList" type="submit" class="botonAside" ><strong>CREATE A NEW LIST</strong></button>
         </form>
         <hr/>
@@ -89,7 +89,7 @@
                 <td> ${list.average} </td>
                 <!-- Pasar a URL Rewrite -->
                 <!-- <td> <a href="items/${list.id}/${list.url}"> ${list.name} </a> </td> -->
-                <td> <a href="items/${list.id}/${list.url}"> ${list.name} </a> </td>
+                <td> <a href="Items.show?listId=${list.id}"> ${list.name} </a> </td>
             </tr>
         </c:forEach>
     </table>

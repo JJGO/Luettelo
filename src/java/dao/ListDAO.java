@@ -208,11 +208,14 @@ public class ListDAO extends DAO
         return lists;
     }
 
-    public ArrayList<List> findByRating(int limit) throws SQLException
+    public ArrayList<List> findByRating(int limit, User user) throws SQLException
     {
         // GET THE List A USER HAS SUBSCRIBED TO {username}
         PreparedStatement ps = con.prepareStatement(QUERY_LISTS_BY_RATING);
         String username = null;
+        if (user != null){
+            username = user.getUsername();
+        }
         ps.setString(   1,  username      );
         ps.setInt(   2,  limit      );
         ArrayList<List> lists = this.parseResultSetDisplay(ps.executeQuery());
