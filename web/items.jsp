@@ -23,22 +23,22 @@
             <div class="content">
                 <div class="component main-component">
                     <div class="component-title" id="list-title">${displayList.name}</div>
-                    <!-- si creador -->
+                    <c:if test="${displayList.username==sessionScope.user.username}">
                         <a href="javascript:deleteList()" style="float:right" class="complete-icon" >
                             <img src="images/delete.png" alt="Eliminar" id="deleteList">
                         </a>
                         <a href="javascript:editList()" style="float:right" class="complete-icon" >
                             <img src="images/edit.png" alt="Editar" id="editList">
                         </a>
-                    <!-- /si -->
+                    </c:if>
                     <span class="component-rating">${displayList.average}</span>
                     <br/>
-                    <!-- si iniciada sesion -->
+                    <c:if test="${not empty sessionScope.user.username}">
                         <a href="javascript:suscribe()" class="suscribe-icon" onmouseover="hoverSuscribe()" onmouseout="unhoverSuscribe()">
                             <img src="images/suscribe.png" alt="Suscribirse" id="suscribeIcon">
                         </a>
-                    <!-- /si -->
-                    <!-- si creador -->
+                    </c:if>
+                    <c:if test="${displayList.username==sessionScope.user.username}">
                         <form action="" class="list-margin component-title" style="display:none" id="list-edit">
                             <table>
                                 <tr>
@@ -57,7 +57,7 @@
                             <br/>
                                 <input type="submit" value="Submit">
                         </form>
-                    <!-- /si -->
+                    </c:if>
                     <p class="component-description" id="list-description">${displayList.description}</p>
                     <br/>
                     <a class="component-comments" id="list-comments" href="comments.html">Comments (${displayList.comments})</a>
@@ -84,15 +84,18 @@
                                 <input type="submit" value="Submit">
                         </form>
                     </div>
-                    <!-- for -->
+                    <c:forEach var="item" items="${displayItems}">
                         <div class="component">
-                            <!-- si esta suscrito -->
+                            <!--  -->
+                            <c:set var="subscription" value="1"/>
+                            <c:if test="${subscription==1}">
+                            <!--  -->
                                 <a href="javascript:complete()"  class="complete-icon" >
                                     <img src="images/complete.png" alt="Completar" id="completeIcon">
                                 </a>
-                            <!-- /si -->
+                            </c:if>
                             <div class="component-title" id="component-title" >
-                                <a id="element" href="http://www.dummies.com/how-to/content/javascript-and-html.navId-405070.html">JS and HTML for Dummies</a>
+                                <a id="element" href="${item.url}">${item.name}</a>
                             </div>
                             <form action="" class="component-title" style="display:none" id="component-edit">
                                 <table>
@@ -108,23 +111,25 @@
                                 <br/>
                                     <input type="submit" value="Submit">
                             </form>
-                            <!-- si es creador -->
+                            <c:if test="${displayList.username==sessionScope.user.username}">
                                 <a href="javascript:deleteItem()" style="float:right" class="complete-icon" >
                                     <img src="images/delete.png" alt="Eliminar" id="deleteIcon">
                                 </a>
                                 <a href="javascript:editItem()" style="float:right" class="complete-icon" >
                                     <img src="images/edit.png" alt="Editar" id="editIcon">
                                 </a>
-                            <!-- /si -->
+                            </c:if>
                             <span class="component-rating">92</span>
-                            <!-- si suscrito ????? -->
+                            <!--  -->
+                            <c:if test="${subscription}">
+                            <!--  -->
                                 <br/>
                                 <div class="rating" id="rating">
                                     <span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
                                 </div>
-                            <!-- /si -->
+                            </c:if>
                         </div>
-                    <!-- /for -->
+                    </c:forEach>
             </div>
             <aside id="aside">
             </aside>
