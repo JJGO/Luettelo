@@ -8,7 +8,9 @@
 package servlets;
 
 import action.Action;
+import dominio.User;
 import framework.ActionFactory;
+import helper.DisplayHelper;
 import java.io.IOException;
 import java.sql.SQLException;
 import javax.servlet.ServletException;
@@ -34,37 +36,53 @@ public class UserActions extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        DisplayHelper.setDefaultLists();
-        try
+        
+        User user   = (User) request.getSession().getAttribute("user");
+        if(user != null)
         {
-            String servletPath = request.getServletPath();
-            String actionPath = "action";
-            if(servletPath.endsWith("Comment")) {
-                actionPath += ".comment";
-            } else if(servletPath.endsWith("Item")) {
-                actionPath += ".item";
-            } else if(servletPath.endsWith("List")) {
-                actionPath += ".list";
+            try
+            {
+                DisplayHelper.setDefaultLists(request);
+                String servletPath = request.getServletPath();
+                String actionPath = "action";
+                if(servletPath.contains("Comment")) {
+                    actionPath += ".comment";
+                } else if(servletPath.contains("Item")) {
+                    actionPath += ".item";
+                } else if(servletPath.contains("List")) {
+                    actionPath += ".list";
+                }
+                Action action = ActionFactory.getAction(servletPath,actionPath);
+                action.execute(request, response);
             }
-            Action action = ActionFactory.getAction(servletPath,actionPath);
-            action.execute(request, response);
+            catch (ClassNotFoundException ex)
+            {
+               response.sendRedirect("ClassNotFoundException.jsp");
+               ex.printStackTrace();
+            }
+            catch (InstantiationException ex)
+            {
+               response.sendRedirect("InstantiationException.jsp");
+               ex.printStackTrace();
+            }
+            catch (IllegalAccessException ex)
+            {
+               response.sendRedirect("IllegalAccessException.jsp");
+               ex.printStackTrace();
+            }
+            catch (SQLException ex)
+            {
+               response.sendRedirect("SQLException.jsp");
+               ex.printStackTrace();
+            }
         }
-        catch (ClassNotFoundException ex)
+        else
         {
-           response.sendRedirect("error.jsp");
+            user = new User("Joseja");
+            request.getSession().setAttribute("user",user);
+            //response.sendRedirect("index");
         }
-        catch (InstantiationException ex)
-        {
-           response.sendRedirect("error.jsp");
-        }
-        catch (IllegalAccessException ex)
-        {
-           response.sendRedirect("error.jsp");
-        }
-        catch (SQLException ex)
-        {
-           response.sendRedirect("error.jsp");
-        }
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

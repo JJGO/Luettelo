@@ -64,8 +64,7 @@
         <form action="user/${sessionScope.user.username}" style="text-align: center">
         <button id="btnCreated" type="submit" class="botonAside" ><strong>${sessionScope.user.username}'s LISTS</strong></button>
         </form>
-        <hr/>
-        <hr/>
+
         <form action="subscribed" style="text-align: center">
         <button id="btnSubscribed" type="submit" class="botonAside" ><strong>SUBSCRIBED LISTS</strong></button>
         </form>
@@ -84,7 +83,7 @@
         <c:forEach var="list" items="${defaultLists}">
             <tr>
                 <td> ${list.average} </td>
-                <td> <a href="items/${list.listId}/${list.url}"> ${list.name} </a> </td>
+                <td> <a href="items/${list.id}/${list.url}"> ${list.name} </a> </td>
             </tr>
         </c:forEach>
     </table>

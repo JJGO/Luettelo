@@ -37,34 +37,10 @@ public class Login implements Action
         String username     = request.getParameter("username");
         String password     = request.getParameter("password");
 
-<<<<<<< HEAD
-        try
-        {
-            User user = new User(username, password);
-
-            UserDAO dao = DAOHelper.getUserDAO(request);
-            if( dao.findUser(user) )
-            {
-                HttpSession session = request.getSession();
-                session.setAttribute("user",user);
-            }
-            else
-            {
-                request.setAttribute("loginError","The username/password are incorrect");
-                
-            }
-            request.setAttribute("displayLists",dao.findByCategory("%",user));
-            RequestDispatcher rd = request.getRequestDispatcher("/lists.jsp");
-            rd.forward(request,response);
-
-        }
-        catch(SQLException e)
-=======
         User user = new User(username, password);
-
         UserDAO dao = DAOHelper.getUserDAO(request);
         if( dao.findUser(user) )
->>>>>>> FETCH_HEAD
+
         {
             HttpSession session = request.getSession();
             session.setAttribute("user",user);

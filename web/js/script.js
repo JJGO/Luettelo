@@ -30,7 +30,7 @@ function validate()
 	{
 		document.getElementById("errorUsername").innerHTML = "Invalid username";
 	}
-	else if(!email.match(/^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/))
+	else if(!email.match(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$/))
 	{
 		document.getElementById("errorEmail").innerHTML = "The email address is invalid";
 	}
@@ -38,7 +38,7 @@ function validate()
 	{
 		document.getElementById("errorPassword").innerHTML = "The password must be at least 8 characters long";
 	}
-	else if(password != rpassword)
+	else if(password !== rpassword)
 	{
 		document.getElementById("errorRpassword").innerHTML = "The passwords do not match";
 	}else{

@@ -53,11 +53,15 @@ public class ItemDAO extends DAO
     {
         //ADD ITEM {name, url, listId, listId, username}
         PreparedStatement ps = con.prepareStatement(ADD_ITEM);
+        String username = null;
+        if (user != null){
+            username = user.getUsername();
+        }
         ps.setString(   1, item.getName()       );
         ps.setString(   2, item.getUrl()        );
         ps.setInt(      3, list.getId()         );
         ps.setInt(      4, list.getId()         );
-        ps.setString(   5, user.getUsername()   );
+        ps.setString(   5, username   );
 
         int rows = ps.executeUpdate();
         ps.close();
@@ -68,10 +72,14 @@ public class ItemDAO extends DAO
     {
         //EDIT ITEM {name, url, itemId, username}
         PreparedStatement ps = con.prepareStatement(UPDATE_ITEM);
+        String username = null;
+        if (user != null){
+            username = user.getUsername();
+        }
         ps.setString(   1, item.getName()       );
         ps.setString(   2, item.getUrl()        );
         ps.setInt(      3, item.getId()         );
-        ps.setString(   4, user.getUsername()   );
+        ps.setString(   4, username   );
 
         int rows = ps.executeUpdate();
         ps.close();
@@ -82,8 +90,12 @@ public class ItemDAO extends DAO
     {
         //REMOVE ITEM {itemId, username}
         PreparedStatement ps = con.prepareStatement(REMOVE_ITEM);
+        String username = null;
+        if (user != null){
+            username = user.getUsername();
+        }
         ps.setInt(      1, item.getId()         );
-        ps.setString(   2, user.getUsername()   );
+        ps.setString(   2, username   );
 
         int rows = ps.executeUpdate();
         ps.close();
@@ -94,9 +106,13 @@ public class ItemDAO extends DAO
     {
         //CHECK IN AN ITEM {username, itemId, username, itemId}
         PreparedStatement ps = con.prepareStatement(CHECK_ITEM);
-        ps.setString(   1, user.getUsername()   );
+        String username = null;
+        if (user != null){
+            username = user.getUsername();
+        }
+        ps.setString(   1, username   );
         ps.setInt(      2, item.getId()         );
-        ps.setString(   3, user.getUsername()   );
+        ps.setString(   3, username   );
         ps.setInt(      4, item.getId()         );
 
         int rows = ps.executeUpdate();
@@ -108,7 +124,11 @@ public class ItemDAO extends DAO
     {
         //UNCHECK AN ELEMENT {username, itemId}
         PreparedStatement ps = con.prepareStatement(UNCHECK_ITEM);
-        ps.setString(   1, user.getUsername()   );
+        String username = null;
+        if (user != null){
+            username = user.getUsername();
+        }
+        ps.setString(   1, username   );
         ps.setInt(      2, item.getId()         );
 
         int rows = ps.executeUpdate();
@@ -120,8 +140,12 @@ public class ItemDAO extends DAO
     {
         //(RE)RATE AN ELEMENT {value, username, itemId}
         PreparedStatement ps = con.prepareStatement(RATE_ITEM);
+        String username = null;
+        if (user != null){
+            username = user.getUsername();
+        }
         ps.setInt(      3, item.getRating()     );
-        ps.setString(   2, user.getUsername()   );
+        ps.setString(   2, username   );
         ps.setInt(      3, item.getId()         );
 
         int rows = ps.executeUpdate();
@@ -132,7 +156,11 @@ public class ItemDAO extends DAO
     public java.util.ArrayList<Item> getItems(dominio.List list, dominio.User user) throws SQLException
     {
         PreparedStatement ps = con.prepareStatement(QUERY_ALL_ITEMS);
-        ps.setString(1, user.getUsername());
+        String username = null;
+        if (user != null){
+            username = user.getUsername();
+        }
+        ps.setString(1, username);
         ps.setInt(2, list.getId());
 
         ResultSet rs = ps.executeQuery();

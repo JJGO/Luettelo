@@ -53,7 +53,7 @@ public class ListDAO extends DAO
     private static final String QUERY_LISTS_BY_CATEGORY    = QUERY_LISTS + " WHERE L.category LIKE ? ORDER BY LA.average DESC";
     
     // SEARCH BY A KEYWORD {username, '%keyword%'}
-    private static final String QUERY_LISTS_BY_KEYWORD     = QUERY_LISTS + " WHERE L.name LIKE '%?%' ORDER BY LA.average DESC";
+    private static final String QUERY_LISTS_BY_KEYWORD     = QUERY_LISTS + " WHERE L.name LIKE ? ORDER BY LA.average DESC";
 
     // GET TOP LISTS {username}
     private static final String QUERY_LISTS_BY_RATING     = QUERY_LISTS + " ORDER BY LA.average DESC LIMIT ?";
@@ -211,7 +211,7 @@ public class ListDAO extends DAO
     public ArrayList<List> findByRating(int limit) throws SQLException
     {
         // GET THE List A USER HAS SUBSCRIBED TO {username}
-        PreparedStatement ps = con.prepareStatement(QUERY_LISTS_BY_SUBSCRIBED);
+        PreparedStatement ps = con.prepareStatement(QUERY_LISTS_BY_RATING);
         String username = null;
         ps.setString(   1,  username      );
         ps.setInt(   2,  limit      );

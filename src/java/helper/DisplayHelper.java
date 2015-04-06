@@ -27,7 +27,7 @@ public class DisplayHelper
     {
         ListDAO dao = DAOHelper.getListDAO(request);
         User user = (User) request.getSession().getAttribute("user"); //Needed to get the user ratings of the items in the list!
-        Integer listId = (Integer) request.getAttribute("listId");
+        int listId =  Integer.parseInt(request.getParameter("listId"));
         List list = new List(listId);
         request.setAttribute("displayList",dao.findById(list, user));
     }
@@ -36,7 +36,7 @@ public class DisplayHelper
     {
         ItemDAO dao = DAOHelper.getItemDAO(request);
         User user = (User) request.getSession().getAttribute("user");
-        Integer listId = (Integer) request.getAttribute("listId");
+        int listId =  Integer.parseInt(request.getParameter("listId"));
         List list = new List(listId);
         request.setAttribute("displayItems",dao.getItems(list,user));
     }
@@ -44,7 +44,7 @@ public class DisplayHelper
     public static void setComments(HttpServletRequest request) throws SQLException, ClassNotFoundException
     {
         CommentDAO dao = DAOHelper.getCommentDAO(request);
-        Integer listId = (Integer) request.getAttribute("listId");
+        int listId =  Integer.parseInt(request.getParameter("listId"));
         List list = new List(listId);
         request.setAttribute("displayComments",dao.getComments(list));
     }

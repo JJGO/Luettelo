@@ -42,13 +42,14 @@ public class ShowController extends HttpServlet {
         
         try
         {
-           //Action action = ActionFactory.getAction(request.getServletPath(),"action.show");
-           //action.execute(request, response);
+           DisplayHelper.setDefaultLists(request);
+           Action action = ActionFactory.getAction(request.getServletPath(),"action.show");
+           action.execute(request, response);
             
             //Original
-                DisplayHelper.setDefaultLists(request);
-                RequestDispatcher rd = request.getRequestDispatcher("/lists.jsp");
-                rd.forward(request, response);
+                //DisplayHelper.setDefaultLists(request);
+                //RequestDispatcher rd = request.getRequestDispatcher("/lists.jsp");
+                //rd.forward(request, response);
             
             //To check comments.jspp
                 //request.setAttribute("listId", 1);
@@ -61,19 +62,22 @@ public class ShowController extends HttpServlet {
         }
         catch (ClassNotFoundException ex)
         {
-           response.sendRedirect("error.jsp");
+           response.sendRedirect("ClassNotFoundException.jsp");
+           ex.printStackTrace();
         }
-        //catch (InstantiationException ex)
-        //{
-        //   response.sendRedirect("error.jsp");
-        //}
-        //catch (IllegalAccessException ex)
-        //{
-        //   response.sendRedirect("error.jsp");
-        //}
-        catch (SQLException ex)
+        catch (InstantiationException ex)
         {
-           response.sendRedirect("error.jsp");
+           response.sendRedirect("InstantiationException.jsp");
+           ex.printStackTrace();
+        }
+        catch (IllegalAccessException ex)
+        {
+           response.sendRedirect("IllegalAccessException.jsp");
+           ex.printStackTrace();
+        }catch (SQLException ex)
+        {
+           response.sendRedirect("SQLException.jsp");
+           ex.printStackTrace();
         }
 
     }

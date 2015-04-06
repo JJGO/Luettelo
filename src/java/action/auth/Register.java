@@ -45,7 +45,7 @@ public class Register implements Action
         {
             response.sendRedirect("index"); //el usuario se ha saltado la verificacion de cliente
         }
-        else if(!email.matches("^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$"))
+        else if(!email.matches("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\\\.[A-Z]{2,6}$"))
         {
             response.sendRedirect("index"); //el usuario se ha saltado la verificacion de cliente
         }
@@ -53,9 +53,10 @@ public class Register implements Action
         {
             response.sendRedirect("index"); //el usuario se ha saltado la verificacion de cliente
         }
-        else if(password != rpassword)
+        else if(password.equals(rpassword))
         {
             response.sendRedirect("index"); //el usuario se ha saltado la verificacion de cliente
+        }
         else
         {
             String hash = BCrypt.hashpw(password, BCrypt.gensalt(12));

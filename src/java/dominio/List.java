@@ -7,6 +7,9 @@
 
 package dominio;
 
+import java.text.Normalizer;
+import java.text.Normalizer.Form;
+
 /**
  *
  * @author Lucia
@@ -121,7 +124,7 @@ public class List
         this.subscribed = subscribed;
     }
 
-    public Integer getUrl() {
+    public String getUrl() {
         return Normalizer.normalize(this.name.toLowerCase(), Form.NFD)
         .replaceAll("\\p{InCombiningDiacriticalMarks}+", "")
         .replaceAll("[^\\p{Alnum}]+", "-");

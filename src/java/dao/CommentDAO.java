@@ -43,8 +43,12 @@ public class CommentDAO extends DAO
     {
         //ADD COMMENT {content, username, listId}
         PreparedStatement ps = con.prepareStatement(ADD_COMMENT);
+        String username = null;
+        if (user != null){
+            username = user.getUsername();
+        }
         ps.setString(   1, comment.getContent() );
-        ps.setString(   2, user.getUsername()   );
+        ps.setString(   2, username   );
         ps.setInt(      3, list.getId()         );
 
         int rows = ps.executeUpdate();
@@ -56,9 +60,13 @@ public class CommentDAO extends DAO
     {
         //EDIT COMMENT {content, commentId}
         PreparedStatement ps = con.prepareStatement(UPDATE_COMMENT);
+        String username = null;
+        if (user != null){
+            username = user.getUsername();
+        }
         ps.setString(   1, comment.getContent() );
         ps.setInt(      2, comment.getId()      );
-        ps.setString(   3, user.getUsername()   );
+        ps.setString(   3, username   );
 
         int rows = ps.executeUpdate();
         ps.close();
@@ -69,8 +77,12 @@ public class CommentDAO extends DAO
     {
         //REMOVE COMMENT {commentId}
         PreparedStatement ps = con.prepareStatement(REMOVE_COMMENT);
+        String username = null;
+        if (user != null){
+            username = user.getUsername();
+        }
         ps.setInt(      1, comment.getId()      );
-        ps.setString(   2, user.getUsername()   );
+        ps.setString(   2, username   );
 
         int rows = ps.executeUpdate();
         ps.close();
