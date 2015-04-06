@@ -32,9 +32,7 @@ public class Logout implements Action
     {
         try {
             request.getSession().setAttribute("user",null);
-            DisplayHelper.setDefaultLists(request);
-            RequestDispatcher rd = request.getRequestDispatcher("/index.jsp");
-            rd.forward(request, response);
+            response.sendRedirect("index");
         } catch (SQLException ex) {
             response.sendRedirect("error.jsp");
         } catch (ClassNotFoundException ex) {

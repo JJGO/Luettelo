@@ -120,6 +120,12 @@ public class List
     public void setSubscribed(boolean subscribed) {
         this.subscribed = subscribed;
     }
+
+    public Integer getUrl() {
+        return Normalizer.normalize(this.name.toLowerCase(), Form.NFD)
+        .replaceAll("\\p{InCombiningDiacriticalMarks}+", "")
+        .replaceAll("[^\\p{Alnum}]+", "-");
+    }
     
     @Override
     public boolean equals(Object o)

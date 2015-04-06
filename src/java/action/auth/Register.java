@@ -39,29 +39,47 @@ public class Register implements Action
         String username     = request.getParameter("username");
         String email        = request.getParameter("email");
         String password     = request.getParameter("password");
+        String rpassword    = request.getParameter("rpassword");
 
-        try
+        if(!username.matches("^[a-z0-9_-]{3,15}$"))
         {
-            String hash = BCrypt.hashpw(password, BCrypt.gensalt(12));
-            User user = new User(username, email, hash);
-
-            UserDAO dao = DAOHelper.getUserDAO(request);
-            dao.addUser(user);
-
-            HttpSession session = request.getSession();
-            session.setAttribute("user",user);
-
-            DisplayHelper.setDefaultLists(request);
-            RequestDispatcher rd = request.getRequestDispatcher("/index.jsp");
-            rd.forward(request, response);
+            response.sendRedirect("index"); //el usuario se ha saltado la verificacion de cliente
         }
-        catch(SQLException e)
+        else if(!email.matches("^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$"))
         {
-            response.sendRedirect("error.jsp");
+            response.sendRedirect("index"); //el usuario se ha saltado la verificacion de cliente
         }
-        catch(ClassNotFoundException e)
+        else if(!password.matches("^.{8,}$"))
         {
-            response.sendRedirect("error.jsp");
+            response.sendRedirect("index"); //el usuario se ha saltado la verificacion de cliente
         }
+        else if(password != rpassword)
+        {
+            response.sendRedirect("index"); //el usuario se ha saltado la verificacion de cliente
+        else
+        {
+            try
+            {
+                String hash = BCrypt.hashpw(password, BCrypt.gensalt(12));
+                User user = new User(username, email, hash);
+
+                UserDAO dao = DAOHelper.getUserDAO(request);
+                dao.addUser(user);
+
+                HttpSession session = request.getSession();
+                session.setAttribute("user",user);
+                response.sendRedirect("index");
+                
+            }
+            catch(SQLException e)
+            {
+                response.sendRedirect("error.jsp");
+            }
+            catch(ClassNotFoundException e)
+            {
+                response.sendRedirect("error.jsp");
+            }
+        }
+        
     }
 }

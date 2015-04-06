@@ -49,8 +49,7 @@ public class DeleteAccount implements Action
                 request.setAttribute("loginError","La contraseña introducida es incorrecta");
             }
 
-            RequestDispatcher rd = request.getRequestDispatcher("/index.jsp");
-            rd.forward(request, response);
+            response.sendRedirect("index");
         }
         catch(SQLException e)
         {

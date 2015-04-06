@@ -1,9 +1,3 @@
-$(document).ready(function () {
-    $("#header").load("header.html");
-    $("#aside").load("aside.html");
-    $("#footer").load("footer.html");
-});
-
 var suscribed = false;
 var suscribeIcon = "images/suscribe.png";
 var suscribeIconHover = "images/suscribed.png";
@@ -25,14 +19,32 @@ function showSignUp()
 	document.getElementById("btnShowSignUp").style.background = "#d83c3c";
 }
 
-function LogIn()
+function validate()
 {
-	alert(1);
-}
-
-function SignUp()
-{
-	alert(2);
+	var username = document.getElementById("username").value;
+	var email = document.getElementById("email").value;
+	var password = document.getElementById("password").value;
+	var rpassword = document.getElementById("rpassword").value;
+	error = "";
+	if(!username.match(/^[a-z0-9_-]{3,15}$/))
+	{
+		document.getElementById("errorUsername").innerHTML = "Invalid username";
+	}
+	else if(!email.match(/^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/))
+	{
+		document.getElementById("errorEmail").innerHTML = "The email address is invalid";
+	}
+	else if(!password.match(/^.{8,}$/))
+	{
+		document.getElementById("errorPassword").innerHTML = "The password must be at least 8 characters long";
+	}
+	else if(password != rpassword)
+	{
+		document.getElementById("errorRpassword").innerHTML = "The passwords do not match";
+	}else{
+		return true;
+	}
+	return false;
 }
 
 

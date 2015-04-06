@@ -55,6 +55,8 @@ public class ListDAO extends DAO
     // SEARCH BY A KEYWORD {username, '%keyword%'}
     private static final String QUERY_LISTS_BY_KEYWORD     = QUERY_LISTS + " WHERE L.name LIKE '%?%' ORDER BY LA.average DESC";
 
+    // GET TOP LISTS {username}
+    private static final String QUERY_LISTS_BY_RATING     = QUERY_LISTS + " ORDER BY LA.average DESC LIMIT ?";
 
     public ListDAO()
         throws SQLException, ClassNotFoundException
@@ -201,6 +203,18 @@ public class ListDAO extends DAO
         }
         ps.setString(   1,  username      );
         ps.setString(   2,  "%" + keyword + "%"     );
+        ArrayList<List> lists = this.parseResultSetDisplay(ps.executeQuery());
+        ps.close();
+        return lists;
+    }
+
+    public ArrayList<List> findByRating(int limit) throws SQLException
+    {
+        // GET THE List A USER HAS SUBSCRIBED TO {username}
+        PreparedStatement ps = con.prepareStatement(QUERY_LISTS_BY_SUBSCRIBED);
+        String username = null;
+        ps.setString(   1,  username      );
+        ps.setInt(   2,  limit      );
         ArrayList<List> lists = this.parseResultSetDisplay(ps.executeQuery());
         ps.close();
         return lists;

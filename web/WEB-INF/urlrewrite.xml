@@ -44,7 +44,7 @@
             <to>Lists.show?type=user&value=$1</to>
         </rule>
         <rule>
-            <from>/search/([a-z]+)</from>
+            <from>/search?q=([a-z]+)</from>
             <to>Lists.show?type=search&value=$1</to>
         </rule>
         <rule>

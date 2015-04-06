@@ -1,4 +1,4 @@
-<%-- 
+<%--
     Document   : lists
     Created on : 04-abr-2015, 19:24:36
     Author     : Lucia
@@ -16,11 +16,11 @@
         <link rel="stylesheet" href="css/style.css">
         <link rel="stylesheet" href="css/search.css">
         <link rel="shortcut icon" href="images/favicon.ico">
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     </head>
     <body onLoad="javascript:showLogin();">
         <main>
             <header id="header">
+                <%@include file="header.jsp" %>
             </header>
             <div class="content">
                 <c:forEach var="list" items="${defaultLists}">
@@ -39,12 +39,12 @@
                 </c:forEach>
             </div>
             <aside id="aside">
+                <%@include file="aside.jsp" %>
             </aside>
             <footer id="footer">
+                <%@include file="footer.jsp" %>
             </footer>
         </main>
-        <!-- JS -->
-        <!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script> -->
         <script src="js/script.js" type="text/javascript" charset="utf-8"></script>
     </body>
 </html>

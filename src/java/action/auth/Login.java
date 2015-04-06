@@ -50,12 +50,13 @@ public class Login implements Action
             }
             else
             {
-                request.setAttribute("loginError","El usuario/contraseña son incorrectos");
+                request.setAttribute("loginError","The username/password are incorrect");
+                
             }
+            request.setAttribute("displayLists",dao.findByCategory("%",user));
+            RequestDispatcher rd = request.getRequestDispatcher("/lists.jsp");
+            rd.forward(request,response);
 
-            DisplayHelper.setDefaultLists(request);
-            RequestDispatcher rd = request.getRequestDispatcher("/index.jsp");
-            rd.forward(request, response);
         }
         catch(SQLException e)
         {

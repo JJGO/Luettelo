@@ -1,6 +1,8 @@
 ### Jose Javier
 
-Hacer el URLRewrite teorico :(
+Logout boton
+
+DeleteAccount formulario para comprobar contraseña
 
 Boton de cancel edit
 
@@ -14,8 +16,6 @@ Para que hagan @include de header.jsp
 							aside.jsp -(las trending list iteran en JSTL sobre defaultLists)
 							footer.jsp
 
-Quitar jQuery de script.js
-
 
 ### Further releases
 
@@ -24,3 +24,5 @@ Paginar resultados
 Meter dummy content
 
 Pasar todo lo que no es show a AJAX / JSON
+
+Forgot Password

@@ -9,7 +9,7 @@ ShowController.java
     /user/subscribed        -> Lists.show?type=subscribed
 
 
-    /list/42/semantic_thing -> Items.show?listId=42
+    /items/42/semantic_thing -> Items.show?listId=42
 
     /comments/42/semantic_thing -> Comments.show?listId=42
 
