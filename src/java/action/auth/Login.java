@@ -49,7 +49,8 @@ public class Login implements Action
             request.setAttribute("loginError","El usuario/contraseña son incorrectos");
         }
 
-        RequestDispatcher rd = request.getRequestDispatcher("/lists.jsp");
+        request.setAttribute("content","lists");
+        RequestDispatcher rd = request.getRequestDispatcher("/luettelo.jsp");
         rd.forward(request, response);
     }
 }

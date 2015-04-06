@@ -1,12 +1,10 @@
 -------------
 --- ASIDE
 -------------
-
---V-- CHECK IF A USER IS IN THE DB {username,password}
-SELECT username
+--V--CHECK IF A USER IS IN THE DB {username}
+SELECT username, password
 FROM User
-WHERE username = ? AND
-      password = ?;
+WHERE username = ?
 
 -------------
 --- INDEX
