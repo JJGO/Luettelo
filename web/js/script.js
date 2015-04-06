@@ -1,4 +1,21 @@
-function validate()
+function showLogin()
+{
+	document.getElementById("loginPanel").style.display = "block";
+	document.getElementById("signupPanel").style.display = "none";
+	document.getElementById("btnShowLogin").style.background ="#d83c3c";
+	document.getElementById("btnShowSignUp").style.background ="#bf3535";
+}
+
+
+function showSignUp()
+{
+	document.getElementById("loginPanel").style.display = "none";
+	document.getElementById("signupPanel").style.display = "block";
+	document.getElementById("btnShowLogin").style.background = "#bf3535";
+	document.getElementById("btnShowSignUp").style.background = "#d83c3c";
+}
+
+function validateSignUp()
 {
 	var username = document.getElementById("username").value;
 	var email = document.getElementById("email").value;
@@ -65,87 +82,62 @@ function addComment()
     peticionAJAX(url,updateContent);
 }
 
-function editComment(id)
+function editComment(commentId)
 {
-	var comment = document.getElementById("comment-"+id);
+	var comment = document.getElementById("comment-"+commentId);
 	comment.style.display = "none";
-	document.getElementById("comment-edit-"+id).style.display = "block";
-	document.getElementById("comment-field-"+id).value = comment.innerHTML;
+	document.getElementById("comment-edit-"+commentId).style.display = "block";
+	document.getElementById("comment-field-"+commentId).value = comment.innerHTML;
 }
 
-function commitEditComment(id)
+function commitEditComment(commentId)
 {
-    var url = 'EditComment.do?commentId='+id;
-    url += '&content='+document.getElementById("comment-field-"+id);
+    var url = 'EditComment.do?commentId='+commentId;
+    url += '&content='+document.getElementById("comment-field-"+commentId).value;
     peticionAJAX(url,updateContent);
 }
 
-function removeComment(id)
+function removeComment(commentId)
 {
 	if(confirm("Do you really want to delete the comment?"))
 	{
-		var url = 'DeleteComment.do?commentId='+id;
+		var url = 'RemoveComment.do?commentId='+commentId;
 		peticionAJAX(url,updateContent);
 	}
 }
 
-
-
-// ///////////////////////////////
-var suscribed = false;
-var suscribeIcon = "images/suscribe.png";
-var suscribeIconHover = "images/suscribed.png";
-
-function showLogin()
+function addItem(listId)
 {
-	document.getElementById("loginPanel").style.display = "block";
-	document.getElementById("signupPanel").style.display = "none";
-	document.getElementById("btnShowLogin").style.background ="#d83c3c";
-	document.getElementById("btnShowSignUp").style.background ="#bf3535";
+    var url = 'AddItem.do?';
+    url += "name="+document.getElementById("item-name");
+    url += "&url="+document.getElementById("item-url");
+    url += "&listId="+listId;
+    peticionAJAX(url,updateContent);
 }
 
-
-function showSignUp()
+function editItem(itemId)
 {
-	document.getElementById("loginPanel").style.display = "none";
-	document.getElementById("signupPanel").style.display = "block";
-	document.getElementById("btnShowLogin").style.background = "#bf3535";
-	document.getElementById("btnShowSignUp").style.background = "#d83c3c";
+	document.getElementById("item-title-"itemId).style.display = "none";
+	document.getElementById("item-edit-"itemId).style.display = "block";
+	document.getElementById("name-field-"itemId).value = document.getElementById("item-url-"itemId).text;
+	document.getElementById("url-field-"itemId).value = document.getElementById("item-url-"itemId).href;
 }
 
-
-
-function suscribe()
+function commitEditItem(itemId)
 {
-	// document.getElementById("suscribeIcon").src="images/suscribed.png";
-	if(suscribed == false)
+    var url = 'EditItem.do?itemId='+itemId;
+    url += "&name="+document.getElementById("name-field-"itemId).value;
+    url += "&url="+document.getElementById("url-field-"itemId).value;
+    peticionAJAX(url,updateContent);
+}
+
+function removeItem(itemId)
+{
+	if(confirm("Do you really want to delete the item?"))
 	{
-		suscribed = true;
-		suscribeIcon = "images/suscribed.png";
-		suscribeIconHover = "images/unsuscribed.png";
-	}else{
-		suscribed = false;
-		suscribeIcon = "images/suscribe.png";
-		suscribeIconHover = "images/suscribed.png";
+		var url = 'RemoveItem.do?itemId='+itemId;
+		peticionAJAX(url,updateContent);
 	}
-	document.getElementById("suscribeIcon").src = suscribeIcon;
-}
-
-
-function complete()
-{
-	document.getElementById("completeIcon").src = "images/completed.png";
-	document.getElementById("rating").style.display = "inline";
-}
-
-function deleteList()
-{
-	confirm("Do you really want to delete this list?. It will delete all the items in it");
-}
-
-function deleteItem()
-{
-	confirm("Do you really want to delete the item?");
 }
 
 function editList()
@@ -162,21 +154,92 @@ function editList()
 	document.getElementById("ldescription-field").value = document.getElementById("list-description").innerHTML;
 }
 
-function editItem()
+function commitEditList(listId)
 {
-	document.getElementById("component-title").style.display = "none";
-	document.getElementById("component-edit").style.display = "block";
-	var element = document.getElementById("element");
-	document.getElementById("name-field").value = document.getElementById("element").text;
-	document.getElementById("url-field").value = element.href;
+	var url = 'EditList.do?listId='+listId;
+	url += "&name="+ document.getElementById("ltitle-field").value
+	url += "&category="+ document.getElementById("lcategory-field").value
+	url += "&description="+ document.getElementById("ldescription-field").value
+	peticionAJAX(url,updateContent);
 }
 
-function hoverSuscribe()
+function removeList(listId)
 {
-	document.getElementById("suscribeIcon").src=suscribeIconHover;
+	if(confirm("Do you really want to delete this list?. This will delete all the items in it (This action cannot be undone)");)
+	{
+		var url = 'RemoveList.do?listId='+listId;
+		document.location.replace(url);
+	}
 }
 
-function unhoverSuscribe()
+function subscribeList(listId)
 {
-	document.getElementById("suscribeIcon").src=suscribeIcon;
+	var url = 'SubscribeList.do?listId='+listId;
+	peticionAJAX(url,updateContent);
+}
+
+function unsubscribeList(listId)
+{
+	var url = 'UnsubscribeList.do?listId='+listId;
+	peticionAJAX(url,updateContent);
+}
+
+function checkItem(itemId)
+{
+	var url = 'CheckItem.do?itemId='+itemId;
+	peticionAJAX(url,updateContent);
+}
+
+function uncheckItem(itemId)
+{
+	var url = 'UncheckItem.do?itemId='+itemId;
+	peticionAJAX(url,updateContent);
+}
+
+function uncheckItem(itemId,rating)
+{
+	var url = 'RateItem.do?itemId='+itemId;
+	url += "&rating="+rating;
+	peticionAJAX(url,updateContent);
+}
+
+function hoverSubscribe()
+{
+	document.getElementById("subscribeIcon").src="images/subscribed.png";
+}
+
+function unhoverSubscribe()
+{
+	document.getElementById("subscribeIcon").src="images/subscribe.png";
+}
+
+function hoverUnsubscribe()
+{
+	document.getElementById("subscribeIcon").src="images/unsubscribed.png";
+}
+
+function unhoverUnsubscribe()
+{
+	document.getElementById("subscribeIcon").src="images/subscribed.png";
+}
+
+
+function hoverCheck()
+{
+	document.getElementById("checkIcon").src="images/checked.png";
+}
+
+function unhoverCheck()
+{
+	document.getElementById("checkIcon").src="images/check.png";
+}
+
+function hoverUncheck()
+{
+	document.getElementById("checkIcon").src="images/unchecked.png";
+}
+
+function unhoverUncheck()
+{
+	document.getElementById("checkIcon").src="images/checked.png";
 }

@@ -35,7 +35,7 @@
 
             <div class="panelFormulario" id="signupPanel" style="display:none">
                 <div class="mensajeFormulario">Sign Up for Free</div>
-                <form action="Register.auth" method="post" onsubmit="javascript:return validate();">
+                <form action="Register.auth" method="post" onsubmit="javascript:return validateSignUp();">
                     <div >
                         <input id="username" name="username" type="text"required autocomplete="off" placeholder="Username" />
                     </div>
