@@ -10,7 +10,6 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title>Comentarios</title>
         <!-- CSS -->
@@ -25,10 +24,10 @@
             </header>
             <div class="content">
                 <div class="component main-component">
-                    <div class="component-title">
+                    <span class="component-title">
                         <a href="list.html">${displayList.name}</a>
-                    </div>
-                    <span>${displayList.username}</span>
+                        <a class="user-inline" href="lists.jsp">${displayList.username}</a>
+                    </span>
                     <span class="component-rating component-rating-index">${displayList.average}</span>
                     <br/>
                     <p>${displayList.description}</p>
@@ -47,7 +46,7 @@
                     </div>
                     <c:forEach var="comment" items="${displayComments}">
                         <div class="component">
-                            <div class="user">${comment.username}</div>
+                            <div class="user"><a href="lists.jsp">${comment.username}</a></div>
                             <div>
                                 <!-- <div class="comment-rating">
                                 <span id="upvote" class="arrow">▲</span>
