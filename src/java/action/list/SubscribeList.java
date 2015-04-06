@@ -30,27 +30,16 @@ public class SubscribeList implements Action
 {
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException
+            throws ServletException, IOException, SQLException, ClassNotFoundException
     {
         int listId = Integer.parseInt(request.getParameter("listId"));
         User user  = (User) request.getSession().getAttribute("user");
 
-        try
-        {
-            ListDAO dao = DAOHelper.getListDAO(request);
-            List list = new List(listId);
-            boolean error = !dao.subscribeList(list, user);
-            
-            PrintWriter out = response.getWriter();
-            out.println("{ error : "+error+"}");
-        }
-        catch(SQLException e)
-        {
-            response.sendRedirect("error.jsp");
-        }
-        catch(ClassNotFoundException e)
-        {
-            response.sendRedirect("error.jsp");
-        }
+        ListDAO dao = DAOHelper.getListDAO(request);
+        List list = new List(listId);
+        boolean error = !dao.subscribeList(list, user);
+        
+        PrintWriter out = response.getWriter();
+        out.println("{ error : "+error+"}");
     }
 }

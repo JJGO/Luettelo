@@ -10,6 +10,7 @@ package servlets;
 import action.Action;
 import framework.ActionFactory;
 import java.io.IOException;
+import java.sql.SQLException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -60,7 +61,10 @@ public class UserActions extends HttpServlet {
         {
            response.sendRedirect("error.jsp");
         }
-
+        catch (SQLException ex)
+        {
+           response.sendRedirect("error.jsp");
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

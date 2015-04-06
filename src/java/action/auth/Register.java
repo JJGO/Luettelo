@@ -33,7 +33,7 @@ public class Register implements Action
 {
     // TODO - Put coherently the exceptions to error.jsp
     @Override
-    public void execute(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException
+    public void execute(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException, SQLException, ClassNotFoundException
     {
 
         String username     = request.getParameter("username");
@@ -58,27 +58,18 @@ public class Register implements Action
             response.sendRedirect("index"); //el usuario se ha saltado la verificacion de cliente
         else
         {
-            try
-            {
-                String hash = BCrypt.hashpw(password, BCrypt.gensalt(12));
-                User user = new User(username, email, hash);
+            String hash = BCrypt.hashpw(password, BCrypt.gensalt(12));
+        User user = new User(username, email, hash);
 
-                UserDAO dao = DAOHelper.getUserDAO(request);
-                dao.addUser(user);
+        UserDAO dao = DAOHelper.getUserDAO(request);
+        dao.addUser(user);
 
-                HttpSession session = request.getSession();
-                session.setAttribute("user",user);
-                response.sendRedirect("index");
-                
-            }
-            catch(SQLException e)
-            {
-                response.sendRedirect("error.jsp");
-            }
-            catch(ClassNotFoundException e)
-            {
-                response.sendRedirect("error.jsp");
-            }
+        HttpSession session = request.getSession();
+        session.setAttribute("user",user);
+
+        DisplayHelper.setDefaultLists(request);
+        RequestDispatcher rd = request.getRequestDispatcher("/index.jsp");
+        rd.forward(request, response);
         }
         
     }

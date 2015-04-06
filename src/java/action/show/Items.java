@@ -27,23 +27,12 @@ public class Items implements Action
 {
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException
+            throws ServletException, IOException, SQLException, ClassNotFoundException
     {
-        try
-        {
-                DisplayHelper.setList(request);
-                DisplayHelper.setItems(request);
+        DisplayHelper.setList(request);
+        DisplayHelper.setItems(request);
 
-                RequestDispatcher rd = request.getRequestDispatcher("/items.jsp");
-                rd.forward(request,response);
-        }
-        catch(SQLException e)
-        {
-            response.sendRedirect("error.jsp");
-        }
-        catch(ClassNotFoundException e)
-        {
-            response.sendRedirect("error.jsp");
-        }
+        RequestDispatcher rd = request.getRequestDispatcher("/items.jsp");
+        rd.forward(request,response);
     }
 }

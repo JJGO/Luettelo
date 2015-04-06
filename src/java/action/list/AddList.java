@@ -31,39 +31,28 @@ public class AddList implements Action
 {
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException
+            throws ServletException, IOException, SQLException, ClassNotFoundException
     {
         String name        = request.getParameter("name");
         String category    = request.getParameter("category");
         String description = request.getParameter("description");
         User user          = (User) request.getSession().getAttribute("user");
                              //to know who created the list
-        try
+        ListDAO dao = DAOHelper.getListDAO(request);
+        List list   = new List(name, category, description);
+        if(dao.addList(list, user))
         {
-            ListDAO dao = DAOHelper.getListDAO(request);
-            List list   = new List(name, category, description);
-            if(dao.addList(list, user))
-            {
-                //shouldnt this go to 'items.jsp'?
-                //if it really goes to 'lists.jsp' 'DisplayHelper.set' should set the lists instead
-                DisplayHelper.setItems(request);
-                DisplayHelper.setList(request);
+            //shouldnt this go to 'items.jsp'?
+            //if it really goes to 'lists.jsp' 'DisplayHelper.set' should set the lists instead
+            DisplayHelper.setItems(request);
+            DisplayHelper.setList(request);
 
-                RequestDispatcher rd = request.getRequestDispatcher("/items.jsp");
-                rd.forward(request,response);
-            }
-            else
-            {
-                response.sendRedirect("index.jsp");
-            }
+            RequestDispatcher rd = request.getRequestDispatcher("/items.jsp");
+            rd.forward(request,response);
         }
-        catch(SQLException e)
+        else
         {
-            response.sendRedirect("error.jsp");
-        }
-        catch(ClassNotFoundException e)
-        {
-            response.sendRedirect("error.jsp");
+            response.sendRedirect("index.jsp");
         }
     }
 }

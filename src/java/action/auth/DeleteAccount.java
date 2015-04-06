@@ -30,34 +30,26 @@ public class DeleteAccount implements Action
 {
     // TODO - Put coherently the exceptions to error.jsp
     @Override
-    public void execute(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException
+    public void execute(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException, SQLException, ClassNotFoundException
     {
 
         String password     = request.getParameter("password");
         User user           = (User) request.getSession().getAttribute("user");
-        try
-        {
-            User user_delete = new User(user.getUsername(), password);
 
-            UserDAO dao = DAOHelper.getUserDAO(request);
-            if(dao.removeUser(user_delete))
-            {
-                request.getSession().setAttribute("user",null);
-            }
-            else
-            {
-                request.setAttribute("loginError","La contraseña introducida es incorrecta");
-            }
+        User user_delete = new User(user.getUsername(), password);
 
-            response.sendRedirect("index");
-        }
-        catch(SQLException e)
+
+        UserDAO dao = DAOHelper.getUserDAO(request);
+        if(dao.removeUser(user_delete))
         {
-            response.sendRedirect("error.jsp");
+            request.getSession().setAttribute("user",null);
         }
-        catch(ClassNotFoundException e)
+        else
         {
-            response.sendRedirect("error.jsp");
+            request.setAttribute("loginError","La contraseña introducida es incorrecta");
         }
+
+        RequestDispatcher rd = request.getRequestDispatcher("/index.jsp");
+        rd.forward(request, response);
     }
 }

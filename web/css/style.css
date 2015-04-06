@@ -16,8 +16,8 @@ main
 
 header
 {
-	padding: 50px 50px 70px 50px;
-    box-shadow:         0px 5px 7px 0px rgba(50, 50, 50, 0.6);
+    padding: 50px 50px 70px 50px;
+    box-shadow: 0px 5px 7px 0px rgba(50, 50, 50, 0.6);
     overflow: auto;
     position: relative;
     z-index: 10;
@@ -156,7 +156,7 @@ h1
 
 .component-comments
 {
-	color:darkred;
+    color:darkred;
     font-size: 10pt;
     clear:left;
     float:left;
@@ -347,7 +347,7 @@ footer span
 }
 .formulario
 {
-  float:center;
+  float: center;
 }
 
 .mensajeFormulario {
@@ -417,6 +417,7 @@ footer span
     width: 90%;
     float:left;
 }
+
 .user
 {
     font-weight: bold;
@@ -425,6 +426,19 @@ footer span
     margin:auto;
     margin-bottom:10px;
     width: 100%;
+}
+
+.user a
+{
+    color : #000;
+}
+
+.user-inline
+{
+    font-weight: bold;
+    font-size: 11pt;
+    color : #000;
+    margin-left: 30px;
 }
 
 .forgot{

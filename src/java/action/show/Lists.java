@@ -8,7 +8,9 @@
 package action.show;
 
 import action.Action;
-import helper.DisplayHelper;
+import dao.ListDAO;
+import dominio.User;
+import helper.DAOHelper;
 import java.io.IOException;
 import java.sql.SQLException;
 import javax.servlet.RequestDispatcher;
@@ -27,47 +29,35 @@ public class Lists implements Action
 {
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException
+            throws ServletException, IOException, SQLException, ClassNotFoundException
     {
         String type = request.getParameter("type");
         String value = request.getParameter("value");
-        try
-        {
-                ListDAO dao = (ListDAO) DAOHelper.getListDAO(request);
-                User user = (User) request.getSession().getAttribute("user");
+        ListDAO dao = (ListDAO) DAOHelper.getListDAO(request);
+        User user = (User) request.getSession().getAttribute("user");
 
-
-                if(type == null)
-                {
-                    request.setAttribute("displayLists",dao.findByCategory("%",user));
-                }
-                else if (type.equals("category"))
-                {
-                    request.setAttribute("displayLists",dao.findByCategory(value,user));
-                }
-                else if (type.equals("search"))
-                {
-                    request.setAttribute("displayLists",dao.findByKeyword(value,user));
-                }
-                else if (type.equals("user"))
-                {
-                    request.setAttribute("displayLists",dao.findByUser(value,user));
-                }
-                else if (type.equals("subscribed"))
-                {
-                    request.setAttribute("displayLists",dao.findBySubscribed(user));
-                }
-
-                RequestDispatcher rd = request.getRequestDispatcher("/lists.jsp");
-                rd.forward(request,response);
-        }
-        catch(SQLException e)
+        if(type == null)
         {
-            response.sendRedirect("error.jsp");
+            request.setAttribute("displayLists",dao.findByCategory("%",user));
         }
-        catch(ClassNotFoundException e)
+        else if (type.equals("category"))
         {
-            response.sendRedirect("error.jsp");
+            request.setAttribute("displayLists",dao.findByCategory(value,user));
         }
+        else if (type.equals("search"))
+        {
+            request.setAttribute("displayLists",dao.findByKeyword(value,user));
+        }
+        else if (type.equals("user"))
+        {
+            request.setAttribute("displayLists",dao.findByUser(new User(value),user));
+        }
+        else if (type.equals("subscribed"))
+        {
+            request.setAttribute("displayLists",dao.findBySubscribed(user));
+        }
+
+        RequestDispatcher rd = request.getRequestDispatcher("/lists.jsp");
+        rd.forward(request,response);
     }
 }

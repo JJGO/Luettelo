@@ -28,15 +28,13 @@ public class Logout implements Action
 {
     // TODO - Put coherently the exceptions to error.jsp
     @Override
-    public void execute(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException
+    public void execute(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException, SQLException, ClassNotFoundException
     {
-        try {
-            request.getSession().setAttribute("user",null);
-            response.sendRedirect("index");
-        } catch (SQLException ex) {
-            response.sendRedirect("error.jsp");
-        } catch (ClassNotFoundException ex) {
-            response.sendRedirect("error.jsp");
-        }
+
+        request.getSession().setAttribute("user",null);
+        DisplayHelper.setDefaultLists(request);
+        RequestDispatcher rd = request.getRequestDispatcher("/index.jsp");
+        rd.forward(request, response);
+
     }
 }
