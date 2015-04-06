@@ -1,10 +1,10 @@
-<%-- 
+<%--
     Document   : comments
     Created on : 05-abr-2015, 21:19:15
     Author     : Lucia
 --%>
 
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -21,6 +21,7 @@
     <body>
         <main>
             <header id="header">
+                <%@include file="header.jsp" %>
             </header>
             <div class="content">
                 <div class="component main-component">
@@ -70,7 +71,7 @@
                                     <a href="javascript:editComment()" class="complete-icon" >
                                     <img src="images/edit.png" alt="Editar" id="completeIcon">
                                     </a>
-                                    <a href="javascript:deleteComment()" class="complete-icon" > 
+                                    <a href="javascript:deleteComment()" class="complete-icon" >
                                     <img src="images/delete.png" alt="Eliminar" id="completeIcon">
                                     </a>
                                 </div>
@@ -79,8 +80,10 @@
                     </c:forEach>
             </div>
             <aside id="aside">
+                <%@include file="aside.jsp" %>
             </aside>
             <footer id="footer">
+                <%@include file="footer.jsp" %>
             </footer>
         </main>
         <!-- JS -->
