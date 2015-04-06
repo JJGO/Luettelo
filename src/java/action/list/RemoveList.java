@@ -31,35 +31,24 @@ public class RemoveList implements Action
 {
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException
+            throws ServletException, IOException, SQLException, ClassNotFoundException
     {
         int listId = Integer.parseInt(request.getParameter("listId"));
         User user  = (User) request.getSession().getAttribute("user");
 
-        try
+        ListDAO dao = DAOHelper.getListDAO(request);
+        List list = new List(listId);
+        if(dao.removeList(list, user))
         {
-            ListDAO dao = DAOHelper.getListDAO(request);
-            List list = new List(listId);
-            if(dao.removeList(list, user))
-            {
-                DisplayHelper.setItems(request);
-                DisplayHelper.setList(request);
+            DisplayHelper.setItems(request);
+            DisplayHelper.setList(request);
 
-                RequestDispatcher rd = request.getRequestDispatcher("/lists.jsp");
-                rd.forward(request,response);
-            }
-            else
-            {
-                response.sendRedirect("index.jsp");
-            }
+            RequestDispatcher rd = request.getRequestDispatcher("/lists.jsp");
+            rd.forward(request,response);
         }
-        catch(SQLException e)
+        else
         {
-            response.sendRedirect("error.jsp");
-        }
-        catch(ClassNotFoundException e)
-        {
-            response.sendRedirect("error.jsp");
+            response.sendRedirect("index.jsp");
         }
     }
 }

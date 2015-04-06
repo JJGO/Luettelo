@@ -27,23 +27,12 @@ public class Comments implements Action
 {
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException
+            throws ServletException, IOException, SQLException, ClassNotFoundException
     {
-        try
-        {
-                DisplayHelper.setList(request);
-                DisplayHelper.setComments(request);
+        DisplayHelper.setList(request);
+        DisplayHelper.setComments(request);
 
-                RequestDispatcher rd = request.getRequestDispatcher("/comments.jsp");
-                rd.forward(request,response);
-        }
-        catch(SQLException e)
-        {
-            response.sendRedirect("error.jsp");
-        }
-        catch(ClassNotFoundException e)
-        {
-            response.sendRedirect("error.jsp");
-        }
+        RequestDispatcher rd = request.getRequestDispatcher("/comments.jsp");
+        rd.forward(request,response);
     }
 }

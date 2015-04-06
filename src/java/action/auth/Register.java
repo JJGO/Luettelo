@@ -33,35 +33,24 @@ public class Register implements Action
 {
     // TODO - Put coherently the exceptions to error.jsp
     @Override
-    public void execute(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException
+    public void execute(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException, SQLException, ClassNotFoundException
     {
 
         String username     = request.getParameter("username");
         String email        = request.getParameter("email");
         String password     = request.getParameter("password");
 
-        try
-        {
-            String hash = BCrypt.hashpw(password, BCrypt.gensalt(12));
-            User user = new User(username, email, hash);
+        String hash = BCrypt.hashpw(password, BCrypt.gensalt(12));
+        User user = new User(username, email, hash);
 
-            UserDAO dao = DAOHelper.getUserDAO(request);
-            dao.addUser(user);
+        UserDAO dao = DAOHelper.getUserDAO(request);
+        dao.addUser(user);
 
-            HttpSession session = request.getSession();
-            session.setAttribute("user",user);
+        HttpSession session = request.getSession();
+        session.setAttribute("user",user);
 
-            DisplayHelper.setDefaultLists(request);
-            RequestDispatcher rd = request.getRequestDispatcher("/index.jsp");
-            rd.forward(request, response);
-        }
-        catch(SQLException e)
-        {
-            response.sendRedirect("error.jsp");
-        }
-        catch(ClassNotFoundException e)
-        {
-            response.sendRedirect("error.jsp");
-        }
+        DisplayHelper.setDefaultLists(request);
+        RequestDispatcher rd = request.getRequestDispatcher("/index.jsp");
+        rd.forward(request, response);
     }
 }

@@ -31,38 +31,27 @@ public class AddItem implements Action
 {
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException
+            throws ServletException, IOException, SQLException, ClassNotFoundException
     {
         String name = request.getParameter("name");
         String url  = request.getParameter("url");
         int listId  = Integer.parseInt(request.getParameter("listId"));
         User user   = (User) request.getSession().getAttribute("user");
 
-        try
+        ItemDAO dao       = DAOHelper.getItemDAO(request);
+        Item item         = new Item(name, url);
+        dominio.List list = new dominio.List(listId);
+        if(dao.addItem(item, list, user))
         {
-            ItemDAO dao       = DAOHelper.getItemDAO(request);
-            Item item         = new Item(name, url);
-            dominio.List list = new dominio.List(listId);
-            if(dao.addItem(item, list, user))
-            {
-                DisplayHelper.setList(request);
-                DisplayHelper.setItems(request);
+            DisplayHelper.setList(request);
+            DisplayHelper.setItems(request);
 
-                RequestDispatcher rd = request.getRequestDispatcher("/items.jsp");
-                rd.forward(request,response);
-            }
-            else
-            {
-                response.sendRedirect("index.jsp");
-            }
+            RequestDispatcher rd = request.getRequestDispatcher("/items.jsp");
+            rd.forward(request,response);
         }
-        catch(SQLException e)
+        else
         {
-            response.sendRedirect("error.jsp");
-        }
-        catch(ClassNotFoundException e)
-        {
-            response.sendRedirect("error.jsp");
+            response.sendRedirect("index.jsp");
         }
     }
 }

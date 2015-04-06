@@ -31,27 +31,16 @@ public class CheckItem implements Action
 {
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException
+            throws ServletException, IOException, SQLException, ClassNotFoundException
     {
         int itemId = Integer.parseInt(request.getParameter("itemId"));
         User user  = (User) request.getSession().getAttribute("user");
 
-        try
-        {
-            ItemDAO dao = DAOHelper.getItemDAO(request);
-            Item item = new Item(itemId);
-            boolean error = !dao.checkItem(item, user);
-            
-            PrintWriter out = response.getWriter();
-            out.println("{ error : "+error+"}");
-        }
-        catch(SQLException e)
-        {
-            response.sendRedirect("error.jsp");
-        }
-        catch(ClassNotFoundException e)
-        {
-            response.sendRedirect("error.jsp");
-        }
+        ItemDAO dao = DAOHelper.getItemDAO(request);
+        Item item = new Item(itemId);
+        boolean error = !dao.checkItem(item, user);
+        
+        PrintWriter out = response.getWriter();
+        out.println("{ error : "+error+"}");
     }
 }
