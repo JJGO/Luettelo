@@ -40,15 +40,14 @@ public class RemoveList implements Action
         List list = new List(listId);
         if(dao.removeList(list, user))
         {
-            DisplayHelper.setItems(request);
-            DisplayHelper.setList(request);
+            DisplayHelper.setDefaultLists();
 
             RequestDispatcher rd = request.getRequestDispatcher("/lists.jsp");
             rd.forward(request,response);
         }
         else
         {
-            response.sendRedirect("index.jsp");
+            response.sendRedirect("error.jsp");
         }
     }
 }

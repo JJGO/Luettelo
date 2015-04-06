@@ -11,7 +11,6 @@ import action.Action;
 import dao.UserDAO;
 import dominio.User;
 import helper.DAOHelper;
-import helper.DisplayHelper;
 import java.io.IOException;
 import java.sql.SQLException;
 import javax.servlet.RequestDispatcher;
@@ -36,8 +35,9 @@ public class Login implements Action
     {
         String username     = request.getParameter("username");
         String password     = request.getParameter("password");
+        String hash = BCrypt.hashpw(password, BCrypt.gensalt(12));
 
-        User user = new User(username, password);
+        User user = new User(username, hash);
         UserDAO dao = DAOHelper.getUserDAO(request);
         if( dao.findUser(user) )
         {
@@ -49,8 +49,7 @@ public class Login implements Action
             request.setAttribute("loginError","El usuario/contraseña son incorrectos");
         }
 
-        DisplayHelper.setDefaultLists(request);
-        RequestDispatcher rd = request.getRequestDispatcher("/index.jsp");
+        RequestDispatcher rd = request.getRequestDispatcher("/lists.jsp");
         rd.forward(request, response);
     }
 }

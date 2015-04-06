@@ -36,7 +36,8 @@ public class DeleteAccount implements Action
         String password     = request.getParameter("password");
         User user           = (User) request.getSession().getAttribute("user");
 
-        User user_delete = new User(user.getUsername(), password);
+        String hash = BCrypt.hashpw(password, BCrypt.gensalt(12));
+        User user_delete = new User(user.getUsername(), hash);
 
 
         UserDAO dao = DAOHelper.getUserDAO(request);
@@ -49,7 +50,7 @@ public class DeleteAccount implements Action
             request.setAttribute("loginError","La contraseña introducida es incorrecta");
         }
 
-        RequestDispatcher rd = request.getRequestDispatcher("/index.jsp");
+        RequestDispatcher rd = request.getRequestDispatcher("/lists.jsp");
         rd.forward(request, response);
     }
 }

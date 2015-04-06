@@ -40,18 +40,10 @@ public class AddComment implements Action
         CommentDAO dao    = DAOHelper.getCommentDAO(request);
         Comment comment   = new Comment(content);
         dominio.List list = new dominio.List(listId);
+    
+        boolean error = !dao.addComment(comment, list, user);
         
-        if(dao.addComment(comment, list, user))
-        {
-            DisplayHelper.setList(request);
-            DisplayHelper.setComments(request);
-
-            RequestDispatcher rd = request.getRequestDispatcher("/comments.jsp");
-            rd.forward(request,response);
-        }
-        else
-        {
-            response.sendRedirect("index.jsp");
-        }
+        PrintWriter out = response.getWriter();
+        out.println("{ error : "+error+"}");
     }
 }

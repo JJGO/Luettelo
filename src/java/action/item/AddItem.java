@@ -41,17 +41,10 @@ public class AddItem implements Action
         ItemDAO dao       = DAOHelper.getItemDAO(request);
         Item item         = new Item(name, url);
         dominio.List list = new dominio.List(listId);
-        if(dao.addItem(item, list, user))
-        {
-            DisplayHelper.setList(request);
-            DisplayHelper.setItems(request);
-
-            RequestDispatcher rd = request.getRequestDispatcher("/items.jsp");
-            rd.forward(request,response);
-        }
-        else
-        {
-            response.sendRedirect("index.jsp");
-        }
+        
+        boolean error = !dao.addItem(item, list, user);
+        
+        PrintWriter out = response.getWriter();
+        out.println("{ error : "+error+"}");
     }
 }

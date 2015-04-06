@@ -16,11 +16,11 @@ import javax.servlet.http.HttpServletRequest;
 public class DisplayHelper
 {
 
-    public static void setDefaultLists(HttpServletRequest request) throws SQLException, ClassNotFoundException
+    public static void setTrendingLists(HttpServletRequest request) throws SQLException, ClassNotFoundException
     {
         ListDAO dao = (ListDAO) DAOHelper.getListDAO(request);
         User user = (User) request.getSession().getAttribute("user");
-        request.setAttribute("defaultLists",dao.findByRating(15));
+        request.setAttribute("trendingLists",dao.findByRating(15));
     }
 
     public static void setList(HttpServletRequest request) throws SQLException, ClassNotFoundException
@@ -47,5 +47,13 @@ public class DisplayHelper
         int listId =  Integer.parseInt(request.getParameter("listId"));
         List list = new List(listId);
         request.setAttribute("displayComments",dao.getComments(list));
+    }
+
+    public static void setDefaultLists(HttpServletRequest request) throws SQLException, ClassNotFoundException
+    {
+        ListDAO dao = (ListDAO) DAOHelper.getListDAO(request);
+        User user = (User) request.getSession().getAttribute("user");
+        request.setAttribute("trendingLists",dao.findByRating(15));
+        request.setAttribute("displayLists",dao.findByRating(50));
     }
 }

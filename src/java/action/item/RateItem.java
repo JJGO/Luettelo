@@ -38,6 +38,7 @@ public class RateItem implements Action
 
         ItemDAO dao = DAOHelper.getItemDAO(request);
         Item item = new Item(itemId,rating);
+        
         boolean error = !dao.rateItem(item, user);
         
         PrintWriter out = response.getWriter();
