@@ -44,9 +44,20 @@ public class ShowController extends HttpServlet {
         {
            //Action action = ActionFactory.getAction(request.getServletPath(),"action.show");
            //action.execute(request, response);
-            DisplayHelper.setDefaultLists(request);
-            RequestDispatcher rd = request.getRequestDispatcher("/lists.jsp");
-            rd.forward(request, response);
+            
+            //Original
+                DisplayHelper.setDefaultLists(request);
+                RequestDispatcher rd = request.getRequestDispatcher("/lists.jsp");
+                rd.forward(request, response);
+            
+            //To check comments.jspp
+                //request.setAttribute("listId", 1);
+                //request.getSession().setAttribute("user",new dominio.User("Dumbo","DB"));
+                //DisplayHelper.setDefaultLists(request);
+                //DisplayHelper.setList(request);
+                //DisplayHelper.setComments(request);
+                //RequestDispatcher rd = request.getRequestDispatcher("/comments.jsp");
+                //rd.forward(request, response);
         }
         catch (ClassNotFoundException ex)
         {

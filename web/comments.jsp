@@ -29,9 +29,10 @@
                         <a class="user-inline" href="lists.jsp">${displayList.username}</a>
                     </span>
                     <span class="component-rating component-rating-index">${displayList.average}</span>
-                    <br/>
+                    <br/><br/>
                     <p>${displayList.description}</p>
-                    <span class="component-comments">Comments (${displayList.comments})</span>
+                    <!--<span class="component-comments">Comments (${displayList.comments})</span>-->
+                    <span class="component-comments">Comments</span>
                     <a class="component-category" href="index.html">${displayList.category}</a>
                 </div>
                     <div class="component comment-component">
