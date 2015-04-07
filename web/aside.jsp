@@ -64,26 +64,27 @@
 <c:if test="${not empty sessionScope.user}">
      <div class="mensajeFormulario" style="text-transform: capitalize">Hi  ${sessionScope.user.username}</div>
      <a href="Logout.auth"> Logout </a>
-        <!-- <form action="user/${sessionScope.user.username}" style="text-align: center"> -->
-        <form action="Lists.show?type=user&value=${sessionScope.user.username}" style="text-align: center">
-        <button id="btnCreated" type="submit" class="botonAside" ><strong>${fn:toUpperCase(sessionScope.user.username)}'S LISTS</strong></button>
-        </form>
+        <!-- <div onClick="user/${sessionScope.user.username}" style="text-align: center"> -->
+        <div style="text-align: center">
+            <button onclick="window.location.href='Lists.show?type=user&value=${sessionScope.user.username}'" id="btnCreated" class="botonAside" ><strong>${fn:toUpperCase(sessionScope.user.username)}'S LISTS</strong></button>
+        </div>
 
-        <!-- <form action="subscribed" style="text-align: center"> -->
-        <form action="Lists.show?type=subscribed" style="text-align: center">
-        <button id="btnSubscribed" type="submit" class="botonAside" ><strong>SUBSCRIBED LISTS</strong></button>
-        </form>
-        <hr/>
-        <form action="newlist.jsp" style="text-align: center">
-        <button id="btnNewList" type="submit" class="botonAside" ><strong>CREATE A NEW LIST</strong></button>
-        </form>
+
+    <!-- <div onClick="window.location.href='subscribed" style="text-align: center"> -->
+    <div style="text-align: center">
+        <button  onclick="window.location.href='Lists.show?type=subscribed'" id="btnSubscribed" class="botonAside" ><strong>SUBSCRIBED LISTS</strong></button>
+    </div>
+    <hr/>
+    <div style="text-align: center">
+        <button onclick="window.location.href='AddList.do'" id="btnNewList" class="botonAside" ><strong>CREATE A NEW LIST</strong></button>
+    </div>
         <hr/>
 </c:if>
 
 <div class="trendingL">
-    <form action="Lists.show" style="text-align: center">
-        <button id="btnTlists" type="submit" class="botonAside" ><strong>TRENDING LISTS</strong></button>
-        </form>
+    <div style="text-align: center">
+        <button onclick="window.location.href='Lists.show'" id="btnTlists" class="botonAside" ><strong>TRENDING LISTS</strong></button>
+    </div>
     <table>
         <c:forEach var="list" items="${trendingLists}">
             <tr>

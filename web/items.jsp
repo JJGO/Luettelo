@@ -79,11 +79,11 @@
         <br/>
         <c:if test="${not empty item.rating}">
             <div class="rating" id="rating">
-                <c:forEach var="i" begin="${item.rating+1}" end="5">
-                    <span onclick="javascript:rateItem(${item.id},${5-i})">&#x2606;</span>
+                <c:forEach var="i" begin="${item.rating+1}" end="5"  step="1" varStatus="loop">
+                    <span onclick="javascript:rateItem(${item.id},${loop.end - i + loop.begin})">&#x2606;</span>
                 </c:forEach>
-                <c:forEach var="i" begin="1" end="${item.rating}">
-                    <span onclick="javascript:rateItem(${item.id},${5-i})">&#x2605;</span>
+                <c:forEach var="i" begin="1" end="${item.rating}" step="1" varStatus="loop">
+                    <span onclick="javascript:rateItem(${item.id},${loop.end - i + loop.begin})">&#x2605;</span>
                 </c:forEach>
             </div>
         </c:if>

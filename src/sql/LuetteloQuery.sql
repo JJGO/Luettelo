@@ -19,7 +19,7 @@ SELECT L.listId,
        COALESCE(C.numcom,0) AS numcom,
        NOT ISNULL(S.username) AS subscribed
 FROM List L
-     INNER JOIN List_avg LA
+     LEFT  OUTER JOIN List_avg LA
         ON L.listId = LA.listId
      LEFT OUTER JOIN (  SELECT  listId,
                                 COUNT(*) AS numcom
@@ -44,7 +44,7 @@ SELECT L.listId,
        COALESCE(C.numcom,0) AS numcom,
        NOT ISNULL(S.username) AS subscribed
 FROM List L
-     INNER JOIN List_avg LA
+     LEFT  OUTER JOIN List_avg LA
         ON L.listId = LA.listId
      LEFT OUTER JOIN (  SELECT  listId,
                                 COUNT(*) AS numcom
@@ -70,7 +70,7 @@ SELECT L.listId,
        COALESCE(C.numcom,0) AS numcom,
        NOT ISNULL(S.username) AS subscribed
 FROM List L
-     INNER JOIN List_avg LA
+     LEFT  OUTER JOIN List_avg LA
         ON L.listId = LA.listId
      LEFT OUTER JOIN (  SELECT  listId,
                                 COUNT(*) AS numcom
@@ -95,7 +95,7 @@ SELECT L.listId,
        COALESCE(C.numcom,0) AS numcom,
        NOT ISNULL(S.username) AS subscribed
 FROM List L
-     INNER JOIN List_avg LA
+     LEFT  OUTER JOIN List_avg LA
         ON L.listId = LA.listId
      LEFT OUTER JOIN (  SELECT  listId,
                                 COUNT(*) AS numcom
@@ -127,7 +127,7 @@ SELECT  L.listId,
         COALESCE(C.numcom,0) AS numcom,
         NOT ISNULL(S.username) AS subscribed
 FROM List L
-     INNER JOIN List_avg LA
+     LEFT  OUTER JOIN List_avg LA
         ON L.listId = LA.listId
      LEFT OUTER JOIN (  SELECT  listId,
                                 COUNT(*) AS numcom

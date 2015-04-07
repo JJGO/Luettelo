@@ -43,11 +43,9 @@ public class AddList implements Action
                                  //to know who created the list
             ListDAO dao = DAOHelper.getListDAO(request);
             List list   = new List(name, category, description);
-            if(dao.addList(list, user))
+            list = dao.addList(list, user);
+            if(list != null)
             {
-                //TODO findLast in ListDAO
-                ArrayList<List> col = dao.findByKeyword(list.getName(),user);
-                list = col.get(0);
                 request.setAttribute("listId",list.getId());
                 response.sendRedirect("Items.show?listid="+list.getId());
             }

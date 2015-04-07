@@ -39,9 +39,9 @@ public class ListDAO extends DAO
 
 // QUERY
     // GET THE INFO OF A LIST {username,listId}
-    private static final String QUERY_LIST_INFO = "SELECT  L.listId, L.name, L.category, L.description, L.username, LA.average, COALESCE(C.numcom,0) AS numcom, NOT ISNULL(S.username) AS subscribed FROM List L INNER JOIN List_avg LA ON L.listId = LA.listId LEFT OUTER JOIN (  SELECT  listId, COUNT(*) AS numcom FROM Comment GROUP BY listId) C ON L.listId = C.listId LEFT OUTER JOIN (  SELECT listId, username FROM Subscription WHERE username = ? ) S ON L.listId = S.listId WHERE L.listId = ? ORDER BY LA.average DESC";
+    private static final String QUERY_LIST_INFO = "SELECT  L.listId, L.name, L.category, L.description, L.username, LA.average, COALESCE(C.numcom,0) AS numcom, NOT ISNULL(S.username) AS subscribed FROM List L LEFT OUTER JOIN List_avg LA ON L.listId = LA.listId LEFT OUTER JOIN (  SELECT  listId, COUNT(*) AS numcom FROM Comment GROUP BY listId) C ON L.listId = C.listId LEFT OUTER JOIN (  SELECT listId, username FROM Subscription WHERE username = ? ) S ON L.listId = S.listId WHERE L.listId = ? ORDER BY LA.average DESC";
 
-    private static final String QUERY_LISTS = "SELECT L.listId, L.name, L.category, L.username, LA.average, COALESCE(C.numcom,0) AS numcom, NOT ISNULL(S.username) AS subscribed FROM List L INNER JOIN List_avg LA ON L.listId = LA.listId LEFT OUTER JOIN (  SELECT  listId, COUNT(*) AS numcom FROM Comment GROUP BY listId ) C ON L.listId = C.listId LEFT OUTER JOIN (  SELECT listId, username FROM Subscription WHERE username = ? ) S ON L.listId = S.listId";
+    private static final String QUERY_LISTS = "SELECT L.listId, L.name, L.category, L.username, LA.average, COALESCE(C.numcom,0) AS numcom, NOT ISNULL(S.username) AS subscribed FROM List L LEFT OUTER JOIN List_avg LA ON L.listId = LA.listId LEFT OUTER JOIN (  SELECT  listId, COUNT(*) AS numcom FROM Comment GROUP BY listId ) C ON L.listId = C.listId LEFT OUTER JOIN (  SELECT listId, username FROM Subscription WHERE username = ? ) S ON L.listId = S.listId";
 
     // GET THE LISTS CREATED BY A USER {username, username(creator)}
     private static final String QUERY_LISTS_BY_USER     = QUERY_LISTS + " WHERE L.username = ? ORDER BY LA.average DESC";
@@ -64,7 +64,7 @@ public class ListDAO extends DAO
         super();
     }
 
-    public boolean addList(List list, User user) throws SQLException
+    public List addList(List list, User user) throws SQLException
     {
         //CREATE LIST {name, category, description, username}
         PreparedStatement ps = con.prepareStatement(ADD_LIST);
@@ -79,7 +79,15 @@ public class ListDAO extends DAO
         
         int rows = ps.executeUpdate();
         ps.close();
-        return (rows != 0);
+        list = null;
+        if(rows != 0)
+        {
+            ps = con.prepareStatement("SELECT max(listId) AS last_id FROM list");
+            ResultSet rs = ps.executeQuery();
+            int lastid = rs.getInt("last_id");
+            list = new List(lastid);
+        }
+        return list;
     }
 
     public boolean editList(List list, User user) throws SQLException

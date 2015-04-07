@@ -1,4 +1,4 @@
-var listId = document.getElementById("list-id").innerHTML;
+var listId = document.getElementById("listId").value;
 
 function showLogin()
 {
@@ -206,7 +206,7 @@ function uncheckItem(itemId)
 	AJAX(url,updateContent);
 }
 
-function uncheckItem(itemId,rating)
+function rateItem(itemId,rating)
 {
 	var url = 'RateItem.do?listId='+listId;
 	url += '&itemId='+itemId;
@@ -235,7 +235,7 @@ function unhoverUnsubscribe()
 }
 
 
-function hoverCheckitemId(itemId)
+function hoverCheck(itemId)
 {
 	document.getElementById("checkIcon-"+itemId).src="images/checked.png";
 }
