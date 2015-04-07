@@ -82,7 +82,7 @@ function updateContent(responseText)
 function addComment()
 {
     var url = 'AddComment.do?listId='+listId;
-    url += '&content='+document.getElementById("comment-field");
+    url += '&content='+document.getElementById("comment-field").value;
     AJAX(url,updateContent);
 }
 

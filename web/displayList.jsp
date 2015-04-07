@@ -38,7 +38,14 @@
                 </tr>
                 <tr>
                     <td>Category</td>
-                    <td><input type="text" name="list-category" id="lcategory-field" class="edit-field"></td>
+                    <td><select name="category" form="newListForm">
+                      <option value="Movies">Movies</option>
+                      <option value="Books">Books</option>
+                      <option value="Series">Series</option>
+                      <option value="Videogames">Videogames</option>
+                      <option value="DIY">DIY</option>
+                      <option value="Miscellaneous">Miscellaneous</option>
+                    </select></td>
                 </tr>
                 <tr>
                     <td>Description</td>
