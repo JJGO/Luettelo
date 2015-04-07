@@ -19,7 +19,14 @@
             </tr>
             <tr>
                 <td>Category</td>
-                <td><input type="text" name="category"></td>
+                <td><select name="category" form="newListForm">
+                  <option value="movies">Movies</option>
+                  <option value="books">Books</option>
+                  <option value="series">Series</option>
+                  <option value="videogames">Videogames</option>
+                  <option value="diy">DIY</option>
+                  <option value="Miscellaneous">Miscellaneous</option>
+                </select></td>
             </tr>
             <tr>
                 <td>Description</td>

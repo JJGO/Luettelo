@@ -12,9 +12,10 @@ import dao.ListDAO;
 import dominio.List;
 import dominio.User;
 import helper.DAOHelper;
+import helper.DisplayHelper;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.SQLException;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -41,9 +42,17 @@ public class EditList implements Action
         ListDAO dao = DAOHelper.getListDAO(request);
         List list   = new List(listId, name, category, description);
         
-        boolean error = !dao.editList(list, user);
-        
-        PrintWriter out = response.getWriter();
-        out.println("{ error : "+error+"}");
+        if(dao.editList(list, user))
+        {
+            DisplayHelper.setList(request);
+            DisplayHelper.setItems(request);
+            
+            RequestDispatcher rd = request.getRequestDispatcher("/items.jsp");
+            rd.forward(request,response);
+        }
+        else
+        {
+            response.sendRedirect("index");
+        }
     }
 }

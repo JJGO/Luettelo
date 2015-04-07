@@ -42,8 +42,8 @@ public class RemoveList implements Action
         {
             DisplayHelper.setTrendingLists(request);
             DisplayHelper.setFrontpageLists(request);
-
-            RequestDispatcher rd = request.getRequestDispatcher("/lists.jsp");
+            request.setAttribute("content","lists");
+            RequestDispatcher rd = request.getRequestDispatcher("/luettelo.jsp");
             rd.forward(request,response);
         }
         else

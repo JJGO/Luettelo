@@ -115,8 +115,8 @@ function removeComment(commentId)
 function addItem()
 {
     var url = 'AddItem.do?listId='+listId;
-    url += "name="+document.getElementById("item-name");
-    url += "&url="+document.getElementById("item-url");
+    url += "&name="+document.getElementById("item-name").value;
+    url += "&url="+document.getElementById("item-url").value;
     url += "&listId="+listId;
     AJAX(url,updateContent);
 }

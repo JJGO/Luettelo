@@ -84,8 +84,11 @@ public class ListDAO extends DAO
         {
             ps = con.prepareStatement("SELECT max(listId) AS last_id FROM list");
             ResultSet rs = ps.executeQuery();
-            int lastid = rs.getInt("last_id");
-            list = new List(lastid);
+            if(rs.next())
+            {
+                int lastid = rs.getInt("last_id");
+                list = new List(lastid);
+            }
         }
         return list;
     }

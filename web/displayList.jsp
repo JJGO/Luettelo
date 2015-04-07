@@ -3,8 +3,8 @@
 <%@page import="dominio.List"%>
 <!DOCTYPE html>
 <div class="component main-component">
-    <span class="component-title">
-        <a href="Items.show?listId=${displayList.id}">${displayList.name}</a>
+    <span class="component-title" >
+        <a href="Items.show?listId=${displayList.id}" id="list-title">${displayList.name}</a>
         <a class="user-inline" href="Lists.show?type=user&value=${displayList.username}">${displayList.username}</a>
     </span>
     <c:if test="${displayList.username==sessionScope.user.username}">
@@ -38,7 +38,7 @@
                 </tr>
                 <tr>
                     <td>Category</td>
-                    <td><input type="text" name="list-url" id="lcategory-field" class="edit-field"></td>
+                    <td><input type="text" name="list-category" id="lcategory-field" class="edit-field"></td>
                 </tr>
                 <tr>
                     <td>Description</td>
