@@ -21,8 +21,10 @@ CREATE TABLE IF NOT EXISTS List
 
     CONSTRAINT List_pkey
         PRIMARY KEY(listId),
+
     CONSTRAINT List_username_fkey
-        FOREIGN KEY(username) REFERENCES User(username) ON DELETE CASCADE
+        FOREIGN KEY(username) REFERENCES User(username)
+            ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS Item
@@ -35,8 +37,10 @@ CREATE TABLE IF NOT EXISTS Item
 
     CONSTRAINT Item_pkey
         PRIMARY KEY(itemId),
+
     CONSTRAINT Item_listId_fkey
-        FOREIGN KEY(listId) REFERENCES List(listId) ON DELETE CASCADE
+        FOREIGN KEY(listId) REFERENCES List(listId)
+            ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS Comment
@@ -48,10 +52,14 @@ CREATE TABLE IF NOT EXISTS Comment
 
     CONSTRAINT Comment_pkey
         PRIMARY KEY(commentId),
+
     CONSTRAINT Comment_username_fkey
-        FOREIGN KEY(username) REFERENCES User(username) ON DELETE CASCADE,
+        FOREIGN KEY(username) REFERENCES User(username)
+            ON DELETE CASCADE,
+
     CONSTRAINT Comment_listId_fkey
-        FOREIGN KEY(listId) REFERENCES List(listId) ON DELETE CASCADE
+        FOREIGN KEY(listId) REFERENCES List(listId)
+            ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS Subscription
@@ -61,10 +69,14 @@ CREATE TABLE IF NOT EXISTS Subscription
 
     CONSTRAINT Subscription_pkey
         PRIMARY KEY(username,listId),
+
     CONSTRAINT Subscription_username_fkey
-        FOREIGN KEY(username) REFERENCES User(username) ON DELETE CASCADE,
+        FOREIGN KEY(username) REFERENCES User(username)
+            ON DELETE CASCADE,
+
     CONSTRAINT Subscription_listId_fkey
-        FOREIGN KEY(listId) REFERENCES List(listId) ON DELETE CASCADE
+        FOREIGN KEY(listId) REFERENCES List(listId)
+            ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS Rating
@@ -72,17 +84,25 @@ CREATE TABLE IF NOT EXISTS Rating
     value       TINYINT         DEFAULT 0,
     username    VARCHAR(31)     NOT NULL,
     itemId      INT UNSIGNED    NOT NULL,
+    listId      INT UNSIGNED    NOT NULL,
 
-    PRIMARY KEY(username,itemId),
-    FOREIGN KEY(username) REFERENCES User(username) ON DELETE CASCADE,
-    FOREIGN KEY(itemId) REFERENCES Item(itemId) ON DELETE CASCADE
+    CONSTRAINT Rating_pkey
+        PRIMARY KEY(username,itemId),
+
+    CONSTRAINT Rating_username_listId_fkey
+        FOREIGN KEY(username,listId) REFERENCES Subscription(username,listId)
+            ON DELETE CASCADE,
+
+    CONSTRAINT Rating_itemId_fkey
+        FOREIGN KEY(itemId) REFERENCES Item(itemId)
+            ON DELETE CASCADE
 );
 
 
 
 CREATE VIEW Item_avg AS
 SELECT  I.itemId,
-        listId,
+        I.listId,
         ROUND(20*AVG(NULLIF(R.value,0))) AS average
 FROM Item I
      INNER JOIN Rating R

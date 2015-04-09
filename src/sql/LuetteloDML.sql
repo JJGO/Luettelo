@@ -98,8 +98,8 @@ WHERE username = ? AND listId = ?;
 
 --CHECK IN AN ITEM {username, itemId, username, itemId}
 --Only a subscriber can check
-INSERT INTO Rating(username,itemId)
-SELECT ?, ?
+INSERT INTO Rating(username,itemId,listId)
+SELECT ?, ?, I.listId
 FROM Item I
 	 INNER JOIN Subscription S
 	 	ON I.listId = S.listId

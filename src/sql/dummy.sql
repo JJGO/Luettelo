@@ -35,26 +35,26 @@ INSERT INTO Subscription (username, listId) VALUES
 ('dumbo',       2),
 ('dumbo',       3);
 
-INSERT INTO Rating(value, username, itemId) VALUES
-(5,     'joseja',   1   ),
-(5,     'joseja',   2   ),
-(5,     'joseja',   3   ),
-(5,     'joseja',   4   ),
-(3,     'joseja',   5   ),
-(4,     'joseja',   6   ),
-(5,     'joseja',   7   ),
-(4,     'joseja',   8   ),
-(4,     'joseja',   9   ),
-(5,     'joseja',   10  ),
-(4,     'joseja',   11  ),
-(3,     'joseja',   12  ),
-(5,     'lucia',    1   ),
-(0,     'lucia',    3   ),
-(5,     'lucia',    8   ),
-(0,     'lucia',    9   ),
-(5,     'lucia',    10  ),
-(3,     'lucia',    11  ),
-(3,     'lucia',    12  );
+INSERT INTO Rating(value, username, itemId, listId) VALUES
+(5,     'joseja',   1,   1 ),
+(5,     'joseja',   2,   1 ),
+(5,     'joseja',   3,   1 ),
+(5,     'joseja',   4,   2 ),
+(3,     'joseja',   5,   2 ),
+(4,     'joseja',   6,   2 ),
+(5,     'joseja',   7,   2 ),
+(4,     'joseja',   8,   3 ),
+(4,     'joseja',   9,   3 ),
+(5,     'joseja',   10,  3 ),
+(4,     'joseja',   11,  3 ),
+(3,     'joseja',   12,  3 ),
+(5,     'lucia',    1,   1 ),
+(0,     'lucia',    3,   1 ),
+(5,     'lucia',    8,   3 ),
+(0,     'lucia',    9,   3 ),
+(5,     'lucia',    10,  3 ),
+(3,     'lucia',    11,  3 ),
+(3,     'lucia',    12,  3 );
 
 INSERT INTO Comment(content,username,listId) VALUES
 ('This list is tor','dumbo',1),
