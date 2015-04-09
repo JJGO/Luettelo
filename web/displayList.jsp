@@ -39,6 +39,7 @@
                 <tr>
                     <td>Category</td>
                     <td><select name="category" form="newListForm" id="lcategory-field">
+
                       <option value="Movies">Movies</option>
                       <option value="Books">Books</option>
                       <option value="Series">Series</option>
