@@ -12,8 +12,9 @@
 	<h1>Luettelo</h1>
 </a>
 <div class="search">
-	<form class="form-wrapper cf" action="search">
-	    <input name="q" type="text" placeholder="Search here..." required>
+	<form class="form-wrapper cf" action="Lists.show">
+            <input name="type" type="hidden" value="search">
+	    <input name="value" type="text" placeholder="Search here..." required>
 	    <button type="submit">Search</button>
 	</form>
 </div>

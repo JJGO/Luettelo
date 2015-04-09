@@ -1,0 +1,3 @@
+AddList -> Error
+Al desuscribirte de una lista no se eliminan tus puntuaciones
+AddComment -> Error

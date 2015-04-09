@@ -31,7 +31,7 @@ public class ItemDAO extends DAO
     private static String REMOVE_ITEM = "DELETE FROM Item WHERE   itemId = ? AND listId IN ( SELECT listId FROM List WHERE username = ?)";
  
     //CHECK IN AN ITEM {username, itemId, username, itemId}
-    private static String CHECK_ITEM = "INSERT INTO Rating(username,itemId)  SELECT ?, ?  FROM Item I  INNER JOIN Subscription S  ON I.listId = S.listId  WHERE S.username = ? and I.itemId = ?";
+    private static String CHECK_ITEM = "INSERT INTO Rating(username,itemId,listId)  SELECT ?, ?, I.listId  FROM Item I  INNER JOIN Subscription S  ON I.listId = S.listId  WHERE S.username = ? and I.itemId = ?";
 
     //UNCHECK AN ELEMENT {username, itemId}
     private static String UNCHECK_ITEM = "DELETE FROM Rating WHERE username = ? AND itemId = ?";

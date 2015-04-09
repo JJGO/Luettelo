@@ -37,7 +37,7 @@ public class Authentication extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         
         try
-        {  
+        {
            Action action = ActionFactory.getAction(request.getServletPath(),"action.auth");
            action.execute(request, response);
            DisplayHelper.setTrendingLists(request);

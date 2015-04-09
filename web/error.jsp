@@ -11,4 +11,6 @@
 <div class="content">
     <span class="error"> WHOOPSIE! </span>
     It's looking like you may have taken a wrong turn. Don't worry... it happens to the best of us.
+
+    <p>${error}</p>
 </div>

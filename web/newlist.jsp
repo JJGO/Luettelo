@@ -20,11 +20,11 @@
             <tr>
                 <td>Category</td>
                 <td><select name="category" form="newListForm">
-                  <option value="movies">Movies</option>
-                  <option value="books">Books</option>
-                  <option value="series">Series</option>
-                  <option value="videogames">Videogames</option>
-                  <option value="diy">DIY</option>
+                  <option value="Movies">Movies</option>
+                  <option value="Books">Books</option>
+                  <option value="Series">Series</option>
+                  <option value="Videogames">Videogames</option>
+                  <option value="DIY">DIY</option>
                   <option value="Miscellaneous">Miscellaneous</option>
                 </select></td>
             </tr>

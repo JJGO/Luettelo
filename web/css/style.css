@@ -376,7 +376,7 @@ footer span
     text-align: center;
 }
 
-.rating {
+/*.rating {
   unicode-bidi: bidi-override;
   direction: rtl;
   float:left;
@@ -395,8 +395,72 @@ footer span
 .rating > span:hover ~ span:before {
    content: "\2605";
    position: absolute;
+}*/
+
+.rating {
+    float:left;
+
+    clear:left;
+    margin:10px 30px;
+    font-size:12pt;
+    border: 0;
 }
 
+/* :not(:checked) is a filter, so that browsers that don’t support :checked don’t
+   follow these rules. Every browser that supports :checked also supports :not(), so
+   it doesn’t make the test unnecessarily selective */
+.rating:not(:checked) > input {
+    clip:rect(0px,0px,0px,0px);
+    position:absolute;
+    height:1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    width: 1px;
+}
+
+.rating:not(:checked) > label {
+    float:right;
+    width:1em;
+    padding:0 .1em;
+    overflow:hidden;
+    white-space:nowrap;
+    cursor:pointer;
+    font-size:150%;
+    line-height:1.2;
+    color:#E7E7EF;
+    text-shadow:1px 1px 1px 1px #c72b2b;
+}
+
+.rating:not(:checked) > label:before {
+    content: '★ ';
+}
+
+.rating > input:checked ~ label {
+    color: #c72b2b;
+    text-shadow:1px 1px 1px 1px #c72b2b;
+}
+
+.rating:not(:checked) > label:hover,
+.rating:not(:checked) > label:hover ~ label {
+    color: gold;
+    text-shadow:1px 1px 1px 1px #c72b2b;
+}
+
+.rating > input:checked + label:hover,
+.rating > input:checked + label:hover ~ label,
+.rating > input:checked ~ label:hover,
+.rating > input:checked ~ label:hover ~ label,
+.rating > label:hover ~ input:checked ~ label {
+    color: #ea0;
+    text-shadow:1px 1px 1px 1px #c72b2b;
+}
+
+.rating > label:active {
+    position:relative;
+    top:2px;
+    left:2px;
+}
 
 .comment-rating
 {

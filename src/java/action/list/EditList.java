@@ -47,7 +47,7 @@ public class EditList implements Action
             DisplayHelper.setList(request);
             DisplayHelper.setItems(request);
             
-            RequestDispatcher rd = request.getRequestDispatcher("/items.jsp");
+            RequestDispatcher rd = request.getRequestDispatcher("/displayList.jsp");
             rd.forward(request,response);
         }
         else

@@ -10,17 +10,19 @@
 <%@page import="dominio.User"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<c:import url="/displayList.jsp" charEncoding="UTF-8" />
+<div id="displayList">
+    <c:import url="/displayList.jsp" charEncoding="UTF-8" />
+</div>
 <c:if test="${not empty sessionScope.user}">
     <div class="component comment-component">
-        <form onsubmit="javascript:addComment()">
+        <div>
             <div class="right-holder">
                 <textarea class="comment-box" id="comment-field"></textarea>
             </div>
             <div class="right-holder">
-                 <input type="submit" value="Submit"/>
+                 <input type="submit" value="Submit" onclick="javascript:addComment()"/>
             </div>
-        </form>
+        </div>
     </div>
 </c:if>
 
@@ -47,7 +49,7 @@
             </div>
         </div>
         <c:if test="${comment.username==sessionScope.user.username}">
-            <div style="float:right">
+            <div style="float:right" id="op-${comment.id}">
                 <a href="javascript:editComment(${comment.id})" class="check-icon" >
                 <img src="images/edit.png" alt="Edit Comment" id="editCommentIcon">
                 </a>

@@ -75,9 +75,9 @@ public class UserActions extends HttpServlet {
 //            }
             catch (Exception ex)
             {
-               ex.printStackTrace();
-               RequestDispatcher rd = request.getRequestDispatcher("/error.jsp");
-               rd.forward(request,response);
+              ex.printStackTrace();
+              RequestDispatcher rd = request.getRequestDispatcher("/error.jsp");
+              rd.forward(request,response);
             }
         }
         else

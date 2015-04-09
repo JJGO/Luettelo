@@ -11,7 +11,9 @@
 <%@page import="dominio.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<c:import url="/displayList.jsp" charEncoding="UTF-8" />
+<div id="displayList">
+    <c:import url="/displayList.jsp" charEncoding="UTF-8" />
+</div>
 <c:if test="${displayList.username==sessionScope.user.username}">
     <div class="component">
         <div class="component-title">
@@ -78,14 +80,19 @@
         <span class="component-rating">${item.average}</span>
         <br/>
         <c:if test="${not empty item.rating}">
-            <div class="rating" id="rating">
-                <c:forEach var="i" begin="${item.rating+1}" end="5"  step="1" varStatus="loop">
+            <fieldset class="rating" id="rating-${item.id}">
+                <!-- <c:forEach var="i" begin="${item.rating+1}" end="5"  step="1" varStatus="loop">
                     <span onclick="javascript:rateItem(${item.id},${loop.end - i + loop.begin})">&#x2606;</span>
                 </c:forEach>
                 <c:forEach var="i" begin="1" end="${item.rating}" step="1" varStatus="loop">
                     <span onclick="javascript:rateItem(${item.id},${loop.end - i + loop.begin})">&#x2605;</span>
-                </c:forEach>
-            </div>
+                </c:forEach> -->
+                <input type="radio" id="star5-${item.id}" name="rating-${item.id}" value="5"  <c:if test="${item.rating == 5}">checked = "checked"</c:if> onclick="javascript:rateItem(${item.id},5)" /><label for="star5-${item.id}" title="Rocks!">5 stars</label>
+                <input type="radio" id="star4-${item.id}" name="rating-${item.id}" value="4"  <c:if test="${item.rating == 4}">checked = "checked"</c:if> onclick="javascript:rateItem(${item.id},4)" /><label for="star4-${item.id}" title="Pretty good">4 stars</label>
+                <input type="radio" id="star3-${item.id}" name="rating-${item.id}" value="3"  <c:if test="${item.rating == 3}">checked = "checked"</c:if> onclick="javascript:rateItem(${item.id},3)" /><label for="star3-${item.id}" title="Meh">3 stars</label>
+                <input type="radio" id="star2-${item.id}" name="rating-${item.id}" value="2"  <c:if test="${item.rating == 2}">checked = "checked"</c:if> onclick="javascript:rateItem(${item.id},2)" /><label for="star2-${item.id}" title="Kinda bad">2 stars</label>
+                <input type="radio" id="star1-${item.id}" name="rating-${item.id}" value="1"  <c:if test="${item.rating == 1}">checked = "checked"</c:if> onclick="javascript:rateItem(${item.id},1)" /><label for="star1-${item.id}" title="Sucks big time">1 star</label>
+            </fieldset>
         </c:if>
     </div>
 </c:forEach>

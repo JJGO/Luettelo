@@ -12,10 +12,8 @@ import dao.ListDAO;
 import dominio.List;
 import dominio.User;
 import helper.DAOHelper;
-import helper.DisplayHelper;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -46,12 +44,14 @@ public class AddList implements Action
             list = dao.addList(list, user);
             if(list != null)
             {
-                request.setAttribute("listId",list.getId());
-                response.sendRedirect("Items.show?listid="+list.getId());
+                response.sendRedirect("Items.show?listId="+list.getId() );
             }
             else
             {
-                response.sendRedirect("error.jsp");
+                request.setAttribute("content","error");
+                request.setAttribute("title","Error");
+                RequestDispatcher rd = request.getRequestDispatcher("/luettelo.jsp");
+                rd.forward(request,response);
             }
         }else
         {
