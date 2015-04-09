@@ -47,29 +47,35 @@ function validateSignUp()
 	}else{
 		return true;
 	}
-	return false;
+	
 }
-
+var lock = false;
 function AJAX(url,fun)
 {
-    var xmlHttpReq = new XMLHttpRequest();
-    xmlHttpReq.onreadystatechange=function()
-                {
-                    if (xmlHttpReq.readyState == 4)
+    if(!lock)
+    {
+        lock = true;
+        var xmlHttpReq = new XMLHttpRequest();
+        xmlHttpReq.onreadystatechange=function()
                     {
-                    	if(xmlHttpReq.status==200)
-                    	{
-                        	fun(xmlHttpReq.responseText);
-                    	}
-                    	else
-                    	{
-                    		document.location.replace(document.location.path);
-                    	}
-                    }
-                }
+                        if (xmlHttpReq.readyState === 4)
+                        {
+                            if(xmlHttpReq.status===200)
+                            {
+                                    fun(xmlHttpReq.responseText);
+                            }
+                            else
+                            {
+                                    document.location.replace(document.location.path);
+                            }
+                            lock = false;
+                        }
+                    };
 
-    xmlHttpReq.open('GET', url, true);
-    xmlHttpReq.send();
+        xmlHttpReq.open('GET', url, true);
+        xmlHttpReq.send();
+    }
+    
 }
 
 function updateContent(responseText)
@@ -77,13 +83,17 @@ function updateContent(responseText)
     document.getElementById("content").innerHTML = responseText;
 }
 
-
+function updateDisplayList(responseText)
+{
+    document.getElementById("displayList").innerHTML = responseText;
+}
 
 function addComment()
 {
     var url = 'AddComment.do?listId='+listId;
-    url += '&content='+document.getElementById("comment-field");
+    url += '&content='+document.getElementById("comment-field").value;
     AJAX(url,updateContent);
+    
 }
 
 function editComment(commentId)
@@ -92,6 +102,7 @@ function editComment(commentId)
 	comment.style.display = "none";
 	document.getElementById("comment-edit-"+commentId).style.display = "block";
 	document.getElementById("comment-field-"+commentId).value = comment.innerHTML;
+        document.getElementById("op-"+commentId).style.display = none;
 }
 
 function commitEditComment(commentId)
@@ -100,6 +111,7 @@ function commitEditComment(commentId)
 	url += '&commentId='+commentId;
     url += '&content='+document.getElementById("comment-field-"+commentId).value;
     AJAX(url,updateContent);
+    
 }
 
 function removeComment(commentId)
@@ -109,6 +121,7 @@ function removeComment(commentId)
 		var url = 'RemoveComment.do?listId='+listId;
 		url += '&commentId='+commentId;
 		AJAX(url,updateContent);
+		
 	}
 }
 
@@ -119,6 +132,7 @@ function addItem()
     url += "&url="+document.getElementById("item-url").value;
     url += "&listId="+listId;
     AJAX(url,updateContent);
+    
 }
 
 function editItem(itemId)
@@ -136,6 +150,7 @@ function commitEditItem(itemId)
     url += "&name="+document.getElementById("name-field-"+itemId).value;
     url += "&url="+document.getElementById("url-field-"+itemId).value;
     AJAX(url,updateContent);
+    
 }
 
 function removeItem(itemId)
@@ -145,6 +160,7 @@ function removeItem(itemId)
 		var url = 'RemoveItem.do?listId='+listId;
 		url += '&itemId='+itemId;
 		AJAX(url,updateContent);
+		
 	}
 }
 
@@ -154,21 +170,22 @@ function editList()
     document.getElementById("list-description").style.display = "none";
     document.getElementById("list-comments").style.display = "none";
     document.getElementById("list-category").style.display = "none";
-	document.getElementById("list-edit").style.display = "block";
-	var list = document.getElementById("list");
+    document.getElementById("list-edit").style.display = "block";
+    var list = document.getElementById("list");
 
-	document.getElementById("ltitle-field").value = document.getElementById("list-title").innerHTML;
-	document.getElementById("lcategory-field").value = document.getElementById("list-category").text;
-	document.getElementById("ldescription-field").value = document.getElementById("list-description").innerHTML;
+    document.getElementById("ltitle-field").value = document.getElementById("list-title").innerHTML;
+    document.getElementById("lcategory-field").value = document.getElementById("list-category").text;
+    document.getElementById("ldescription-field").value = document.getElementById("list-description").innerHTML;
 }
 
 function commitEditList()
 {
 	var url = 'EditList.do?listId='+listId;
-	url += "&name="+ document.getElementById("ltitle-field").value
-	url += "&category="+ document.getElementById("lcategory-field").value
-	url += "&description="+ document.getElementById("ldescription-field").value
-	AJAX(url,updateContent);
+	url += "&name="+ document.getElementById("ltitle-field").value;
+	url += "&category="+ document.getElementById("lcategory-field").value;
+	url += "&description="+ document.getElementById("ldescription-field").value;
+	AJAX(url,updateDisplayList);
+	
 }
 
 function removeList()
@@ -184,12 +201,14 @@ function subscribeList()
 {
 	var url = 'SubscribeList.do?listId='+listId;
 	AJAX(url,updateContent);
+	
 }
 
 function unsubscribeList()
 {
 	var url = 'UnsubscribeList.do?listId='+listId;
 	AJAX(url,updateContent);
+	
 }
 
 function checkItem(itemId)
@@ -197,6 +216,7 @@ function checkItem(itemId)
 	var url = 'CheckItem.do?listId='+listId;
 	url += '&itemId='+itemId;
 	AJAX(url,updateContent);
+	
 }
 
 function uncheckItem(itemId)
@@ -204,6 +224,7 @@ function uncheckItem(itemId)
 	var url = 'UncheckItem.do?listId='+listId;
 	url += '&itemId='+itemId;
 	AJAX(url,updateContent);
+	
 }
 
 function rateItem(itemId,rating)
@@ -212,6 +233,7 @@ function rateItem(itemId,rating)
 	url += '&itemId='+itemId;
 	url += "&rating="+rating;
 	AJAX(url,updateContent);
+	
 }
 
 function hoverSubscribe()
