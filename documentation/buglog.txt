@@ -1,3 +1,25 @@
-AddList -> Error
-Al desuscribirte de una lista no se eliminan tus puntuaciones
-AddComment -> Error
+Status        Description
+____________________________________________________________________________________
+
+OK            AddList -> Error
+OK            Al desuscribirte de una lista no se eliminan tus puntuaciones
+OK            AddComment -> Error
+
+**            No llamar a DAOHelper, crear DAO cada vez
+            Soporte de UTF8 en Java? (Para que puedan incluirse simbolos raros en la web)
+**            AuthError-> JSON
+            OnLogin-> Cookie.getURL ?????? (No me acuerdo de que era - Lucia)
+**            Cookie "recentLists" "2,13,5,84" (ArrayList sin repeticiones)
+**            Crear tabla de categorias en la BD
+
+            Seguridad: Escapar sentencias
+            Pagina responsiva (Quitar CSS de rating mono para telefonos y tablets)
+
+            Dar formato a Logout
+            Dar formato a cuadros de texto
+
+
+
+
+OK -> Arreglado
+** -> Importante

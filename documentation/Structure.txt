@@ -1,6 +1,6 @@
                                                                                         TODO    WORKING
-ShowController.java                                                                        *
-    Lists.show{type,value}                                          lists.jsp              *
+ShowController.java                                                                                 *
+    Lists.show{type,value}                                          lists.jsp                       *
         ?type=
                 ""
                 "category"
@@ -9,10 +9,10 @@ ShowController.java                                                             
                 "subscribed"
         -> changes the {displayLists} request parameter
 
-    Items.show          {listId}                                    items.jsp              *
-    Comments.show       {listId}                                    comments.jsp           *
+    Items.show          {listId}                                    items.jsp                       *
+    Comments.show       {listId}                                    comments.jsp                    *
 
-Authentication.java                                                                        *
+Authentication.java                                                                                 *
     DeleteAccount.auth  {password}                                  index.jsp
     Login.auth          {username, password}                        index.jsp
     Logout.auth         {}                                          index.jsp
@@ -20,7 +20,7 @@ Authentication.java                                                             
 
 
 
-UserActions.java (Checkea que exista user en session, si no  ->     index.jsp              *
+UserActions.java (Checkea que exista user en session, si no  ->     index.jsp                       *
 
     AddList.do          {name, category, description}               items.jsp
     EditList.do         {listId, name, category, description}       items.jsp
@@ -41,6 +41,6 @@ UserActions.java (Checkea que exista user en session, si no  ->     index.jsp   
 
 
 URLRewrite                                                                                 *
-lists.jsp                                                                                  *
-items.jsp                                                                                  *
-comments.jsp                                                                               *
+lists.jsp                                                                                           *
+items.jsp                                                                                           *
+comments.jsp                                                                                        *

@@ -8,8 +8,6 @@ Boton de cancel edit
 
 ### Lucia
 
-
-
 displayLists == null -> Su búsqueda no ha obtenido resultados
 
 ### Further releases
