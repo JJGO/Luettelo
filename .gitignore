@@ -11,3 +11,5 @@ nb-configuration.xml
 # Class Files #
 *.class
 nbproject/private/private.xml
+
+._*
