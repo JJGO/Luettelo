@@ -27,7 +27,7 @@
                 </div>
                 <span id="loginError">${loginError}</span>
                 <div style="margin-top:10px">
-                    <button id="btnLogIn" type="button" class="botonAside" onclick="location.href='javascript:loginJSON();'"><strong>LOG IN</strong></button>
+                    <button id="btnLogIn" type="button" class="botonAside" onclick="location.href='javascript:login();'"><strong>LOG IN</strong></button>
                 </div>
             </div>
 
@@ -58,7 +58,7 @@
 
 <c:if test="${not empty sessionScope.user}">
      <div class="mensajeFormulario" style="text-transform: capitalize">Hi  ${sessionScope.user.username}</div>
-     <a href="Logout.auth"> Logout </a>
+     <a href="javascript:logout();"> Logout </a>
         <!-- <div onClick="user/${sessionScope.user.username}" style="text-align: center"> -->
         <div style="text-align: center">
             <button onclick="window.location.href='Lists.show?type=user&value=${sessionScope.user.username}'" id="btnCreated" class="botonAside" ><strong>${fn:toUpperCase(sessionScope.user.username)}'S LISTS</strong></button>

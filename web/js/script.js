@@ -14,6 +14,60 @@ function showSignUp()
     document.getElementById("btnShowSignUp").style.background = "#d83c3c";
 }
 
+var lock = false;
+function AJAX(url,fun)
+{
+    if(!lock)
+    {
+        lock = true;
+        var xmlHttpReq = new XMLHttpRequest();
+        xmlHttpReq.onreadystatechange=function()
+            {
+                if (xmlHttpReq.readyState === 4)
+                {
+                    if(xmlHttpReq.status === 200)
+                    {
+                        fun(xmlHttpReq.responseText);
+                    }
+                    else
+                    {
+                        document.location.replace(document.location.path);
+                    }
+
+                    lock = false;
+                }
+            };
+
+        xmlHttpReq.open('GET', url, true);
+        xmlHttpReq.send();
+    }
+}
+
+function loginJSON(responseText)
+{
+    var objectJSON = eval("(" + responseText + ")");
+    if(objectJSON.loginError == true)
+    {
+        document.getElementById("loginError").innerHTML = objectJSON.message;
+    }
+    else if(objectJSON.loginError == false)
+    {
+        document.getElementById("loginError").innerHTML = "";
+        location.reload(); //F5
+    }
+}
+
+function reloadContent(responseText)
+{
+    location.reload(); //F5
+}
+
+function login()
+{
+    url = 'Login.auth?username='+document.getElementById("username_login").value+'&password='+document.getElementById("password_login").value;
+    AJAX(url,loginJSON);
+}
+
 function validateSignUp()
 {
     var username = document.getElementById("username").value;
@@ -44,61 +98,18 @@ function validateSignUp()
     }
     else
     {
-        var xmlHttpReq = new XMLHttpRequest();                    
-        xmlHttpReq.open('GET', 'Register.auth?username='+username+'&email='+email+'&password='+password+'&rpassword='+rpassword, true); 
-        xmlHttpReq.send();
-        location.reload();
+        url = 'Register.auth?username='+username+'&email='+email+'&password='+password+'&rpassword='+rpassword;
+        AJAX(url, reloadContent)
     }
 }
 
-var lock = false;
-function AJAX(url,fun)
+function logout()
 {
-    if(!lock)
-    {
-        lock = true;
-        var xmlHttpReq = new XMLHttpRequest();
-        xmlHttpReq.onreadystatechange=function()
-            {
-                if (xmlHttpReq.readyState === 4)
-                {
-                    if(xmlHttpReq.status === 200)
-                    {
-                        fun(xmlHttpReq.responseText);
-                    }
-                    else
-                    {
-                        document.location.replace(document.location.path);
-                    }
-
-                    lock = false;
-                }
-            };
-
-        xmlHttpReq.open('GET', url, true);
-        xmlHttpReq.send();
-    }
+    url = 'Logout.auth';
+    AJAX(url,reloadContent);
 }
 
-function login()
-{
-    url = 'Login.auth?username='+document.getElementById("username_login").value+'&password='+document.getElementById("password_login").value;
-    AJAX(url,loginJSON);
-}
 
-function loginJSON()
-{
-    var objectJSON = eval("(" + xmlHttpReq.responseText + ")");
-    if(objectJSON.loginError == true)
-    {
-        document.getElementById("loginError").innerHTML = objectJSON.message;
-    }
-    else if(objectJSON.loginError == false)
-    {
-        document.getElementById("loginError").innerHTML = "";
-        location.reload(); //F5
-    }
-}
 
 function updateContent(responseText)
 {

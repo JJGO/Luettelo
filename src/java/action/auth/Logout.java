@@ -31,12 +31,5 @@ public class Logout implements Action
     public void execute(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException, SQLException, ClassNotFoundException
     {
         request.getSession().setAttribute("user",null);
-        
-            DisplayHelper.setTrendingLists(request);
-            DisplayHelper.setFrontpageLists(request);
-            request.setAttribute("content","lists");
-            request.setAttribute("title","Luettelo");
-            RequestDispatcher rd = request.getRequestDispatcher("/luettelo.jsp");
-            rd.forward(request, response);
     }
 }

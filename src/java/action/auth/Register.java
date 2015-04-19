@@ -78,9 +78,6 @@ public class Register implements Action
                 HttpSession session = request.getSession();
                 session.setAttribute("user",user);
             }
-            
-            RequestDispatcher rd = request.getRequestDispatcher("/luettelo.jsp");
-            rd.forward(request, response);
         }
     }
 }
