@@ -36,7 +36,7 @@
             <to>/Lists.show?type=search</to>
         </rule>
         <rule>
-            <from>/subscribed</from>
+            <from>/subscriptions</from>
             <to>/Lists.show?type=subscribed</to>
         </rule>
 

@@ -70,7 +70,7 @@
 
 
     <div style="text-align: center">
-        <button  onclick="window.location.href='/subscribed'" id="btnSubscribed" class="botonAside" ><strong>SUBSCRIBED LISTS</strong></button>
+        <button  onclick="window.location.href='/subscriptions'" id="btnSubscribed" class="botonAside" ><strong>SUBSCRIBED LISTS</strong></button>
     </div>
     <hr/>
     <div style="text-align: center">
