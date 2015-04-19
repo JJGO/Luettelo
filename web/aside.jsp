@@ -20,10 +20,10 @@
             <div class="panelFormulario" id="loginPanel">
                 <div class="mensajeFormulario">Welcome Back!</div>
                 <div>
-                    <input name="username" type="text" required autocomplete="off" placeholder="Username" />
+                    <input name="username" id="username_login" type="text" required autocomplete="off" placeholder="Username" />
                 </div>
                 <div>
-                    <input name="password" type="password" required autocomplete="off" placeholder="Password"/>
+                    <input name="password" id="password_login" type="password" required autocomplete="off" placeholder="Password"/>
                 </div>
                 <span id="loginError">${loginError}</span>
                 <div style="margin-top:10px">
@@ -33,27 +33,25 @@
 
             <div class="panelFormulario" id="signupPanel" style="display:none">
                 <div class="mensajeFormulario">Sign Up for Free</div>
-                <form action="Register.auth" method="post" onsubmit="javascript:return validateSignUp();">
-                    <div >
-                        <input id="username" name="username" type="text"required autocomplete="off" placeholder="Username" />
-                    </div>
-                    <span id="errorUsername"></span>
-                    <div >
-                        <input id="email" name="email" type="email"required autocomplete="off" placeholder="Email Adress" />
-                    </div>
-                    <span id="errorEmail"></span>
-                    <div >
-                        <input id="password" name="password" type="password"required autocomplete="off" placeholder="Password"/>
-                    </div>
-                    <span id="errorPassword"></span>
-                    <div >
-                        <input id="rpassword" type="password"required autocomplete="off" placeholder="Retype Password"/>
-                    </div>
-                    <span id="errorRpassword"></span>
-                    <div style="margin-top:10px">
-                        <button id="btnSignUp" type="submit" class="botonAside" ><strong>GET STARTED</strong></button>
-                    </div>
-                </form>
+                <div>
+                    <input id="username" name="username" type="text"required autocomplete="off" placeholder="Username" />
+                </div>
+                <span id="errorUsername"></span>
+                <div>
+                    <input id="email" name="email" type="email"required autocomplete="off" placeholder="Email Adress" />
+                </div>
+                <span id="errorEmail"></span>
+                <div>
+                    <input id="password" name="password" type="password"required autocomplete="off" placeholder="Password"/>
+                </div>
+                <span id="errorPassword"></span>
+                <div>
+                    <input id="rpassword" type="password"required autocomplete="off" placeholder="Retype Password"/>
+                </div>
+                <span id="errorRpassword"></span>
+                <div style="margin-top:10px">
+                    <button id="btnSignUp" type="button" class="botonAside" onclick="location.href='javascript:validateSignUp();'"><strong>GET STARTED</strong></button>
+                </div>
             </div>
     </div>
 </c:if>

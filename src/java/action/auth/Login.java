@@ -12,11 +12,11 @@ import dao.UserDAO;
 import dominio.User;
 import helper.DAOHelper;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.SQLException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import util.BCrypt;
 
 
@@ -38,20 +38,26 @@ public class Login implements Action
 
         User user = new User(username);
         UserDAO dao = DAOHelper.getUserDAO(request);
-        String hash = dao.findUser(user).getPassword();
+        
+        String loginErrorJSON = "{loginError: 'true', message: 'Incorrect username or password'}";
 
-        String loginError;
+        user = dao.findUser(user);
+           
+        if(user != null) 
+        {
+            //User exists in DataBase
+            String hash = user.getPassword(); //get password
+            
+            if(password.equals(hash))
+            //if(BCrypt.checkpw(password,hash))
+            {
+                request.getSession().setAttribute("user",user);
+                loginErrorJSON = "{loginError: 'false'}";
+            }
+        }
 
-        if( BCrypt.checkpw(password,hash))
-        {
-            HttpSession session = request.getSession();
-            session.setAttribute("user",user);
-            loginError = "{loginError: 'false'}";
-        }
-        else
-        {
-            loginError = "{loginError: 'true', message: 'Incorrect username or password'}";
-            //request.setAttribute("loginError","Incorrect username or password");
-        }
+        PrintWriter out = response.getWriter();
+        out.println(loginErrorJSON);
+        out.close();
     }
 }

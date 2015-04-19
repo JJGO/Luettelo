@@ -1,21 +1,18 @@
-var listId = document.getElementById("listId").value;
-
 function showLogin()
 {
-	document.getElementById("loginPanel").style.display = "block";
-	document.getElementById("signupPanel").style.display = "none";
-	document.getElementById("btnShowLogin").style.background ="#d83c3c";
-	document.getElementById("btnShowSignUp").style.background ="#bf3535";
+    document.getElementById("loginPanel").style.display = "block";
+    document.getElementById("signupPanel").style.display = "none";
+    document.getElementById("btnShowLogin").style.background ="#d83c3c";
+    document.getElementById("btnShowSignUp").style.background ="#bf3535";
 }
 
 function showSignUp()
 {
-	document.getElementById("loginPanel").style.display = "none";
-	document.getElementById("signupPanel").style.display = "block";
-	document.getElementById("btnShowLogin").style.background = "#bf3535";
-	document.getElementById("btnShowSignUp").style.background = "#d83c3c";
+    document.getElementById("loginPanel").style.display = "none";
+    document.getElementById("signupPanel").style.display = "block";
+    document.getElementById("btnShowLogin").style.background = "#bf3535";
+    document.getElementById("btnShowSignUp").style.background = "#d83c3c";
 }
-
 
 function loginJSON()
 {
@@ -28,54 +25,58 @@ function loginJSON()
 
             if(objectJSON.loginError == "true")
             {
-                document.getElementById("loginError").innerHTML = "";                
+                document.getElementById("loginError").innerHTML = objectJSON.message;
             }
             else if(objectJSON.loginError == "false")
             {
-                document.getElementById("loginError").innerHTML = objectJSON.message;                
+                document.getElementById("loginError").innerHTML = "";
+                location.reload();
             }
         }
     }
-    xmlHttpReq.open('GET', 'Login.auth', true); 
+
+    xmlHttpReq.open('GET', 'Login.auth?username='+document.getElementById("username_login").value+'&password='+document.getElementById("password_login").value, true); 
     xmlHttpReq.send();
 }
 
 function validateSignUp()
 {
-	var username = document.getElementById("username").value;
-	var email = document.getElementById("email").value;
-	var password = document.getElementById("password").value;
-	var rpassword = document.getElementById("rpassword").value;
+    var username = document.getElementById("username").value;
+    var email = document.getElementById("email").value;
+    var password = document.getElementById("password").value;
+    var rpassword = document.getElementById("rpassword").value;
 
-	document.getElementById("errorUsername").innerHTML = "";
-	document.getElementById("errorEmail").innerHTML = "";
-	document.getElementById("errorPassword").innerHTML = "";
-	document.getElementById("errorRpassword").innerHTML = "";
+    document.getElementById("errorUsername").innerHTML = "";
+    document.getElementById("errorEmail").innerHTML = "";
+    document.getElementById("errorPassword").innerHTML = "";
+    document.getElementById("errorRpassword").innerHTML = "";
 
-	if(!username.match(/^[a-z0-9_-]{3,15}$/))
-	{
-		document.getElementById("errorUsername").innerHTML = "The username must contain lowercase letters and numbers and be 3-15 characters long";
-	}
-	else if(!email.match(/^^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/))
-	{
-		document.getElementById("errorEmail").innerHTML = "The email address is invalid";
-	}
-	else if(!password.match(/^.{8,}$/))
-	{
-		document.getElementById("errorPassword").innerHTML = "The password must be at least 8 characters long";
-	}
-	else if(password !== rpassword)
-	{
-		document.getElementById("errorRpassword").innerHTML = "The passwords do not match";
-	}
+    if(!username.match(/^[a-z0-9_-]{3,15}$/))
+    {
+        document.getElementById("errorUsername").innerHTML = "The username must contain lowercase letters and numbers and be 3-15 characters long";
+    }
+    else if(!email.match(/^^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/))
+    {
+        document.getElementById("errorEmail").innerHTML = "The email address is invalid";
+    }
+    else if(!password.match(/^.{8,}$/))
+    {
+        document.getElementById("errorPassword").innerHTML = "The password must be at least 8 characters long";
+    }
+    else if(password !== rpassword)
+    {
+        document.getElementById("errorRpassword").innerHTML = "The passwords do not match";
+    }
     else
     {
-		return true;
-	}
-	
+        var xmlHttpReq = new XMLHttpRequest();                    
+        xmlHttpReq.open('GET', 'Register.auth?username='+username+'&email='+email+'&password='+password+'&rpassword='+rpassword, true); 
+        xmlHttpReq.send();
+        location.reload();
+    }
 }
 
-var lock = false; //Esto para que es (y que hace aqui fuera)? -Lucia
+var lock = false;
 function AJAX(url,fun)
 {
     if(!lock)
@@ -83,25 +84,25 @@ function AJAX(url,fun)
         lock = true;
         var xmlHttpReq = new XMLHttpRequest();
         xmlHttpReq.onreadystatechange=function()
+            {
+                if (xmlHttpReq.readyState === 4)
+                {
+                    if(xmlHttpReq.status === 200)
                     {
-                        if (xmlHttpReq.readyState === 4)
-                        {
-                            if(xmlHttpReq.status===200)
-                            {
-                                    fun(xmlHttpReq.responseText);
-                            }
-                            else
-                            {
-                                    document.location.replace(document.location.path);
-                            }
-                            lock = false;
-                        }
-                    };
+                        fun(xmlHttpReq.responseText);
+                    }
+                    else
+                    {
+                        document.location.replace(document.location.path);
+                    }
+
+                    lock = false;
+                }
+            };
 
         xmlHttpReq.open('GET', url, true);
         xmlHttpReq.send();
     }
-    
 }
 
 function updateContent(responseText)
@@ -116,78 +117,78 @@ function updateDisplayList(responseText)
 
 function addComment()
 {
+    var listId = document.getElementById("listId").value;
     var url = 'AddComment.do?listId='+listId;
     url += '&content='+document.getElementById("comment-field").value;
     AJAX(url,updateContent);
-    
 }
 
 function editComment(commentId)
 {
-	var comment = document.getElementById("comment-"+commentId);
-	comment.style.display = "none";
-	document.getElementById("comment-edit-"+commentId).style.display = "block";
-	document.getElementById("comment-field-"+commentId).value = comment.innerHTML;
+    var comment = document.getElementById("comment-"+commentId);
+    comment.style.display = "none";
+    document.getElementById("comment-edit-"+commentId).style.display = "block";
+    document.getElementById("comment-field-"+commentId).value = comment.innerHTML;
         document.getElementById("op-"+commentId).style.display = none;
 }
 
 function commitEditComment(commentId)
 {
+    var listId = document.getElementById("listId").value;
     var url = 'EditComment.do?listId='+listId;
-	url += '&commentId='+commentId;
+    url += '&commentId='+commentId;
     url += '&content='+document.getElementById("comment-field-"+commentId).value;
     AJAX(url,updateContent);
-    
 }
 
 function removeComment(commentId)
 {
-	if(confirm("Do you really want to delete the comment?"))
-	{
-		var url = 'RemoveComment.do?listId='+listId;
-		url += '&commentId='+commentId;
-		AJAX(url,updateContent);
-		
-	}
+    if(confirm("Do you really want to delete the comment?"))
+    {
+        var listId = document.getElementById("listId").value;
+        var url = 'RemoveComment.do?listId='+listId;
+        url += '&commentId='+commentId;
+        AJAX(url,updateContent);
+    }
 }
 
 function addItem()
 {
+    var listId = document.getElementById("listId").value;
     var url = 'AddItem.do?listId='+listId;
     url += "&name="+document.getElementById("item-name").value;
     url += "&url="+document.getElementById("item-url").value;
     url += "&listId="+listId;
     AJAX(url,updateContent);
-    
 }
 
 function editItem(itemId)
 {
-	document.getElementById("item-title-"+itemId).style.display = "none";
-	document.getElementById("item-edit-"+itemId).style.display = "block";
-	document.getElementById("name-field-"+itemId).value = document.getElementById("item-url-"+itemId).text;
-	document.getElementById("url-field-"+itemId).value = document.getElementById("item-url-"+itemId).href;
+    document.getElementById("item-title-"+itemId).style.display = "none";
+    document.getElementById("item-edit-"+itemId).style.display = "block";
+    document.getElementById("name-field-"+itemId).value = document.getElementById("item-url-"+itemId).text;
+    document.getElementById("url-field-"+itemId).value = document.getElementById("item-url-"+itemId).href;
 }
 
 function commitEditItem(itemId)
 {
+    var listId = document.getElementById("listId").value;
     var url = 'EditItem.do?listId='+listId;
-	url += '&itemId='+itemId;
+    url += '&itemId='+itemId;
     url += "&name="+document.getElementById("name-field-"+itemId).value;
     url += "&url="+document.getElementById("url-field-"+itemId).value;
     AJAX(url,updateContent);
-    
 }
 
 function removeItem(itemId)
 {
-	if(confirm("Do you really want to delete the item?"))
-	{
-		var url = 'RemoveItem.do?listId='+listId;
-		url += '&itemId='+itemId;
-		AJAX(url,updateContent);
-		
-	}
+    if(confirm("Do you really want to delete the item?"))
+    {
+        var listId = document.getElementById("listId").value;
+        var url = 'RemoveItem.do?listId='+listId;
+        url += '&itemId='+itemId;
+        AJAX(url,updateContent);
+    }
 }
 
 function editList()
@@ -206,99 +207,100 @@ function editList()
 
 function commitEditList()
 {
-	var url = 'EditList.do?listId='+listId;
-	url += "&name="+ document.getElementById("ltitle-field").value;
-	url += "&category="+ document.getElementById("lcategory-field").value;
-	url += "&description="+ document.getElementById("ldescription-field").value;
-	AJAX(url,updateDisplayList);
-	
+    var listId = document.getElementById("listId").value;
+    var url = 'EditList.do?listId='+listId;
+    url += "&name="+ document.getElementById("ltitle-field").value;
+    url += "&category="+ document.getElementById("lcategory-field").value;
+    url += "&description="+ document.getElementById("ldescription-field").value;
+    AJAX(url,updateDisplayList);
 }
 
 function removeList()
 {
-	if(confirm("Do you really want to delete this list?. This will delete all the items in it (This action cannot be undone)"))
-	{
-		var url = 'RemoveList.do?listId='+listId;
-		document.location.replace(url);
-	}
+    if(confirm("Do you really want to delete this list?. This will delete all the items in it (This action cannot be undone)"))
+    {
+        var listId = document.getElementById("listId").value;
+        var url = 'RemoveList.do?listId='+listId;
+        document.location.replace(url);
+    }
 }
 
 function subscribeList()
 {
-	var url = 'SubscribeList.do?listId='+listId;
-	AJAX(url,updateContent);
-	
+    var listId = document.getElementById("listId").value;
+    var url = 'SubscribeList.do?listId='+listId;
+    AJAX(url,updateContent);
 }
 
 function unsubscribeList()
 {
-	var url = 'UnsubscribeList.do?listId='+listId;
-	AJAX(url,updateContent);
-	
+    var listId = document.getElementById("listId").value;
+    var url = 'UnsubscribeList.do?listId='+listId;
+    AJAX(url,updateContent);
 }
 
 function checkItem(itemId)
 {
-	var url = 'CheckItem.do?listId='+listId;
-	url += '&itemId='+itemId;
-	AJAX(url,updateContent);
-	
+    var listId = document.getElementById("listId").value;
+    var url = 'CheckItem.do?listId='+listId;
+    url += '&itemId='+itemId;
+    AJAX(url,updateContent);
 }
 
 function uncheckItem(itemId)
 {
-	var url = 'UncheckItem.do?listId='+listId;
-	url += '&itemId='+itemId;
-	AJAX(url,updateContent);
-	
+    var listId = document.getElementById("listId").value;
+    var url = 'UncheckItem.do?listId='+listId;
+    url += '&itemId='+itemId;
+    AJAX(url,updateContent);
 }
 
 function rateItem(itemId,rating)
 {
-	var url = 'RateItem.do?listId='+listId;
-	url += '&itemId='+itemId;
-	url += "&rating="+rating;
-	AJAX(url,updateContent);
-	
+    var listId = document.getElementById("listId").value;
+    var url = 'RateItem.do?listId='+listId;
+    url += '&itemId='+itemId;
+    url += "&rating="+rating;
+    AJAX(url,updateContent);
 }
 
 function hoverSubscribe()
 {
-	document.getElementById("subscribeIcon").src="images/subscribed.png";
+    document.getElementById("subscribeIcon").src="images/subscribed.png";
 }
 
 function unhoverSubscribe()
 {
-	document.getElementById("subscribeIcon").src="images/subscribe.png";
+    document.getElementById("subscribeIcon").src="images/subscribe.png";
 }
 
 function hoverUnsubscribe()
 {
-	document.getElementById("subscribeIcon").src="images/unsubscribed.png";
+    document.getElementById("subscribeIcon").src="images/unsubscribed.png";
 }
 
 function unhoverUnsubscribe()
 {
-	document.getElementById("subscribeIcon").src="images/subscribed.png";
+    document.getElementById("subscribeIcon").src="images/subscribed.png";
 }
 
 
 function hoverCheck(itemId)
 {
-	document.getElementById("checkIcon-"+itemId).src="images/checked.png";
+    document.getElementById("checkIcon-"+itemId).src="images/checked.png";
 }
 
 function unhoverCheck(itemId)
 {
-	document.getElementById("checkIcon-"+itemId).src="images/check.png";
+    document.getElementById("checkIcon-"+itemId).src="images/check.png";
 }
 
 function hoverUncheck(itemId)
 {
-	document.getElementById("checkIcon-"+itemId).src="images/unchecked.png";
+    document.getElementById("checkIcon-"+itemId).src="images/unchecked.png";
 }
 
 function unhoverUncheck(itemId)
 {
-	document.getElementById("checkIcon-"+itemId).src="images/checked.png";
+    document.getElementById("checkIcon-"+itemId).src="images/checked.png";
 }

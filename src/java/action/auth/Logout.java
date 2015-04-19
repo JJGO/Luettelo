@@ -8,8 +8,10 @@
 package action.auth;
 
 import action.Action;
+import helper.DisplayHelper;
 import java.io.IOException;
 import java.sql.SQLException;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -29,5 +31,12 @@ public class Logout implements Action
     public void execute(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException, SQLException, ClassNotFoundException
     {
         request.getSession().setAttribute("user",null);
+        
+            DisplayHelper.setTrendingLists(request);
+            DisplayHelper.setFrontpageLists(request);
+            request.setAttribute("content","lists");
+            request.setAttribute("title","Luettelo");
+            RequestDispatcher rd = request.getRequestDispatcher("/luettelo.jsp");
+            rd.forward(request, response);
     }
 }

@@ -69,10 +69,6 @@ public class Authentication extends HttpServlet {
         {
             request.setAttribute("content","error");
             ex.printStackTrace();
-        }finally
-        {
-            RequestDispatcher rd = request.getRequestDispatcher("/luettelo.jsp");
-            rd.forward(request, response);
         }
     }
 

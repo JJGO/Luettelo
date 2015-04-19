@@ -13,6 +13,7 @@ import dominio.User;
 import helper.DAOHelper;
 import java.io.IOException;
 import java.sql.SQLException;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -33,7 +34,6 @@ public class Register implements Action
     @Override
     public void execute(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException, SQLException, ClassNotFoundException
     {
-
         String username     = request.getParameter("username");
         String email        = request.getParameter("email");
         String password     = request.getParameter("password");
@@ -43,18 +43,22 @@ public class Register implements Action
         {
             response.sendRedirect("Lists.show"); //el usuario se ha saltado la verificacion de cliente
         }
+
         else if(!email.matches("^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+$"))
         {
             response.sendRedirect("Lists.show"); //el usuario se ha saltado la verificacion de cliente
         }
+
         else if(!password.matches("^.{8,}$"))
         {
             response.sendRedirect("Lists.show"); //el usuario se ha saltado la verificacion de cliente
         }
-        else if(password.equals(rpassword))
+
+        else if(!password.equals(rpassword))
         {
             response.sendRedirect("Lists.show"); //el usuario se ha saltado la verificacion de cliente
         }
+
         else
         {
             UserDAO dao = DAOHelper.getUserDAO(request);
@@ -74,7 +78,9 @@ public class Register implements Action
                 HttpSession session = request.getSession();
                 session.setAttribute("user",user);
             }
+            
+            RequestDispatcher rd = request.getRequestDispatcher("/luettelo.jsp");
+            rd.forward(request, response);
         }
-        
     }
 }
