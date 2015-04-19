@@ -81,7 +81,7 @@
         <button onclick="window.location.href='Lists.show'" id="btnTlists" class="botonAside" ><strong>TRENDING LISTS</strong></button>
     </div>
     <table>
-        <c:forEach var="list" items="${trendingLists}">
+        <c:forEach var="list" items="${visitedLists}">
             <tr>
                 <td> ${list.average} </td>
                 <!-- Pasar a URL Rewrite -->
