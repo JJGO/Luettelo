@@ -6,6 +6,7 @@ import dao.ListDAO;
 import dominio.List;
 import dominio.User;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 
 
@@ -23,6 +24,24 @@ public class DisplayHelper
         request.setAttribute("trendingLists",dao.findByRating(15,user));
     }
 
+    public static void setVisitedLists(HttpServletRequest request) throws SQLException, ClassNotFoundException
+    {
+        ListDAO dao = DAOHelper.getListDAO(request);
+        ArrayList<String> listIds = CookieHelper.getSplittedListsCookie(request);
+        ArrayList<List> visitedLists = new ArrayList<List>();
+
+        if(listIds != null)
+        {
+            for(String id:listIds)
+            {
+                List list = new List(Integer.parseInt(id));
+                visitedLists.add(dao.findById(list, null));
+            }
+        }
+     
+        request.setAttribute("visitedLists",visitedLists);
+    }
+    
     public static void setList(HttpServletRequest request) throws SQLException, ClassNotFoundException
     {
         ListDAO dao = DAOHelper.getListDAO(request);
