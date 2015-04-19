@@ -19,19 +19,16 @@
 
             <div class="panelFormulario" id="loginPanel">
                 <div class="mensajeFormulario">Welcome Back!</div>
-                <form action="Login.auth" method="post">
-                    <div >
-                        <input name="username" type="text"required autocomplete="off" placeholder="Username" />
-                    </div>
-                    <div >
-                        <input name="password" type="password"required autocomplete="off" placeholder="Password"/>
-                    </div>
-                    <span id="loginError">${loginError}</span>
-                    <!-- <p class="forgot"><a href="#">Forgot Password?</a></p> -->
-                    <div  style="margin-top:10px">
-                        <button id="btnLogIn" type="submit" class="botonAside" ><strong>LOG IN</strong></button>
-                    </div>
-                </form>
+                <div>
+                    <input name="username" type="text" required autocomplete="off" placeholder="Username" />
+                </div>
+                <div>
+                    <input name="password" type="password" required autocomplete="off" placeholder="Password"/>
+                </div>
+                <span id="loginError">${loginError}</span>
+                <div style="margin-top:10px">
+                    <button id="btnLogIn" type="button" class="botonAside" onclick="location.href='javascript:loginJSON();'"><strong>LOG IN</strong></button>
+                </div>
             </div>
 
             <div class="panelFormulario" id="signupPanel" style="display:none">

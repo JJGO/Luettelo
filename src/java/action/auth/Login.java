@@ -39,14 +39,19 @@ public class Login implements Action
         User user = new User(username);
         UserDAO dao = DAOHelper.getUserDAO(request);
         String hash = dao.findUser(user).getPassword();
+
+        String loginError;
+
         if( BCrypt.checkpw(password,hash))
         {
             HttpSession session = request.getSession();
             session.setAttribute("user",user);
+            loginError = "{loginError: 'false'}";
         }
         else
         {
-            request.setAttribute("loginError","Incorrect username or passwords");
+            loginError = "{loginError: 'true', message: 'Incorrect username or password'}";
+            //request.setAttribute("loginError","Incorrect username or password");
         }
     }
 }

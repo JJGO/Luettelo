@@ -8,13 +8,36 @@ function showLogin()
 	document.getElementById("btnShowSignUp").style.background ="#bf3535";
 }
 
-
 function showSignUp()
 {
 	document.getElementById("loginPanel").style.display = "none";
 	document.getElementById("signupPanel").style.display = "block";
 	document.getElementById("btnShowLogin").style.background = "#bf3535";
 	document.getElementById("btnShowSignUp").style.background = "#d83c3c";
+}
+
+
+function loginJSON()
+{
+    var xmlHttpReq = new XMLHttpRequest();
+    xmlHttpReq.onreadystatechange=function()
+    {
+        if (xmlHttpReq.readyState == 4 && xmlHttpReq.status==200)
+        {
+            var objectJSON = eval("(" + xmlHttpReq.responseText + ")");
+
+            if(objectJSON.loginError == "true")
+            {
+                document.getElementById("loginError").innerHTML = "";                
+            }
+            else if(objectJSON.loginError == "false")
+            {
+                document.getElementById("loginError").innerHTML = objectJSON.message;                
+            }
+        }
+    }
+    xmlHttpReq.open('GET', 'Login.auth', true); 
+    xmlHttpReq.send();
 }
 
 function validateSignUp()
@@ -31,7 +54,7 @@ function validateSignUp()
 
 	if(!username.match(/^[a-z0-9_-]{3,15}$/))
 	{
-		document.getElementById("errorUsername").innerHTML = "Invalid username";
+		document.getElementById("errorUsername").innerHTML = "The username must contain lowercase letters and numbers and be 3-15 characters long";
 	}
 	else if(!email.match(/^^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/))
 	{
@@ -44,12 +67,15 @@ function validateSignUp()
 	else if(password !== rpassword)
 	{
 		document.getElementById("errorRpassword").innerHTML = "The passwords do not match";
-	}else{
+	}
+    else
+    {
 		return true;
 	}
 	
 }
-var lock = false;
+
+var lock = false; //Esto para que es (y que hace aqui fuera)? -Lucia
 function AJAX(url,fun)
 {
     if(!lock)
