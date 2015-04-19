@@ -14,31 +14,6 @@ function showSignUp()
     document.getElementById("btnShowSignUp").style.background = "#d83c3c";
 }
 
-function loginJSON()
-{
-    var xmlHttpReq = new XMLHttpRequest();
-    xmlHttpReq.onreadystatechange=function()
-    {
-        if (xmlHttpReq.readyState == 4 && xmlHttpReq.status==200)
-        {
-            var objectJSON = eval("(" + xmlHttpReq.responseText + ")");
-
-            if(objectJSON.loginError == true)
-            {
-                document.getElementById("loginError").innerHTML = objectJSON.message;
-            }
-            else if(objectJSON.loginError == false)
-            {
-                document.getElementById("loginError").innerHTML = "";
-                location.reload();
-            }
-        }
-    }
-
-    xmlHttpReq.open('GET', 'Login.auth?username='+document.getElementById("username_login").value+'&password='+document.getElementById("password_login").value, true); 
-    xmlHttpReq.send();
-}
-
 function validateSignUp()
 {
     var username = document.getElementById("username").value;
@@ -102,6 +77,26 @@ function AJAX(url,fun)
 
         xmlHttpReq.open('GET', url, true);
         xmlHttpReq.send();
+    }
+}
+
+function login()
+{
+    url = 'Login.auth?username='+document.getElementById("username_login").value+'&password='+document.getElementById("password_login").value;
+    AJAX(url,loginJSON);
+}
+
+function loginJSON()
+{
+    var objectJSON = eval("(" + xmlHttpReq.responseText + ")");
+    if(objectJSON.loginError == true)
+    {
+        document.getElementById("loginError").innerHTML = objectJSON.message;
+    }
+    else if(objectJSON.loginError == false)
+    {
+        document.getElementById("loginError").innerHTML = "";
+        location.reload(); //F5
     }
 }
 
@@ -283,7 +278,6 @@ function unhoverUnsubscribe()
 {
     document.getElementById("subscribeIcon").src="images/subscribed.png";
 }
-
 
 function hoverCheck(itemId)
 {
