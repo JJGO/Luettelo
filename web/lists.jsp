@@ -12,22 +12,15 @@
 <c:forEach var="list" items="${displayLists}">
     <div class="component ${list.subscribed ? 'subscribed' : ''}"}>
         <div class="component-title">
-        <!-- Pasar a URL Rewrite -->
-            <!-- <a href="items/${list.id}/${list.url}">
-                ${list.name}
-            </a> -->
-            <a href="Items.show?listId=${list.id}">
+            <a href="/items/${list.id}/${list.url}">
                 ${list.name}
             </a>
-            <!-- <a class="user-inline" href="user/${displayList.username}">${displayList.username}</a> -->
-            <a class="user-inline" href="Lists.show?type=user&value=${list.username}">${list.username}</a>
+            <a class="user-inline" href="/user/${list.username}">${list.username}</a>
         </div>
 
         <span class="component-rating component-rating-index">${list.average}</span>
         <br/>
-        <!-- <a class="component-comments" hhref="comments/${list.id}/${list.url}">Comments (${list.comments})</a> -->
-        <a class="component-comments" href="Comments.show?listId=${list.id}">Comments (${list.comments})</a>
-        <!-- <a class="component-category" href="category/{list.category}">${list.category}</a> -->
-        <a class="component-category" href="Lists.show?type=category&value=${list.category}">${list.category}</a>
+        <a class="component-comments" href="/comments/${list.id}/${list.url}">Comments (${list.comments})</a>
+        <a class="component-category" href="/category/${list.category}">${list.category}</a>
     </div>
 </c:forEach>

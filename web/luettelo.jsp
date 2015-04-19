@@ -13,10 +13,9 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title>${title}</title>
         <!-- CSS -->
-        <link rel="stylesheet" href="css/style.css">
-        <link rel="stylesheet" href="css/search.css">
-        <link rel="shortcut icon" href="images/favicon.ico">
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+        <link rel="stylesheet" href="/css/style.css">
+        <link rel="stylesheet" href="/css/search.css">
+        <link rel="shortcut icon" href="/images/favicon.ico">
     </head>
     <body>
         <main>
@@ -33,6 +32,7 @@
                 <c:import url="/footer.jsp" charEncoding="UTF-8" />
             </footer>
         </main>
-        <script src="js/script.js" type="text/javascript" charset="utf-8"></script>
+        <script src="/js/script.js" type="text/javascript" charset="utf-8"></script>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     </body>
 </html>

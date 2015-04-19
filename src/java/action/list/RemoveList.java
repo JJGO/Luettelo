@@ -41,7 +41,7 @@ public class RemoveList implements Action
         if(dao.removeList(list, user))
         {
             
-            response.sendRedirect("Lists.show");
+            response.sendRedirect("home");
         }
         else
         {

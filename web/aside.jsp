@@ -61,32 +61,29 @@
      <a href="javascript:logout();"> Logout </a>
         <!-- <div onClick="user/${sessionScope.user.username}" style="text-align: center"> -->
         <div style="text-align: center">
-            <button onclick="window.location.href='Lists.show?type=user&value=${sessionScope.user.username}'" id="btnCreated" class="botonAside" ><strong>${fn:toUpperCase(sessionScope.user.username)}'S LISTS</strong></button>
+            <button onclick="window.location.href='/user/${sessionScope.user.username}'" id="btnCreated" class="botonAside" ><strong>${fn:toUpperCase(sessionScope.user.username)}'S LISTS</strong></button>
         </div>
 
 
-    <!-- <div onClick="window.location.href='subscribed" style="text-align: center"> -->
     <div style="text-align: center">
-        <button  onclick="window.location.href='Lists.show?type=subscribed'" id="btnSubscribed" class="botonAside" ><strong>SUBSCRIBED LISTS</strong></button>
+        <button  onclick="window.location.href='/subscriptions'" id="btnSubscribed" class="botonAside" ><strong>SUBSCRIBED LISTS</strong></button>
     </div>
     <hr/>
     <div style="text-align: center">
-        <button onclick="window.location.href='AddList.do'" id="btnNewList" class="botonAside" ><strong>CREATE A NEW LIST</strong></button>
+        <button onclick="window.location.href='/addList'" id="btnNewList" class="botonAside" ><strong>CREATE A NEW LIST</strong></button>
     </div>
         <hr/>
 </c:if>
 
 <div class="trendingL">
     <div style="text-align: center">
-        <button onclick="window.location.href='Lists.show'" id="btnTlists" class="botonAside" ><strong>TRENDING LISTS</strong></button>
+        <button onclick="window.location.href='/home'" id="btnTlists" class="botonAside" ><strong>TRENDING LISTS</strong></button>
     </div>
     <table>
         <c:forEach var="list" items="${visitedLists}">
             <tr>
                 <td> ${list.average} </td>
-                <!-- Pasar a URL Rewrite -->
-                <!-- <td> <a href="items/${list.id}/${list.url}"> ${list.name} </a> </td> -->
-                <td> <a href="Items.show?listId=${list.id}"> ${list.name} </a> </td>
+                <td> <a href="/items/${list.id}/${list.url}"> ${list.name} </a> </td>
             </tr>
         </c:forEach>
     </table>

@@ -4,7 +4,7 @@ USE luettelo;
 CREATE TABLE IF NOT EXISTS User
 (
     username    VARCHAR(31)     NOT NULL,
-    email       VARCHAR(254)    NOT NULL,
+    email       VARCHAR(254)    NOT NULL    UNIQUE,
     password    CHAR(60)        NOT NULL,
     CONSTRAINT User_pkey
         PRIMARY KEY(username)

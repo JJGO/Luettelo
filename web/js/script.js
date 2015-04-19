@@ -124,7 +124,7 @@ function updateDisplayList(responseText)
 function addComment()
 {
     var listId = document.getElementById("listId").value;
-    var url = 'AddComment.do?listId='+listId;
+    var url = '/AddComment.do?listId='+listId;
     url += '&content='+document.getElementById("comment-field").value;
     AJAX(url,updateContent);
 }
@@ -141,7 +141,7 @@ function editComment(commentId)
 function commitEditComment(commentId)
 {
     var listId = document.getElementById("listId").value;
-    var url = 'EditComment.do?listId='+listId;
+    var url = '/EditComment.do?listId='+listId;
     url += '&commentId='+commentId;
     url += '&content='+document.getElementById("comment-field-"+commentId).value;
     AJAX(url,updateContent);
@@ -152,7 +152,7 @@ function removeComment(commentId)
     if(confirm("Do you really want to delete the comment?"))
     {
         var listId = document.getElementById("listId").value;
-        var url = 'RemoveComment.do?listId='+listId;
+        var url = '/RemoveComment.do?listId='+listId;
         url += '&commentId='+commentId;
         AJAX(url,updateContent);
     }
@@ -161,7 +161,7 @@ function removeComment(commentId)
 function addItem()
 {
     var listId = document.getElementById("listId").value;
-    var url = 'AddItem.do?listId='+listId;
+    var url = '/AddItem.do?listId='+listId;
     url += "&name="+document.getElementById("item-name").value;
     url += "&url="+document.getElementById("item-url").value;
     url += "&listId="+listId;
@@ -179,7 +179,7 @@ function editItem(itemId)
 function commitEditItem(itemId)
 {
     var listId = document.getElementById("listId").value;
-    var url = 'EditItem.do?listId='+listId;
+    var url = '/EditItem.do?listId='+listId;
     url += '&itemId='+itemId;
     url += "&name="+document.getElementById("name-field-"+itemId).value;
     url += "&url="+document.getElementById("url-field-"+itemId).value;
@@ -191,7 +191,7 @@ function removeItem(itemId)
     if(confirm("Do you really want to delete the item?"))
     {
         var listId = document.getElementById("listId").value;
-        var url = 'RemoveItem.do?listId='+listId;
+        var url = '/RemoveItem.do?listId='+listId;
         url += '&itemId='+itemId;
         AJAX(url,updateContent);
     }
@@ -214,7 +214,7 @@ function editList()
 function commitEditList()
 {
     var listId = document.getElementById("listId").value;
-    var url = 'EditList.do?listId='+listId;
+    var url = '/EditList.do?listId='+listId;
     url += "&name="+ document.getElementById("ltitle-field").value;
     url += "&category="+ document.getElementById("lcategory-field").value;
     url += "&description="+ document.getElementById("ldescription-field").value;
@@ -226,7 +226,7 @@ function removeList()
     if(confirm("Do you really want to delete this list?. This will delete all the items in it (This action cannot be undone)"))
     {
         var listId = document.getElementById("listId").value;
-        var url = 'RemoveList.do?listId='+listId;
+        var url = '/RemoveList.do?listId='+listId;
         document.location.replace(url);
     }
 }
@@ -234,21 +234,21 @@ function removeList()
 function subscribeList()
 {
     var listId = document.getElementById("listId").value;
-    var url = 'SubscribeList.do?listId='+listId;
+    var url = '/SubscribeList.do?listId='+listId;
     AJAX(url,updateContent);
 }
 
 function unsubscribeList()
 {
     var listId = document.getElementById("listId").value;
-    var url = 'UnsubscribeList.do?listId='+listId;
+    var url = '/UnsubscribeList.do?listId='+listId;
     AJAX(url,updateContent);
 }
 
 function checkItem(itemId)
 {
     var listId = document.getElementById("listId").value;
-    var url = 'CheckItem.do?listId='+listId;
+    var url = '/CheckItem.do?listId='+listId;
     url += '&itemId='+itemId;
     AJAX(url,updateContent);
 }
@@ -256,7 +256,7 @@ function checkItem(itemId)
 function uncheckItem(itemId)
 {
     var listId = document.getElementById("listId").value;
-    var url = 'UncheckItem.do?listId='+listId;
+    var url = '/UncheckItem.do?listId='+listId;
     url += '&itemId='+itemId;
     AJAX(url,updateContent);
 }
@@ -264,7 +264,7 @@ function uncheckItem(itemId)
 function rateItem(itemId,rating)
 {
     var listId = document.getElementById("listId").value;
-    var url = 'RateItem.do?listId='+listId;
+    var url = '/RateItem.do?listId='+listId;
     url += '&itemId='+itemId;
     url += "&rating="+rating;
     AJAX(url,updateContent);
@@ -272,40 +272,40 @@ function rateItem(itemId,rating)
 
 function hoverSubscribe()
 {
-    document.getElementById("subscribeIcon").src="images/subscribed.png";
+	document.getElementById("subscribeIcon").src="/images/subscribed.png";
 }
 
 function unhoverSubscribe()
 {
-    document.getElementById("subscribeIcon").src="images/subscribe.png";
+	document.getElementById("subscribeIcon").src="/images/subscribe.png";
 }
 
 function hoverUnsubscribe()
 {
-    document.getElementById("subscribeIcon").src="images/unsubscribed.png";
+	document.getElementById("subscribeIcon").src="/images/unsubscribed.png";
 }
 
 function unhoverUnsubscribe()
 {
-    document.getElementById("subscribeIcon").src="images/subscribed.png";
+	document.getElementById("subscribeIcon").src="/images/subscribed.png";
 }
 
 function hoverCheck(itemId)
 {
-    document.getElementById("checkIcon-"+itemId).src="images/checked.png";
+	document.getElementById("checkIcon-"+itemId).src="/images/checked.png";
 }
 
 function unhoverCheck(itemId)
 {
-    document.getElementById("checkIcon-"+itemId).src="images/check.png";
+	document.getElementById("checkIcon-"+itemId).src="/images/check.png";
 }
 
 function hoverUncheck(itemId)
 {
-    document.getElementById("checkIcon-"+itemId).src="images/unchecked.png";
+	document.getElementById("checkIcon-"+itemId).src="/images/unchecked.png";
 }
 
 function unhoverUncheck(itemId)
 {
-    document.getElementById("checkIcon-"+itemId).src="images/checked.png";
+	document.getElementById("checkIcon-"+itemId).src="/images/checked.png";
 }

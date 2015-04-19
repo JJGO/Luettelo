@@ -42,13 +42,13 @@
         <c:if test="${displayList.subscribed}">
             <c:if test="${empty item.rating}">
                 <a href="javascript:checkItem(${item.id})"  class="check-icon" onmouseover="hoverCheck(${item.id})" onmouseout="unhoverCheck(${item.id})">
-                    <img src="images/check.png" alt="Check" id="checkIcon-${item.id}">
+                    <img src="/images/check.png" alt="Check" id="checkIcon-${item.id}">
                 </a>
             </c:if>
 
             <c:if test="${not empty item.rating}">
                 <a href="javascript:uncheckItem(${item.id})"  class="check-icon" onmouseover="hoverUncheck(${item.id})" onmouseout="unhoverUncheck(${item.id})">
-                    <img src="images/checked.png" alt="Uncheck" id="checkIcon-${item.id}">
+                    <img src="/images/checked.png" alt="Uncheck" id="checkIcon-${item.id}">
                 </a>
             </c:if>
         </c:if>
@@ -71,22 +71,16 @@
                 <input type="submit" value="Submit" onclick="javascript:commitEditItem(${item.id})">
         </div>
             <a href="javascript:removeItem(${item.id})" style="float:right" class="check-icon" >
-                <img src="images/delete.png" alt="Eliminar" id="deleteIcon">
+                <img src="/images/delete.png" alt="Remove Item" id="deleteIcon">
             </a>
             <a href="javascript:editItem(${item.id})" style="float:right" class="check-icon" >
-                <img src="images/edit.png" alt="Editar" id="editIcon">
+                <img src="/images/edit.png" alt="Edit Item" id="editIcon">
             </a>
         </c:if>
         <span class="component-rating">${item.average}</span>
         <br/>
         <c:if test="${not empty item.rating}">
             <fieldset class="rating" id="rating-${item.id}">
-                <!-- <c:forEach var="i" begin="${item.rating+1}" end="5"  step="1" varStatus="loop">
-                    <span onclick="javascript:rateItem(${item.id},${loop.end - i + loop.begin})">&#x2606;</span>
-                </c:forEach>
-                <c:forEach var="i" begin="1" end="${item.rating}" step="1" varStatus="loop">
-                    <span onclick="javascript:rateItem(${item.id},${loop.end - i + loop.begin})">&#x2605;</span>
-                </c:forEach> -->
                 <input type="radio" id="star5-${item.id}" name="rating-${item.id}" value="5"  <c:if test="${item.rating == 5}">checked = "checked"</c:if> onclick="javascript:rateItem(${item.id},5)" /><label for="star5-${item.id}" title="Rocks!">5 stars</label>
                 <input type="radio" id="star4-${item.id}" name="rating-${item.id}" value="4"  <c:if test="${item.rating == 4}">checked = "checked"</c:if> onclick="javascript:rateItem(${item.id},4)" /><label for="star4-${item.id}" title="Pretty good">4 stars</label>
                 <input type="radio" id="star3-${item.id}" name="rating-${item.id}" value="3"  <c:if test="${item.rating == 3}">checked = "checked"</c:if> onclick="javascript:rateItem(${item.id},3)" /><label for="star3-${item.id}" title="Meh">3 stars</label>

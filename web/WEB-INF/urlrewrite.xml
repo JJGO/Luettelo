@@ -20,35 +20,55 @@
     </rule>
 
         <rule>
-            <from>/index</from>
+            <from>/home</from>
             <to>/Lists.show</to>
         </rule>
         <rule>
-            <from>/category/([a-z]+)</from>
-            <to>Lists.show?type=category&value=$1</to>
+            <from>/category/([a-z_-]+)</from>
+            <to>/Lists.show?type=category&amp;value=$1</to>
         </rule>
         <rule>
-            <from>/user/([a-z]+)</from>
-            <to>Lists.show?type=user&value=$1</to>
+            <from>/user/([a-z_-]+)</from>
+            <to>/Lists.show?type=user&amp;value=$1</to>
         </rule>
         <rule>
-            <from>/search?q=([a-z]+)</from>
-            <to>Lists.show?type=search&value=$1</to>
+            <from>/search</from>
+            <to>/Lists.show?type=search</to>
         </rule>
         <rule>
-            <from>/subscribed</from>
-            <to>Lists.show?type=subscribed</to>
+            <from>/subscriptions</from>
+            <to>/Lists.show?type=subscribed</to>
         </rule>
 
         <rule>
-            <from>/items/([0-9]+)/([a-z]+)</from>
-            <to>Items.show?listId=$1</to>
+            <from>/items/([0-9]+)/([a-z_-]+)</from>
+            <to>/Items.show?listId=$1</to>
         </rule>
 
         <rule>
-            <from>/comments/([0-9]+)/([a-z]+)</from>
-            <to>Comments.show?type=search&value=$1</to>
+            <from>/comments/([0-9]+)/([a-z_-]+)</from>
+            <to>/Comments.show?listId=$1</to>
         </rule>
+
+        <rule>
+            <from>/addList</from>
+            <to>/AddList.do</to>
+        </rule>
+
+        <rule>
+            <from>/items/([0-9]+)</from>
+            <to>/Items.show?listId=$1</to>
+        </rule>
+
+        <rule>
+            <from>/comments/([0-9]+)</from>
+            <to>/Comments.show?listId=$1</to>
+        </rule>
+
+        <rule>
+            <set type="request" name="content">error</set>
+            <set type="request" name="title">Error</set>
+        </rule>        
     
     <outbound-rule>
         <note>

@@ -28,7 +28,7 @@
 
 <c:forEach var="comment" items="${displayComments}">
     <div class="component">
-        <div class="user"><a href="Lists.show?type=user&value=${comment.username}">${comment.username}</a></div>
+        <div class="user"><a href="/user/${comment.username}">${comment.username}</a></div>
         <div>
             <!-- <div class="comment-rating">
             <span id="upvote" class="arrow">▲</span>
@@ -51,10 +51,10 @@
         <c:if test="${comment.username==sessionScope.user.username}">
             <div style="float:right" id="op-${comment.id}">
                 <a href="javascript:editComment(${comment.id})" class="check-icon" >
-                <img src="images/edit.png" alt="Edit Comment" id="editCommentIcon">
+                <img src="/images/edit.png" alt="Edit Comment" id="editCommentIcon">
                 </a>
                 <a href="javascript:removeComment(${comment.id})" class="check-icon" >
-                <img src="images/delete.png" alt="Remove Comment" id="removeCommentIcon">
+                <img src="/images/delete.png" alt="Remove Comment" id="removeCommentIcon">
                 </a>
             </div>
         </c:if>
