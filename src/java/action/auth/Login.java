@@ -39,7 +39,7 @@ public class Login implements Action
         User user = new User(username);
         UserDAO dao = DAOHelper.getUserDAO(request);
         
-        String loginErrorJSON = "{loginError: 'true', message: 'Incorrect username or password'}";
+        String loginErrorJSON = "{loginError: true, message: 'Incorrect username or password'}";
 
         user = dao.findUser(user);
            
@@ -48,11 +48,10 @@ public class Login implements Action
             //User exists in DataBase
             String hash = user.getPassword(); //get password
             
-            if(password.equals(hash))
-            //if(BCrypt.checkpw(password,hash))
+            if(BCrypt.checkpw(password,hash))
             {
                 request.getSession().setAttribute("user",user);
-                loginErrorJSON = "{loginError: 'false'}";
+                loginErrorJSON = "{loginError: false}";
             }
         }
 

@@ -23,11 +23,11 @@ function loginJSON()
         {
             var objectJSON = eval("(" + xmlHttpReq.responseText + ")");
 
-            if(objectJSON.loginError == "true")
+            if(objectJSON.loginError == true)
             {
                 document.getElementById("loginError").innerHTML = objectJSON.message;
             }
-            else if(objectJSON.loginError == "false")
+            else if(objectJSON.loginError == false)
             {
                 document.getElementById("loginError").innerHTML = "";
                 location.reload();
