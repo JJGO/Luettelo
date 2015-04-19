@@ -41,10 +41,11 @@ public class AddList implements Action
                                  //to know who created the list
             ListDAO dao = DAOHelper.getListDAO(request);
             List list   = new List(name, category, description);
-            list = dao.addList(list, user);
-            if(list != null)
+            List listWithId = dao.addList(list, user);
+            if(listWithId != null)
             {
-                response.sendRedirect("Items.show?listId="+list.getId() );
+                list.setId(listWithId.getId());
+                response.sendRedirect("items/"+list.getId()+"/"+list.getUrl() );
             }
             else
             {

@@ -4,15 +4,15 @@
 <!DOCTYPE html>
 <div class="component main-component">
     <span class="component-title" >
-        <a href="Items.show?listId=${displayList.id}" id="list-title">${displayList.name}</a>
-        <a class="user-inline" href="Lists.show?type=user&value=${displayList.username}">${displayList.username}</a>
+        <a href="/items/${displayList.id}/${displayList.url}" id="list-title">${displayList.name}</a>
+        <a class="user-inline" href="/user/${displayList.username}">${displayList.username}</a>
     </span>
     <c:if test="${displayList.username==sessionScope.user.username}">
         <a href="javascript:removeList()" style="float:right" class="check-icon" >
-            <img src="images/delete.png" alt="Eliminar" id="deleteList">
+            <img src="/images/delete.png" alt="Remove List" id="deleteList">
         </a>
         <a href="javascript:editList()" style="float:right" class="check-icon" >
-            <img src="images/edit.png" alt="Editar" id="editList">
+            <img src="/images/edit.png" alt="Edit List" id="editList">
         </a>
     </c:if>
     <span class="component-rating">${displayList.average}</span>
@@ -20,12 +20,12 @@
     <c:if test="${not empty sessionScope.user.username}">
         <c:if test="${not displayList.subscribed}">
             <a href="javascript:subscribeList()" class="subscribe-icon" onmouseover="hoverSubscribe()" onmouseout="unhoverSubscribe()">
-                <img src="images/subscribe.png" alt="Subscribe" id="subscribeIcon">
+                <img src="/images/subscribe.png" alt="Subscribe" id="subscribeIcon">
             </a>
         </c:if>
         <c:if test="${displayList.subscribed}">
             <a href="javascript:unsubscribeList()" class="subscribe-icon" onmouseover="hoverUnsubscribe()" onmouseout="unhoverUnsubscribe()">
-                <img src="images/subscribed.png" alt="Subscribe" id="subscribeIcon">
+                <img src="/images/subscribed.png" alt="Unsubscribe" id="subscribeIcon">
             </a>
         </c:if>
     </c:if>
@@ -59,8 +59,8 @@
     </c:if>
     <p class="component-description" id="list-description">${displayList.description}</p>
     <br/>
-    <a class="component-comments" id="list-comments" href="Comments.show?listId=${displayList.id}">Comments (${displayList.comments})</a>
-    <a class="component-category" id="list-category" href="Lists.show?type=category&value=${displayList.category}">${displayList.category}</a>
+    <a class="component-comments" id="list-comments" href="/comments/${displayList.id}/${displayList.url}">Comments (${displayList.comments})</a>
+    <a class="component-category" id="list-category" href="/category/${displayList.category}">${displayList.category}</a>
     <input type="hidden" style="display:none" id="listId" value="${displayList.id}"/>
 </div>
 
