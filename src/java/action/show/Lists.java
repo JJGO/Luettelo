@@ -48,7 +48,8 @@ public class Lists implements Action
         else if (type.equals("search"))
         {
             request.setAttribute("displayLists",dao.findByKeyword(value,user));
-            request.setAttribute("title","Search : "+value);
+            request.setAttribute("title","Search: "+value);
+            //Add to cookie the thing added
         }
         else if (type.equals("user"))
         {

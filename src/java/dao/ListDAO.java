@@ -249,7 +249,6 @@ public class ListDAO extends DAO
         return lists.get(0);
     }
 
-
     private ArrayList<List> parseResultSet(ResultSet rs) throws SQLException
     {
         ArrayList<List> lists = new ArrayList<List>();

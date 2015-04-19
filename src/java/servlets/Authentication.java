@@ -11,7 +11,6 @@ import action.Action;
 import framework.ActionFactory;
 import helper.DisplayHelper;
 import java.io.IOException;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -40,7 +39,7 @@ public class Authentication extends HttpServlet {
         {
            Action action = ActionFactory.getAction(request.getServletPath(),"action.auth");
            action.execute(request, response);
-           DisplayHelper.setTrendingLists(request);
+           DisplayHelper.setVisitedLists(request);
            DisplayHelper.setFrontpageLists(request);
            request.setAttribute("content","lists");
            request.setAttribute("title","Luettelo");
