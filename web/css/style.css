@@ -352,7 +352,7 @@ footer span
     margin: 0px 0px 10px 0px;
     color:#fff0f0;
     text-transform: capitalize;
-    font-family: 'Open Sans';
+    /*font-family: 'Open Sans';*/
     font-size: 25pt;
     text-align: center;
 }

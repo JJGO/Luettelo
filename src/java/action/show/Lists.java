@@ -45,19 +45,19 @@ public class Lists implements Action
         {
             request.setAttribute("displayLists",dao.findByCategory(value,user));
             request.setAttribute("title",value);
-            request.setAttribute("queryMessage","Category : "+value);
+            request.setAttribute("queryMessage","Category: "+value);
         }
         else if (type.equals("search"))
         {
             request.setAttribute("displayLists",dao.findByKeyword(value,user));
             request.setAttribute("title","Search: "+value);
-            request.setAttribute("queryMessage","Search : "+value);
+            request.setAttribute("queryMessage","Search: "+value);
         }
         else if (type.equals("user"))
         {
             request.setAttribute("displayLists",dao.findByUser(new User(value),user));
             request.setAttribute("title",value);
-            request.setAttribute("queryMessage","User :  "+value);
+            request.setAttribute("queryMessage","User:  "+value);
         }
         else if (type.equals("subscribed"))
         {
@@ -71,7 +71,6 @@ public class Lists implements Action
             request.setAttribute("displayLists",request.getAttribute("visitedLists"));
             request.setAttribute("title","Recently Visited");
             request.setAttribute("queryMessage","Recently Visited Lists");
-
         }
 
         request.setAttribute("content","lists");
