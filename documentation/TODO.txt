@@ -16,6 +16,3 @@ Paginar resultados
 
 Meter dummy content
 
-Pasar todo lo que no es show a AJAX / JSON
-
-Forgot Password

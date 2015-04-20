@@ -10,5 +10,7 @@
 <!DOCTYPE html>
 <div class="content">
     <span class="error"> WHOOPSIE! </span>
-    It's looking like you may have taken a wrong turn. Don't worry... it happens to the best of us.
+    <p class="errormsg">It's looking like you may have taken a wrong turn.</p>
+    <p class="errormsg"> Don't worry... </p>
+    <p class="errormsg"> It happens to the best of us.</p>
 </div>

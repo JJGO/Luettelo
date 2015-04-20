@@ -50,7 +50,7 @@ public class RateItem implements Action
         }
         else
         {
-            response.sendRedirect("index");
+            response.sendRedirect("/home");
         }
     }
 }

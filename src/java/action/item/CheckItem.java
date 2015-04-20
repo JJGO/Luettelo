@@ -50,7 +50,7 @@ public class CheckItem implements Action
         }
         else
         {
-            response.sendRedirect("index");
+            response.sendRedirect("/home");
         }
     }
 }

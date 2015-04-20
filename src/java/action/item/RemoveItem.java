@@ -49,7 +49,7 @@ public class RemoveItem implements Action
         }
         else
         {
-            response.sendRedirect("index");
+            response.sendRedirect("/home");
         }
     }
 }

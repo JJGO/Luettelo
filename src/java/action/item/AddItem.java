@@ -52,7 +52,7 @@ public class AddItem implements Action
         }
         else
         {
-            response.sendRedirect("index");
+            response.sendRedirect("/home");
         }
     }
 }

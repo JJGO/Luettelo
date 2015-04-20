@@ -48,7 +48,7 @@ public class SubscribeList implements Action
         }
         else
         {
-            response.sendRedirect("index");
+            response.sendRedirect("/home");
         }
     }
 }

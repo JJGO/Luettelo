@@ -19,7 +19,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import util.BCrypt;
-// import java.security.NoSuchAlgorithmException;
 
 /**
  *
@@ -30,7 +29,6 @@ import util.BCrypt;
 
 public class Register implements Action
 {
-    // TODO - Put coherently the exceptions to error.jsp
     @Override
     public void execute(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException, SQLException, ClassNotFoundException
     {

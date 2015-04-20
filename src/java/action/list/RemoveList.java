@@ -40,8 +40,7 @@ public class RemoveList implements Action
         List list = new List(listId);
         if(dao.removeList(list, user))
         {
-            
-            response.sendRedirect("home");
+            response.sendRedirect("/home");
         }
         else
         {

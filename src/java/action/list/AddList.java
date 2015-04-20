@@ -45,7 +45,7 @@ public class AddList implements Action
             if(listWithId != null)
             {
                 list.setId(listWithId.getId());
-                response.sendRedirect("items/"+list.getId()+"/"+list.getUrl() );
+                response.sendRedirect("/items/"+list.getId()+"/"+list.getUrl() );
             }
             else
             {

@@ -49,7 +49,7 @@ public class UnsubscribeList implements Action
         }
         else
         {
-            response.sendRedirect("index");
+            response.sendRedirect("/home");
         }
     }
 }

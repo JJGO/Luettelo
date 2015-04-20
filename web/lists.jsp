@@ -9,6 +9,12 @@
 <%@page import="dominio.User"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+<div class="queryMessage">
+    <h4> ${queryMessage} </h4>
+    <c:if test="${empty displayLists}">
+        <p>There are no lists that match this criteria</p>
+    </c:if>
+</div>
 <c:forEach var="list" items="${displayLists}">
     <div class="component ${list.subscribed ? 'subscribed' : ''}"}>
         <div class="component-title">

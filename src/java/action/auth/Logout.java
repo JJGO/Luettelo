@@ -26,7 +26,6 @@ import javax.servlet.http.HttpServletResponse;
 
 public class Logout implements Action
 {
-    // TODO - Put coherently the exceptions to error.jsp
     @Override
     public void execute(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException, SQLException, ClassNotFoundException
     {

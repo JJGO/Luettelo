@@ -39,7 +39,10 @@
             <from>/subscriptions</from>
             <to>/Lists.show?type=subscribed</to>
         </rule>
-
+        <rule>
+            <from>/history</from>
+            <to>/Lists.show?type=visited</to>
+        </rule>
         <rule>
             <from>/items/([0-9]+)/([a-z_-]+)</from>
             <to>/Items.show?listId=$1</to>
@@ -54,21 +57,18 @@
             <from>/addList</from>
             <to>/AddList.do</to>
         </rule>
-
         <rule>
             <from>/items/([0-9]+)</from>
             <to>/Items.show?listId=$1</to>
         </rule>
-
         <rule>
             <from>/comments/([0-9]+)</from>
             <to>/Comments.show?listId=$1</to>
         </rule>
-
         <rule>
             <set type="request" name="content">error</set>
             <set type="request" name="title">Error</set>
-        </rule>        
+        </rule>
     
     <outbound-rule>
         <note>

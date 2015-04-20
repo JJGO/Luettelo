@@ -27,7 +27,7 @@
                 </div>
                 <span id="loginError">${loginError}</span>
                 <div style="margin-top:10px">
-                    <button id="btnLogIn" type="button" class="botonAside" onclick="location.href='javascript:login();'"><strong>LOG IN</strong></button>
+                    <button id="btnLogIn" type="button"  onclick="location.href='javascript:login();'"><strong>LOG IN</strong></button>
                 </div>
             </div>
 
@@ -49,35 +49,34 @@
                     <input id="rpassword" type="password"required autocomplete="off" placeholder="Retype Password"/>
                 </div>
                 <span id="errorRpassword"></span>
-                <div style="margin-top:10px">
-                    <button id="btnSignUp" type="button" class="botonAside" onclick="location.href='javascript:validateSignUp();'"><strong>GET STARTED</strong></button>
+                <div class="botonAside" style="margin-top:10px">
+                    <button id="btnSignUp" type="button"  onclick="location.href='javascript:validateSignUp();'"><strong>GET STARTED</strong></button>
                 </div>
             </div>
     </div>
 </c:if>
 
 <c:if test="${not empty sessionScope.user}">
-     <div class="mensajeFormulario" style="text-transform: capitalize">Hi  ${sessionScope.user.username}</div>
+     <div class="mensajeFormulario">Hi  ${sessionScope.user.username}</div>
      <a href="javascript:logout();"> Logout </a>
-        <!-- <div onClick="user/${sessionScope.user.username}" style="text-align: center"> -->
-        <div style="text-align: center">
-            <button onclick="window.location.href='/user/${sessionScope.user.username}'" id="btnCreated" class="botonAside" ><strong>${fn:toUpperCase(sessionScope.user.username)}'S LISTS</strong></button>
+        <div class="botonAside">
+            <button onclick="window.location.href='/user/${sessionScope.user.username}'" id="btnCreated"  ><strong>${fn:toUpperCase(sessionScope.user.username)}'S LISTS</strong></button>
         </div>
 
 
-    <div style="text-align: center">
-        <button  onclick="window.location.href='/subscriptions'" id="btnSubscribed" class="botonAside" ><strong>SUBSCRIBED LISTS</strong></button>
+    <div class="botonAside">
+        <button  onclick="window.location.href='/subscriptions'" id="btnSubscribed"  ><strong>SUBSCRIBED LISTS</strong></button>
     </div>
     <hr/>
-    <div style="text-align: center">
-        <button onclick="window.location.href='/addList'" id="btnNewList" class="botonAside" ><strong>CREATE A NEW LIST</strong></button>
+    <div class="botonAside">
+        <button onclick="window.location.href='/addList'" id="btnNewList"  ><strong>CREATE A NEW LIST</strong></button>
     </div>
         <hr/>
 </c:if>
 
-<div class="trendingL">
-    <div style="text-align: center">
-        <button onclick="window.location.href='/home'" id="btnTlists" class="botonAside" ><strong>VISITED LISTS</strong></button>
+<div class="visitedLists">
+    <div class="botonAside">
+        <button onclick="window.location.href='/visited'" id="btnTlists"  ><strong>VISITED LISTS</strong></button>
     </div>
     <table>
         <c:forEach var="list" items="${visitedLists}">

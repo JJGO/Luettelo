@@ -3,8 +3,6 @@ body
 	font-family: Helvetica, Arial;
 	font-size: 11pt;
 	background-image: url('../images/background.png');
-    /*background-attachment: fixed;
-	color: #EBEBEB;*/
 }
 
 main
@@ -262,17 +260,17 @@ aside a:hover
   
 }
 
-.trendingL
+.visitedLists
 {
     padding-left: 5px;
 }
 
-.trendingL td
+.visitedLists td
 {
 	padding : 5px;
 }
 
-.trendingL a:hover
+.visitedLists a:hover
 {
     text-decoration: underline;
 }
@@ -356,13 +354,18 @@ footer span
 }
 
 .mensajeFormulario {
-    margin: 30px 0px 20px 0px;
+    margin: 0px 0px 10px 0px;
     color:#fff0f0;
-    font-size: 2em;
+    text-transform: capitalize;
+    font-family: 'Lucida Grande';
+    font-size: 25pt;
     text-align: center;
 }
-
 .botonAside
+{
+    text-align: center;
+}
+.botonAside button
 {
     border: 0;
     outline: none;
@@ -376,27 +379,6 @@ footer span
     text-align: center;
 }
 
-/*.rating {
-  unicode-bidi: bidi-override;
-  direction: rtl;
-  float:left;
-  clear:left;
-  margin:10px 30px;
-  color : #c72b2b;
-  font-size:12pt;
-}
-.rating > span {
-  display: inline-block;
-  position: relative;
-  width: 1.1em;
-  cursor:pointer;
-}
-.rating > span:hover:before,
-.rating > span:hover ~ span:before {
-   content: "\2605";
-   position: absolute;
-}*/
-
 .rating {
     float:left;
 
@@ -406,9 +388,6 @@ footer span
     border: 0;
 }
 
-/* :not(:checked) is a filter, so that browsers that don’t support :checked don’t
-   follow these rules. Every browser that supports :checked also supports :not(), so
-   it doesn’t make the test unnecessarily selective */
 .rating:not(:checked) > input {
     clip:rect(0px,0px,0px,0px);
     position:absolute;
@@ -522,4 +501,47 @@ footer span
 
 .edit-field{
     width: 250px;
+}
+
+.logout
+{
+    display : block;
+    text-align: center;
+}
+
+.error
+{
+    text-align: center;
+    display: block;
+    font-size: 27pt;
+    font-family: wisdom;
+    color: #003031;
+    margin: 20px 0px 0px 0px;
+}
+
+.errormsg
+{
+    text-align: center;
+    color: #003031;
+    font-size: 12pt;
+    font-style: italic;
+}
+
+.queryMessage
+{
+    color: #003031;
+}
+
+.queryMessage h4
+{
+    padding: 0px 0px 0px 50px;
+    font-weight: bold;
+}
+
+.queryMessage
+{
+    text-align: center;
+    display: block;
+    font-size: 12pt;
+    font-style: italic;
 }
