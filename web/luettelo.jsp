@@ -14,7 +14,7 @@
         <title>${title}</title>
         <!-- CSS -->
         <link rel="stylesheet" href="/css/style.css">
-        <link rel="stylesheet" href="/css/search.css">
+        <link rel="stylesheet" href="/css/searchbar.css">
         <link rel="shortcut icon" href="/images/favicon.ico">
     </head>
     <body>

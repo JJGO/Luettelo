@@ -32,8 +32,8 @@
             <to>/Lists.show?type=user&amp;value=$1</to>
         </rule>
         <rule>
-            <from>/search</from>
-            <to>/Lists.show?type=search</to>
+            <from>/search/(.*)</from>
+            <to>/Lists.show?type=search&amp;value=$1</to>
         </rule>
         <rule>
             <from>/subscriptions</from>

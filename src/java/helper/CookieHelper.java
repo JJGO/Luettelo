@@ -46,7 +46,7 @@ public class CookieHelper
         {
             String[] array = c.getValue().split(":");   //get array of Strings
             ArrayList<String> values = new ArrayList<String>(Arrays.asList(array)); //get ArrayList<String> from array
-            int max = 10;
+            int max = Integer.parseInt(request.getServletContext().getInitParameter("maxVisited"));
             
             if (values.contains(listId))
             {
@@ -64,7 +64,7 @@ public class CookieHelper
             c.setValue(cookieValue);                    //add value to the Cookie
         }
 
-        c.setPath("");
+        c.setPath("/");
         response.addCookie(c);
     }
 

@@ -77,7 +77,7 @@
 
 <div class="trendingL">
     <div style="text-align: center">
-        <button onclick="window.location.href='/home'" id="btnTlists" class="botonAside" ><strong>TRENDING LISTS</strong></button>
+        <button onclick="window.location.href='/home'" id="btnTlists" class="botonAside" ><strong>VISITED LISTS</strong></button>
     </div>
     <table>
         <c:forEach var="list" items="${visitedLists}">

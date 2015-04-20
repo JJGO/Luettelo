@@ -31,7 +31,8 @@ function AJAX(url,fun)
                     }
                     else
                     {
-                        document.location.replace(document.location.path);
+                        alert("te has pasado de listo");
+                        document.location.replace("/");
                     }
 
                     lock = false;
@@ -41,6 +42,24 @@ function AJAX(url,fun)
         xmlHttpReq.open('GET', url, true);
         xmlHttpReq.send();
     }
+}
+
+function reloadContent(responseText)
+{
+    location.reload(); //F5
+}
+
+function search()
+{
+    // Some validation could be added
+    var url = "/search/" + document.getElementById("query").value;
+    document.location.replace(url);
+}
+
+function login()
+{
+    url = '/Login.auth?username='+document.getElementById("username_login").value+'&password='+document.getElementById("password_login").value;
+    AJAX(url,loginJSON);
 }
 
 function loginJSON(responseText)
@@ -55,17 +74,6 @@ function loginJSON(responseText)
         document.getElementById("loginError").innerHTML = "";
         location.reload(); //F5
     }
-}
-
-function reloadContent(responseText)
-{
-    location.reload(); //F5
-}
-
-function login()
-{
-    url = 'Login.auth?username='+document.getElementById("username_login").value+'&password='+document.getElementById("password_login").value;
-    AJAX(url,loginJSON);
 }
 
 function validateSignUp()
@@ -98,18 +106,16 @@ function validateSignUp()
     }
     else
     {
-        url = 'Register.auth?username='+username+'&email='+email+'&password='+password+'&rpassword='+rpassword;
+        url = '/Register.auth?username='+username+'&email='+email+'&password='+password+'&rpassword='+rpassword;
         AJAX(url, reloadContent)
     }
 }
 
 function logout()
 {
-    url = 'Logout.auth';
+    url = '/Logout.auth';
     AJAX(url,reloadContent);
 }
-
-
 
 function updateContent(responseText)
 {
@@ -135,7 +141,7 @@ function editComment(commentId)
     comment.style.display = "none";
     document.getElementById("comment-edit-"+commentId).style.display = "block";
     document.getElementById("comment-field-"+commentId).value = comment.innerHTML;
-        document.getElementById("op-"+commentId).style.display = none;
+    document.getElementById("op-"+commentId).style.display = none;
 }
 
 function commitEditComment(commentId)

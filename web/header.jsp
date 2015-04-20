@@ -10,10 +10,10 @@
 	<h1>Luettelo</h1>
 </a>
 <div class="search">
-	<form class="form-wrapper cf" action="/search" method="POST">
-	    <input name="value" type="text" placeholder="Search here..." required>
-	    <button type="submit">Search</button>
-	</form>
+	<div class="form-wrapper cf">
+	    <input id="query" name="value" type="text" placeholder="Search here..." required>
+	    <button type="submit" onclick="javascript:search()">Search</button>
+	</div>
 </div>
 
 <br/>
