@@ -246,7 +246,10 @@ public class ListDAO extends DAO
         ps.setInt(      2,  list.getId()            );
         ArrayList<List> lists = this.parseResultSet(ps.executeQuery());
         ps.close();
-        return lists.get(0);
+        if(lists != null)
+            return lists.get(0);
+        else
+            return null;
     }
 
     private ArrayList<List> parseResultSet(ResultSet rs) throws SQLException

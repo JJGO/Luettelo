@@ -9,7 +9,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <div class="content">
-    <span class="error"> WHOOPSIE! </span>
+    <span class="error"> Whoopsie!! </span>
     <p class="errormsg">It's looking like you may have taken a wrong turn.</p>
     <p class="errormsg"> Don't worry... </p>
     <p class="errormsg"> It happens to the best of us.</p>

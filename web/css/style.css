@@ -328,11 +328,6 @@ footer span
   
 }
 
-
-.botonAside:hover{
-  background: #d12a2a;
-}
-
 .panelFormulario input {
   border: 1px solid #d12a2a;
   color: #fff;
@@ -353,12 +348,19 @@ footer span
   float: center;
 }
 
-.mensajeFormulario {
+.mensajeBienvenida {
     margin: 0px 0px 10px 0px;
     color:#fff0f0;
     text-transform: capitalize;
-    font-family: 'Lucida Grande';
+    font-family: 'Open Sans';
     font-size: 25pt;
+    text-align: center;
+}
+
+.mensajeFormulario {
+    margin: 30px 0px 20px 0px;
+    color:#fff0f0;
+    font-size: 2em;
     text-align: center;
 }
 .botonAside
@@ -377,6 +379,10 @@ footer span
     width: 90%;
     margin: 15px 2px 15px 2px;
     text-align: center;
+}
+
+.botonAside button:hover{
+  background: #d12a2a;
 }
 
 .rating {
@@ -530,17 +536,16 @@ footer span
 .queryMessage
 {
     color: #003031;
+    text-align: center;
 }
 
 .queryMessage h4
 {
-    padding: 0px 0px 0px 50px;
     font-weight: bold;
 }
 
 .queryMessage
 {
-    text-align: center;
     display: block;
     font-size: 12pt;
     font-style: italic;

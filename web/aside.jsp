@@ -26,7 +26,7 @@
                     <input name="password" id="password_login" type="password" required autocomplete="off" placeholder="Password"/>
                 </div>
                 <span id="loginError">${loginError}</span>
-                <div style="margin-top:10px">
+                <div class="botonAside" style="margin-top:10px">
                     <button id="btnLogIn" type="button"  onclick="location.href='javascript:login();'"><strong>LOG IN</strong></button>
                 </div>
             </div>
@@ -57,8 +57,8 @@
 </c:if>
 
 <c:if test="${not empty sessionScope.user}">
-     <div class="mensajeFormulario">Hi  ${sessionScope.user.username}</div>
-     <a href="javascript:logout();"> Logout </a>
+     <div class="mensajeBienvenida">Hi  ${sessionScope.user.username}</div>
+     <a class="logout" href="javascript:logout();"> Logout </a>
         <div class="botonAside">
             <button onclick="window.location.href='/user/${sessionScope.user.username}'" id="btnCreated"  ><strong>${fn:toUpperCase(sessionScope.user.username)}'S LISTS</strong></button>
         </div>
@@ -76,7 +76,7 @@
 
 <div class="visitedLists">
     <div class="botonAside">
-        <button onclick="window.location.href='/visited'" id="btnTlists"  ><strong>VISITED LISTS</strong></button>
+        <button onclick="window.location.href='/history'" id="btnTlists"  ><strong>VISITED LISTS</strong></button>
     </div>
     <table>
         <c:forEach var="list" items="${visitedLists}">

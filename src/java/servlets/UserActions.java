@@ -82,7 +82,7 @@ public class UserActions extends HttpServlet {
         }
         else
         {
-            response.sendRedirect("Lists.show");
+            response.sendRedirect("/home");
         }
         
     }
