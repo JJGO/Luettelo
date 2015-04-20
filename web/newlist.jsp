@@ -15,11 +15,11 @@
         <table>
             <tr>
                 <td>Name</td>
-                <td><input type="text" name="name"></td>
+                <td><input class="rounded-component textbox" type="text" name="name"></td>
             </tr>
             <tr>
                 <td>Category</td>
-                <td><select name="category" form="newListForm">
+                <td><select name="category" class="rounded-component multiplechoice" form="newListForm">
                   <option value="Movies">Movies</option>
                   <option value="Books">Books</option>
                   <option value="Series">Series</option>
@@ -33,8 +33,8 @@
                 <td></td>
             </tr>
         </table>
-        <textarea name="description" form="newListForm" class="comment-box"></textarea>
+        <textarea name="description" form="newListForm" class="rounded-component comment-box add-description-list"></textarea>
         <br/><br/>
-            <input type="submit" value="Submit">
+            <input type="submit" value="Submit" class="my-button">
     </form>
 </div>

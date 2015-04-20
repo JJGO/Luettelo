@@ -49,6 +49,7 @@
                     <input id="rpassword" type="password"required autocomplete="off" placeholder="Retype Password"/>
                 </div>
                 <span id="errorRpassword"></span>
+                <span id="signupError">${signupError}</span>
                 <div class="botonAside" style="margin-top:10px">
                     <button id="btnSignUp" type="button"  onclick="location.href='javascript:validateSignUp();'"><strong>GET STARTED</strong></button>
                 </div>
@@ -65,7 +66,7 @@
 
 
     <div class="botonAside">
-        <button  onclick="window.location.href='/subscriptions'" id="btnSubscribed"  ><strong>SUBSCRIBED LISTS</strong></button>
+        <button  onclick="window.location.href='/subscriptions'" id="btnSubscribed"><strong>SUBSCRIBED LISTS</strong></button>
     </div>
     <hr/>
     <div class="botonAside">

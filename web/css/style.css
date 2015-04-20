@@ -37,12 +37,71 @@ h1
 	display: inline;
 }
 
-
 .search
 {
 	width: 60%;
 	float:right;
     padding-top: 5px;
+}
+
+.rounded-component
+{
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    border: 1px solid #848484;
+    outline:0;
+}
+
+.textbox
+{
+    margin-left: 3px;
+    height:20px;
+    width: 275px;
+    padding-left: 2px;
+    padding-right: 2px;
+}
+
+.multiplechoice
+{
+    margin-left: 3px;
+    height: 25px;
+}
+
+.comment-box
+{
+    font-family: Helvetica, Arial;
+    font-size: 11pt;
+
+    padding-left: 3px;
+    padding-right: 3px;
+    margin-left: 20px;
+    margin-top: 10px;
+    width:95%;
+    min-width:95%;
+    max-width:95%;
+    height:70px;
+    min-height:70px;
+    max-height:70px;
+}
+
+.comment-edit-box
+{
+    margin-left: 0px;
+    margin-top: 0px;
+    width:90%;
+    min-width:90%;
+    max-width:90%;
+}
+
+.add-description-list
+{
+    font-family: Helvetica, Arial;
+    font-size: 11pt;
+
+    width:91%;
+    min-width:91%;
+    max-width:91%;
 }
 
 .categories
@@ -167,25 +226,6 @@ h1
     margin-top: 10px;
 }
 
-.comment-box
-{
-    width:95%;
-    min-width:95%;
-    max-width:95%;
-
-    margin-left: 20px;
-
-    height:70px;
-    min-height:70px;
-    max-height:70px;
-}
-
-.comment-edit-box
-{
-    width:90%;
-    height:70px;
-}
-
 .right-holder
 {
     text-align: right;
@@ -221,7 +261,7 @@ h1
 {
     height: 25px;
     width: 25px;
-    margin-top:20px;
+    margin-top:15px;
     float:left;
     clear:left;
 }
@@ -257,7 +297,7 @@ aside
 
 aside a:hover
 {
-  
+    text-decoration: underline;
 }
 
 .visitedLists
@@ -343,6 +383,7 @@ footer span
     border: 1px solid #fff;
     outline:none;
 }
+
 .formulario
 {
   float: center;
@@ -551,4 +592,34 @@ footer span
     display: block;
     font-size: 12pt;
     font-style: italic;
+}
+
+.my-button
+{
+    -moz-box-shadow:inset 0px 1px 0px 0px #cf866c;
+    -webkit-box-shadow:inset 0px 1px 0px 0px #cf866c;
+    box-shadow:inset 0px 1px 0px 0px #cf866c;
+    background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #d0451b), color-stop(1, #bc3315));
+    background:-moz-linear-gradient(top, #d0451b 5%, #bc3315 100%);
+    background:-webkit-linear-gradient(top, #d0451b 5%, #bc3315 100%);
+    background:-o-linear-gradient(top, #d0451b 5%, #bc3315 100%);
+    background:-ms-linear-gradient(top, #d0451b 5%, #bc3315 100%);
+    background:linear-gradient(to bottom, #d0451b 5%, #bc3315 100%);
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#d0451b', endColorstr='#bc3315',GradientType=0);
+    background-color:#d0451b;
+    border:1px solid #942911;
+    display:inline-block;
+    color:#ffffff;
+    padding:3px 7px;
+}
+
+.my-button:hover
+{
+    background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #bc3315), color-stop(1, #d0451b));
+    background:-moz-linear-gradient(top, #bc3315 5%, #d0451b 100%);
+    background:-webkit-linear-gradient(top, #bc3315 5%, #d0451b 100%);
+    background:-o-linear-gradient(top, #bc3315 5%, #d0451b 100%);
+    background:-ms-linear-gradient(top, #bc3315 5%, #d0451b 100%);
+    background:linear-gradient(to bottom, #bc3315 5%, #d0451b 100%);
+    background-color:#bc3315;
 }

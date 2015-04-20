@@ -25,15 +25,15 @@
             <table>
                 <tr>
                     <td>Name</td>
-                    <td><input type="text" name="item-name" id="item-name" class="edit-field"></td>
+                    <td><input type="text" class="rounded-component textbox" name="item-name" id="item-name" class="edit-field"></td>
                 </tr>
                 <tr>
                     <td>URL</td>
-                    <td><input type="text" name="item-url" id="item-url" class="edit-field"></td>
+                    <td><input type="text" class="rounded-component textbox" name="item-url" id="item-url" class="edit-field"></td>
                 </tr>
             </table>
             <br/>
-                <input type="submit" value="Submit" onclick="addItem(${displayList.id})" >
+                <input type="submit" value="Submit" class="my-button" onclick="addItem(${displayList.id})" >
         </div>
     </div>
 </c:if>
@@ -60,15 +60,15 @@
             <table>
                 <tr>
                     <td>Name</td>
-                    <td><input type="text" id="name-field-${item.id}"  class="edit-field"></td>
+                    <td><input type="text" class="rounded-component textbox" id="name-field-${item.id}"  class="edit-field"></td>
                 </tr>
                 <tr>
                     <td>URL</td>
-                    <td><input type="text" id="url-field-${item.id}"  class="edit-field"></td>
+                    <td><input type="text" class="rounded-component textbox" id="url-field-${item.id}"  class="edit-field"></td>
                 </tr>
             </table>
             <br/>
-                <input type="submit" value="Submit" onclick="javascript:commitEditItem(${item.id})">
+                <input type="submit" value="Submit" class="my-button" onclick="javascript:commitEditItem(${item.id})">
         </div>
             <a href="javascript:removeItem(${item.id})" style="float:right" class="check-icon" >
                 <img src="/images/delete.png" alt="Remove Item" id="deleteIcon">

@@ -17,10 +17,10 @@
     <div class="component comment-component">
         <div>
             <div class="right-holder">
-                <textarea class="comment-box" id="comment-field"></textarea>
+                <textarea class="rounded-component comment-box" id="comment-field"></textarea>
             </div>
             <div class="right-holder">
-                 <input type="submit" value="Submit" onclick="javascript:addComment()"/>
+                 <input type="submit" value="Submit" class="my-button" onclick="javascript:addComment()"/>
             </div>
         </div>
     </div>
@@ -39,10 +39,10 @@
                 <c:if test="${comment.username==sessionScope.user.username}">
                     <div id="comment-edit-${comment.id}"style="display:none">
                         <div class="right-holder">
-                            <textarea class="comment-edit-box" id="comment-field-${comment.id}"></textarea>
+                            <textarea class="rounded-component comment-box comment-edit-box" id="comment-field-${comment.id}"></textarea>
                         </div>
                         <div class="right-holder">
-                             <input type="submit" value="Submit"  onclick="javascript:commitEditComment(${comment.id})"/>
+                             <input type="submit" value="Submit" class="my-button" onclick="javascript:commitEditComment(${comment.id})"/>
                         </div>
                     </div>
                 </c:if>

@@ -34,11 +34,11 @@
             <table>
                 <tr>
                     <td>Name</td>
-                    <td><input type="text" name="list-name" id="ltitle-field" class="edit-field"></td>
+                    <td><input type="text" class="rounded-component textbox" name="list-name" id="ltitle-field" class="edit-field"></td>
                 </tr>
                 <tr>
                     <td>Category</td>
-                    <td><select name="category" form="newListForm" id="lcategory-field">
+                    <td><select class="rounded-component multiplechoice" name="category" form="newListForm" id="lcategory-field">
 
                       <option value="Movies">Movies</option>
                       <option value="Books">Books</option>
@@ -50,11 +50,11 @@
                 </tr>
                 <tr>
                     <td>Description</td>
-                    <td><input type="text" name="list-description" id="ldescription-field" class="edit-field"></td>
+                    <td><input type="text" class="rounded-component textbox" name="list-description" id="ldescription-field" class="edit-field"></td>
                 </tr>
             </table>
             <br/>
-                <input type="submit" value="Submit" onclick="javascript:commitEditList()">
+                <input type="submit" value="Submit" class="my-button" onclick="javascript:commitEditList()">
         </div>
     </c:if>
     <p class="component-description" id="list-description">${displayList.description}</p>

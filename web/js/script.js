@@ -76,6 +76,20 @@ function loginJSON(responseText)
     }
 }
 
+function signUpJSON(responseText)
+{
+    var objectJSON = eval("(" + responseText + ")");
+    if(objectJSON.signupError == true)
+    {
+        document.getElementById("signupError").innerHTML = objectJSON.message;
+    }
+    else if(objectJSON.signupError == false)
+    {
+        document.getElementById("signupError").innerHTML = "";
+        location.reload(); //F5
+    }
+}
+
 function validateSignUp()
 {
     var username = document.getElementById("username").value;
@@ -107,7 +121,7 @@ function validateSignUp()
     else
     {
         url = '/Register.auth?username='+username+'&email='+email+'&password='+password+'&rpassword='+rpassword;
-        AJAX(url, reloadContent)
+        AJAX(url, signUpJSON)
     }
 }
 

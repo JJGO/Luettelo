@@ -12,8 +12,8 @@ import dao.UserDAO;
 import dominio.User;
 import helper.DAOHelper;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.SQLException;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -39,32 +39,34 @@ public class Register implements Action
 
         if(!username.matches("^[a-z0-9_-]{3,15}$"))
         {
-            response.sendRedirect("Lists.show"); //el usuario se ha saltado la verificacion de cliente
+            response.sendRedirect("/home"); //el usuario se ha saltado la verificacion de cliente
         }
 
         else if(!email.matches("^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+$"))
         {
-            response.sendRedirect("Lists.show"); //el usuario se ha saltado la verificacion de cliente
+            response.sendRedirect("/home"); //el usuario se ha saltado la verificacion de cliente
         }
 
         else if(!password.matches("^.{8,}$"))
         {
-            response.sendRedirect("Lists.show"); //el usuario se ha saltado la verificacion de cliente
+            response.sendRedirect("/home"); //el usuario se ha saltado la verificacion de cliente
         }
 
         else if(!password.equals(rpassword))
         {
-            response.sendRedirect("Lists.show"); //el usuario se ha saltado la verificacion de cliente
+            response.sendRedirect("/home"); //el usuario se ha saltado la verificacion de cliente
         }
 
         else
         {
+            String signupErrorJSON;
+
             UserDAO dao = DAOHelper.getUserDAO(request);
             String hash = BCrypt.hashpw(password, BCrypt.gensalt(12));
             User user = new User(username, email, hash);
             if(dao.findUser(user) != null)
             {
-                request.setAttribute("loginError","Username already exists");
+                signupErrorJSON = "{signupError: true, message: 'Username already exists'}";
             }
             //else if(user.getEmail().equals(storedUser.getEmail()))
             //{
@@ -75,7 +77,12 @@ public class Register implements Action
                 dao.addUser(user);
                 HttpSession session = request.getSession();
                 session.setAttribute("user",user);
+                signupErrorJSON = "{signupError: false}";
             }
+            
+            PrintWriter out = response.getWriter();
+            out.println(signupErrorJSON);
+            out.close();
         }
     }
 }
