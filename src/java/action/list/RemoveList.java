@@ -12,7 +12,6 @@ import dao.ListDAO;
 import dominio.List;
 import dominio.User;
 import helper.DAOHelper;
-import helper.DisplayHelper;
 import java.io.IOException;
 import java.sql.SQLException;
 import javax.servlet.RequestDispatcher;

@@ -68,10 +68,34 @@ public class CookieHelper
         response.addCookie(c);
     }
 
+    public static void removeListCookie(HttpServletRequest request, HttpServletResponse response, List list)
+    {
+        Cookie c = CookieHelper.findCookie(request, "visitedLists");
+        String listId = Integer.toString(list.getId());
+        
+        if (c != null)
+        {
+            String[] array = c.getValue().split(":");   //get array of Strings
+            ArrayList<String> values = new ArrayList<String>(Arrays.asList(array)); //get ArrayList<String> from array
+
+            if (values.contains(listId))
+            {
+                values.remove(listId);                  //remove
+            }
+
+            String value = values.toString();
+            String cookieValue = value.substring(1, value.length()-1).replace(", ",":");
+
+            c.setValue(cookieValue);                    //add value to the Cookie
+            c.setPath("/");
+            response.addCookie(c);
+        }
+    }
+
     public static ArrayList<String> getSplittedListsCookie(HttpServletRequest request)
     {
         Cookie c = CookieHelper.findCookie(request, "visitedLists");
-        if (c != null) 
+        if (c != null && !"".equals(c.getValue())) 
         {           
             String[] array = c.getValue().split(":");   //get array of Strings
             ArrayList<String> values = new ArrayList<String>(Arrays.asList(array));

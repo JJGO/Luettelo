@@ -39,7 +39,7 @@ public class Authentication extends HttpServlet {
         {
            Action action = ActionFactory.getAction(request.getServletPath(),"action.auth");
            action.execute(request, response);
-           DisplayHelper.setVisitedLists(request);
+           DisplayHelper.setVisitedLists(request, response);
            DisplayHelper.setFrontpageLists(request);
            request.setAttribute("content","lists");
            request.setAttribute("title","Luettelo");

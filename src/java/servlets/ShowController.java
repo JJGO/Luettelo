@@ -42,7 +42,7 @@ public class ShowController extends HttpServlet {
         
         try
         {
-           DisplayHelper.setVisitedLists(request);
+           DisplayHelper.setVisitedLists(request, response);
            Action action = ActionFactory.getAction(request.getServletPath(),"action.show");
            action.execute(request, response);
         }

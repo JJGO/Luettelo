@@ -246,7 +246,7 @@ public class ListDAO extends DAO
         ps.setInt(      2,  list.getId()            );
         ArrayList<List> lists = this.parseResultSet(ps.executeQuery());
         ps.close();
-        if(lists != null)
+        if(lists != null && !lists.isEmpty())
             return lists.get(0);
         else
             return null;

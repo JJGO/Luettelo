@@ -67,7 +67,7 @@ public class Lists implements Action
         }
         else if( type.equals("visited"))
         {
-            DisplayHelper.setVisitedLists(request);
+            DisplayHelper.setVisitedLists(request, response);
             request.setAttribute("displayLists",request.getAttribute("visitedLists"));
             request.setAttribute("title","Recently Visited");
             request.setAttribute("queryMessage","Recently Visited Lists");

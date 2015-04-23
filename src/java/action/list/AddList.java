@@ -37,6 +37,11 @@ public class AddList implements Action
         String description = request.getParameter("description");
         if(name != null && category != null && description != null)
         {
+            if ("".equals(name))
+            {
+                name = "Untitled";
+            }
+            
             User user          = (User) request.getSession().getAttribute("user");
                                  //to know who created the list
             ListDAO dao = DAOHelper.getListDAO(request);

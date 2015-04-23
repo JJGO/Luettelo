@@ -8,6 +8,7 @@ import dominio.User;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 
 /**
@@ -17,14 +18,14 @@ import javax.servlet.http.HttpServletRequest;
 public class DisplayHelper
 {
 
-    public static void setTrendingLists(HttpServletRequest request) throws SQLException, ClassNotFoundException
-    {
-        ListDAO dao = (ListDAO) DAOHelper.getListDAO(request);
-        User user = (User) request.getSession().getAttribute("user");
-        request.setAttribute("trendingLists",dao.findByRating(15,user));
-    }
+    //public static void setTrendingLists(HttpServletRequest request) throws SQLException, ClassNotFoundException
+    //{
+    //    ListDAO dao = (ListDAO) DAOHelper.getListDAO(request);
+    //    User user = (User) request.getSession().getAttribute("user");
+    //    request.setAttribute("trendingLists",dao.findByRating(15,user));
+    //}
 
-    public static void setVisitedLists(HttpServletRequest request) throws SQLException, ClassNotFoundException
+    public static void setVisitedLists(HttpServletRequest request, HttpServletResponse response) throws SQLException, ClassNotFoundException
     {
         ListDAO dao = DAOHelper.getListDAO(request);
         ArrayList<String> listIds = CookieHelper.getSplittedListsCookie(request);
@@ -34,8 +35,16 @@ public class DisplayHelper
         {
             for(String id:listIds)
             {
-                List list = new List(Integer.parseInt(id));
-                visitedLists.add(dao.findById(list, null));
+                List l = new List(Integer.parseInt(id)); //encapsulo el id en l
+                List list = dao.findById(l, null);       //busco la lista l
+                if(list != null)
+                {
+                    visitedLists.add(list);              //meto l en arraylist si esta en la base de datos
+                }
+                else
+                {
+                    CookieHelper.removeListCookie(request, response, l);
+                }
             }
         }
      
