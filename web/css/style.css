@@ -386,7 +386,7 @@ footer span
 
 .formulario
 {
-  float: center;
+  //float: center;
 }
 
 .mensajeBienvenida {
@@ -604,7 +604,7 @@ footer span
     background:-webkit-linear-gradient(top, #d0451b 5%, #bc3315 100%);
     background:-o-linear-gradient(top, #d0451b 5%, #bc3315 100%);
     background:-ms-linear-gradient(top, #d0451b 5%, #bc3315 100%);
-    background:linear-gradient(to bottom, #d0451b 5%, #bc3315 100%);
+    background: linear-gradient(bottom, #d0451b 5%, #bc3315 100%);
     filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#d0451b', endColorstr='#bc3315',GradientType=0);
     background-color:#d0451b;
     border:1px solid #942911;
@@ -620,7 +620,7 @@ footer span
     background:-webkit-linear-gradient(top, #bc3315 5%, #d0451b 100%);
     background:-o-linear-gradient(top, #bc3315 5%, #d0451b 100%);
     background:-ms-linear-gradient(top, #bc3315 5%, #d0451b 100%);
-    background:linear-gradient(to bottom, #bc3315 5%, #d0451b 100%);
+    background:linear-gradient(bottom, #bc3315 5%, #d0451b 100%);
     background-color:#bc3315;
 }
 
@@ -760,9 +760,6 @@ footer span
 
                     .mensajeBienvenida{
                         display: none;
-                    }
-                    .logout{
-                        margin-bottom: 
                     }
                     .botonAside button{
                         margin-bottom: 5px;
