@@ -628,57 +628,49 @@ footer span
 
 @media (max-width: 1023px) {
 
-    .search{
+    .search {
         width : 50%;
-        //float : left;
         padding-top : 0px;
-        margin-top : -10px;
+        margin-top : 15px;
     }
 
     body {
         background :blue;
     }
 
-    main{
+    main {
         width : 95%;
     }
 
-    .logo{
+    .logo {
         margin : auto;
         text-align : center;
         font-size : 25pt;
         margin-top : -5px;
+        margin-left: 10px;
     }
 
-    .content
-    {
-        width : 99.25%;
+    .content {
+        width : 99.35%;
+    }
 
-        /* margin : auto; */
-    
-        /* display: none; */
-}
-
-    .category
-    {
+    .category {
         margin-right : 2px;
         margin-left : 2px;
         font-size : 13pt;
     }
 
-    header
-    {
+    header {
         padding-bottom : 30px;
-    
-}
+        padding-top: 40px;
+        padding-left: 30px;
+    }
 
-    .categories
-    {
+    .categories {
         padding-top : 5px;
     }
 
-    aside
-    {
+    aside {
         display : none;
         position : absolute;
         z-index : 10;
@@ -686,39 +678,45 @@ footer span
         top : 197px;
         right : 3.5%;
     }
+
 }
 
 
 @media (max-width: 640px) {
-    body{
-        background-color : green;
+
+    body {
+        background :green;
     }
 
-    main{
+    .logo {
+        width: 95%;
+    }
+
+    main {
         min-width : 320px;
     }
 
-    .search
-    {
-        display : none;
+    .search {
+        margin-top : 45px;
+        float: left;
     }
 
-    .component
-    {
-        width : 90%
+    .component {
+        width : 90%;
     }
 
-    .logo{
-        clear:none;
 
-    }
-    .category
-    {
-        float:right;
+    .categories {
+        display:none;
     }
 
-    aside{
-        display:block;
+    //.category {
+    //    float:right;
+    //}
+
+    aside {
+        //display:block;
+        display: none;
         //width : 100%;
         //transform: scale(1);
         zoom : 180%;
@@ -726,8 +724,13 @@ footer span
         left:3.9%
     }
 
-    .content{
+    .content {
         //display:none;
+        width: 98.9%;
+    }
+
+    .component-rating{
+        font-size: 15pt;
     }
     
 }

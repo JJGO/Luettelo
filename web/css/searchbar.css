@@ -129,16 +129,26 @@
   
   .form-wrapper{
       width : 270px;
-      background : none;
-      -webkit-box-shadow: none;
-       box-shadow: none;
+      padding: 5px;
   }
 
   .form-wrapper input{
       width : 150px;
+      height: 15px;
   }
 
   .form-wrapper button{
-      height : 40px;
+      height: 35px;
+      font: bold 15px 'lucida sans', 'trebuchet MS', 'Tahoma';
   }
+
+}
+
+@media (max-width: 640px) {
+  
+  .form-wrapper{
+      width : 270px;
+      padding: 0px;
+  }
+
 }
