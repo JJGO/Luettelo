@@ -634,9 +634,9 @@ footer span
         margin-top : 15px;
     }
 
-    body {
-        background :blue;
-    }
+    //body {
+    //    background :blue;
+    //}
 
     main {
         width : 95%;
@@ -652,6 +652,7 @@ footer span
 
     .content {
         width : 99.35%;
+                        padding-bottom: 30px;
     }
 
     .category {
@@ -671,22 +672,48 @@ footer span
     }
 
     aside {
-        display : none;
-        position : absolute;
-        z-index : 10;
-        background-color: #AD3030;
-        top : 197px;
-        right : 3.5%;
+        //display : none;
+        //position : absolute;
+        //z-index : 10;
+        //background-color: #AD3030;
+        //top : 197px;
+        //right : 3.5%;
+                    clear: both;
+                    width: 100%;
+                    min-height: 0px;
     }
+
+                    .mensajeBienvenida{
+                        width: 307px;
+                        margin: auto;
+                    }
+
+                    .botonAside{
+                        width: 307px;
+                        margin: auto;
+                    }
+
+                    .visitedLists{
+                        width: 307px;
+                        margin: auto;
+                    }
+
+                    .panelFormulario input{
+                        width: 260px;
+                    }
+
+                    .content{
+                        min-height: 0px;
+                    }
 
 }
 
 
 @media (max-width: 640px) {
 
-    body {
-        background :green;
-    }
+    //body {
+    //    background :green;
+    //}
 
     .logo {
         width: 95%;
@@ -710,27 +737,40 @@ footer span
         display:none;
     }
 
-    //.category {
-    //    float:right;
-    //}
-
     aside {
-        //display:block;
-        display: none;
-        //width : 100%;
-        //transform: scale(1);
-        zoom : 180%;
-        top:122px;
-        left:3.9%
+        display:block;
+        position: relative;
+        z-index: 0;
+        top: 0px;
+        right: 0px;
+        width : 100%;
+        clear: both;
+                    padding-top: 30px;
     }
 
     .content {
-        //display:none;
         width: 98.9%;
+        min-height: 0px;
+                    padding-bottom: 0px;
     }
 
     .component-rating{
         font-size: 15pt;
     }
-    
+
+                    .mensajeBienvenida{
+                        display: none;
+                    }
+                    .logout{
+                        margin-bottom: 
+                    }
+                    .botonAside button{
+                        margin-bottom: 5px;
+                        margin-top: 5px;
+                        padding-top: 10px;
+                        padding-bottom: 10px;
+                    }
+                    .visitedLists{
+                        display: none;
+                    }
 }
