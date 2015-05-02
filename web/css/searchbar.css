@@ -124,3 +124,21 @@
     border: 0;
     padding: 0;
 }
+
+@media (max-width: 1023px) {
+  
+  .form-wrapper{
+      width : 270px;
+      background : none;
+      -webkit-box-shadow: none;
+       box-shadow: none;
+  }
+
+  .form-wrapper input{
+      width : 150px;
+  }
+
+  .form-wrapper button{
+      height : 40px;
+  }
+}
