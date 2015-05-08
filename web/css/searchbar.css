@@ -124,3 +124,31 @@
     border: 0;
     padding: 0;
 }
+
+@media (max-width: 1023px) {
+  
+  .form-wrapper{
+      width : 270px;
+      padding: 5px;
+  }
+
+  .form-wrapper input{
+      width : 150px;
+      height: 15px;
+  }
+
+  .form-wrapper button{
+      height: 35px;
+      font: bold 15px 'lucida sans', 'trebuchet MS', 'Tahoma';
+  }
+
+}
+
+@media (max-width: 640px) {
+  
+  .form-wrapper{
+      width : 270px;
+      padding: 0px;
+  }
+
+}

@@ -141,7 +141,7 @@ h1
     min-height: 800px;
     float: left;
     /*margin : auto;*/
-    text-align: justify;
+    /*text-align: justify;*/
     padding : 10px 5px 0px 0px;
     background-color: #E7E7EF;
 }
@@ -386,7 +386,7 @@ footer span
 
 .formulario
 {
-  float: center;
+  //float: center;
 }
 
 .mensajeBienvenida {
@@ -604,7 +604,7 @@ footer span
     background:-webkit-linear-gradient(top, #d0451b 5%, #bc3315 100%);
     background:-o-linear-gradient(top, #d0451b 5%, #bc3315 100%);
     background:-ms-linear-gradient(top, #d0451b 5%, #bc3315 100%);
-    background:linear-gradient(to bottom, #d0451b 5%, #bc3315 100%);
+    background: linear-gradient(bottom, #d0451b 5%, #bc3315 100%);
     filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#d0451b', endColorstr='#bc3315',GradientType=0);
     background-color:#d0451b;
     border:1px solid #942911;
@@ -620,6 +620,154 @@ footer span
     background:-webkit-linear-gradient(top, #bc3315 5%, #d0451b 100%);
     background:-o-linear-gradient(top, #bc3315 5%, #d0451b 100%);
     background:-ms-linear-gradient(top, #bc3315 5%, #d0451b 100%);
-    background:linear-gradient(to bottom, #bc3315 5%, #d0451b 100%);
+    background:linear-gradient(bottom, #bc3315 5%, #d0451b 100%);
     background-color:#bc3315;
+}
+
+
+
+@media (max-width: 1023px) {
+
+    .search {
+        width : 50%;
+        padding-top : 0px;
+        margin-top : 15px;
+    }
+
+    //body {
+    //    background :blue;
+    //}
+
+    main {
+        width : 95%;
+    }
+
+    .logo {
+        margin : auto;
+        text-align : center;
+        font-size : 25pt;
+        margin-top : -5px;
+        margin-left: 10px;
+    }
+
+    .content {
+        width : 99.35%;
+                        padding-bottom: 30px;
+    }
+
+    .category {
+        margin-right : 2px;
+        margin-left : 2px;
+        font-size : 13pt;
+    }
+
+    header {
+        padding-bottom : 30px;
+        padding-top: 40px;
+        padding-left: 30px;
+    }
+
+    .categories {
+        padding-top : 5px;
+    }
+
+    aside {
+        //display : none;
+        //position : absolute;
+        //z-index : 10;
+        //background-color: #AD3030;
+        //top : 197px;
+        //right : 3.5%;
+                    clear: both;
+                    width: 100%;
+                    min-height: 0px;
+    }
+
+                    .mensajeBienvenida{
+                        width: 307px;
+                        margin: auto;
+                    }
+
+                    .botonAside{
+                        width: 307px;
+                        margin: auto;
+                    }
+
+                    .visitedLists{
+                        width: 307px;
+                        margin: auto;
+                    }
+
+                    .panelFormulario input{
+                        width: 260px;
+                    }
+
+                    .content{
+                        min-height: 0px;
+                    }
+
+}
+
+
+@media (max-width: 640px) {
+
+    //body {
+    //    background :green;
+    //}
+
+    .logo {
+        width: 95%;
+    }
+
+    main {
+        min-width : 320px;
+    }
+
+    .search {
+        margin-top : 45px;
+        float: left;
+    }
+
+    .component {
+        width : 90%;
+    }
+
+
+    .categories {
+        display:none;
+    }
+
+    aside {
+        display:block;
+        position: relative;
+        z-index: 0;
+        top: 0px;
+        right: 0px;
+        width : 100%;
+        clear: both;
+                    padding-top: 30px;
+    }
+
+    .content {
+        width: 98.9%;
+        min-height: 0px;
+                    padding-bottom: 0px;
+    }
+
+    .component-rating{
+        font-size: 15pt;
+    }
+
+                    .mensajeBienvenida{
+                        display: none;
+                    }
+                    .botonAside button{
+                        margin-bottom: 5px;
+                        margin-top: 5px;
+                        padding-top: 10px;
+                        padding-bottom: 10px;
+                    }
+                    .visitedLists{
+                        display: none;
+                    }
 }
