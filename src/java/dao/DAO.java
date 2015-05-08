@@ -19,8 +19,8 @@ public class DAO
 {
     protected Connection con;
 
-    static String USER = "pat";
-    static String PASSWD = "pat";
+    static String USER = "root";
+    static String PASSWD = "root";
 
     public DAO()
         throws SQLException, ClassNotFoundException

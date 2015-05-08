@@ -49,7 +49,7 @@ public class Register implements Action
 
         else if(!password.matches("^.{8,}$"))
         {
-            //response.sendRedirect("/home"); //el usuario se ha saltado la verificacion de cliente
+            response.sendRedirect("/home"); //el usuario se ha saltado la verificacion de cliente
         }
 
         else if(!password.equals(rpassword))

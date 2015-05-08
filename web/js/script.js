@@ -110,10 +110,10 @@ function validateSignUp()
     {
         document.getElementById("errorEmail").innerHTML = "The email address is invalid";
     }
-    // else if(!password.match(/^.{8,}$/))
-    // {
-    //     document.getElementById("errorPassword").innerHTML = "The password must be at least 8 characters long";
-    // }
+    else if(!password.match(/^.{8,}$/))
+    {
+        document.getElementById("errorPassword").innerHTML = "The password must be at least 8 characters long";
+    }
     else if(password !== rpassword)
     {
         document.getElementById("errorRpassword").innerHTML = "The passwords do not match";
