@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
     <context-param>
+        <param-name>DB</param-name>
+        <param-value>pat</param-value>
+    </context-param>
+    <context-param>
+        <param-name>USER</param-name>
+        <param-value>pat</param-value>
+    </context-param>
+    <context-param>
+        <param-name>PASSWD</param-name>
+        <param-value>pat</param-value>
+    </context-param>
+    <context-param>
         <param-name>maxVisited</param-name>
         <param-value>10</param-value>
     </context-param>

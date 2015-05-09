@@ -13,6 +13,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import javax.servlet.http.HttpServletRequest;
 
 /**
  *
@@ -58,10 +59,10 @@ public class ListDAO extends DAO
     // GET TOP LISTS {username}
     private static final String QUERY_LISTS_BY_RATING     = QUERY_LISTS + " ORDER BY LA.average DESC LIMIT ?";
 
-    public ListDAO()
+    public ListDAO(HttpServletRequest request)
         throws SQLException, ClassNotFoundException
     {
-        super();
+        super(request);
     }
 
     public List addList(List list, User user) throws SQLException

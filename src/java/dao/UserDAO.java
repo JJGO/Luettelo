@@ -11,6 +11,7 @@ import dominio.User;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import javax.servlet.http.HttpServletRequest;
 
 /**
  *
@@ -20,19 +21,19 @@ public class UserDAO extends DAO
 {
 
     //INSERT NEW USER IN THE DB {username, email, password}
-    private static String ADD_USER = "INSERT INTO User (username, email, password) VALUES (?,?,?)";
+    private static final String ADD_USER = "INSERT INTO User (username, email, password) VALUES (?,?,?)";
 
     //REMOVE USER FROM DB {username, password}
-    private static String REMOVE_USER = "DELETE FROM User WHERE username = ? AND password = ?";
+    private static final String REMOVE_USER = "DELETE FROM User WHERE username = ? AND password = ?";
 
     // CHECK IF A USER IS IN THE DB {username,password}
-    private static String QUERY_FIND_USER = "SELECT username, password FROM User WHERE username = ?";
+    private static final String QUERY_FIND_USER = "SELECT username, password FROM User WHERE username = ?";
 
 
-    public UserDAO()
+    public UserDAO(HttpServletRequest request)
         throws SQLException, ClassNotFoundException
     {
-        super();
+        super(request);
     }
 
     public boolean addUser(User user) throws SQLException

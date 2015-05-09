@@ -11,6 +11,7 @@ import dominio.Comment;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import javax.servlet.http.HttpServletRequest;
 
 /**
  *
@@ -33,10 +34,10 @@ public class CommentDAO extends DAO
     //GET THE COMMENTS OF A LIST {listId}
     private static String QUERY_ALL_COMMENTS = ("SELECT commentId, username, content FROM Comment WHERE listId = ?");
 
-    public CommentDAO()
+    public CommentDAO(HttpServletRequest request)
         throws SQLException, ClassNotFoundException
     {
-        super();
+        super(request);
     }
 
     public boolean addComment(Comment comment, dominio.List list, dominio.User user) throws SQLException

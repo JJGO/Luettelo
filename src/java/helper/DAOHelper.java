@@ -17,25 +17,25 @@ public class DAOHelper
 {
     public static UserDAO getUserDAO(HttpServletRequest request) throws SQLException, ClassNotFoundException
     {
-       UserDAO dao = new UserDAO();
+       UserDAO dao = new UserDAO(request);
        return dao;
     }
 
     public static ListDAO getListDAO(HttpServletRequest request) throws SQLException, ClassNotFoundException
     {
-       ListDAO dao = new ListDAO();
+       ListDAO dao = new ListDAO(request);
        return dao;
     }
 
     public static ItemDAO getItemDAO(HttpServletRequest request) throws SQLException, ClassNotFoundException
     {
-       ItemDAO dao = new ItemDAO();
+       ItemDAO dao = new ItemDAO(request);
        return dao;
     }
 
     public static CommentDAO getCommentDAO(HttpServletRequest request) throws SQLException, ClassNotFoundException
     {
-       CommentDAO dao = new CommentDAO();
+       CommentDAO dao = new CommentDAO(request);
        return dao;
     }
 

@@ -12,6 +12,7 @@ import dominio.User;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import javax.servlet.http.HttpServletRequest;
 
 /**
  *
@@ -22,31 +23,31 @@ public class ItemDAO extends DAO
 
 //DML
     //ADD ITEM {name, url, listId, listId, username}
-    private static String ADD_ITEM = "INSERT INTO Item(name, url, listId) SELECT ?, ?, ? FROM List WHERE listId = ? and username = ?";
+    private static final String ADD_ITEM = "INSERT INTO Item(name, url, listId) SELECT ?, ?, ? FROM List WHERE listId = ? and username = ?";
 
     //EDIT ITEM {name, url, itemId, username}
-    private static String UPDATE_ITEM = "UPDATE Item SET name = ?, url  = ? WHERE   itemId = ? AND listId IN ( SELECT listId FROM List WHERE username = ?)";
+    private static final String UPDATE_ITEM = "UPDATE Item SET name = ?, url  = ? WHERE   itemId = ? AND listId IN ( SELECT listId FROM List WHERE username = ?)";
 
     //REMOVE ITEM {itemId, username}
-    private static String REMOVE_ITEM = "DELETE FROM Item WHERE   itemId = ? AND listId IN ( SELECT listId FROM List WHERE username = ?)";
+    private static final String REMOVE_ITEM = "DELETE FROM Item WHERE   itemId = ? AND listId IN ( SELECT listId FROM List WHERE username = ?)";
  
     //CHECK IN AN ITEM {username, itemId, username, itemId}
-    private static String CHECK_ITEM = "INSERT INTO Rating(username,itemId,listId)  SELECT ?, ?, I.listId  FROM Item I  INNER JOIN Subscription S  ON I.listId = S.listId  WHERE S.username = ? and I.itemId = ?";
+    private static final String CHECK_ITEM = "INSERT INTO Rating(username,itemId,listId)  SELECT ?, ?, I.listId  FROM Item I  INNER JOIN Subscription S  ON I.listId = S.listId  WHERE S.username = ? and I.itemId = ?";
 
     //UNCHECK AN ELEMENT {username, itemId}
-    private static String UNCHECK_ITEM = "DELETE FROM Rating WHERE username = ? AND itemId = ?";
+    private static final String UNCHECK_ITEM = "DELETE FROM Rating WHERE username = ? AND itemId = ?";
 
     //(RE)RATE AN ELEMENT {value, username, itemId}
-    private static String RATE_ITEM = "UPDATE Rating SET value = ? WHERE username = ? AND itemId = ?";
+    private static final String RATE_ITEM = "UPDATE Rating SET value = ? WHERE username = ? AND itemId = ?";
 
 //QUERY
     //GET THE ITEMS OF A LIST AS WELL AS THEIR RATINGS (AUTH) {username, listId}
-    private static String QUERY_ALL_ITEMS = "SELECT I.itemId, I.name, I.url, IA.average, RU.value AS rating FROM Item I LEFT OUTER JOIN Item_avg IA ON I.itemId = IA.itemId LEFT OUTER JOIN ( SELECT itemId, value FROM Rating WHERE username = ?) RU ON I.itemId = RU.itemId WHERE I.listId = ? ORDER BY IA.average DESC, rating DESC;";
+    private static final String QUERY_ALL_ITEMS = "SELECT I.itemId, I.name, I.url, IA.average, RU.value AS rating FROM Item I LEFT OUTER JOIN Item_avg IA ON I.itemId = IA.itemId LEFT OUTER JOIN ( SELECT itemId, value FROM Rating WHERE username = ?) RU ON I.itemId = RU.itemId WHERE I.listId = ? ORDER BY IA.average DESC, rating DESC;";
 
-    public ItemDAO()
+    public ItemDAO(HttpServletRequest request)
         throws SQLException, ClassNotFoundException
     {
-        super();
+        super(request);
     }
 
     public boolean addItem(Item item, dominio.List list, User user) throws SQLException

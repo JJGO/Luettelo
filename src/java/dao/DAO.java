@@ -10,6 +10,7 @@ package dao;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import javax.servlet.http.HttpServletRequest;
 
 /**
  *
@@ -19,14 +20,15 @@ public class DAO
 {
     protected Connection con;
 
-    static String USER = "root";
-    static String PASSWD = "root";
-
-    public DAO()
+    public DAO(HttpServletRequest request)
         throws SQLException, ClassNotFoundException
     {
+        String user     = request.getServletContext().getInitParameter("USER");
+        String passwd   = request.getServletContext().getInitParameter("PASSWD");
+        String db       = request.getServletContext().getInitParameter("DB");
+
         Class.forName("com.mysql.jdbc.Driver");
-        con = DriverManager.getConnection("jdbc:mysql://localhost/luettelo", USER, PASSWD);
+        con = DriverManager.getConnection("jdbc:mysql://localhost/"+db, user, passwd);
     }
 
     public void close()
