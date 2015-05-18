@@ -1,0 +1,21 @@
+# robots.txt for Luettelo
+#
+User-Agent: *
+Disallow: /Login.auth
+Disallow: /Register.auth
+Disallow: /Logout.auth
+Disallow: /AddComment.do
+Disallow: /EditComment.do
+Disallow: /RemoveComment.do
+Disallow: /AddItem.do
+Disallow: /EditItem.do
+Disallow: /RemoveItem.do
+Disallow: /EditList.do
+Disallow: /RemoveList.do
+Disallow: /SubscribeList.do
+Disallow: /UnsubscribeList.do
+Disallow: /CheckItem.do
+Disallow: /UncheckItem.do
+Disallow: /RateItem.do
+#
+Sitemap: http://luettelo-jjg.rhcloud.com/sitemap.xml

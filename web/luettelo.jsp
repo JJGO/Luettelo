@@ -11,10 +11,11 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="description" content="Create lists and share them with the world.">
+        <meta name="keywords" content="list, item, comment, Luettelo, movies, books, best, miscellaneous">
         <title>${title}</title>
         <!-- CSS -->
-        <link rel="stylesheet" href="/css/style.css">
-        <link rel="stylesheet" href="/css/searchbar.css">
+        <link rel="stylesheet" href="/css/style.min.css">
         <link rel="shortcut icon" href="/images/favicon.ico">
     </head>
     <body>
@@ -32,7 +33,6 @@
                 <c:import url="/footer.jsp" charEncoding="UTF-8" />
             </footer>
         </main>
-        <script src="/js/script.js" type="text/javascript" charset="utf-8"></script>
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+        <script src="/js/script.min.js" type="text/javascript" charset="utf-8"></script>
     </body>
 </html>
